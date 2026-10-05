@@ -5,7 +5,7 @@ services:
       - path: .env
         required: false
     ports:
-      - "8000:8000"
+      - "8010:8000"
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8000/api/health')"]
       interval: 5s
