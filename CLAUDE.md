@@ -10,8 +10,8 @@
 
 ## 目前進度
 
-- 已完成：（無）
-- 下一步：Step 1 專案骨架
+- 已完成：Step 1 專案骨架
+- 下一步：Step 2 資料取得與格式確認（先提計畫並等確認）
 
 每完成一個 Step 就更新這一段。
 
@@ -50,4 +50,16 @@
 
 ## 指令
 
-Step 1 完成後把實際指令填在這裡（後端：uv、pytest、ruff、mypy；前端：Biome、tsc、Vitest；整體：docker compose）。
+後端（在 `backend/`）：
+
+- 安裝：`uv sync`
+- 開發伺服器：`uv run uvicorn app.main:app --reload`
+- 檢查：`uv run ruff check .`、`uv run ruff format --check .`、`uv run mypy app tests`
+- 測試：`uv run pytest`
+
+前端（在 `frontend/`，pnpm）：
+
+- 安裝：`pnpm install`；開發伺服器：`pnpm dev`（`/api` proxy 到 `BACKEND_URL`，預設 `http://localhost:8000`）
+- 檢查：`pnpm run ci`（Biome）、`pnpm typecheck`（tsc）；測試：`pnpm test`（Vitest）；注意 `pnpm ci` 是 pnpm 內建指令，要用 `pnpm run ci`
+
+整體：`docker compose up --build`（前端 http://localhost:5173、後端 http://localhost:8000）。設定放 `.env`（範本見 `.env.example`）。
