@@ -1,0 +1,18 @@
+# 目標法規清單。以 pcode 為唯一識別；新增法規只需改這個檔案並重跑 ingestion。
+# priority 對應 spec 2.2（must / should / could）；short_name 是畫面顯示用的簡稱。
+targets:
+  - pcode: K0040012
+    short_name: 道交處罰條例
+    priority: must
+  - pcode: K0040013
+    short_name: 道安規則
+    priority: must
+  - pcode: D0080090 # 現行版；舊版 K0040015 已廢止，不收
+    short_name: 事故處理辦法
+    priority: must
+  - pcode: G0390060
+    short_name: 強制險法
+    priority: should
+  - pcode: D0080029 # 附表只有 PDF 檔名、沒有文字內容，見 docs/data-format.md
+    short_name: 裁罰基準
+    priority: could

@@ -1,4 +1,5 @@
 from functools import lru_cache
+from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -8,6 +9,7 @@ class Settings(BaseSettings):
 
     anthropic_api_key: str = ""
     cors_origins: list[str] = ["http://localhost:5173"]
+    data_dir: Path = Path(__file__).resolve().parents[3] / "data"
 
 
 @lru_cache

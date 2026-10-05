@@ -10,8 +10,8 @@
 
 ## 目前進度
 
-- 已完成：Step 1 專案骨架
-- 下一步：Step 2 資料取得與格式確認（先提計畫並等確認）
+- 已完成：Step 1 專案骨架、Step 2 資料取得與格式確認
+- 下一步：Step 3 Chunking 與建索引（先提計畫並等確認；完成後必停等檢視）
 
 每完成一個 Step 就更新這一段。
 
@@ -61,5 +61,7 @@
 
 - 安裝：`pnpm install`；開發伺服器：`pnpm dev`（`/api` proxy 到 `BACKEND_URL`，預設 `http://localhost:8000`）
 - 檢查：`pnpm run ci`（Biome）、`pnpm typecheck`（tsc）；測試：`pnpm test`（Vitest）；注意 `pnpm ci` 是 pnpm 內建指令，要用 `pnpm run ci`
+
+資料（在 `backend/`）：`uv run python -m app.ingestion.fetch` 下載、`uv run python -m app.ingestion.parse` 解析（說明見 `docs/data-format.md`）
 
 整體：`docker compose up --build`（前端 http://localhost:5173、後端 http://localhost:8010，容器內仍是 8000；本機 8000 常被其他專案佔用）。設定放 `.env`（範本見 `.env.example`）。
