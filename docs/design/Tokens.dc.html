@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<title>設計 Token</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@500;700;900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; height: 1360px; box-sizing: border-box; padding: 56px 64px; background: #F6EEE3; color: #1C1917; font-family: 'Noto Sans TC', sans-serif; font-size: 15px; line-height: 1.6; display: flex; flex-direction: column; gap: 36px;">
+<section style="display: flex; flex-direction: column; gap: 14px;">
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 28px; border-top: 3px solid #1C1917; padding-top: 10px;">顏色</h2>
+<p style="margin: 0; color: #4F4842;">報紙米色底＋深墨字；主色為深青綠（互動與引用），酒紅只用在欄目小標，紅色只留給錯誤。所有文字配色皆符合 WCAG AA。</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px;">
+<div style="display: flex; flex-direction: column; gap: 10px;"><h3 style="margin: 0; font-size: 16px;">亮色</h3>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; font-size: 12px; font-family: 'IBM Plex Mono', monospace;">
+<div><div style="height: 56px; background: #F6EEE3; border: 1px solid #D8C8B4;"></div>--paper<br>#F6EEE3</div>
+<div><div style="height: 56px; background: #FCF7F0; border: 1px solid #D8C8B4;"></div>--surface<br>#FCF7F0</div>
+<div><div style="height: 56px; background: #EEE2D2;"></div>--sunken<br>#EEE2D2</div>
+<div><div style="height: 56px; background: #D8C8B4;"></div>--rule<br>#D8C8B4</div>
+<div><div style="height: 56px; background: #1C1917;"></div>--ink<br>#1C1917</div>
+<div><div style="height: 56px; background: #4F4842;"></div>--ink2<br>#4F4842</div>
+<div><div style="height: 56px; background: #645B53;"></div>--ink3<br>#645B53</div>
+<div><div style="height: 56px; background: #1E2A2E;"></div>--band<br>#1E2A2E</div>
+<div><div style="height: 56px; background: #0B5D66;"></div>--accent<br>#0B5D66</div>
+<div><div style="height: 56px; background: #DCEBE8;"></div>--accent-soft<br>#DCEBE8</div>
+<div><div style="height: 56px; background: #F4DFA8;"></div>--mark<br>#F4DFA8</div>
+<div><div style="height: 56px; background: #8A1538;"></div>--kicker<br>#8A1538</div>
+<div><div style="height: 56px; background: #2E6A39;"></div>--ok<br>#2E6A39</div>
+<div><div style="height: 56px; background: #7A5000;"></div>--warn<br>#7A5000</div>
+<div><div style="height: 56px; background: #A12A2A;"></div>--err<br>#A12A2A</div>
+<div><div style="height: 56px; background: #F6E5BF;"></div>--warn-soft<br>#F6E5BF</div>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 10px;"><h3 style="margin: 0; font-size: 16px;">暗色</h3>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; font-size: 12px; font-family: 'IBM Plex Mono', monospace;">
+<div><div style="height: 56px; background: #151311;"></div>--paper<br>#151311</div>
+<div><div style="height: 56px; background: #1F1B18;"></div>--surface<br>#1F1B18</div>
+<div><div style="height: 56px; background: #2A2420;"></div>--sunken<br>#2A2420</div>
+<div><div style="height: 56px; background: #3E3630;"></div>--rule<br>#3E3630</div>
+<div><div style="height: 56px; background: #F3EBE1; border: 1px solid #D8C8B4;"></div>--ink<br>#F3EBE1</div>
+<div><div style="height: 56px; background: #CFC4B8;"></div>--ink2<br>#CFC4B8</div>
+<div><div style="height: 56px; background: #A99D91;"></div>--ink3<br>#A99D91</div>
+<div><div style="height: 56px; background: #0E1517;"></div>--band<br>#0E1517</div>
+<div><div style="height: 56px; background: #7CC6C8;"></div>--accent<br>#7CC6C8</div>
+<div><div style="height: 56px; background: #1D3739;"></div>--accent-soft<br>#1D3739</div>
+<div><div style="height: 56px; background: #4D3D17;"></div>--mark<br>#4D3D17</div>
+<div><div style="height: 56px; background: #E894AB;"></div>--kicker<br>#E894AB</div>
+<div><div style="height: 56px; background: #86C994;"></div>--ok<br>#86C994</div>
+<div><div style="height: 56px; background: #E7BC5E;"></div>--warn<br>#E7BC5E</div>
+<div><div style="height: 56px; background: #F09088;"></div>--err<br>#F09088</div>
+<div><div style="height: 56px; background: #3A2E13;"></div>--warn-soft<br>#3A2E13</div>
+</div></div>
+</div>
+</section>
+
+<section style="display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 48px;">
+<div style="display: flex; flex-direction: column; gap: 12px;">
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 28px; border-top: 3px solid #1C1917; padding-top: 10px;">字體</h2>
+<div style="display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 10px 20px; align-items: baseline;">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #645B53;">display · Serif 900 / 42</span><span style="font-family: 'Noto Serif TC', serif; font-weight: 900; font-size: 42px; letter-spacing: 0.12em;">交通法規問答</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #645B53;">h1 · Serif 700 / 52–40</span><span style="font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 40px; line-height: 1.35;">紅燈右轉會被罰多少錢？</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #645B53;">h2 · Serif 700 / 28–24</span><span style="font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 26px;">依據</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #645B53;">answer · Serif 400 / 21 · 2.0</span><span style="font-family: 'Noto Serif TC', serif; font-size: 21px; line-height: 2;">答案與條文原文用襯線，像在讀法條。</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #645B53;">body · Sans 400 / 16 · 1.7</span><span style="font-size: 16px;">介面、說明與標籤用無襯線，清楚俐落。</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #645B53;">kicker · Sans 700 / 14</span><span style="font-size: 14px; font-weight: 700; color: #8A1538;">你的問題</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #645B53;">section · Sans 700 / 15 · 0.3em</span><span style="font-size: 15px; font-weight: 700; letter-spacing: 0.3em;">檢索結果</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #645B53;">data · Plex Mono 400 / 13</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">0.91 · 2.4s · q01</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #4F4842;">字型：Noto Serif TC、Noto Sans TC、IBM Plex Mono（Google Fonts）。數字一律 tabular-nums。</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px;">
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 28px; border-top: 3px solid #1C1917; padding-top: 10px;">間距、圓角、線條</h2>
+<div style="display: flex; flex-direction: column; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12px;">
+<div style="display: flex; align-items: center; gap: 12px;"><span style="width: 4px; height: 16px; background: #0B5D66;"></span>space-1 · 4</div>
+<div style="display: flex; align-items: center; gap: 12px;"><span style="width: 8px; height: 16px; background: #0B5D66;"></span>space-2 · 8</div>
+<div style="display: flex; align-items: center; gap: 12px;"><span style="width: 16px; height: 16px; background: #0B5D66;"></span>space-3 · 16（手機邊距）</div>
+<div style="display: flex; align-items: center; gap: 12px;"><span style="width: 24px; height: 16px; background: #0B5D66;"></span>space-4 · 24</div>
+<div style="display: flex; align-items: center; gap: 12px;"><span style="width: 32px; height: 16px; background: #0B5D66;"></span>space-5 · 32（桌面邊距）</div>
+<div style="display: flex; align-items: center; gap: 12px;"><span style="width: 40px; height: 16px; background: #0B5D66;"></span>space-6 · 40（欄距）</div>
+<div style="display: flex; align-items: center; gap: 12px;"><span style="width: 56px; height: 16px; background: #0B5D66;"></span>space-7 · 56</div>
+</div>
+<p style="margin: 8px 0 0; font-size: 14px; color: #4F4842;"><strong style="color: #1C1917;">圓角 0</strong>：方正的報紙版面，不使用圓角與陰影。<br><strong style="color: #1C1917;">線條</strong>：區塊標題上方 3px 實線；欄間與列表 1px 細線；區段分隔 3px 點線。<br><strong style="color: #1C1917;">觸控</strong>：可點元件最小 44px 高。</p>
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1360}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

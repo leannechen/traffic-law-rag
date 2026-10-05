@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<title>手機｜條文抽屜</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@500;700;900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.th-light{--paper:#F6EEE3;--surface:#FCF7F0;--sunken:#EEE2D2;--ink:#1C1917;--ink2:#4F4842;--ink3:#645B53;--rule:#D8C8B4;--rule-strong:#1C1917;--accent:#0B5D66;--accent-soft:#DCEBE8;--on-accent:#FFFFFF;--kicker:#8A1538;--mark:#F4DFA8;--ok:#2E6A39;--warn:#7A5000;--warn-soft:#F6E5BF;--scrim:rgba(28,25,23,0.45)}
+.th-dark{--paper:#151311;--surface:#1F1B18;--sunken:#2A2420;--ink:#F3EBE1;--ink2:#CFC4B8;--ink3:#A99D91;--rule:#3E3630;--rule-strong:#F3EBE1;--accent:#7CC6C8;--accent-soft:#1D3739;--on-accent:#0F1A1B;--kicker:#E894AB;--mark:#4D3D17;--ok:#86C994;--warn:#E7BC5E;--warn-soft:#3A2E13;--scrim:rgba(0,0,0,0.6)}
+a{color:var(--accent)}a:hover{color:var(--ink)}
+</style>
+</helmet>
+<div class="{{themeClass}}" style="position: relative; width: 390px; height: 844px; overflow: hidden; background: var(--paper); color: var(--ink); font-family: 'Noto Sans TC', sans-serif; font-size: 15px; line-height: 1.7;">
+<div aria-hidden="true" style="padding: 76px 16px 0; font-family: 'Noto Serif TC', serif; font-size: 18px; line-height: 1.95; color: var(--ink2);">
+<p style="margin: 0 0 8px; font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: var(--kicker);">你的問題</p>
+<p style="margin: 0 0 16px; font-size: 26px; font-weight: 700; color: var(--ink);">紅燈右轉會被罰多少錢？</p>
+<p style="margin: 0;">在設有紅燈的路口，紅燈時右轉通常屬於「闖紅燈」，汽車駕駛人會被處新臺幣 [金額] 元罰鍰……</p>
+</div>
+<div style="position: absolute; inset: 0; background: var(--scrim);"></div>
+<section role="dialog" aria-modal="true" aria-labelledby="sheet-title" style="position: absolute; left: 0; right: 0; bottom: 0; height: 560px; background: var(--paper); border-top: 3px solid var(--ink); display: flex; flex-direction: column;">
+<div style="display: flex; justify-content: center; padding-top: 8px;"><span style="width: 40px; height: 4px; background: var(--rule);"></span></div>
+<div style="display: flex; align-items: center; padding: 6px 8px 8px 16px; border-bottom: 1px solid var(--rule);">
+<span style="font-size: 12px; font-weight: 700; color: var(--on-accent); background: var(--accent); padding: 1px 8px;">已引用</span>
+<h2 id="sheet-title" style="margin: 0 0 0 8px; font-size: 17px; flex-grow: 1;">道交處罰條例 第 53 條</h2>
+<a href="MobileAnswer.dc.html" aria-label="關閉" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: var(--ink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></a>
+</div>
+<div style="flex-grow: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+<p style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 2; color: var(--ink);">1. 汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者，處新臺幣 [金額] 元以上 [金額] 元以下罰鍰。</p>
+<p style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 2; color: var(--ink);">2. 前項紅燈右轉行為者，處新臺幣 [金額] 元以上 [金額] 元以下罰鍰。</p>
+<span style="font-size: 12px; color: var(--ink3);">最新異動 [YYYY-MM-DD]</span>
+<a href="https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&amp;flno=53" target="_blank" rel="noopener" style="font-size: 14px; font-weight: 700;">在全國法規資料庫查看 ↗</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--rule);">
+<a href="MobileSources.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 52px; color: var(--ink3); text-decoration: none; font-weight: 700;">← 上一則</a>
+<a href="MobileSources.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 52px; border-left: 1px solid var(--rule); color: var(--ink); text-decoration: none; font-weight: 700;">下一則 →</a>
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { themeClass: (this.props.theme ?? 'light') === 'dark' ? 'th-dark' : 'th-light' };
+  }
+}
+</script>
+</body>
+</html>

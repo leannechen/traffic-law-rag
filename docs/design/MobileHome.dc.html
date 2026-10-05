@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<title>手機｜首頁</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@500;700;900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.th-light{--paper:#F6EEE3;--surface:#FCF7F0;--sunken:#EEE2D2;--ink:#1C1917;--ink2:#4F4842;--ink3:#645B53;--rule:#D8C8B4;--rule-strong:#1C1917;--accent:#0B5D66;--accent-soft:#DCEBE8;--on-accent:#FFFFFF;--kicker:#8A1538;--mark:#F4DFA8;--ok:#2E6A39;--warn:#7A5000;--warn-soft:#F6E5BF;--band:#1E2A2E;--on-band:#F6EEE3;--band-ink2:#B9C6C8}
+.th-dark{--paper:#151311;--surface:#1F1B18;--sunken:#2A2420;--ink:#F3EBE1;--ink2:#CFC4B8;--ink3:#A99D91;--rule:#3E3630;--rule-strong:#F3EBE1;--accent:#7CC6C8;--accent-soft:#1D3739;--on-accent:#0F1A1B;--kicker:#E894AB;--mark:#4D3D17;--ok:#86C994;--warn:#E7BC5E;--warn-soft:#3A2E13;--band:#0E1517;--on-band:#F3EBE1;--band-ink2:#9FB1B3}
+a{color:var(--accent)}a:hover{color:var(--ink)}
+</style>
+</helmet>
+<div class="{{themeClass}}" style="width: 390px; height: 844px; overflow: hidden; background: var(--paper); color: var(--ink); font-family: 'Noto Sans TC', sans-serif; font-size: 15px; line-height: 1.7; display: flex; flex-direction: column;">
+<header style="border-bottom: 1px solid var(--rule-strong);">
+<div style="background: var(--band); color: var(--band-ink2); padding: 6px 16px; font-size: 12px; font-variant-numeric: tabular-nums;">收錄 4 部法規 · 資料更新 2026-10-03</div>
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px;">
+<a href="MobileHome.dc.html" style="font-family: 'Noto Serif TC', serif; font-weight: 900; font-size: 22px; letter-spacing: 0.08em; color: var(--ink); text-decoration: none;">交通法規問答</a>
+<button type="button" aria-label="開啟選單" style="width: 44px; height: 44px; border: 0; background: transparent; color: var(--ink); display: flex; align-items: center; justify-content: center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></button>
+</div>
+</header>
+<main style="flex-grow: 1; padding: 24px 16px; display: flex; flex-direction: column; gap: 18px;">
+<p style="margin: 0; color: var(--kicker); font-weight: 700; font-size: 13px;">白話問答 · 條文為據</p>
+<h1 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 30px; line-height: 1.35;">用白話問交通法規，每個答案都附上條文依據。</h1>
+<form style="display: flex; flex-direction: column; gap: 8px;">
+<label for="mq" style="font-size: 13px; font-weight: 700;">你的問題</label>
+<textarea id="mq" rows="2" placeholder="例如：騎機車沒戴安全帽會被罰多少？" style="border: 2px solid var(--ink); background: var(--surface); padding: 12px 14px; font-family: inherit; font-size: 17px; color: var(--ink); resize: none;"></textarea>
+<button type="submit" style="min-height: 48px; border: 0; background: var(--accent); color: var(--on-accent); font-family: inherit; font-size: 17px; font-weight: 700;">提問</button>
+</form>
+<div style="border-top: 3px dotted var(--ink3); padding-top: 12px; display: flex; flex-direction: column;">
+<h2 style="margin: 0 0 6px; font-size: 13px; letter-spacing: 0.3em; text-align: center;">試試這些問題</h2>
+<a href="MobileAnswer.dc.html" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; border-bottom: 1px solid var(--rule); color: var(--ink); text-decoration: none; font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 17px;">紅燈右轉會被罰多少錢？<span style="color: var(--accent);">→</span></a>
+<a href="MobileAnswer.dc.html" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; border-bottom: 1px solid var(--rule); color: var(--ink); text-decoration: none; font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 17px;">酒駕被抓到會有什麼處罰？<span style="color: var(--accent);">→</span></a>
+<a href="MobileAnswer.dc.html" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; border-bottom: 1px solid var(--rule); color: var(--ink); text-decoration: none; font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 17px;">發生小擦撞，一定要報警嗎？<span style="color: var(--accent);">→</span></a>
+<a href="MobileAnswer.dc.html" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; border-bottom: 1px solid var(--rule); color: var(--ink); text-decoration: none; font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 17px;">騎機車可以載幾個人？<span style="color: var(--accent);">→</span></a>
+</div>
+<p style="margin: auto 0 0; font-size: 12px; color: var(--ink2);"><strong style="color: var(--ink);">僅供參考，非法律意見。</strong>法規資料來源：全國法規資料庫，由法務部依政府資料開放授權條款授權使用。</p>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { themeClass: (this.props.theme ?? 'light') === 'dark' ? 'th-dark' : 'th-light' };
+  }
+}
+</script>
+</body>
+</html>

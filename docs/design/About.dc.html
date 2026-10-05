@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<title>交通法規問答｜關於</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@500;700;900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.th-light{--paper:#F6EEE3;--surface:#FCF7F0;--sunken:#EEE2D2;--ink:#1C1917;--ink2:#4F4842;--ink3:#645B53;--rule:#D8C8B4;--rule-strong:#1C1917;--accent:#0B5D66;--accent-soft:#DCEBE8;--on-accent:#FFFFFF;--kicker:#8A1538;--mark:#F4DFA8;--ok:#2E6A39;--ok-soft:#DDEBDD;--warn:#7A5000;--warn-soft:#F6E5BF;--err:#A12A2A;--err-soft:#F6DCD8;--band:#1E2A2E;--on-band:#F6EEE3;--band-ink2:#B9C6C8}
+.th-dark{--paper:#151311;--surface:#1F1B18;--sunken:#2A2420;--ink:#F3EBE1;--ink2:#CFC4B8;--ink3:#A99D91;--rule:#3E3630;--rule-strong:#F3EBE1;--accent:#7CC6C8;--accent-soft:#1D3739;--on-accent:#0F1A1B;--kicker:#E894AB;--mark:#4D3D17;--ok:#86C994;--ok-soft:#1E3322;--warn:#E7BC5E;--warn-soft:#3A2E13;--err:#F09088;--err-soft:#3F1F1D;--band:#0E1517;--on-band:#F3EBE1;--band-ink2:#9FB1B3}
+a{color:var(--accent)}a:hover{color:var(--ink)}
+</style>
+</helmet>
+<div class="{{themeClass}}" style="min-height: 100vh; background: var(--paper); color: var(--ink); font-family: 'Noto Sans TC', sans-serif; font-size: 16px; line-height: 1.7;">
+<header style="border-bottom: 1px solid var(--rule-strong);">
+<div style="background: var(--band); color: var(--on-band);"><div style="max-width: 1240px; margin: 0 auto; padding: 8px 32px; display: flex; gap: 24px; font-size: 13px;"><span style="font-weight: 700;">收錄：道交處罰條例 · 道安規則 · 事故處理辦法 · 強制險法</span><span style="margin-left: auto; color: var(--band-ink2); font-variant-numeric: tabular-nums;">資料更新：2026-10-03</span></div></div>
+<div style="max-width: 1240px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; gap: 32px;">
+<a href="Main.dc.html" style="font-family: 'Noto Serif TC', serif; font-weight: 900; font-size: 26px; letter-spacing: 0.1em; color: var(--ink); text-decoration: none;">交通法規問答</a>
+<nav aria-label="主選單" style="display: flex; gap: 24px; font-size: 14px; font-weight: 700;"><a href="Main.dc.html" style="color: var(--ink2); text-decoration: none; padding-bottom: 4px;">問答</a><a href="Main.dc.html" style="color: var(--ink2); text-decoration: none; padding-bottom: 4px;">收錄範圍</a><a href="Eval.dc.html" style="color: var(--ink2); text-decoration: none; padding-bottom: 4px;">評估結果</a><a href="About.dc.html" aria-current="page" style="color: var(--ink); text-decoration: none; border-bottom: 3px solid var(--accent); padding-bottom: 4px;">關於</a></nav>
+</div>
+</header>
+
+<main style="max-width: 1240px; margin: 0 auto; padding: 40px 32px 0; display: flex; flex-direction: column; gap: 40px;">
+<section style="max-width: 860px; display: flex; flex-direction: column; gap: 14px;">
+<p style="margin: 0; color: var(--kicker); font-weight: 700; font-size: 14px;">關於本工具</p>
+<h1 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 44px; line-height: 1.3;">只根據條文回答，<br>附上參考依據。</h1>
+<p style="margin: 0; font-size: 18px; color: var(--ink2);">交通法規用語艱澀，關鍵字搜尋常常對不上白話問題。這個工具把你的問題對應到相關條文，只根據條文回答，並附上每一句話的出處。</p>
+</section>
+
+<section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 3px solid var(--ink);">
+<div style="padding: 20px 28px 20px 0; display: flex; flex-direction: column; gap: 10px;">
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 24px;">它會做的事</h2>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; color: var(--ink2);"><li>找出和問題相關的條文，並列出相似度</li><li>用白話整理條文內容，每個論點附出處</li><li>答案中的金額、點數直接取自條文原文</li><li>找不到依據時明確告知，不勉強作答</li></ul>
+</div>
+<div style="padding: 20px 0 20px 28px; border-left: 1px solid var(--rule); display: flex; flex-direction: column; gap: 10px;">
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 24px;">它不會做的事</h2>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; color: var(--ink2);"><li>提供法律意見或判斷個案</li><li>引用法院判決、行政函釋</li><li>回答收錄範圍以外的法規</li><li>記錄你的問題或個人資料</li></ul>
+</div>
+</section>
+
+<section aria-labelledby="how" style="display: flex; flex-direction: column; gap: 18px;">
+<h2 id="how" style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 28px; border-top: 1px solid var(--rule-strong); padding-top: 14px;">運作方式</h2>
+<div style="display: flex; align-items: center; gap: 0;">
+<div style="flex-grow: 1; flex-basis: 0; background: var(--surface); border: 1px solid var(--rule); padding: 16px; display: flex; flex-direction: column; gap: 4px;"><span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--accent);"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink3);">01</span></span><span style="font-weight: 700;">改寫問題</span><span style="font-size: 14px; color: var(--ink2);">把口語轉成法律用語查詢</span></div>
+<svg width="28" height="14" viewBox="0 0 28 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" style="flex-shrink: 0; color: var(--ink3);"><path d="M3 7h20"></path><path d="m19 3 4 4-4 4"></path></svg>
+<div style="flex-grow: 1; flex-basis: 0; background: var(--surface); border: 1px solid var(--rule); padding: 16px; display: flex; flex-direction: column; gap: 4px;"><span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--accent);"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink3);">02</span></span><span style="font-weight: 700;">檢索條文</span><span style="font-size: 14px; color: var(--ink2);">語意＋關鍵字找出前幾名</span></div>
+<svg width="28" height="14" viewBox="0 0 28 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" style="flex-shrink: 0; color: var(--ink3);"><path d="M3 7h20"></path><path d="m19 3 4 4-4 4"></path></svg>
+<div style="flex-grow: 1; flex-basis: 0; background: var(--surface); border: 1px solid var(--rule); padding: 16px; display: flex; flex-direction: column; gap: 4px;"><span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--accent);"><path d="M3 5h18l-7 8v6l-4-2v-4Z"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink3);">03</span></span><span style="font-weight: 700;">相關度檢查</span><span style="font-size: 14px; color: var(--ink2);">不夠相關就拒答</span></div>
+<svg width="28" height="14" viewBox="0 0 28 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" style="flex-shrink: 0; color: var(--ink3);"><path d="M3 7h20"></path><path d="m19 3 4 4-4 4"></path></svg>
+<div style="flex-grow: 1; flex-basis: 0; background: var(--surface); border: 1px solid var(--rule); padding: 16px; display: flex; flex-direction: column; gap: 4px;"><span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--accent);"><path d="M4 5h16v11H9l-5 4Z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink3);">04</span></span><span style="font-weight: 700;">產生答案</span><span style="font-size: 14px; color: var(--ink2);">只根據條文，附上出處</span></div>
+<svg width="28" height="14" viewBox="0 0 28 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" style="flex-shrink: 0; color: var(--ink3);"><path d="M3 7h20"></path><path d="m19 3 4 4-4 4"></path></svg>
+<div style="flex-grow: 1; flex-basis: 0; background: var(--surface); border: 1px solid var(--rule); padding: 16px; display: flex; flex-direction: column; gap: 4px;"><span style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--accent);"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6Z"></path><path d="m9 12 2 2 4-4"></path></svg><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink3);">05</span></span><span style="font-weight: 700;">驗證引用</span><span style="font-size: 14px; color: var(--ink2);">確認出處真的在檢索結果中</span></div>
+</div>
+</section>
+
+<section style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 32px; border-top: 1px solid var(--rule-strong); padding-top: 14px;">
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 24px;">資料來源與授權</h2>
+<p style="margin: 0; color: var(--ink2);">法規資料來源：全國法規資料庫（<a href="https://law.moj.gov.tw/">https://law.moj.gov.tw/</a>），由法務部依政府資料開放授權條款授權使用。資料每月更新，目前版本為 2026-10-03。</p>
+<div style="background: var(--sunken); padding: 16px 18px; font-size: 15px; color: var(--ink2);"><strong style="color: var(--ink);">免責聲明</strong>　本工具僅整理並引用公開法規條文，不構成法律意見。法規可能修正，實際適用以主管機關公告及全國法規資料庫最新內容為準。</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 24px;">原始碼</h2>
+<p style="margin: 0; color: var(--ink2);">架構、技術取捨與評估方法都寫在 README。</p>
+<a href="https://github.com/" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 700;">前往 GitHub</a>
+</div>
+</section>
+</main>
+<footer style="margin-top: 56px; border-top: 1px solid var(--rule-strong);"><div style="max-width: 1240px; margin: 0 auto; padding: 20px 32px 36px; display: flex; justify-content: space-between; gap: 24px; font-size: 13px; color: var(--ink2);"><p style="margin: 0;">法規資料來源：全國法規資料庫（<a href="https://law.moj.gov.tw/">https://law.moj.gov.tw/</a>），由法務部依政府資料開放授權條款授權使用。</p><p style="margin: 0; font-weight: 700; color: var(--ink);">僅供參考，非法律意見。</p></div></footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"$preview":{"width":1440,"height":1380}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { themeClass: (this.props.theme ?? 'light') === 'dark' ? 'th-dark' : 'th-light' };
+  }
+}
+</script>
+</body>
+</html>

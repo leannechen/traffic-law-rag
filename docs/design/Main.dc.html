@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<title>交通法規問答｜首頁</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@500;700;900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.th-light{--paper:#F6EEE3;--surface:#FCF7F0;--sunken:#EEE2D2;--ink:#1C1917;--ink2:#4F4842;--ink3:#645B53;--rule:#D8C8B4;--rule-strong:#1C1917;--accent:#0B5D66;--accent-soft:#DCEBE8;--on-accent:#FFFFFF;--kicker:#8A1538;--mark:#F4DFA8;--ok:#2E6A39;--ok-soft:#DDEBDD;--warn:#7A5000;--warn-soft:#F6E5BF;--err:#A12A2A;--err-soft:#F6DCD8;--band:#1E2A2E;--on-band:#F6EEE3;--band-ink2:#B9C6C8}
+.th-dark{--paper:#151311;--surface:#1F1B18;--sunken:#2A2420;--ink:#F3EBE1;--ink2:#CFC4B8;--ink3:#A99D91;--rule:#3E3630;--rule-strong:#F3EBE1;--accent:#7CC6C8;--accent-soft:#1D3739;--on-accent:#0F1A1B;--kicker:#E894AB;--mark:#4D3D17;--ok:#86C994;--ok-soft:#1E3322;--warn:#E7BC5E;--warn-soft:#3A2E13;--err:#F09088;--err-soft:#3F1F1D;--band:#0E1517;--on-band:#F3EBE1;--band-ink2:#9FB1B3}
+a{color:var(--accent)}a:hover{color:var(--ink)}
+</style>
+</helmet>
+<div class="{{themeClass}}" style="min-height: 100vh; background: var(--paper); color: var(--ink); font-family: 'Noto Sans TC', sans-serif; font-size: 16px; line-height: 1.7;">
+
+<header>
+<div style="background: var(--band); color: var(--on-band);">
+<div style="max-width: 1240px; margin: 0 auto; padding: 9px 32px; display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center; font-size: 13px;">
+<span style="font-weight: 700;">收錄法規</span>
+<span>道交處罰條例 <span style="color: var(--band-ink2);">法律</span></span>
+<span>道安規則 <span style="color: var(--band-ink2);">命令</span></span>
+<span>事故處理辦法 <span style="color: var(--band-ink2);">命令</span></span>
+<span>強制險法 <span style="color: var(--band-ink2);">法律</span></span>
+<span style="margin-left: auto; color: var(--band-ink2); font-variant-numeric: tabular-nums;">資料更新：2026-10-03</span>
+</div>
+</div>
+<div style="border-bottom: 1px solid var(--rule);">
+<div style="max-width: 1240px; margin: 0 auto; padding: 24px 32px 14px; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 16px;">
+<span style="font-size: 12px; color: var(--ink2); letter-spacing: 0.12em;">TRAFFIC LAW Q&amp;A</span>
+<a href="Main.dc.html" style="font-family: 'Noto Serif TC', serif; font-weight: 900; font-size: 42px; letter-spacing: 0.12em; color: var(--ink); text-decoration: none; line-height: 1.2;">法規資料庫</a>
+<div style="justify-self: end;"><a href="https://github.com/" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--ink); color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 500;">GitHub 原始碼</a></div>
+</div>
+<nav aria-label="主選單" style="max-width: 1240px; margin: 0 auto; padding: 0 32px; display: flex; gap: 28px; font-size: 14px; font-weight: 700;">
+<a href="Main.dc.html" aria-current="page" style="padding: 8px 0 10px; border-bottom: 3px solid var(--accent); color: var(--ink); text-decoration: none;">問答</a>
+<a href="#scope" style="padding: 8px 0 10px; border-bottom: 3px solid transparent; color: var(--ink2); text-decoration: none;">收錄範圍</a>
+<a href="Eval.dc.html" style="padding: 8px 0 10px; border-bottom: 3px solid transparent; color: var(--ink2); text-decoration: none;">評估結果</a>
+<a href="About.dc.html" style="padding: 8px 0 10px; border-bottom: 3px solid transparent; color: var(--ink2); text-decoration: none;">關於</a>
+</nav>
+</div>
+</header>
+
+<main style="max-width: 1240px; margin: 0 auto; padding: 0 32px;">
+
+<section style="max-width: 880px; margin: 0 auto; padding: 56px 0 44px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+<p style="margin: 0; color: var(--kicker); font-weight: 700; font-size: 15px; letter-spacing: 0.08em;">白話問答 · 條文為據</p>
+<h1 style="margin: 0; font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 52px; line-height: 1.32;">交通法規白話文搜尋</h1>
+<p style="margin: 0; max-width: 640px; font-size: 18px; color: var(--ink2);">輸入你的問題，系統會找出相關條文，只根據條文回答，並標出每一句話的出處。</p>
+<form style="width: 100%; margin-top: 16px; display: flex; flex-direction: column; gap: 8px; text-align: left;">
+<label for="q" style="font-size: 14px; font-weight: 700;">你的問題</label>
+<div style="display: flex; border: 2px solid var(--ink); background: var(--surface);">
+<input id="q" type="text" placeholder="例如：騎機車沒戴安全帽會被罰多少？" style="flex-grow: 1; min-width: 0; border: 0; background: transparent; padding: 18px 20px; font-size: 20px; font-family: inherit; color: var(--ink);">
+<button type="submit" style="display: flex; align-items: center; gap: 8px; border: 0; background: var(--accent); color: var(--on-accent); padding: 0 28px; font-size: 18px; font-weight: 700; font-family: inherit; cursor: pointer;">提問<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--ink3);"><span>一次問一題，可以用口語描述情境。</span><span style="font-variant-numeric: tabular-nums;">0 / 200</span></div>
+</form>
+</section>
+
+<section aria-labelledby="examples" style="padding-bottom: 40px;">
+<div style="border-top: 3px dotted var(--ink3); padding-top: 16px; text-align: center;">
+<h2 id="examples" style="margin: 0; font-size: 15px; letter-spacing: 0.3em; font-weight: 700;">試試這些問題</h2>
+</div>
+<div style="margin-top: 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--rule);">
+<a href="Answer.dc.html" style="display: flex; flex-direction: column; gap: 4px; padding: 14px 20px; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink);"><span style="font-size: 12px; font-weight: 700; color: var(--kicker);">罰鍰</span><span style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700; line-height: 1.5;">紅燈右轉會被罰多少錢？<span aria-hidden="true" style="margin-left: 6px; color: var(--accent);">→</span></span></a>
+<a href="Streaming.dc.html" style="display: flex; flex-direction: column; gap: 4px; padding: 14px 20px; border-left: 1px solid var(--rule); border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink);"><span style="font-size: 12px; font-weight: 700; color: var(--kicker);">處罰</span><span style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700; line-height: 1.5;">酒駕被抓到會有什麼處罰？<span aria-hidden="true" style="margin-left: 6px; color: var(--accent);">→</span></span></a>
+<a href="Answer.dc.html" style="display: flex; flex-direction: column; gap: 4px; padding: 14px 20px; border-left: 1px solid var(--rule); border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink);"><span style="font-size: 12px; font-weight: 700; color: var(--kicker);">事故處理</span><span style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700; line-height: 1.5;">發生小擦撞，一定要報警嗎？<span aria-hidden="true" style="margin-left: 6px; color: var(--accent);">→</span></span></a>
+<a href="Answer.dc.html" style="display: flex; flex-direction: column; gap: 4px; padding: 14px 20px; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink);"><span style="font-size: 12px; font-weight: 700; color: var(--kicker);">行為規範</span><span style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700; line-height: 1.5;">騎機車可以載幾個人？<span aria-hidden="true" style="margin-left: 6px; color: var(--accent);">→</span></span></a>
+<a href="Answer.dc.html" style="display: flex; flex-direction: column; gap: 4px; padding: 14px 20px; border-left: 1px solid var(--rule); border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink);"><span style="font-size: 12px; font-weight: 700; color: var(--kicker);">拖吊</span><span style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700; line-height: 1.5;">違規停車被拖吊，要去哪裡領車？<span aria-hidden="true" style="margin-left: 6px; color: var(--accent);">→</span></span></a>
+<a href="Refusal.dc.html" style="display: flex; flex-direction: column; gap: 4px; padding: 14px 20px; border-left: 1px solid var(--rule); border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink);"><span style="font-size: 12px; font-weight: 700; color: var(--kicker);">強制險</span><span style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700; line-height: 1.5;">強制險可以理賠哪些項目？<span aria-hidden="true" style="margin-left: 6px; color: var(--accent);">→</span></span></a>
+</div>
+</section>
+
+<section id="scope" aria-labelledby="scope-title" style="padding-bottom: 48px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-top: 1px solid var(--rule-strong); padding-top: 14px;">
+<h2 id="scope-title" style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 28px; font-weight: 700;">收錄範圍</h2>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink2); font-variant-numeric: tabular-nums;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>資料更新：2026-10-03</span>
+</div>
+<p style="margin: 6px 0 20px; color: var(--ink2);">只根據以下四部法規回答；範圍外的問題，系統會明確告知找不到相關規定。</p>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));">
+<div style="padding: 4px 24px 8px 0; display: flex; flex-direction: column; gap: 6px;"><span style="align-self: flex-start; font-size: 12px; font-weight: 700; padding: 1px 8px; border: 1px solid var(--ink2); color: var(--ink2);">法律</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px; line-height: 1.45;">道路交通管理處罰條例</h3><span style="font-size: 14px; color: var(--ink2);">簡稱：道交處罰條例</span><span style="font-size: 13px; color: var(--ink3); font-variant-numeric: tabular-nums;">[N] 條 · 最新異動 [YYYY-MM-DD]</span></div>
+<div style="padding: 4px 24px 8px; border-left: 1px solid var(--rule); display: flex; flex-direction: column; gap: 6px;"><span style="align-self: flex-start; font-size: 12px; font-weight: 700; padding: 1px 8px; border: 1px solid var(--ink2); color: var(--ink2);">命令</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px; line-height: 1.45;">道路交通安全規則</h3><span style="font-size: 14px; color: var(--ink2);">簡稱：道安規則</span><span style="font-size: 13px; color: var(--ink3); font-variant-numeric: tabular-nums;">[N] 條 · 最新異動 [YYYY-MM-DD]</span></div>
+<div style="padding: 4px 24px 8px; border-left: 1px solid var(--rule); display: flex; flex-direction: column; gap: 6px;"><span style="align-self: flex-start; font-size: 12px; font-weight: 700; padding: 1px 8px; border: 1px solid var(--ink2); color: var(--ink2);">命令</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px; line-height: 1.45;">道路交通事故處理辦法</h3><span style="font-size: 14px; color: var(--ink2);">簡稱：事故處理辦法</span><span style="font-size: 13px; color: var(--ink3); font-variant-numeric: tabular-nums;">[N] 條 · 最新異動 [YYYY-MM-DD]</span></div>
+<div style="padding: 4px 0 8px 24px; border-left: 1px solid var(--rule); display: flex; flex-direction: column; gap: 6px;"><span style="align-self: flex-start; font-size: 12px; font-weight: 700; padding: 1px 8px; border: 1px solid var(--ink2); color: var(--ink2);">法律</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px; line-height: 1.45;">強制汽車責任保險法</h3><span style="font-size: 14px; color: var(--ink2);">簡稱：強制險法</span><span style="font-size: 13px; color: var(--ink3); font-variant-numeric: tabular-nums;">[N] 條 · 最新異動 [YYYY-MM-DD]</span></div>
+</div>
+</section>
+
+<aside style="display: flex; gap: 14px; align-items: flex-start; padding: 18px 20px; background: var(--sunken); font-size: 14px; color: var(--ink2);">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 3px;"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+<p style="margin: 0;"><strong style="color: var(--ink);">免責聲明</strong>　本工具僅整理並引用公開法規條文，不構成法律意見。法規可能修正，實際適用以主管機關公告及全國法規資料庫最新內容為準。</p>
+</aside>
+</main>
+
+<footer style="margin-top: 56px; border-top: 1px solid var(--rule-strong);">
+<div style="max-width: 1240px; margin: 0 auto; padding: 22px 32px 40px; display: flex; gap: 32px; justify-content: space-between; align-items: flex-start; font-size: 13px; color: var(--ink2);">
+<p style="margin: 0; max-width: 760px;">法規資料來源：全國法規資料庫（<a href="https://law.moj.gov.tw/">https://law.moj.gov.tw/</a>），由法務部依政府資料開放授權條款授權使用。</p>
+<p style="margin: 0; font-weight: 700; color: var(--ink);">僅供參考，非法律意見。</p>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"$preview":{"width":1440,"height":1380}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { themeClass: (this.props.theme ?? 'light') === 'dark' ? 'th-dark' : 'th-light' };
+  }
+}
+</script>
+</body>
+</html>

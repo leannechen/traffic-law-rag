@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<title>手機｜過程與依據</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@500;700;900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.th-light{--paper:#F6EEE3;--surface:#FCF7F0;--sunken:#EEE2D2;--ink:#1C1917;--ink2:#4F4842;--ink3:#645B53;--rule:#D8C8B4;--rule-strong:#1C1917;--accent:#0B5D66;--accent-soft:#DCEBE8;--on-accent:#FFFFFF;--kicker:#8A1538;--ok:#2E6A39}
+.th-dark{--paper:#151311;--surface:#1F1B18;--sunken:#2A2420;--ink:#F3EBE1;--ink2:#CFC4B8;--ink3:#A99D91;--rule:#3E3630;--rule-strong:#F3EBE1;--accent:#7CC6C8;--accent-soft:#1D3739;--on-accent:#0F1A1B;--kicker:#E894AB;--ok:#86C994}
+a{color:var(--accent)}a:hover{color:var(--ink)}
+</style>
+</helmet>
+<div class="{{themeClass}}" style="width: 390px; height: 844px; overflow: hidden; background: var(--paper); color: var(--ink); font-family: 'Noto Sans TC', sans-serif; font-size: 15px; line-height: 1.7; display: flex; flex-direction: column;">
+<header style="display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 4px; border-bottom: 1px solid var(--rule-strong);">
+<a href="MobileHome.dc.html" aria-label="回首頁" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: var(--ink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg></a>
+<span style="font-family: 'Noto Serif TC', serif; font-weight: 900; font-size: 18px; letter-spacing: 0.08em;">交通法規問答</span>
+</header>
+<nav aria-label="答案分頁" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid var(--rule); font-size: 14px; font-weight: 700; text-align: center;"><a href="MobileAnswer.dc.html" style="padding: 12px 0px 9px; border-bottom: 3px solid transparent; color: var(--ink2); text-decoration: none">答案</a><a href="MobileProcess.dc.html" aria-current="page" style="padding: 12px 0px 9px; border-bottom: 3px solid var(--accent); color: var(--ink); text-decoration: none">過程與依據</a></nav>
+<main style="flex-grow: 1; min-height: 0; overflow-y: auto; padding: 6px 16px 18px; display: flex; flex-direction: column; gap: 12px;">
+
+<section aria-label="檢索過程" style="border-bottom: 1px solid var(--rule-strong);">
+<button type="button" onClick="{{toggle}}" aria-expanded="{{processOpen}}" style="width: 100%; display: flex; align-items: center; gap: 8px; min-height: 48px; border: 0; background: transparent; color: var(--ink); font-family: inherit; font-size: 14px; font-weight: 700; letter-spacing: 0.15em; cursor: pointer; padding: 0;">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="{{chevron}}"><path d="m9 6 6 6-6 6"></path></svg>檢索過程<span style="margin-left: auto; font-size: 12px; letter-spacing: 0; color: var(--ink3); font-weight: 400; font-variant-numeric: tabular-nums;">{{toggleLabel}}</span>
+</button>
+<sc-if value="{{processOpen}}" hint-placeholder-val="{{ true }}">
+<ol style="margin: 0; padding: 0 0 6px; list-style: none; display: flex; flex-direction: column;">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="5">
+<li style="display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 10px; padding: 6px 0; border-top: 1px solid var(--rule); line-height: 1.5;"><span style="color: var(--accent); font-weight: 700;">✓</span><span><strong>{{s.label}}</strong><br><span style="font-size: 13px; color: var(--ink2);">{{s.detail}}</span></span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink3);">{{s.ms}}</span></li>
+</sc-for>
+</ol>
+</sc-if>
+</section>
+
+<section aria-labelledby="src-title" style="display: flex; flex-direction: column; gap: 10px;">
+<div style="display: flex; align-items: baseline; justify-content: space-between;"><h2 id="src-title" style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px;">依據</h2><span style="font-size: 12px; color: var(--ink3);">已引用 3 · 檢索到 5 · 依相似度排序</span></div>
+
+<a href="MobileSources.dc.html" style="display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--rule); color: var(--ink); text-decoration: none;">
+<span style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 11px; font-weight: 700; color: var(--on-accent); background: var(--accent); padding: 1px 7px; white-space: nowrap;">已引用</span><span style="font-weight: 700; flex-grow: 1;">道交處罰條例 §53</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">0.91</span></span>
+<span style="height: 4px; background: var(--sunken);"><span style="display: block; width: 91%; height: 4px; background: var(--accent);"></span></span>
+<span style="font-family: 'Noto Serif TC', serif; font-size: 15px; line-height: 1.8; color: var(--ink2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">汽車駕駛人，行經有燈光號誌管制之交岔路口闖紅燈者，處新臺幣 [金額] 元以上 [金額] 元以下罰鍰。前項紅燈右轉行為者，處新臺幣 [金額] 元以上 [金額] 元以下罰鍰。</span>
+</a>
+
+<a href="MobileSources.dc.html" style="display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--rule); color: var(--ink); text-decoration: none;">
+<span style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 11px; font-weight: 700; color: var(--on-accent); background: var(--accent); padding: 1px 7px; white-space: nowrap;">已引用</span><span style="font-weight: 700; flex-grow: 1;">道安規則 §206</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">0.84</span></span>
+<span style="height: 4px; background: var(--sunken);"><span style="display: block; width: 84%; height: 4px; background: var(--accent);"></span></span>
+<span style="font-family: 'Noto Serif TC', serif; font-size: 15px; line-height: 1.8; color: var(--ink2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">行車管制號誌各種燈號顯示之意義如下：圓形紅燈表示禁止通行，不得超越停止線或進入路口。</span>
+</a>
+
+<a href="MobileSources.dc.html" style="display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--rule); color: var(--ink); text-decoration: none;">
+<span style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 11px; font-weight: 700; color: var(--on-accent); background: var(--accent); padding: 1px 7px; white-space: nowrap;">已引用</span><span style="font-weight: 700; flex-grow: 1;">道安規則 §102</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">0.78</span></span>
+<span style="height: 4px; background: var(--sunken);"><span style="display: block; width: 78%; height: 4px; background: var(--accent);"></span></span>
+<span style="font-family: 'Noto Serif TC', serif; font-size: 15px; line-height: 1.8; color: var(--ink2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">汽車行駛至交岔路口，其行進、轉彎，應依下列規定：一、應遵守燈光號誌或交通指揮人員之指揮。</span>
+</a>
+
+<a href="MobileSources.dc.html" style="display: flex; flex-direction: column; gap: 6px; padding: 10px 14px; border: 1px dashed var(--rule); color: var(--ink2); text-decoration: none;">
+<span style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 11px; font-weight: 700; color: var(--ink2); border: 1px solid var(--ink3); padding: 0 7px; white-space: nowrap;">未引用</span><span style="flex-grow: 1;">道交處罰條例 §63</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">0.66</span></span>
+<span style="height: 4px; background: var(--sunken);"><span style="display: block; width: 66%; height: 4px; background: var(--ink3);"></span></span>
+</a>
+
+<a href="MobileSources.dc.html" style="display: flex; flex-direction: column; gap: 6px; padding: 10px 14px; border: 1px dashed var(--rule); color: var(--ink2); text-decoration: none;">
+<span style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 11px; font-weight: 700; color: var(--ink2); border: 1px solid var(--ink3); padding: 0 7px; white-space: nowrap;">未引用</span><span style="flex-grow: 1;">道交處罰條例 §60</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">0.58</span></span>
+<span style="height: 4px; background: var(--sunken);"><span style="display: block; width: 58%; height: 4px; background: var(--ink3);"></span></span>
+</a>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: true };
+  }
+  renderVals() {
+    const open = this.state.open;
+    return {
+      themeClass: (this.props.theme ?? 'light') === 'dark' ? 'th-dark' : 'th-light',
+      processOpen: open,
+      toggle: () => this.setState({ open: !this.state.open }),
+      toggleLabel: open ? '✓ 5 個步驟完成 · 3.2 秒　收合' : '✓ 5 個步驟完成 · 3.2 秒　展開',
+      chevron: 'transition: transform .15s; transform: rotate(' + (open ? 90 : 0) + 'deg);',
+      steps: [
+        { label: '改寫問題', detail: '「闖紅燈 處罰」「交岔路口 紅燈 右轉」', ms: '0.4s' },
+        { label: '檢索條文', detail: '找到 5 筆', ms: '0.3s' },
+        { label: '相關度檢查', detail: '最高 0.91，高於門檻', ms: '0.0s' },
+        { label: '產生答案', detail: '3 個引用', ms: '2.4s' },
+        { label: '驗證引用', detail: '3 / 3 通過', ms: '0.1s' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

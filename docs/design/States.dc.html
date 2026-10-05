@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<title>交通法規問答｜錯誤與警告狀態</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@500;700;900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.th-light{--paper:#F6EEE3;--surface:#FCF7F0;--sunken:#EEE2D2;--ink:#1C1917;--ink2:#4F4842;--ink3:#645B53;--rule:#D8C8B4;--rule-strong:#1C1917;--accent:#0B5D66;--accent-soft:#DCEBE8;--on-accent:#FFFFFF;--kicker:#8A1538;--mark:#F4DFA8;--ok:#2E6A39;--ok-soft:#DDEBDD;--warn:#7A5000;--warn-soft:#F6E5BF;--err:#A12A2A;--err-soft:#F6DCD8;--band:#1E2A2E;--on-band:#F6EEE3;--band-ink2:#B9C6C8}
+.th-dark{--paper:#151311;--surface:#1F1B18;--sunken:#2A2420;--ink:#F3EBE1;--ink2:#CFC4B8;--ink3:#A99D91;--rule:#3E3630;--rule-strong:#F3EBE1;--accent:#7CC6C8;--accent-soft:#1D3739;--on-accent:#0F1A1B;--kicker:#E894AB;--mark:#4D3D17;--ok:#86C994;--ok-soft:#1E3322;--warn:#E7BC5E;--warn-soft:#3A2E13;--err:#F09088;--err-soft:#3F1F1D;--band:#0E1517;--on-band:#F3EBE1;--band-ink2:#9FB1B3}
+a{color:var(--accent)}a:hover{color:var(--ink)}
+</style>
+</helmet>
+<div class="{{themeClass}}" style="width: 1440px; height: 1180px; box-sizing: border-box; padding: 56px 64px; background: var(--paper); color: var(--ink); font-family: 'Noto Sans TC', sans-serif; font-size: 16px; line-height: 1.7; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 56px; align-content: start;">
+
+<section style="display: flex; flex-direction: column; gap: 12px;">
+<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: var(--ink3);">ERRORNOTICE · 一般錯誤</p>
+<div role="alert" style="border-top: 3px solid var(--err); background: var(--err-soft); padding: 22px 24px; display: flex; flex-direction: column; gap: 10px;">
+<div style="display: flex; align-items: center; gap: 8px; color: var(--err); font-weight: 700;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>連線中斷</div>
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 24px;">答案沒有完整送達</h2>
+<p style="margin: 0; color: var(--ink2);">和伺服器的連線在產生答案時中斷了。已顯示的內容可能不完整，請重新送出問題。</p>
+<div style="display: flex; gap: 10px;"><button type="button" style="min-height: 44px; padding: 0 20px; border: 0; background: var(--ink); color: var(--paper); font-family: inherit; font-weight: 700; font-size: 15px;">重試</button><a href="Main.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid var(--ink); color: var(--ink); text-decoration: none; font-weight: 700; font-size: 15px;">回首頁</a></div>
+<p style="margin: 0; font-size: 12px; color: var(--ink3); font-family: 'IBM Plex Mono', monospace;">錯誤代碼 stream_interrupted · run 7f3a</p>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px;">
+<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: var(--ink3);">ERRORNOTICE · 速率限制</p>
+<div role="status" style="border-top: 3px solid var(--warn); background: var(--warn-soft); padding: 22px 24px; display: flex; flex-direction: column; gap: 10px;">
+<div style="display: flex; align-items: center; gap: 8px; color: var(--warn); font-weight: 700;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>請稍候</div>
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 24px;">提問太頻繁，請稍後再試</h2>
+<p style="margin: 0; color: var(--ink2);">為了讓每個人都能使用，每分鐘的提問次數有上限。</p>
+<div style="display: flex; align-items: center; gap: 12px;"><button type="button" disabled style="min-height: 44px; padding: 0 20px; border: 0; background: var(--rule); color: var(--ink2); font-family: inherit; font-weight: 700; font-size: 15px;">重試</button><span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: var(--warn); font-weight: 500;">00:42 後可再提問</span></div>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px;">
+<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: var(--ink3);">QUESTIONINPUT · 超過字數</p>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<label for="q-long" style="font-size: 14px; font-weight: 700;">你的問題</label>
+<div style="display: flex; border: 2px solid var(--err); background: var(--surface);">
+<input id="q-long" type="text" aria-invalid="true" aria-describedby="q-long-help" value="我昨天晚上騎機車經過一個路口，那時候是黃燈轉紅燈，我已經過了停止線但還沒進到路口中間，後面的車一直按喇叭……" style="flex-grow: 1; min-width: 0; border: 0; background: transparent; padding: 16px 18px; font-size: 18px; font-family: inherit; color: var(--ink);">
+<button type="submit" disabled style="border: 0; background: var(--rule); color: var(--ink2); padding: 0 24px; font-size: 17px; font-weight: 700; font-family: inherit;">提問</button>
+</div>
+<div id="q-long-help" style="display: flex; justify-content: space-between; font-size: 13px;"><span style="color: var(--err); font-weight: 700;">⨯ 問題超過 200 字，請精簡成一個重點。</span><span style="color: var(--err); font-variant-numeric: tabular-nums; font-weight: 700;">236 / 200</span></div>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px;">
+<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: var(--ink3);">ANSWERSTREAM · 已停止</p>
+<div style="border-top: 1px solid var(--rule-strong); padding-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+<p style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 19px; line-height: 1.9; color: var(--ink2);">依法規，酒後駕車屬於「吐氣所含酒精濃度超過規定標準」的違規。汽車駕駛人除了處新臺幣 [金額] 元罰鍰……</p>
+<div style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--ink2);"><span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700;"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12"></rect></svg>你已停止產生，答案不完整</span><button type="button" style="margin-left: auto; min-height: 40px; padding: 0 16px; border: 1px solid var(--ink); background: transparent; color: var(--ink); font-family: inherit; font-weight: 700;">重新產生</button></div>
+</div>
+</section>
+
+<section style="grid-column: 1 / span 2; display: flex; flex-direction: column; gap: 12px;">
+<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: var(--ink3);">引用驗證警告</p>
+<div style="display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px; border-top: 1px solid var(--rule-strong); padding-top: 16px;">
+<div style="display: flex; flex-direction: column; gap: 14px;">
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--warn); font-weight: 700;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>有 1 個引用未通過驗證，請以條文原文為準。</p>
+<p style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 21px; line-height: 2;">騎機車時使用手機屬於違規行為，會被處新臺幣 [金額] 元罰鍰 <button type="button" style="display: inline-flex; align-items: center; padding: 0 8px; min-height: 28px; border: 1px solid var(--accent); background: var(--accent-soft); color: var(--accent); font-family: 'Noto Sans TC', sans-serif; font-size: 14px; font-weight: 700; vertical-align: 2px;">道交處罰條例 §31-1</button>，並可能記違規點數 <button type="button" aria-describedby="warn-tip" style="display: inline-flex; align-items: center; gap: 4px; padding: 0 8px; min-height: 28px; border: 1.5px dashed var(--warn); background: var(--warn-soft); color: var(--warn); font-family: 'Noto Sans TC', sans-serif; font-size: 14px; font-weight: 700; vertical-align: 2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 8v5"></path><path d="M12 17h.01"></path></svg>道交處罰條例 §63</button>。</p>
+</div>
+<div id="warn-tip" role="tooltip" style="align-self: end; background: var(--ink); color: var(--paper); padding: 14px 16px; font-size: 14px; display: flex; flex-direction: column; gap: 4px;">
+<strong>此引用未通過驗證</strong>
+<span>「道交處罰條例 §63」不在這次檢索到的條文中，系統無法確認它支持這句話。請以條文原文為準。</span>
+</div>
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { themeClass: (this.props.theme ?? 'light') === 'dark' ? 'th-dark' : 'th-light' };
+  }
+}
+</script>
+</body>
+</html>
