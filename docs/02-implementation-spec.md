@@ -78,7 +78,7 @@ UI footer、關於頁與 README 須註明：法規資料來源為全國法規資
 | LLM | Claude API，封裝在 `LLMClient` 介面後 | |
 | 前端 | React 18 + TypeScript + Vite | |
 | 資料請求 | TanStack Query；SSE 用 `fetch` + ReadableStream 解析 | |
-| 檢索過程呈現 | PipelineSteps（橫向步驟進度列，核准設計稿的版本） | React Flow 節點圖為 Should，且設計稿沒有此畫面，要做需先補設計 |
+| 檢索過程呈現 | PipelineSteps（橫向步驟進度列，核准設計稿的版本） | React Flow 節點圖延後到本專案完成之後，不在範圍內 |
 | 樣式 | 依核准設計稿的 token 實作（Tailwind + CSS variables） | token 值見 `docs/design/README.md` |
 | 測試 | pytest、Vitest、Playwright | |
 | 後端品質 | ruff（lint + format）、mypy strict | |
@@ -140,6 +140,7 @@ traffic-law-rag/
 ├── docs/
 │   ├── design/                 # 核准的設計稿：畫板原始檔（*.dc.html）、README（對照表、token）、截圖
 │   ├── decisions/              # ADR
+│   ├── learning/               # 每步的學習筆記（Step 2–6），見 7.1
 │   └── data-format.md
 ├── docker-compose.yml
 ├── CLAUDE.md                   # 給 Claude Code 的專案說明與目前進度
@@ -292,12 +293,11 @@ class LawChunk(BaseModel):
 7. 手機選單內容與桌面主選單相同。
 8. 問答狀態只存在記憶體，重新整理後回到首頁。
 
-#### H. 待 Leanne 確認的設計項目
+#### H. 已確認的設計決定
 
-實作到相關畫面前要先問，不自行決定：
-
-- **產品名稱**：首頁刊頭是「法規資料庫」，其他頁面是「交通法規問答」。
-- **全文面板的陰影**：設計 token 的原則是不使用陰影，目前面板上緣的陰影是唯一例外。
+- **產品名稱**：「交通法規資料庫」。頁首刊頭、頁面標題、手機標題列一律使用這個名稱。專案與 repo 名稱仍是 Traffic Law RAG，兩者不必相同。
+- **陰影**：不使用陰影的原則維持不變，唯一的例外是桌面全文面板的上緣陰影（`--shadow`），是刻意保留的，用來表現面板與頁面不同層。不要把陰影用到其他元件。
+- **React Flow 節點圖**：延後到本專案完成之後，不在範圍內（見優先級）。
 
 ---
 
@@ -306,10 +306,11 @@ class LawChunk(BaseModel):
 ### 優先級
 
 - **Must**：Step 1–8、Step 9（PipelineSteps 版）、Step 10、Step 11（E2E 除外）、Step 12、Step 13
-- **Should**：hybrid 檢索、Step 11 的 Playwright E2E、React Flow 節點圖（設計稿沒有此畫面，要做需先補設計並經核准）
+- **Should**：hybrid 檢索、Step 11 的 Playwright E2E
 - **Could**：reranker、裁罰基準附表、拒答頁由 LLM 產生改問建議
+- **延後（不在本專案範圍）**：React Flow 節點圖。核准的設計是 PipelineSteps；README 的「後續方向」可提到它
 
-時間不夠時依序砍：reranker → 裁罰基準附表 → React Flow 節點圖（核准的設計本來就是 PipelineSteps，砍掉不影響版面）。
+時間不夠時依序砍：reranker → 裁罰基準附表 → hybrid 檢索。
 
 ---
 
@@ -373,7 +374,7 @@ class LawChunk(BaseModel):
 ```
 
 - 類別：罰鍰金額、行為定義、事故處理、跨法規、口語問法、範圍外（至少 4 題應拒答）
-- Claude Code 可產生題目草稿，但 `expected_chunk_ids`、`expected_facts` 一律 `verified: false`，由 Leanne 人工對照條文確認
+- Claude Code 可產生題目草稿，但 `expected_chunk_ids`、`expected_facts` 一律 `verified: false`，由 human 人工對照條文確認
 - `eval/run_eval.py`：Recall@5、MRR；只計入 `verified: true` 的題目
 
 **驗收**：一行指令跑出評估 JSON；記錄 baseline；有 hybrid 時比較兩者並寫 ADR。
@@ -457,7 +458,7 @@ class LawChunk(BaseModel):
 - 桌面：串流中展開，完成時自動收合成一行摘要，可手動展開／收合
 - 手機：放在「過程與依據」分頁上方，預設展開，直式列表
 - 拒答頁的「為什麼不回答」：PipelineSteps 的拒答分支＋最高相似度與門檻的對照條（用 `answer.refused` 的 `top_score`、`threshold`）
-- （Should）React Flow 節點圖：設計稿沒有此畫面。要做的話先補設計並經 Leanne 核准，不直接實作
+- 不做 React Flow 節點圖（延後到本專案完成之後）；Step 9 只做 PipelineSteps
 
 **驗收**：一次提問中各步驟的狀態轉換正確；拒答時後兩步顯示為略過；完成時自動收合；Vitest 覆蓋「事件序列 → 步驟狀態」的轉換。
 
@@ -504,7 +505,7 @@ README 結構：
 2. 要解決的問題與 Input / Output
 3. 架構圖
 4. 評估結果與方法
-5. 技術取捨（連到 ADR）：資料來源、chunk 策略、Chroma vs pgvector、hybrid 檢索、引用驗證、拒答設計
+5. 技術取捨（連到 ADR）：資料來源、chunk 策略、Chroma vs pgvector、hybrid 檢索、引用驗證、拒答設計。素材取自 `docs/learning/` 與 ADR，由 Claude Code 起草、human 逐段改寫
 6. 遇到的困難與解法
 7. 限制與後續方向
 8. 資料來源與授權標示、免責聲明
@@ -515,7 +516,7 @@ README 結構：
 
 ## 7. 執行規則
 
-- 依步驟順序執行；每步完成時逐項對照驗收條件並回報，再進下一步。
+- 依步驟順序執行；每步完成時逐項對照驗收條件並回報。是否停下來等 review，依 7.1 的 review 強度與檢查點決定。
 - 實際情況與本文件不符時（例如資料格式不同），先更新 `docs/data-format.md` 或相關 ADR 並回報，不自行假設後繼續。
 - 重要技術決策寫 ADR（背景、選項、決定、後果）。
 - 不寫爬蟲存取 `law.moj.gov.tw` 的網頁。
@@ -525,4 +526,55 @@ README 結構：
 - 畫板是參考，不是程式碼：取其結構、尺寸與 token，用 React 元件重寫；不要搬畫板的模板語法（`{{ }}`、`<sc-if>`、`<sc-for>`、`DCLogic`）或整段 inline style。
 - 畫板裡的內容是示意資料（條文文字、`[金額]`、相似度分數、日期、`[XX]`），一律不得寫進程式或測試當作真實資料；畫面上的資料全部來自 API。
 - 畫板之間不一致時，依 `docs/design/README.md` 的「以誰為準」處理；那裡也沒寫的，先問。
-- 5.5-H 列的待確認項目，做到相關畫面前先問 Leanne。
+- 5.5-H 是已確認的設計決定，直接照做。
+
+### 7.1 Review 強度與學習流程
+
+依熟悉度分三種做法，並以指標、測試與獨立 review 取代逐行檢視後端程式碼。
+
+**A. 各 Step 的做法**
+
+| Step | 做法 |
+|---|---|
+| 1、7–12（骨架、前端、評估頁、測試、部署） | 一口氣做：簡短說明做法後直接實作，不等核准；完成後對照驗收並回報 |
+| 2、3（資料、chunking） | 先提計畫並等確認；重點是資料長什麼樣、怎麼切，用統計輸出與 `docs/data-format.md` 呈現，不要求讀程式碼 |
+| 4、5、6（檢索、生成、SSE） | 學習流程（見 B） |
+| 13（README） | Claude Code 起草，human 逐段改寫成自己的話 |
+
+**必停的檢查點**：Step 3、4、5、6、9 完成後停下來，等 human 檢視。檢查的內容：
+
+- Step 3 後：資料與索引。看 `docs/data-format.md`、各法規 chunk 統計、抽樣幾條 chunk 的實際內容。
+- Step 4 後：檢索 baseline。看評估結果與 human 自己跑的實驗。
+- Step 5 後：生成、引用與拒答。看五項評估指標；用幾個真實問題讀完整答案，確認引用對得上條文、數字照抄條文；範圍外問題確實拒答；故意製造無效引用，確認會被標成 invalid。
+- Step 6 後：API 跑通。用 `curl -N` 看事件序列（一般回答、拒答各一次）。
+- Step 9 後：前端完成。照 Step 7–9 的驗收，並排比對設計稿截圖。
+
+其餘 Step 驗收通過後可接著做下一個 Step，但每步仍各自 commit、各自對照驗收、更新 `CLAUDE.md` 的進度。
+
+**B. 學習流程（Step 4、5、6）**
+
+1. **開工前**：先用前端工程師熟悉的類比，解釋這一步的核心概念與最常見的坑（例如 embedding 與相似度分數、RRF、拒答門檻為什麼存在、SSE 與一般 API 的差別），不要留下未解釋的術語。再提實作計畫，等 human 確認。
+2. **實作中**：照 spec 做，不需要 human 盯著。
+3. **完成後**：不要求讀 diff。改給一份「請 human 自己跑的實驗清單」，每項附上指令與預期要觀察什麼。例如 Step 4：
+   - 用 CLI 問 10 個問題，看排名與分數；
+   - 故意問範圍外的問題，看最高分落在哪，由此理解門檻怎麼訂；
+   - 改 top-k 或 chunk 大小，重跑評估，看數字怎麼變。
+4. **收尾**：寫 `docs/learning/step-N.md`（見 C）。
+
+**C. 學習筆記（Step 2–6）**
+
+- 檔名 `docs/learning/step-N.md`，一頁內，白話。
+- 內容只有四塊：這步做了什麼；為什麼選這個方法而不是另一個（放棄了什麼）；什麼情況下會壞掉；面試可能被問的 3 個問題與簡短回答。
+- Claude Code 寫的是草稿，檔案開頭標 `狀態：草稿`。human 用自己的話改寫後改成 `狀態：已改寫`。Step 13 的 README 技術取捨以已改寫的筆記為素材。
+
+**D. 後端品質怎麼把關**
+
+- 後端不靠逐行 review。靠 pytest、評估指標（Recall@5、MRR、引用／數字／拒答正確率），以及獨立 review。
+- 改動 chunking、檢索參數、門檻或 prompt 之後，必須重跑評估，並在回報中列出前後數字。數字變差要說明原因，不得只回報「已完成」。
+- 檢查點之前，建議 另開一個全新 session（或 subagent），只給它 spec 與該階段的 diff，請它找 bug、和 spec 不符之處、沒被測到的地方，並用白話說明結論。可用這段 prompt：
+
+  ```
+  你是獨立的 reviewer，沒有參與實作。只根據 docs/02-implementation-spec.md 和這個階段的 diff，
+  找出：1) bug 與邊界情況 2) 與 spec 不符之處 3) 沒被測試涵蓋的行為 4) 資料或評估上可能讓指標失真的地方。
+  用白話說明，每項標示嚴重程度，不要修改任何檔案。
+  ```
