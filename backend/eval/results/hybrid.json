@@ -1,7 +1,7 @@
 {
   "name": "hybrid",
   "retriever": "hybrid",
-  "evaluated_at": "2026-10-06T15:10:55+00:00",
+  "evaluated_at": "2026-10-06T15:43:15+00:00",
   "config": {
     "embedding_model": "voyage-4",
     "data_version": "2026-10-05",
@@ -51,13 +51,13 @@
   },
   "score_distribution": {
     "answerable_top1": {
-      "min": 0.01639,
-      "median": 0.03202,
-      "max": 0.03279
+      "min": 0.4162,
+      "median": 0.6426,
+      "max": 0.735
     },
     "out_of_scope_top1": {
-      "min": 0.01639,
-      "max": 0.03126
+      "min": 0.2608,
+      "max": 0.3997
     }
   },
   "questions": [
@@ -74,64 +74,74 @@
           "rank": 1,
           "article_id": "K0040012:53",
           "chunk_id": "K0040012:53",
-          "score": 0.03279
+          "score": 0.03279,
+          "vector_score": 0.7151
         },
         {
           "rank": 2,
           "article_id": "K0040012:53-1",
           "chunk_id": "K0040012:53-1",
-          "score": 0.03226
+          "score": 0.03226,
+          "vector_score": 0.714
         },
         {
           "rank": 3,
           "article_id": "K0040012:48",
           "chunk_id": "K0040012:48",
-          "score": 0.0315
+          "score": 0.0315,
+          "vector_score": 0.552
         },
         {
           "rank": 4,
           "article_id": "K0040012:45",
           "chunk_id": "K0040012:45",
-          "score": 0.02821
+          "score": 0.02821,
+          "vector_score": 0.5506
         },
         {
           "rank": 5,
           "article_id": "K0040012:58",
           "chunk_id": "K0040012:58",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.5851
         },
         {
           "rank": 6,
           "article_id": "K0040012:63-2",
           "chunk_id": "K0040012:63-2",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 7,
           "article_id": "D0080029:37",
           "chunk_id": "D0080029:37",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "K0040012:39",
           "chunk_id": "K0040012:39",
-          "score": 0.01515
+          "score": 0.01515,
+          "vector_score": 0.5363
         },
         {
           "rank": 9,
           "article_id": "K0040013:109",
           "chunk_id": "K0040013:109",
-          "score": 0.01515
+          "score": 0.01515,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "G0390060:31",
           "chunk_id": "G0390060:31",
-          "score": 0.01493
+          "score": 0.01493,
+          "vector_score": null
         }
       ],
-      "top_score": 0.03279,
+      "top_score": 0.7151,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -149,64 +159,74 @@
           "rank": 1,
           "article_id": "K0040012:31",
           "chunk_id": "K0040012:31",
-          "score": 0.03279
+          "score": 0.03279,
+          "vector_score": 0.693
         },
         {
           "rank": 2,
           "article_id": "K0040012:90-1",
           "chunk_id": "K0040012:90-1",
-          "score": 0.03033
+          "score": 0.03033,
+          "vector_score": 0.5386
         },
         {
           "rank": 3,
           "article_id": "K0040012:31-1",
           "chunk_id": "K0040012:31-1",
-          "score": 0.02838
+          "score": 0.02838,
+          "vector_score": 0.5203
         },
         {
           "rank": 4,
           "article_id": "K0040012:33",
           "chunk_id": "K0040012:33",
-          "score": 0.02711
+          "score": 0.02711,
+          "vector_score": 0.5218
         },
         {
           "rank": 5,
           "article_id": "K0040012:35-1",
           "chunk_id": "K0040012:35-1",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.5407
         },
         {
           "rank": 6,
           "article_id": "K0040012:63-2",
           "chunk_id": "K0040012:63-2",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 7,
           "article_id": "K0040012:24",
           "chunk_id": "K0040012:24",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.5386
         },
         {
           "rank": 8,
           "article_id": "K0040012:84",
           "chunk_id": "K0040012:84",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "K0040013:88",
           "chunk_id": "K0040013:88",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "D0080029:69",
           "chunk_id": "D0080029:69",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": null
         }
       ],
-      "top_score": 0.03279,
+      "top_score": 0.693,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -224,64 +244,74 @@
           "rank": 1,
           "article_id": "K0040012:92",
           "chunk_id": "K0040012:92-p1",
-          "score": 0.03178
+          "score": 0.03178,
+          "vector_score": 0.5847
         },
         {
           "rank": 2,
           "article_id": "K0040012:73",
           "chunk_id": "K0040012:73",
-          "score": 0.03175
+          "score": 0.03175,
+          "vector_score": 0.5757
         },
         {
           "rank": 3,
           "article_id": "K0040012:31",
           "chunk_id": "K0040012:31",
-          "score": 0.03175
+          "score": 0.03175,
+          "vector_score": 0.5708
         },
         {
           "rank": 4,
           "article_id": "K0040013:115-7",
           "chunk_id": "K0040013:115-7",
-          "score": 0.03154
+          "score": 0.03154,
+          "vector_score": 0.5348
         },
         {
           "rank": 5,
           "article_id": "K0040013:88",
           "chunk_id": "K0040013:88",
-          "score": 0.02929
+          "score": 0.02929,
+          "vector_score": 0.5048
         },
         {
           "rank": 6,
           "article_id": "G0390060:49",
           "chunk_id": "G0390060:49",
-          "score": 0.02901
+          "score": 0.02901,
+          "vector_score": 0.5255
         },
         {
           "rank": 7,
           "article_id": "K0040012:21",
           "chunk_id": "K0040012:21-p1",
-          "score": 0.02857
+          "score": 0.02857,
+          "vector_score": 0.5261
         },
         {
           "rank": 8,
           "article_id": "K0040012:32",
           "chunk_id": "K0040012:32",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.5476
         },
         {
           "rank": 9,
           "article_id": "K0040012:32-1",
           "chunk_id": "K0040012:32-1",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.5366
         },
         {
           "rank": 10,
           "article_id": "D0080029:52",
           "chunk_id": "D0080029:52",
-          "score": 0.01515
+          "score": 0.01515,
+          "vector_score": null
         }
       ],
-      "top_score": 0.03178,
+      "top_score": 0.5847,
       "recall_at_5": 1.0,
       "reciprocal_rank": 0.3333333333333333,
       "first_hit_rank": 3
@@ -299,64 +329,74 @@
           "rank": 1,
           "article_id": "K0040012:31-1",
           "chunk_id": "K0040012:31-1",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.7004
         },
         {
           "rank": 2,
           "article_id": "K0040012:63-2",
           "chunk_id": "K0040012:63-2",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 3,
           "article_id": "D0080029:37",
           "chunk_id": "D0080029:37",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 4,
           "article_id": "K0040013:90",
           "chunk_id": "K0040013:90",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.5855
         },
         {
           "rank": 5,
           "article_id": "K0040012:67",
           "chunk_id": "K0040012:67-p2",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 6,
           "article_id": "K0040012:73",
           "chunk_id": "K0040012:73",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.5595
         },
         {
           "rank": 7,
           "article_id": "G0390060:31",
           "chunk_id": "G0390060:31",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "K0040012:43",
           "chunk_id": "K0040012:43",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.5522
         },
         {
           "rank": 9,
           "article_id": "G0390060:34",
           "chunk_id": "G0390060:34",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "K0040012:92",
           "chunk_id": "K0040012:92-p2",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.5441
         }
       ],
-      "top_score": 0.01639,
+      "top_score": 0.7004,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -374,64 +414,74 @@
           "rank": 1,
           "article_id": "K0040012:63-2",
           "chunk_id": "K0040012:63-2",
-          "score": 0.03078
+          "score": 0.03078,
+          "vector_score": 0.5977
         },
         {
           "rank": 2,
           "article_id": "K0040012:67",
           "chunk_id": "K0040012:67-p2",
-          "score": 0.02798
+          "score": 0.02798,
+          "vector_score": 0.5644
         },
         {
           "rank": 3,
           "article_id": "D0080029:38",
           "chunk_id": "D0080029:38",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 4,
           "article_id": "K0040012:21",
           "chunk_id": "K0040012:21-p1",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.6847
         },
         {
           "rank": 5,
           "article_id": "K0040012:21-1",
           "chunk_id": "K0040012:21-1",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.6742
         },
         {
           "rank": 6,
           "article_id": "K0040013:54",
           "chunk_id": "K0040013:54",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 7,
           "article_id": "G0390060:20",
           "chunk_id": "G0390060:20",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "K0040012:22",
           "chunk_id": "K0040012:22",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.626
         },
         {
           "rank": 9,
           "article_id": "D0080029:35",
           "chunk_id": "D0080029:35",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "G0390060:14",
           "chunk_id": "G0390060:14",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": null
         }
       ],
-      "top_score": 0.03078,
+      "top_score": 0.6847,
       "recall_at_5": 1.0,
       "reciprocal_rank": 0.25,
       "first_hit_rank": 4
@@ -449,64 +499,74 @@
           "rank": 1,
           "article_id": "G0390060:20",
           "chunk_id": "G0390060:20",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 2,
           "article_id": "K0040012:35",
           "chunk_id": "K0040012:35-p1",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.5706
         },
         {
           "rank": 3,
           "article_id": "D0080029:19-2",
           "chunk_id": "D0080029:19-2-p2",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.5646
         },
         {
           "rank": 4,
           "article_id": "G0390060:24",
           "chunk_id": "G0390060:24",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 5,
           "article_id": "G0390060:9",
           "chunk_id": "G0390060:9",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 6,
           "article_id": "K0040012:21",
           "chunk_id": "K0040012:21-p1",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.4999
         },
         {
           "rank": 7,
           "article_id": "G0390060:21",
           "chunk_id": "G0390060:21",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "K0040012:92",
           "chunk_id": "K0040012:92-p2",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.4954
         },
         {
           "rank": 9,
           "article_id": "D0080029:38",
           "chunk_id": "D0080029:38",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "K0040012:52",
           "chunk_id": "K0040012:52",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.4909
         }
       ],
-      "top_score": 0.01639,
+      "top_score": 0.5706,
       "recall_at_5": 1.0,
       "reciprocal_rank": 0.5,
       "first_hit_rank": 2
@@ -524,64 +584,74 @@
           "rank": 1,
           "article_id": "K0040012:40",
           "chunk_id": "K0040012:40",
-          "score": 0.03252
+          "score": 0.03252,
+          "vector_score": 0.6426
         },
         {
           "rank": 2,
           "article_id": "K0040012:43",
           "chunk_id": "K0040012:43",
-          "score": 0.03151
+          "score": 0.03151,
+          "vector_score": 0.5712
         },
         {
           "rank": 3,
           "article_id": "K0040012:86",
           "chunk_id": "K0040012:86",
-          "score": 0.02955
+          "score": 0.02955,
+          "vector_score": 0.4577
         },
         {
           "rank": 4,
           "article_id": "K0040013:93",
           "chunk_id": "K0040013:93",
-          "score": 0.02939
+          "score": 0.02939,
+          "vector_score": 0.4627
         },
         {
           "rank": 5,
           "article_id": "K0040012:72-1",
           "chunk_id": "K0040012:72-1",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.527
         },
         {
           "rank": 6,
           "article_id": "K0040012:33",
           "chunk_id": "K0040012:33",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.5204
         },
         {
           "rank": 7,
           "article_id": "K0040013:112",
           "chunk_id": "K0040013:112-p2",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "K0040012:92",
           "chunk_id": "K0040012:92-p2",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.5187
         },
         {
           "rank": 9,
           "article_id": "D0080029:13",
           "chunk_id": "D0080029:13",
-          "score": 0.01515
+          "score": 0.01515,
+          "vector_score": 0.5168
         },
         {
           "rank": 10,
           "article_id": "D0080029:43",
           "chunk_id": "D0080029:43",
-          "score": 0.01515
+          "score": 0.01515,
+          "vector_score": null
         }
       ],
-      "top_score": 0.03252,
+      "top_score": 0.6426,
       "recall_at_5": 1.0,
       "reciprocal_rank": 0.5,
       "first_hit_rank": 2
@@ -599,64 +669,74 @@
           "rank": 1,
           "article_id": "K0040012:56",
           "chunk_id": "K0040012:56",
-          "score": 0.03279
+          "score": 0.03279,
+          "vector_score": 0.6426
         },
         {
           "rank": 2,
           "article_id": "K0040012:55",
           "chunk_id": "K0040012:55",
-          "score": 0.03083
+          "score": 0.03083,
+          "vector_score": 0.5752
         },
         {
           "rank": 3,
           "article_id": "K0040013:112",
           "chunk_id": "K0040013:112-p1",
-          "score": 0.03041
+          "score": 0.03041,
+          "vector_score": 0.5113
         },
         {
           "rank": 4,
           "article_id": "K0040012:44",
           "chunk_id": "K0040012:44",
-          "score": 0.02964
+          "score": 0.02964,
+          "vector_score": 0.5121
         },
         {
           "rank": 5,
           "article_id": "K0040012:74",
           "chunk_id": "K0040012:74",
-          "score": 0.02837
+          "score": 0.02837,
+          "vector_score": 0.5732
         },
         {
           "rank": 6,
           "article_id": "K0040012:45",
           "chunk_id": "K0040012:45",
-          "score": 0.02711
+          "score": 0.02711,
+          "vector_score": 0.4962
         },
         {
           "rank": 7,
           "article_id": "K0040012:29-1",
           "chunk_id": "K0040012:29-1",
-          "score": 0.02636
+          "score": 0.02636,
+          "vector_score": 0.495
         },
         {
           "rank": 8,
           "article_id": "K0040012:92-2",
           "chunk_id": "K0040012:92-2",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "D0080029:19-3",
           "chunk_id": "D0080029:19-3",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "K0040012:57",
           "chunk_id": "K0040012:57",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.541
         }
       ],
-      "top_score": 0.03279,
+      "top_score": 0.6426,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -674,64 +754,74 @@
           "rank": 1,
           "article_id": "K0040012:55",
           "chunk_id": "K0040012:55",
-          "score": 0.03252
+          "score": 0.03252,
+          "vector_score": 0.5476
         },
         {
           "rank": 2,
           "article_id": "K0040013:111",
           "chunk_id": "K0040013:111",
-          "score": 0.03175
+          "score": 0.03175,
+          "vector_score": 0.5229
         },
         {
           "rank": 3,
           "article_id": "K0040012:56",
           "chunk_id": "K0040012:56",
-          "score": 0.03101
+          "score": 0.03101,
+          "vector_score": 0.5124
         },
         {
           "rank": 4,
           "article_id": "K0040013:112",
           "chunk_id": "K0040013:112-p1",
-          "score": 0.03054
+          "score": 0.03054,
+          "vector_score": 0.5063
         },
         {
           "rank": 5,
           "article_id": "K0040012:5",
           "chunk_id": "K0040012:5",
-          "score": 0.02963
+          "score": 0.02963,
+          "vector_score": 0.4663
         },
         {
           "rank": 6,
           "article_id": "K0040012:3",
           "chunk_id": "K0040012:3",
-          "score": 0.02955
+          "score": 0.02955,
+          "vector_score": 0.5743
         },
         {
           "rank": 7,
           "article_id": "K0040013:113",
           "chunk_id": "K0040013:113",
-          "score": 0.02861
+          "score": 0.02861,
+          "vector_score": 0.5183
         },
         {
           "rank": 8,
           "article_id": "K0040012:56-1",
           "chunk_id": "K0040012:56-1",
-          "score": 0.02721
+          "score": 0.02736,
+          "vector_score": 0.4107
         },
         {
           "rank": 9,
           "article_id": "K0040012:7-1",
           "chunk_id": "K0040012:7-1",
-          "score": 0.02699
+          "score": 0.02699,
+          "vector_score": 0.4629
         },
         {
           "rank": 10,
           "article_id": "K0040013:96",
           "chunk_id": "K0040013:96",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         }
       ],
-      "top_score": 0.03252,
+      "top_score": 0.5743,
       "recall_at_5": 0.0,
       "reciprocal_rank": 0.16666666666666666,
       "first_hit_rank": 6
@@ -749,64 +839,74 @@
           "rank": 1,
           "article_id": "K0040012:3",
           "chunk_id": "K0040012:3",
-          "score": 0.03252
+          "score": 0.03252,
+          "vector_score": 0.5746
         },
         {
           "rank": 2,
           "article_id": "K0040013:134",
           "chunk_id": "K0040013:134",
-          "score": 0.03252
+          "score": 0.03252,
+          "vector_score": 0.6194
         },
         {
           "rank": 3,
           "article_id": "K0040013:103",
           "chunk_id": "K0040013:103",
-          "score": 0.03102
+          "score": 0.03102,
+          "vector_score": 0.4953
         },
         {
           "rank": 4,
           "article_id": "K0040013:135-1",
           "chunk_id": "K0040013:135-1",
-          "score": 0.02976
+          "score": 0.02976,
+          "vector_score": 0.551
         },
         {
           "rank": 5,
           "article_id": "K0040013:126",
           "chunk_id": "K0040013:126",
-          "score": 0.02924
+          "score": 0.02924,
+          "vector_score": 0.4641
         },
         {
           "rank": 6,
           "article_id": "K0040012:44",
           "chunk_id": "K0040012:44",
-          "score": 0.02854
+          "score": 0.02854,
+          "vector_score": 0.443
         },
         {
           "rank": 7,
           "article_id": "K0040012:74",
           "chunk_id": "K0040012:74",
-          "score": 0.02791
+          "score": 0.02791,
+          "vector_score": 0.4401
         },
         {
           "rank": 8,
           "article_id": "K0040012:10",
           "chunk_id": "K0040012:10",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "K0040012:78",
           "chunk_id": "K0040012:78",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.5394
         },
         {
           "rank": 10,
           "article_id": "K0040013:133",
           "chunk_id": "K0040013:133",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.5393
         }
       ],
-      "top_score": 0.03252,
+      "top_score": 0.6194,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -824,64 +924,74 @@
           "rank": 1,
           "article_id": "K0040012:3",
           "chunk_id": "K0040012:3",
-          "score": 0.03226
+          "score": 0.03226,
+          "vector_score": 0.4689
         },
         {
           "rank": 2,
           "article_id": "K0040013:142",
           "chunk_id": "K0040013:142",
-          "score": 0.03031
+          "score": 0.03031,
+          "vector_score": 0.3829
         },
         {
           "rank": 3,
           "article_id": "K0040013:133",
           "chunk_id": "K0040013:133",
-          "score": 0.0292
+          "score": 0.0292,
+          "vector_score": 0.3675
         },
         {
           "rank": 4,
           "article_id": "K0040013:7",
           "chunk_id": "K0040013:7",
-          "score": 0.02905
+          "score": 0.02905,
+          "vector_score": 0.3437
         },
         {
           "rank": 5,
           "article_id": "K0040013:140",
           "chunk_id": "K0040013:140",
-          "score": 0.02885
+          "score": 0.02885,
+          "vector_score": 0.3608
         },
         {
           "rank": 6,
           "article_id": "K0040012:78",
           "chunk_id": "K0040012:78",
-          "score": 0.02879
+          "score": 0.02879,
+          "vector_score": 0.3731
         },
         {
           "rank": 7,
           "article_id": "K0040012:32",
           "chunk_id": "K0040012:32",
-          "score": 0.02801
+          "score": 0.02801,
+          "vector_score": 0.3532
         },
         {
           "rank": 8,
           "article_id": "K0040012:4",
           "chunk_id": "K0040012:4",
-          "score": 0.02581
+          "score": 0.02581,
+          "vector_score": 0.3502
         },
         {
           "rank": 9,
           "article_id": "K0040013:141",
           "chunk_id": "K0040013:141",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.4884
         },
         {
           "rank": 10,
           "article_id": "K0040012:2",
           "chunk_id": "K0040012:2",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         }
       ],
-      "top_score": 0.03226,
+      "top_score": 0.4884,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -899,64 +1009,74 @@
           "rank": 1,
           "article_id": "K0040013:79",
           "chunk_id": "K0040013:79",
-          "score": 0.02813
+          "score": 0.02813,
+          "vector_score": 0.2416
         },
         {
           "rank": 2,
           "article_id": "K0040012:90",
           "chunk_id": "K0040012:90",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 3,
           "article_id": "K0040013:83",
           "chunk_id": "K0040013:83",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.4162
         },
         {
           "rank": 4,
           "article_id": "K0040013:14",
           "chunk_id": "K0040013:14",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 5,
           "article_id": "K0040013:40",
           "chunk_id": "K0040013:40",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.3904
         },
         {
           "rank": 6,
           "article_id": "K0040012:63",
           "chunk_id": "K0040012:63",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 7,
           "article_id": "K0040013:3",
           "chunk_id": "K0040013:3-p1",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.3522
         },
         {
           "rank": 8,
           "article_id": "K0040013:83-2",
           "chunk_id": "K0040013:83-2",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.3265
         },
         {
           "rank": 9,
           "article_id": "K0040013:52-4",
           "chunk_id": "K0040013:52-4",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "K0040013:83-1",
           "chunk_id": "K0040013:83-1",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.3261
         }
       ],
-      "top_score": 0.02813,
+      "top_score": 0.4162,
       "recall_at_5": 0.0,
       "reciprocal_rank": 0.14285714285714285,
       "first_hit_rank": 7
@@ -974,64 +1094,74 @@
           "rank": 1,
           "article_id": "D0080090:11",
           "chunk_id": "D0080090:11",
-          "score": 0.03078
+          "score": 0.03078,
+          "vector_score": 0.5243
         },
         {
           "rank": 2,
           "article_id": "D0080090:3",
           "chunk_id": "D0080090:3",
-          "score": 0.03009
+          "score": 0.03009,
+          "vector_score": 0.6407
         },
         {
           "rank": 3,
           "article_id": "D0080090:14",
           "chunk_id": "D0080090:14",
-          "score": 0.02967
+          "score": 0.02967,
+          "vector_score": 0.4869
         },
         {
           "rank": 4,
           "article_id": "K0040013:112",
           "chunk_id": "K0040013:112-p2",
-          "score": 0.02838
+          "score": 0.02838,
+          "vector_score": 0.4984
         },
         {
           "rank": 5,
           "article_id": "K0040013:41",
           "chunk_id": "K0040013:41",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 6,
           "article_id": "D0080090:9",
           "chunk_id": "D0080090:9",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.571
         },
         {
           "rank": 7,
           "article_id": "K0040012:59",
           "chunk_id": "K0040012:59",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "G0390060:22",
           "chunk_id": "G0390060:22",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "G0390060:34",
           "chunk_id": "G0390060:34",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.563
         },
         {
           "rank": 10,
           "article_id": "D0080090:10",
           "chunk_id": "D0080090:10",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.5392
         }
       ],
-      "top_score": 0.03078,
+      "top_score": 0.6407,
       "recall_at_5": 1.0,
       "reciprocal_rank": 0.5,
       "first_hit_rank": 2
@@ -1049,64 +1179,74 @@
           "rank": 1,
           "article_id": "D0080090:4",
           "chunk_id": "D0080090:4",
-          "score": 0.03279
+          "score": 0.03279,
+          "vector_score": 0.6529
         },
         {
           "rank": 2,
           "article_id": "K0040012:59",
           "chunk_id": "K0040012:59",
-          "score": 0.03175
+          "score": 0.03175,
+          "vector_score": 0.5171
         },
         {
           "rank": 3,
           "article_id": "K0040013:112",
           "chunk_id": "K0040013:112-p2",
-          "score": 0.03128
+          "score": 0.03128,
+          "vector_score": 0.579
         },
         {
           "rank": 4,
           "article_id": "D0080090:3",
           "chunk_id": "D0080090:3",
-          "score": 0.03055
+          "score": 0.03055,
+          "vector_score": 0.5126
         },
         {
           "rank": 5,
           "article_id": "K0040013:84",
           "chunk_id": "K0040013:84-p2",
-          "score": 0.03054
+          "score": 0.03054,
+          "vector_score": 0.4942
         },
         {
           "rank": 6,
           "article_id": "D0080090:11",
           "chunk_id": "D0080090:11",
-          "score": 0.02921
+          "score": 0.02921,
+          "vector_score": 0.4707
         },
         {
           "rank": 7,
           "article_id": "K0040013:93",
           "chunk_id": "K0040013:93",
-          "score": 0.0276
+          "score": 0.0276,
+          "vector_score": 0.4281
         },
         {
           "rank": 8,
           "article_id": "D0080090:10",
           "chunk_id": "D0080090:10",
-          "score": 0.0265
+          "score": 0.0265,
+          "vector_score": 0.4156
         },
         {
           "rank": 9,
           "article_id": "D0080090:12",
           "chunk_id": "D0080090:12",
-          "score": 0.02636
+          "score": 0.02636,
+          "vector_score": 0.4325
         },
         {
           "rank": 10,
           "article_id": "G0390060:15",
           "chunk_id": "G0390060:15",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         }
       ],
-      "top_score": 0.03279,
+      "top_score": 0.6529,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -1124,64 +1264,74 @@
           "rank": 1,
           "article_id": "D0080090:13",
           "chunk_id": "D0080090:13",
-          "score": 0.03279
+          "score": 0.03279,
+          "vector_score": 0.735
         },
         {
           "rank": 2,
           "article_id": "D0080090:10",
           "chunk_id": "D0080090:10",
-          "score": 0.03226
+          "score": 0.03226,
+          "vector_score": 0.5951
         },
         {
           "rank": 3,
           "article_id": "D0080090:9",
           "chunk_id": "D0080090:9",
-          "score": 0.03102
+          "score": 0.03102,
+          "vector_score": 0.5225
         },
         {
           "rank": 4,
           "article_id": "D0080090:11",
           "chunk_id": "D0080090:11",
-          "score": 0.03077
+          "score": 0.03077,
+          "vector_score": 0.5176
         },
         {
           "rank": 5,
           "article_id": "K0040012:90",
           "chunk_id": "K0040012:90",
-          "score": 0.03033
+          "score": 0.03033,
+          "vector_score": 0.4819
         },
         {
           "rank": 6,
           "article_id": "D0080090:3",
           "chunk_id": "D0080090:3",
-          "score": 0.02985
+          "score": 0.02985,
+          "vector_score": 0.4928
         },
         {
           "rank": 7,
           "article_id": "D0080029:78",
           "chunk_id": "D0080029:78",
-          "score": 0.02632
+          "score": 0.02632,
+          "vector_score": 0.4163
         },
         {
           "rank": 8,
           "article_id": "D0080029:10",
           "chunk_id": "D0080029:10",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "D0080090:12",
           "chunk_id": "D0080090:12",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.5223
         },
         {
           "rank": 10,
           "article_id": "G0390060:34",
           "chunk_id": "G0390060:34",
-          "score": 0.01515
+          "score": 0.01515,
+          "vector_score": 0.4975
         }
       ],
-      "top_score": 0.03279,
+      "top_score": 0.735,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -1199,64 +1349,74 @@
           "rank": 1,
           "article_id": "K0040012:62",
           "chunk_id": "K0040012:62",
-          "score": 0.03279
+          "score": 0.03279,
+          "vector_score": 0.6432
         },
         {
           "rank": 2,
           "article_id": "D0080090:5",
           "chunk_id": "D0080090:5",
-          "score": 0.032
+          "score": 0.032,
+          "vector_score": 0.5421
         },
         {
           "rank": 3,
           "article_id": "K0040012:60",
           "chunk_id": "K0040012:60",
-          "score": 0.03105
+          "score": 0.03105,
+          "vector_score": 0.5435
         },
         {
           "rank": 4,
           "article_id": "D0080029:10",
           "chunk_id": "D0080029:10",
-          "score": 0.03033
+          "score": 0.03033,
+          "vector_score": 0.5044
         },
         {
           "rank": 5,
           "article_id": "D0080029:19-1",
           "chunk_id": "D0080029:19-1",
-          "score": 0.0303
+          "score": 0.0303,
+          "vector_score": 0.5099
         },
         {
           "rank": 6,
           "article_id": "D0080029:16",
           "chunk_id": "D0080029:16-p2",
-          "score": 0.02971
+          "score": 0.02971,
+          "vector_score": 0.5407
         },
         {
           "rank": 7,
           "article_id": "D0080090:2",
           "chunk_id": "D0080090:2",
-          "score": 0.02788
+          "score": 0.02788,
+          "vector_score": 0.4534
         },
         {
           "rank": 8,
           "article_id": "K0040012:21",
           "chunk_id": "K0040012:21-p2",
-          "score": 0.02721
+          "score": 0.02721,
+          "vector_score": 0.4738
         },
         {
           "rank": 9,
           "article_id": "D0080029:25",
           "chunk_id": "D0080029:25",
-          "score": 0.02711
+          "score": 0.02711,
+          "vector_score": 0.4545
         },
         {
           "rank": 10,
           "article_id": "G0390060:49",
           "chunk_id": "G0390060:49",
-          "score": 0.02705
+          "score": 0.02705,
+          "vector_score": 0.4594
         }
       ],
-      "top_score": 0.03279,
+      "top_score": 0.6432,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -1275,64 +1435,74 @@
           "rank": 1,
           "article_id": "K0040012:62",
           "chunk_id": "K0040012:62",
-          "score": 0.03226
+          "score": 0.03226,
+          "vector_score": 0.5563
         },
         {
           "rank": 2,
           "article_id": "D0080090:3",
           "chunk_id": "D0080090:3",
-          "score": 0.03009
+          "score": 0.03009,
+          "vector_score": 0.6148
         },
         {
           "rank": 3,
           "article_id": "D0080029:19-1",
           "chunk_id": "D0080029:19-1",
-          "score": 0.02973
+          "score": 0.02973,
+          "vector_score": 0.4384
         },
         {
           "rank": 4,
           "article_id": "D0080090:9",
           "chunk_id": "D0080090:9",
-          "score": 0.02845
+          "score": 0.02845,
+          "vector_score": 0.5117
         },
         {
           "rank": 5,
           "article_id": "D0080029:16",
           "chunk_id": "D0080029:16-p2",
-          "score": 0.02727
+          "score": 0.02727,
+          "vector_score": 0.4588
         },
         {
           "rank": 6,
           "article_id": "D0080090:11",
           "chunk_id": "D0080090:11",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.5294
         },
         {
           "rank": 7,
           "article_id": "D0080090:2",
           "chunk_id": "D0080090:2",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "K0040013:94",
           "chunk_id": "K0040013:94",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "D0080029:19",
           "chunk_id": "D0080029:19",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "D0080090:12",
           "chunk_id": "D0080090:12",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.5021
         }
       ],
-      "top_score": 0.03226,
+      "top_score": 0.6148,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -1351,64 +1521,74 @@
           "rank": 1,
           "article_id": "D0080029:19-2",
           "chunk_id": "D0080029:19-2-p2",
-          "score": 0.03279
+          "score": 0.03279,
+          "vector_score": 0.6673
         },
         {
           "rank": 2,
           "article_id": "D0080029:19-4",
           "chunk_id": "D0080029:19-4",
-          "score": 0.03226
+          "score": 0.03226,
+          "vector_score": 0.5952
         },
         {
           "rank": 3,
           "article_id": "K0040012:67",
           "chunk_id": "K0040012:67-p2",
-          "score": 0.02821
+          "score": 0.02821,
+          "vector_score": 0.4498
         },
         {
           "rank": 4,
           "article_id": "D0080029:35",
           "chunk_id": "D0080029:35",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 5,
           "article_id": "K0040012:35",
           "chunk_id": "K0040012:35-p2",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.5561
         },
         {
           "rank": 6,
           "article_id": "D0080029:19-1",
           "chunk_id": "D0080029:19-1",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.4682
         },
         {
           "rank": 7,
           "article_id": "G0390060:12",
           "chunk_id": "G0390060:12",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "G0390060:34",
           "chunk_id": "G0390060:34",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "D0080029:38",
           "chunk_id": "D0080029:38",
-          "score": 0.01515
+          "score": 0.01515,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "K0040013:114",
           "chunk_id": "K0040013:114",
-          "score": 0.01515
+          "score": 0.01515,
+          "vector_score": 0.4357
         }
       ],
-      "top_score": 0.03279,
+      "top_score": 0.6673,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -1426,64 +1606,74 @@
           "rank": 1,
           "article_id": "G0390060:49",
           "chunk_id": "G0390060:49",
-          "score": 0.03089
+          "score": 0.03089,
+          "vector_score": 0.717
         },
         {
           "rank": 2,
           "article_id": "G0390060:51",
           "chunk_id": "G0390060:51",
-          "score": 0.03055
+          "score": 0.03055,
+          "vector_score": 0.6083
         },
         {
           "rank": 3,
           "article_id": "G0390060:2",
           "chunk_id": "G0390060:2",
-          "score": 0.02939
+          "score": 0.02939,
+          "vector_score": 0.5165
         },
         {
           "rank": 4,
           "article_id": "G0390060:51-1",
           "chunk_id": "G0390060:51-1",
-          "score": 0.02821
+          "score": 0.02821,
+          "vector_score": 0.5928
         },
         {
           "rank": 5,
           "article_id": "K0040012:69-1",
           "chunk_id": "K0040012:69-1",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 6,
           "article_id": "G0390060:21",
           "chunk_id": "G0390060:21",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 7,
           "article_id": "G0390060:50",
           "chunk_id": "G0390060:50",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.6323
         },
         {
           "rank": 8,
           "article_id": "G0390060:48",
           "chunk_id": "G0390060:48",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.6247
         },
         {
           "rank": 9,
           "article_id": "G0390060:34",
           "chunk_id": "G0390060:34",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "K0040013:24-1",
           "chunk_id": "K0040013:24-1",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": null
         }
       ],
-      "top_score": 0.03089,
+      "top_score": 0.717,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -1501,64 +1691,74 @@
           "rank": 1,
           "article_id": "K0040012:62",
           "chunk_id": "K0040012:62",
-          "score": 0.02929
+          "score": 0.02929,
+          "vector_score": 0.5019
         },
         {
           "rank": 2,
           "article_id": "K0040012:21-1",
           "chunk_id": "K0040012:21-1",
-          "score": 0.02762
+          "score": 0.02762,
+          "vector_score": 0.5215
         },
         {
           "rank": 3,
           "article_id": "D0080029:68",
           "chunk_id": "D0080029:68",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 4,
           "article_id": "G0390060:49",
           "chunk_id": "G0390060:49",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.6817
         },
         {
           "rank": 5,
           "article_id": "G0390060:48",
           "chunk_id": "G0390060:48",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.5771
         },
         {
           "rank": 6,
           "article_id": "G0390060:50",
           "chunk_id": "G0390060:50",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.5719
         },
         {
           "rank": 7,
           "article_id": "K0040012:91",
           "chunk_id": "K0040012:91",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "D0080029:43",
           "chunk_id": "D0080029:43",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "G0390060:51",
           "chunk_id": "G0390060:51",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.5637
         },
         {
           "rank": 10,
           "article_id": "G0390060:41",
           "chunk_id": "G0390060:41",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.5428
         }
       ],
-      "top_score": 0.02929,
+      "top_score": 0.6817,
       "recall_at_5": 1.0,
       "reciprocal_rank": 0.25,
       "first_hit_rank": 4
@@ -1576,64 +1776,74 @@
           "rank": 1,
           "article_id": "D0080029:55",
           "chunk_id": "D0080029:55",
-          "score": 0.03178
+          "score": 0.03178,
+          "vector_score": 0.6106
         },
         {
           "rank": 2,
           "article_id": "K0040012:9",
           "chunk_id": "K0040012:9",
-          "score": 0.03151
+          "score": 0.03151,
+          "vector_score": 0.6529
         },
         {
           "rank": 3,
           "article_id": "D0080029:58",
           "chunk_id": "D0080029:58",
-          "score": 0.03102
+          "score": 0.03102,
+          "vector_score": 0.6106
         },
         {
           "rank": 4,
           "article_id": "D0080029:52",
           "chunk_id": "D0080029:52",
-          "score": 0.03033
+          "score": 0.03033,
+          "vector_score": 0.6135
         },
         {
           "rank": 5,
           "article_id": "D0080029:48",
           "chunk_id": "D0080029:48",
-          "score": 0.02964
+          "score": 0.02964,
+          "vector_score": 0.5982
         },
         {
           "rank": 6,
           "article_id": "D0080029:41",
           "chunk_id": "D0080029:41",
-          "score": 0.02957
+          "score": 0.02957,
+          "vector_score": 0.6225
         },
         {
           "rank": 7,
           "article_id": "D0080029:49",
           "chunk_id": "D0080029:49",
-          "score": 0.02598
+          "score": 0.02598,
+          "vector_score": 0.561
         },
         {
           "rank": 8,
           "article_id": "D0080029:59",
           "chunk_id": "D0080029:59",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.6812
         },
         {
           "rank": 9,
           "article_id": "D0080029:31",
           "chunk_id": "D0080029:31",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "D0080029:35",
           "chunk_id": "D0080029:35",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         }
       ],
-      "top_score": 0.03178,
+      "top_score": 0.6812,
       "recall_at_5": 1.0,
       "reciprocal_rank": 0.5,
       "first_hit_rank": 2
@@ -1651,64 +1861,74 @@
           "rank": 1,
           "article_id": "K0040012:45",
           "chunk_id": "K0040012:45",
-          "score": 0.03252
+          "score": 0.03252,
+          "vector_score": 0.5503
         },
         {
           "rank": 2,
           "article_id": "K0040012:74",
           "chunk_id": "K0040012:74",
-          "score": 0.03227
+          "score": 0.03227,
+          "vector_score": 0.5539
         },
         {
           "rank": 3,
           "article_id": "K0040012:44",
           "chunk_id": "K0040012:44",
-          "score": 0.03125
+          "score": 0.03125,
+          "vector_score": 0.4903
         },
         {
           "rank": 4,
           "article_id": "K0040013:129",
           "chunk_id": "K0040013:129",
-          "score": 0.02996
+          "score": 0.02996,
+          "vector_score": 0.5101
         },
         {
           "rank": 5,
           "article_id": "K0040013:101",
           "chunk_id": "K0040013:101",
-          "score": 0.02941
+          "score": 0.02941,
+          "vector_score": 0.4762
         },
         {
           "rank": 6,
           "article_id": "K0040012:46",
           "chunk_id": "K0040012:46",
-          "score": 0.02808
+          "score": 0.02808,
+          "vector_score": 0.4628
         },
         {
           "rank": 7,
           "article_id": "K0040012:62",
           "chunk_id": "K0040012:62",
-          "score": 0.02685
+          "score": 0.02685,
+          "vector_score": 0.4658
         },
         {
           "rank": 8,
           "article_id": "K0040012:86",
           "chunk_id": "K0040012:86",
-          "score": 0.02639
+          "score": 0.02639,
+          "vector_score": 0.4561
         },
         {
           "rank": 9,
           "article_id": "D0080090:6",
           "chunk_id": "D0080090:6",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "K0040012:60",
           "chunk_id": "K0040012:60",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.4871
         }
       ],
-      "top_score": 0.03252,
+      "top_score": 0.5539,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -1726,64 +1946,74 @@
           "rank": 1,
           "article_id": "K0040013:105",
           "chunk_id": "K0040013:105",
-          "score": 0.03151
+          "score": 0.03151,
+          "vector_score": 0.5871
         },
         {
           "rank": 2,
           "article_id": "K0040012:92",
           "chunk_id": "K0040012:92-p1",
-          "score": 0.03068
+          "score": 0.03068,
+          "vector_score": 0.6651
         },
         {
           "rank": 3,
           "article_id": "K0040013:113-1",
           "chunk_id": "K0040013:113-1",
-          "score": 0.03008
+          "score": 0.03008,
+          "vector_score": 0.528
         },
         {
           "rank": 4,
           "article_id": "K0040013:84",
           "chunk_id": "K0040013:84-p2",
-          "score": 0.02859
+          "score": 0.02859,
+          "vector_score": 0.5031
         },
         {
           "rank": 5,
           "article_id": "K0040012:83",
           "chunk_id": "K0040012:83",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 6,
           "article_id": "K0040013:94",
           "chunk_id": "K0040013:94",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 7,
           "article_id": "K0040013:124",
           "chunk_id": "K0040013:124",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "K0040013:99",
           "chunk_id": "K0040013:99",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.5684
         },
         {
           "rank": 9,
           "article_id": "K0040013:140",
           "chunk_id": "K0040013:140",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "K0040013:83-3",
           "chunk_id": "K0040013:83-3",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.5661
         }
       ],
-      "top_score": 0.03151,
+      "top_score": 0.6651,
       "recall_at_5": 1.0,
       "reciprocal_rank": 0.5,
       "first_hit_rank": 2
@@ -1801,64 +2031,74 @@
           "rank": 1,
           "article_id": "K0040013:122",
           "chunk_id": "K0040013:122",
-          "score": 0.03068
+          "score": 0.03068,
+          "vector_score": 0.6185
         },
         {
           "rank": 2,
           "article_id": "K0040013:87",
           "chunk_id": "K0040013:87",
-          "score": 0.02867
+          "score": 0.02867,
+          "vector_score": 0.3982
         },
         {
           "rank": 3,
           "article_id": "K0040013:89",
           "chunk_id": "K0040013:89",
-          "score": 0.02808
+          "score": 0.02808,
+          "vector_score": 0.3964
         },
         {
           "rank": 4,
           "article_id": "K0040013:40",
           "chunk_id": "K0040013:40",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 5,
           "article_id": "K0040012:76",
           "chunk_id": "K0040012:76",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.6042
         },
         {
           "rank": 6,
           "article_id": "K0040013:94",
           "chunk_id": "K0040013:94",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 7,
           "article_id": "K0040012:31-2",
           "chunk_id": "K0040012:31-2",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.4891
         },
         {
           "rank": 8,
           "article_id": "K0040013:124",
           "chunk_id": "K0040013:124",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "K0040012:13",
           "chunk_id": "K0040012:13",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "K0040013:88",
           "chunk_id": "K0040013:88",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.4545
         }
       ],
-      "top_score": 0.03068,
+      "top_score": 0.6185,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -1876,64 +2116,74 @@
           "rank": 1,
           "article_id": "K0040012:17",
           "chunk_id": "K0040012:17",
-          "score": 0.03202
+          "score": 0.03202,
+          "vector_score": 0.7073
         },
         {
           "rank": 2,
           "article_id": "K0040013:44",
           "chunk_id": "K0040013:44",
-          "score": 0.03031
+          "score": 0.03031,
+          "vector_score": 0.5736
         },
         {
           "rank": 3,
           "article_id": "K0040013:35",
           "chunk_id": "K0040013:35",
-          "score": 0.02901
+          "score": 0.02901,
+          "vector_score": 0.5567
         },
         {
           "rank": 4,
           "article_id": "K0040012:63-2",
           "chunk_id": "K0040012:63-2",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 5,
           "article_id": "D0080029:37",
           "chunk_id": "D0080029:37",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 6,
           "article_id": "K0040012:18",
           "chunk_id": "K0040012:18",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.6293
         },
         {
           "rank": 7,
           "article_id": "G0390060:48",
           "chunk_id": "G0390060:48",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "K0040012:26",
           "chunk_id": "K0040012:26",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.5979
         },
         {
           "rank": 9,
           "article_id": "G0390060:49",
           "chunk_id": "G0390060:49",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.5912
         },
         {
           "rank": 10,
           "article_id": "K0040012:15",
           "chunk_id": "K0040012:15",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.5911
         }
       ],
-      "top_score": 0.03202,
+      "top_score": 0.7073,
       "recall_at_5": 1.0,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1
@@ -1949,64 +2199,74 @@
           "rank": 1,
           "article_id": "D0080029:4",
           "chunk_id": "D0080029:4",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.2608
         },
         {
           "rank": 2,
           "article_id": "K0040013:146",
           "chunk_id": "K0040013:146",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.252
         },
         {
           "rank": 3,
           "article_id": "D0080029:81",
           "chunk_id": "D0080029:81",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.2385
         },
         {
           "rank": 4,
           "article_id": "K0040012:42",
           "chunk_id": "K0040012:42",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.2342
         },
         {
           "rank": 5,
           "article_id": "K0040013:7",
           "chunk_id": "K0040013:7",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.2336
         },
         {
           "rank": 6,
           "article_id": "K0040013:142",
           "chunk_id": "K0040013:142",
-          "score": 0.01515
+          "score": 0.01515,
+          "vector_score": 0.2334
         },
         {
           "rank": 7,
           "article_id": "D0080090:13",
           "chunk_id": "D0080090:13",
-          "score": 0.01493
+          "score": 0.01493,
+          "vector_score": 0.2315
         },
         {
           "rank": 8,
           "article_id": "K0040013:109",
           "chunk_id": "K0040013:109",
-          "score": 0.01471
+          "score": 0.01471,
+          "vector_score": 0.2311
         },
         {
           "rank": 9,
           "article_id": "K0040012:14",
           "chunk_id": "K0040012:14",
-          "score": 0.01449
+          "score": 0.01449,
+          "vector_score": 0.2303
         },
         {
           "rank": 10,
           "article_id": "K0040012:32-1",
           "chunk_id": "K0040012:32-1",
-          "score": 0.01429
+          "score": 0.01429,
+          "vector_score": 0.2267
         }
       ],
-      "top_score": 0.01639
+      "top_score": 0.2608
     },
     {
       "id": "q27",
@@ -2019,64 +2279,74 @@
           "rank": 1,
           "article_id": "G0390060:17",
           "chunk_id": "G0390060:17",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.3376
         },
         {
           "rank": 2,
           "article_id": "G0390060:39",
           "chunk_id": "G0390060:39",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 3,
           "article_id": "K0040012:16",
           "chunk_id": "K0040012:16",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 4,
           "article_id": "K0040013:16",
           "chunk_id": "K0040013:16-p1",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.3297
         },
         {
           "rank": 5,
           "article_id": "G0390060:33",
           "chunk_id": "G0390060:33",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 6,
           "article_id": "K0040013:17",
           "chunk_id": "K0040013:17",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.3191
         },
         {
           "rank": 7,
           "article_id": "D0080029:52",
           "chunk_id": "D0080029:52",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.2989
         },
         {
           "rank": 8,
           "article_id": "K0040012:36",
           "chunk_id": "K0040012:36",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "D0080029:78",
           "chunk_id": "D0080029:78",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.2952
         },
         {
           "rank": 10,
           "article_id": "G0390060:42",
           "chunk_id": "G0390060:42",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": null
         }
       ],
-      "top_score": 0.01639
+      "top_score": 0.3376
     },
     {
       "id": "q28",
@@ -2089,64 +2359,74 @@
           "rank": 1,
           "article_id": "K0040013:16",
           "chunk_id": "K0040013:16-p1",
-          "score": 0.02921
+          "score": 0.02921,
+          "vector_score": 0.3545
         },
         {
           "rank": 2,
           "article_id": "K0040012:92-2",
           "chunk_id": "K0040012:92-2",
-          "score": 0.02759
+          "score": 0.02759,
+          "vector_score": 0.3365
         },
         {
           "rank": 3,
           "article_id": "K0040013:33",
           "chunk_id": "K0040013:33",
-          "score": 0.02727
+          "score": 0.02727,
+          "vector_score": 0.3438
         },
         {
           "rank": 4,
           "article_id": "G0390060:23",
           "chunk_id": "G0390060:23",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 5,
           "article_id": "K0040013:22",
           "chunk_id": "K0040013:22",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.3899
         },
         {
           "rank": 6,
           "article_id": "D0080029:51",
           "chunk_id": "D0080029:51",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 7,
           "article_id": "K0040013:63",
           "chunk_id": "K0040013:63",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.387
         },
         {
           "rank": 8,
           "article_id": "G0390060:26",
           "chunk_id": "G0390060:26",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "K0040013:75",
           "chunk_id": "K0040013:75",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.3795
         },
         {
           "rank": 10,
           "article_id": "K0040013:15",
           "chunk_id": "K0040013:15",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.3792
         }
       ],
-      "top_score": 0.02921
+      "top_score": 0.3899
     },
     {
       "id": "q29",
@@ -2159,64 +2439,74 @@
           "rank": 1,
           "article_id": "D0080029:68",
           "chunk_id": "D0080029:68",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 2,
           "article_id": "K0040012:75",
           "chunk_id": "K0040012:75",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.2979
         },
         {
           "rank": 3,
           "article_id": "D0080029:38",
           "chunk_id": "D0080029:38",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 4,
           "article_id": "K0040012:81-1",
           "chunk_id": "K0040012:81-1",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.2901
         },
         {
           "rank": 5,
           "article_id": "G0390060:20",
           "chunk_id": "G0390060:20",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 6,
           "article_id": "K0040012:92",
           "chunk_id": "K0040012:92-p2",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.2891
         },
         {
           "rank": 7,
           "article_id": "K0040012:53-1",
           "chunk_id": "K0040012:53-1",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.2712
         },
         {
           "rank": 8,
           "article_id": "K0040013:108",
           "chunk_id": "K0040013:108",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "K0040012:11",
           "chunk_id": "K0040012:11",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "K0040012:80",
           "chunk_id": "K0040012:80",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": 0.269
         }
       ],
-      "top_score": 0.01639
+      "top_score": 0.2979
     },
     {
       "id": "q30",
@@ -2229,64 +2519,74 @@
           "rank": 1,
           "article_id": "K0040012:61",
           "chunk_id": "K0040012:61",
-          "score": 0.03126
+          "score": 0.03126,
+          "vector_score": 0.3663
         },
         {
           "rank": 2,
           "article_id": "K0040012:37",
           "chunk_id": "K0040012:37",
-          "score": 0.03041
+          "score": 0.03041,
+          "vector_score": 0.3417
         },
         {
           "rank": 3,
           "article_id": "K0040012:86",
           "chunk_id": "K0040012:86",
-          "score": 0.02889
+          "score": 0.02889,
+          "vector_score": 0.3997
         },
         {
           "rank": 4,
           "article_id": "G0390060:7",
           "chunk_id": "G0390060:7",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 5,
           "article_id": "K0040012:35-2",
           "chunk_id": "K0040012:35-2",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.3952
         },
         {
           "rank": 6,
           "article_id": "K0040012:21",
           "chunk_id": "K0040012:21-p2",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.3746
         },
         {
           "rank": 7,
           "article_id": "D0080029:2",
           "chunk_id": "D0080029:2-p2",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.3689
         },
         {
           "rank": 8,
           "article_id": "G0390060:1",
           "chunk_id": "G0390060:1",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "G0390060:13",
           "chunk_id": "G0390060:13",
-          "score": 0.01538
+          "score": 0.01538,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "G0390060:10",
           "chunk_id": "G0390060:10",
-          "score": 0.01515
+          "score": 0.01515,
+          "vector_score": null
         }
       ],
-      "top_score": 0.03126
+      "top_score": 0.3997
     },
     {
       "id": "q31",
@@ -2302,64 +2602,74 @@
           "rank": 1,
           "article_id": "K0040012:62",
           "chunk_id": "K0040012:62",
-          "score": 0.03012
+          "score": 0.03012,
+          "vector_score": 0.4621
         },
         {
           "rank": 2,
           "article_id": "K0040012:67",
           "chunk_id": "K0040012:67-p2",
-          "score": 0.02885
+          "score": 0.02885,
+          "vector_score": 0.4439
         },
         {
           "rank": 3,
           "article_id": "K0040012:35",
           "chunk_id": "K0040012:35-p2",
-          "score": 0.02863
+          "score": 0.02863,
+          "vector_score": 0.5341
         },
         {
           "rank": 4,
           "article_id": "G0390060:48",
           "chunk_id": "G0390060:48",
-          "score": 0.02744
+          "score": 0.02744,
+          "vector_score": 0.4591
         },
         {
           "rank": 5,
           "article_id": "D0080029:2",
           "chunk_id": "D0080029:2-p2",
-          "score": 0.02532
+          "score": 0.02532,
+          "vector_score": 0.4221
         },
         {
           "rank": 6,
           "article_id": "G0390060:29",
           "chunk_id": "G0390060:29",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.6169
         },
         {
           "rank": 7,
           "article_id": "G0390060:46",
           "chunk_id": "G0390060:46",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "D0080029:68",
           "chunk_id": "D0080029:68",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 9,
           "article_id": "D0080029:43-1",
           "chunk_id": "D0080029:43-1",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": 0.5235
         },
         {
           "rank": 10,
           "article_id": "K0040013:9",
           "chunk_id": "K0040013:9",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         }
       ],
-      "top_score": 0.03012,
+      "top_score": 0.6169,
       "recall_at_5": 0.5,
       "reciprocal_rank": 0.3333333333333333,
       "first_hit_rank": 3
@@ -2378,64 +2688,74 @@
           "rank": 1,
           "article_id": "D0080090:3",
           "chunk_id": "D0080090:3",
-          "score": 0.0308
+          "score": 0.0308,
+          "vector_score": 0.5598
         },
         {
           "rank": 2,
           "article_id": "D0080090:11",
           "chunk_id": "D0080090:11",
-          "score": 0.03078
+          "score": 0.03078,
+          "vector_score": 0.5015
         },
         {
           "rank": 3,
           "article_id": "D0080090:9",
           "chunk_id": "D0080090:9",
-          "score": 0.02804
+          "score": 0.02804,
+          "vector_score": 0.4748
         },
         {
           "rank": 4,
           "article_id": "D0080029:35",
           "chunk_id": "D0080029:35",
-          "score": 0.02765
+          "score": 0.02765,
+          "vector_score": 0.4748
         },
         {
           "rank": 5,
           "article_id": "D0080090:10",
           "chunk_id": "D0080090:10",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": null
         },
         {
           "rank": 6,
           "article_id": "K0040012:62",
           "chunk_id": "K0040012:62",
-          "score": 0.01639
+          "score": 0.01639,
+          "vector_score": 0.6129
         },
         {
           "rank": 7,
           "article_id": "D0080029:34",
           "chunk_id": "D0080029:34",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": null
         },
         {
           "rank": 8,
           "article_id": "D0080090:5",
           "chunk_id": "D0080090:5",
-          "score": 0.01613
+          "score": 0.01613,
+          "vector_score": 0.5667
         },
         {
           "rank": 9,
           "article_id": "D0080090:13",
           "chunk_id": "D0080090:13",
-          "score": 0.01587
+          "score": 0.01587,
+          "vector_score": null
         },
         {
           "rank": 10,
           "article_id": "D0080029:19-1",
           "chunk_id": "D0080029:19-1",
-          "score": 0.01562
+          "score": 0.01562,
+          "vector_score": 0.5332
         }
       ],
-      "top_score": 0.0308,
+      "top_score": 0.6129,
       "recall_at_5": 0.5,
       "reciprocal_rank": 1.0,
       "first_hit_rank": 1

@@ -38,8 +38,11 @@ def test_empty_expected_is_rejected() -> None:
         score_question([], ["A"])
 
 
-def hit(rank: int, article_id: str, score: float) -> RetrievedChunk:
+def hit(
+    rank: int, article_id: str, score: float, vector_score: float | None = None
+) -> RetrievedChunk:
     return RetrievedChunk(
+        vector_score=score if vector_score is None else vector_score,
         rank=rank,
         score=score,
         chunk_id=article_id,
@@ -89,3 +92,30 @@ def test_evaluate_aggregates_and_skips_unverified_and_out_of_scope() -> None:
     assert out["by_category"]["definition"] == {"n": 1, "recall_at_5": 1.0, "mrr": 0.5}
     assert out["score_distribution"]["out_of_scope_top1"] == {"min": 0.3, "max": 0.3}
     assert {q["id"] for q in out["questions"]} == {"q1", "q2", "q4"}
+
+
+def test_top_score_uses_vector_score_not_rrf_score() -> None:
+    # hybrid：score 是 RRF（約 0.03），vector_score 才是餘弦相似度
+    results = {
+        "問題q1": [hit(1, "T:1", 0.032, vector_score=0.7), hit(2, "T:2", 0.03, vector_score=0.55)]
+    }
+    out = evaluate([question("q1", ["T:1"])], lambda text, k: results[text])
+    assert out["questions"][0]["top_score"] == 0.7
+    assert out["questions"][0]["retrieved"][0]["vector_score"] == 0.7
+
+
+def test_top_score_skips_hits_without_vector_score() -> None:
+    from eval.run_eval import top_vector_score
+
+    only_keyword = RetrievedChunk(
+        rank=1,
+        score=0.03,
+        chunk_id="T:9",
+        article_id="T:9",
+        pcode="T",
+        law_short_name="測",
+        article_no="9",
+        text="",
+    )
+    assert top_vector_score([only_keyword]) is None
+    assert top_vector_score([]) is None

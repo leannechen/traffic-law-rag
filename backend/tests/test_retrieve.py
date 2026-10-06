@@ -94,3 +94,17 @@ def test_cached_embedder_only_calls_api_for_new_texts(tmp_path: Path) -> None:
     inner.calls.clear()
     cached.embed(["甲"], "document")
     assert len(inner.calls) == 1
+
+
+def test_search_widens_fetch_when_one_article_fills_the_first_chunks(tmp_path: Path) -> None:
+    # 第 1 條被切成 12 塊，全部都比別條更像「甲」；k=3 時前 9 塊（3k）都是同一條
+    rows = [(f"T:1-p{i}", "T", "1", "甲" * 20) for i in range(1, 13)]
+    rows += [("T:2", "T", "2", "甲甲"), ("T:3", "T", "3", "甲乙"), ("T:4", "T", "4", "乙乙乙")]
+    hits = Retriever(make_collection(tmp_path, rows), AxisEmbedder()).search("甲" * 20, k=3)
+    assert [h.article_id for h in hits].count("T:1") == 1
+    assert len(hits) == 3  # 擴大取回後補滿，不會只回 1 條
+
+
+def test_search_returns_fewer_only_when_collection_is_exhausted(tmp_path: Path) -> None:
+    hits = Retriever(make_collection(tmp_path, ROWS), AxisEmbedder()).search("甲", k=50)
+    assert len(hits) == 4  # 資料裡只有 4 條

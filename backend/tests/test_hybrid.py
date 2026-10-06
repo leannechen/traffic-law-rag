@@ -97,3 +97,41 @@ def test_hybrid_combines_vector_and_keyword_hits(tmp_path: Path) -> None:
     assert ids.index("T:2") < ids.index("T:3")  # 關鍵字命中的 T:2 勝過兩邊都沒特別的 T:3
     assert all(h.vector_score is not None for h in hits)  # 保留餘弦分數供拒答門檻
     assert [h.rank for h in hits] == [1, 2, 3]
+
+
+def build_hybrid(
+    tmp_path: Path, rows: list[tuple[str, str, str]], tokenizer: str = "bigram"
+) -> HybridRetriever:
+    embedder = AxisEmbedder()
+    collection = chromadb.PersistentClient(path=str(tmp_path / "idx")).create_collection(
+        "test_chunks", metadata={"hnsw:space": "cosine"}
+    )
+    collection.add(
+        ids=[r[0] for r in rows],
+        embeddings=embedder.embed([r[2] for r in rows], "document"),  # type: ignore[arg-type]
+        documents=[r[2] for r in rows],
+        metadatas=[{"pcode": "T", "article_no": r[1], "law_short_name": "測"} for r in rows],
+    )
+    return HybridRetriever(Retriever(collection, embedder), collection, tokenizer)  # type: ignore[arg-type]
+
+
+def test_hybrid_falls_back_to_vector_when_no_keyword_matches(tmp_path: Path) -> None:
+    rows = [("T:1", "1", "甲甲甲"), ("T:2", "2", "乙乙乙")]
+    hybrid = build_hybrid(tmp_path, rows)
+    hits = hybrid.search("zzzz", k=2)  # BM25 完全沒有命中的詞
+    assert {h.article_id for h in hits} == {"T:1", "T:2"}
+    assert all(h.vector_score is not None for h in hits)
+
+
+def test_hybrid_returns_all_articles_when_k_exceeds_available(tmp_path: Path) -> None:
+    rows = [("T:1", "1", "甲甲"), ("T:2", "2", "乙乙")]
+    assert len(build_hybrid(tmp_path, rows).search("甲", k=10)) == 2
+
+
+def test_hybrid_bm25_side_keeps_one_hit_per_article(tmp_path: Path) -> None:
+    rows = [("T:1-p1", "1", "酒駕處罰甲"), ("T:1-p2", "1", "酒駕加重甲"), ("T:2", "2", "其他乙")]
+    hybrid = build_hybrid(tmp_path, rows)
+    keyword_hits = hybrid._bm25_articles("酒駕")
+    assert [h.article_id for h in keyword_hits] == ["T:1"]
+    ids = [h.article_id for h in hybrid.search("酒駕", k=3)]
+    assert len(ids) == len(set(ids))
