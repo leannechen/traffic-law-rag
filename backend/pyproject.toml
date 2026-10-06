@@ -5,6 +5,7 @@ requires-python = ">=3.12"
 dependencies = [
     "chromadb>=1.5.9",
     "fastapi>=0.142.2",
+    "jieba>=0.42.1",
     "pydantic-settings>=2.15.0",
     "pyyaml>=6.0.3",
     "uvicorn[standard]>=0.54.0",
@@ -32,4 +33,9 @@ plugins = ["pydantic.mypy"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+filterwarnings = ["ignore::SyntaxWarning:jieba.*"]
 pythonpath = ["."]
+
+[[tool.mypy.overrides]]
+module = ["jieba"]
+ignore_missing_imports = true

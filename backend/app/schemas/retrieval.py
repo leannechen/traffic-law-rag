@@ -3,7 +3,8 @@ from pydantic import BaseModel
 
 class RetrievedChunk(BaseModel):
     rank: int  # 1 起算
-    score: float  # 餘弦相似度（1 − 距離）；只在同一模型、同一份索引內可比較
+    score: float  # 向量檢索：餘弦相似度（1 − 距離）；hybrid：RRF 分數。兩者不可互比
+    vector_score: float | None = None  # hybrid 時另外保留的餘弦相似度（供拒答門檻用）
     chunk_id: str
     article_id: str  # "{pcode}:{article_no}"，UI 以條為單位
     pcode: str
