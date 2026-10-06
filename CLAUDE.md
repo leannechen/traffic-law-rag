@@ -11,7 +11,7 @@
 ## 目前進度
 
 - 已完成：Step 1 專案骨架、Step 2 資料取得與格式確認
-- 進行中：Step 3 Chunking 與建索引。程式、測試、ADR 0003 已完成；待 Leanne 設定 `VOYAGE_API_KEY` 後跑 `build_index` 產生真實索引，再停下來等檢視
+- 已完成（待 Leanne 檢視）：Step 3 Chunking 與建索引。真實索引已建（489 chunk、voyage-4、data_version 2026-10-05）；**必停檢查點，等 Leanne 檢視後才進 Step 4**
 
 每完成一個 Step 就更新這一段。
 
