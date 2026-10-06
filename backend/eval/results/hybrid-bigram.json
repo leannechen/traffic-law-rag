@@ -1,7 +1,7 @@
 {
   "name": "hybrid-bigram",
   "retriever": "hybrid-bigram",
-  "evaluated_at": "2026-10-06T15:43:16+00:00",
+  "evaluated_at": "2026-10-06T16:03:26+00:00",
   "config": {
     "embedding_model": "voyage-4",
     "data_version": "2026-10-05",
@@ -12,10 +12,10 @@
     "unit": "article"
   },
   "counts": {
-    "total": 32,
-    "verified": 32,
+    "total": 40,
+    "verified": 40,
     "answerable": 27,
-    "out_of_scope": 5
+    "out_of_scope": 13
   },
   "metrics": {
     "recall_at_5": 1.0,
@@ -57,7 +57,7 @@
     },
     "out_of_scope_top1": {
       "min": 0.2608,
-      "max": 0.3997
+      "max": 0.6179
     }
   },
   "questions": [
@@ -810,7 +810,7 @@
           "rank": 9,
           "article_id": "K0040012:56-1",
           "chunk_id": "K0040012:56-1",
-          "score": 0.02765,
+          "score": 0.02781,
           "vector_score": 0.4107
         },
         {
@@ -2759,6 +2759,646 @@
       "recall_at_5": 1.0,
       "reciprocal_rank": 0.5,
       "first_hit_rank": 2
+    },
+    {
+      "id": "q33",
+      "question": "考汽車駕照的報名費要多少錢？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040013:63",
+          "chunk_id": "K0040013:63",
+          "score": 0.03175,
+          "vector_score": 0.5359
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040013:70",
+          "chunk_id": "K0040013:70",
+          "score": 0.03175,
+          "vector_score": 0.5066
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040013:56",
+          "chunk_id": "K0040013:56",
+          "score": 0.03009,
+          "vector_score": 0.4972
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040013:65",
+          "chunk_id": "K0040013:65",
+          "score": 0.02944,
+          "vector_score": 0.4895
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040013:62",
+          "chunk_id": "K0040013:62",
+          "score": 0.02674,
+          "vector_score": 0.4664
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:54",
+          "chunk_id": "K0040013:54",
+          "score": 0.01639,
+          "vector_score": null
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040013:66",
+          "chunk_id": "K0040013:66",
+          "score": 0.01639,
+          "vector_score": 0.6179
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040013:58",
+          "chunk_id": "K0040013:58",
+          "score": 0.01613,
+          "vector_score": null
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040013:57",
+          "chunk_id": "K0040013:57",
+          "score": 0.01562,
+          "vector_score": 0.4995
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040013:64",
+          "chunk_id": "K0040013:64",
+          "score": 0.01538,
+          "vector_score": null
+        }
+      ],
+      "top_score": 0.6179
+    },
+    {
+      "id": "q34",
+      "question": "汽車的牌照稅一年要繳多少？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:18",
+          "chunk_id": "K0040012:18",
+          "score": 0.02964,
+          "vector_score": 0.4831
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:12",
+          "chunk_id": "K0040012:12",
+          "score": 0.02867,
+          "vector_score": 0.5165
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040013:42",
+          "chunk_id": "K0040013:42-p2",
+          "score": 0.02837,
+          "vector_score": 0.473
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040013:15",
+          "chunk_id": "K0040013:15",
+          "score": 0.02819,
+          "vector_score": 0.5034
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:17",
+          "chunk_id": "K0040012:17",
+          "score": 0.0262,
+          "vector_score": 0.4841
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:18",
+          "chunk_id": "K0040013:18",
+          "score": 0.02581,
+          "vector_score": 0.4781
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040013:17",
+          "chunk_id": "K0040013:17",
+          "score": 0.01639,
+          "vector_score": 0.5396
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040013:26",
+          "chunk_id": "K0040013:26",
+          "score": 0.01639,
+          "vector_score": null
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040013:8",
+          "chunk_id": "K0040013:8",
+          "score": 0.01613,
+          "vector_score": 0.5304
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040013:17-1",
+          "chunk_id": "K0040013:17-1",
+          "score": 0.01587,
+          "vector_score": 0.5214
+        }
+      ],
+      "top_score": 0.5396
+    },
+    {
+      "id": "q35",
+      "question": "車禍對方要賠我精神慰撫金，金額怎麼算？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "G0390060:42",
+          "chunk_id": "G0390060:42",
+          "score": 0.03226,
+          "vector_score": 0.3692
+        },
+        {
+          "rank": 2,
+          "article_id": "G0390060:32",
+          "chunk_id": "G0390060:32",
+          "score": 0.03202,
+          "vector_score": 0.3723
+        },
+        {
+          "rank": 3,
+          "article_id": "G0390060:31",
+          "chunk_id": "G0390060:31",
+          "score": 0.03132,
+          "vector_score": 0.3537
+        },
+        {
+          "rank": 4,
+          "article_id": "G0390060:35",
+          "chunk_id": "G0390060:35",
+          "score": 0.02924,
+          "vector_score": 0.3416
+        },
+        {
+          "rank": 5,
+          "article_id": "G0390060:44",
+          "chunk_id": "G0390060:44",
+          "score": 0.02844,
+          "vector_score": 0.3228
+        },
+        {
+          "rank": 6,
+          "article_id": "G0390060:27",
+          "chunk_id": "G0390060:27",
+          "score": 0.02838,
+          "vector_score": 0.3318
+        },
+        {
+          "rank": 7,
+          "article_id": "G0390060:11",
+          "chunk_id": "G0390060:11",
+          "score": 0.02828,
+          "vector_score": 0.3613
+        },
+        {
+          "rank": 8,
+          "article_id": "D0080029:61",
+          "chunk_id": "D0080029:61",
+          "score": 0.01587,
+          "vector_score": null
+        },
+        {
+          "rank": 9,
+          "article_id": "G0390060:39",
+          "chunk_id": "G0390060:39",
+          "score": 0.01587,
+          "vector_score": 0.3664
+        },
+        {
+          "rank": 10,
+          "article_id": "D0080029:64",
+          "chunk_id": "D0080029:64",
+          "score": 0.01538,
+          "vector_score": null
+        }
+      ],
+      "top_score": 0.3723
+    },
+    {
+      "id": "q36",
+      "question": "停車場的收費標準是多少？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:56",
+          "chunk_id": "K0040012:56",
+          "score": 0.03202,
+          "vector_score": 0.5416
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040013:112",
+          "chunk_id": "K0040013:112-p1",
+          "score": 0.03202,
+          "vector_score": 0.4568
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:3",
+          "chunk_id": "K0040012:3",
+          "score": 0.0308,
+          "vector_score": 0.399
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:55",
+          "chunk_id": "K0040012:55",
+          "score": 0.02976,
+          "vector_score": 0.4635
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040013:111",
+          "chunk_id": "K0040013:111",
+          "score": 0.02908,
+          "vector_score": 0.4252
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:7-2",
+          "chunk_id": "K0040012:7-2",
+          "score": 0.02844,
+          "vector_score": 0.3844
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:27",
+          "chunk_id": "K0040012:27",
+          "score": 0.02819,
+          "vector_score": 0.3863
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:56-1",
+          "chunk_id": "K0040012:56-1",
+          "score": 0.02679,
+          "vector_score": 0.3935
+        },
+        {
+          "rank": 9,
+          "article_id": "D0080029:68",
+          "chunk_id": "D0080029:68",
+          "score": 0.01613,
+          "vector_score": null
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:57",
+          "chunk_id": "K0040012:57",
+          "score": 0.01613,
+          "vector_score": 0.4742
+        }
+      ],
+      "top_score": 0.5416
+    },
+    {
+      "id": "q37",
+      "question": "電動車充電站要怎麼申請設置？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040013:115-2",
+          "chunk_id": "K0040013:115-2",
+          "score": 0.03132,
+          "vector_score": 0.4522
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:69-1",
+          "chunk_id": "K0040012:69-1",
+          "score": 0.03102,
+          "vector_score": 0.4593
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040013:24-1",
+          "chunk_id": "K0040013:24-1",
+          "score": 0.02967,
+          "vector_score": 0.449
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:90-3",
+          "chunk_id": "K0040012:90-3",
+          "score": 0.0274,
+          "vector_score": 0.4337
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:72",
+          "chunk_id": "K0040012:72",
+          "score": 0.02686,
+          "vector_score": 0.4276
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:17-1",
+          "chunk_id": "K0040013:17-1",
+          "score": 0.01639,
+          "vector_score": 0.477
+        },
+        {
+          "rank": 7,
+          "article_id": "G0390060:38",
+          "chunk_id": "G0390060:38",
+          "score": 0.01613,
+          "vector_score": null
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:36",
+          "chunk_id": "K0040012:36",
+          "score": 0.01613,
+          "vector_score": 0.4679
+        },
+        {
+          "rank": 9,
+          "article_id": "D0080029:72",
+          "chunk_id": "D0080029:72",
+          "score": 0.01587,
+          "vector_score": null
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040013:115-4",
+          "chunk_id": "K0040013:115-4",
+          "score": 0.01562,
+          "vector_score": null
+        }
+      ],
+      "top_score": 0.477
+    },
+    {
+      "id": "q38",
+      "question": "計程車的起跳價是多少？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:36",
+          "chunk_id": "K0040012:36",
+          "score": 0.03252,
+          "vector_score": 0.4223
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040013:78",
+          "chunk_id": "K0040013:78",
+          "score": 0.032,
+          "vector_score": 0.4101
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:38",
+          "chunk_id": "K0040012:38",
+          "score": 0.03132,
+          "vector_score": 0.4631
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:37",
+          "chunk_id": "K0040012:37",
+          "score": 0.03102,
+          "vector_score": 0.3676
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040013:24-1",
+          "chunk_id": "K0040013:24-1",
+          "score": 0.03101,
+          "vector_score": 0.3813
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:42",
+          "chunk_id": "K0040013:42-p2",
+          "score": 0.03033,
+          "vector_score": 0.3499
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:56-1",
+          "chunk_id": "K0040012:56-1",
+          "score": 0.03008,
+          "vector_score": 0.3625
+        },
+        {
+          "rank": 8,
+          "article_id": "D0080029:8",
+          "chunk_id": "D0080029:8",
+          "score": 0.02899,
+          "vector_score": 0.348
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:16",
+          "chunk_id": "K0040012:16",
+          "score": 0.02598,
+          "vector_score": 0.3094
+        },
+        {
+          "rank": 10,
+          "article_id": "D0080029:25",
+          "chunk_id": "D0080029:25",
+          "score": 0.02549,
+          "vector_score": 0.3079
+        }
+      ],
+      "top_score": 0.4631
+    },
+    {
+      "id": "q39",
+      "question": "國道的通行費怎麼計算？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:27",
+          "chunk_id": "K0040012:27",
+          "score": 0.03279,
+          "vector_score": 0.477
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:29-2",
+          "chunk_id": "K0040012:29-2",
+          "score": 0.02901,
+          "vector_score": 0.4051
+        },
+        {
+          "rank": 3,
+          "article_id": "G0390060:38",
+          "chunk_id": "G0390060:38",
+          "score": 0.0289,
+          "vector_score": 0.3901
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040013:80",
+          "chunk_id": "K0040013:80",
+          "score": 0.02753,
+          "vector_score": 0.4146
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040013:3",
+          "chunk_id": "K0040013:3-p1",
+          "score": 0.02703,
+          "vector_score": 0.3879
+        },
+        {
+          "rank": 6,
+          "article_id": "G0390060:45",
+          "chunk_id": "G0390060:45",
+          "score": 0.01613,
+          "vector_score": 0.4381
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040013:102",
+          "chunk_id": "K0040013:102-p2",
+          "score": 0.01613,
+          "vector_score": null
+        },
+        {
+          "rank": 8,
+          "article_id": "D0080090:8",
+          "chunk_id": "D0080090:8",
+          "score": 0.01587,
+          "vector_score": null
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:92",
+          "chunk_id": "K0040012:92-p2",
+          "score": 0.01587,
+          "vector_score": 0.4333
+        },
+        {
+          "rank": 10,
+          "article_id": "D0080029:70",
+          "chunk_id": "D0080029:70",
+          "score": 0.01562,
+          "vector_score": null
+        }
+      ],
+      "top_score": 0.477
+    },
+    {
+      "id": "q40",
+      "question": "汽車多久要保養一次？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040013:39-3",
+          "chunk_id": "K0040013:39-3",
+          "score": 0.03041,
+          "vector_score": 0.4986
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040013:14",
+          "chunk_id": "K0040013:14",
+          "score": 0.02951,
+          "vector_score": 0.4822
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040013:44",
+          "chunk_id": "K0040013:44",
+          "score": 0.02889,
+          "vector_score": 0.5194
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040013:54",
+          "chunk_id": "K0040013:54",
+          "score": 0.02548,
+          "vector_score": 0.4261
+        },
+        {
+          "rank": 5,
+          "article_id": "G0390060:9",
+          "chunk_id": "G0390060:9",
+          "score": 0.01639,
+          "vector_score": null
+        },
+        {
+          "rank": 6,
+          "article_id": "G0390060:20",
+          "chunk_id": "G0390060:20",
+          "score": 0.01613,
+          "vector_score": null
+        },
+        {
+          "rank": 7,
+          "article_id": "G0390060:21",
+          "chunk_id": "G0390060:21",
+          "score": 0.01587,
+          "vector_score": null
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040013:45",
+          "chunk_id": "K0040013:45",
+          "score": 0.01587,
+          "vector_score": 0.4871
+        },
+        {
+          "rank": 9,
+          "article_id": "G0390060:22",
+          "chunk_id": "G0390060:22",
+          "score": 0.01562,
+          "vector_score": null
+        },
+        {
+          "rank": 10,
+          "article_id": "G0390060:24",
+          "chunk_id": "G0390060:24",
+          "score": 0.01538,
+          "vector_score": null
+        }
+      ],
+      "top_score": 0.5194
     }
   ]
 }
