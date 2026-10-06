@@ -12,6 +12,12 @@ class Settings(BaseSettings):
     anthropic_api_key: str = ""
     voyage_api_key: str = ""
     embedding_model: str = "voyage-4"
+    llm_model: str = "claude-sonnet-5-5"
+    llm_use_fallbacks: bool = True
+    # 拒答門檻：只當第一道粗篩（寧可漏拒交給模型，不要誤拒），依據見 ADR 0004／0005
+    gate_threshold: float = 0.40
+    # 問題改寫預設關閉；評估顯示有益才開啟（ADR 0005）
+    rewrite_enabled: bool = False
     cors_origins: list[str] = ["http://localhost:5173"]
     data_dir: Path = REPO_ROOT / "data"
 
