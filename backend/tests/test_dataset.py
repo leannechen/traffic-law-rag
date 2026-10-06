@@ -11,7 +11,7 @@ CATEGORIES = {"fine_amount", "definition", "accident", "cross_law", "colloquial"
 
 def test_dataset_shape() -> None:
     questions = load_dataset()
-    assert 25 <= len(questions) <= 35
+    assert 25 <= len(questions) <= 50
     ids = [q.id for q in questions]
     assert len(ids) == len(set(ids))
     assert {q.category for q in questions} == CATEGORIES

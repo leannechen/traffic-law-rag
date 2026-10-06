@@ -20,10 +20,18 @@ RRF_K = 60  # RRF 常數：越大，名次差異的影響越小
 FUSION_DEPTH = 20  # 各自取前 20 條再合併
 
 
-def _to_hit(rank: int, score: float, chunk_id: str, text: str, meta: Any) -> RetrievedChunk:
+def _to_hit(
+    rank: int,
+    score: float,
+    chunk_id: str,
+    text: str,
+    meta: Any,
+    vector_score: float | None = None,
+) -> RetrievedChunk:
     return RetrievedChunk(
         rank=rank,
         score=score,
+        vector_score=vector_score,
         chunk_id=chunk_id,
         article_id=f"{meta['pcode']}:{meta['article_no']}",
         pcode=str(meta["pcode"]),
@@ -51,7 +59,16 @@ class Retriever:
     def search(self, question: str, k: int = 5) -> list[RetrievedChunk]:
         """回傳最多 k 條（同一條只留最高分的那一塊），依分數由高到低。"""
         (vector,) = self._embedder.embed([question], "query")
-        n = min(k * OVERFETCH, self._collection.count())
+        total = self._collection.count()
+        n = min(k * OVERFETCH, total)
+        while True:
+            hits = self._query(vector, n, k)
+            # 長條文被切成多塊時，前 n 塊可能集中在少數幾條；去重後不足 k 條就擴大取回量
+            if len(hits) >= k or n >= total:
+                return hits
+            n = min(n * 2, total)
+
+    def _query(self, vector: list[float], n: int, k: int) -> list[RetrievedChunk]:
         result = self._collection.query(
             query_embeddings=[vector],
             n_results=n,
@@ -70,7 +87,8 @@ class Retriever:
             if article_id in seen:
                 continue
             seen.add(article_id)
-            hits.append(_to_hit(len(hits) + 1, round(1 - distance, 4), chunk_id, doc, meta))
+            cosine = round(1 - distance, 4)
+            hits.append(_to_hit(len(hits) + 1, cosine, chunk_id, doc, meta, vector_score=cosine))
             if len(hits) == k:
                 break
         return hits

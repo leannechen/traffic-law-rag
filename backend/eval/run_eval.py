@@ -31,6 +31,12 @@ DEPTH = 10  # 取回深度；Recall@5 看前 5 名，MRR 看前 10 名
 Search = Callable[[str, int], list[RetrievedChunk]]
 
 
+def top_vector_score(hits: list[RetrievedChunk]) -> float | None:
+    """回傳結果中最高的餘弦相似度（供拒答門檻參考）。hybrid 的 score 是 RRF 分數，不能比較。"""
+    scores = [h.vector_score for h in hits if h.vector_score is not None]
+    return max(scores) if scores else None
+
+
 def evaluate(questions: list[EvalQuestion], search: Search) -> dict[str, Any]:
     verified = [q for q in questions if q.verified]
     per_question: list[dict[str, Any]] = []
@@ -48,10 +54,11 @@ def evaluate(questions: list[EvalQuestion], search: Search) -> dict[str, Any]:
                     "article_id": h.article_id,
                     "chunk_id": h.chunk_id,
                     "score": h.score,
+                    "vector_score": h.vector_score,
                 }
                 for h in hits
             ],
-            "top_score": hits[0].score if hits else None,
+            "top_score": top_vector_score(hits),
         }
         if not q.should_refuse:
             s = score_question(q.expected_chunk_ids, [h.article_id for h in hits], RECALL_K)
