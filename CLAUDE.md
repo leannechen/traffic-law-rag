@@ -11,7 +11,8 @@
 ## 目前進度
 
 - 已完成：Step 1 專案骨架、Step 2 資料取得與格式確認、Step 3 Chunking 與建索引（Leanne 已檢視；489 chunk、voyage-4、data_version 2026-10-05）
-- 已完成（待 Leanne 檢視）：Step 4 檢索與評估集 v0。32 題全部已驗證；baseline（純向量）Recall@5 = 1.000、MRR = 0.858；hybrid（jieba／bigram）MRR 0.740／0.724，不如純向量，線上用純向量（ADR 0004）。獨立 review 已做並修正（ADR 補充、取回不足 k 的修正、hybrid 分數記錄）；邊界範圍外題 q33–q40 已驗證，評估集現為 40 題（27 題可回答、13 題範圍外）；單一相似度門檻無法同時避免誤拒與漏拒（ADR 0004）。**必停檢查點，等 Leanne 檢視並自己跑實驗後才進 Step 5**
+- 已完成：Step 4 檢索與評估集 v0（Leanne 已檢視；40 題已驗證、27 可回答／13 範圍外；baseline 純向量 Recall@5 = 1.000、MRR = 0.858；hybrid 不如純向量，線上用純向量，ADR 0004；單一相似度門檻無法分開貼近主題的範圍外題）
+- 進行中：Step 5 生成、引用與拒答（學習流程：已解釋概念、計畫待 Leanne 確認；需要 `ANTHROPIC_API_KEY`）
 
 每完成一個 Step 就更新這一段。
 
