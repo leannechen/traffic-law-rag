@@ -11,7 +11,7 @@
 ## 目前進度
 
 - 已完成：Step 1 專案骨架、Step 2 資料取得與格式確認、Step 3 Chunking 與建索引（Leanne 已檢視；489 chunk、voyage-4、data_version 2026-10-05）
-- 進行中：Step 4 檢索與評估集 v0（學習流程：已解釋概念、計畫待 Leanne 確認）
+- 進行中：Step 4 檢索與評估集 v0。向量檢索（`pipeline/retrieve.py`）與評估集草稿（32 題，全部 `verified: false`）已完成；**等 Leanne 依 `backend/eval/review.md` 逐題驗證**，之後才跑 baseline、做 hybrid、寫 ADR 0004 與 `docs/learning/step-4.md`
 
 每完成一個 Step 就更新這一段。
 
@@ -63,6 +63,8 @@
 - 檢查：`pnpm run ci`（Biome）、`pnpm typecheck`（tsc）；測試：`pnpm test`（Vitest）；注意 `pnpm ci` 是 pnpm 內建指令，要用 `pnpm run ci`
 
 索引（在 `backend/`，需先在 `.env` 設定 `VOYAGE_API_KEY`）：`uv run python -m app.ingestion.build_index`，輸出到 `data/index/`（不進版控）
+
+檢索（在 `backend/`）：`uv run python -m app.pipeline.retrieve "問題"`；評估集審核單：`uv run python -m eval.make_review`（產生 `eval/review.md`）
 
 資料（在 `backend/`）：`uv run python -m app.ingestion.fetch` 下載、`uv run python -m app.ingestion.parse` 解析（說明見 `docs/data-format.md`）
 

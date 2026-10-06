@@ -1,7 +1,9 @@
+import hashlib
 import json
 import time
 import urllib.error
 import urllib.request
+from pathlib import Path
 from typing import Literal, Protocol
 
 InputType = Literal["document", "query"]
@@ -62,3 +64,32 @@ class VoyageEmbedder:
                     continue
                 raise EmbeddingError(f"無法連線 Voyage API：{e.reason}") from e
         raise EmbeddingError("unreachable")
+
+
+class CachedEmbedder:
+    """把另一個 Embedder 的結果存在本機 JSON，同樣的文字不重複呼叫 API。
+
+    快取鍵含模型名稱與 input_type，換模型不會讀到舊向量。
+    """
+
+    def __init__(self, inner: Embedder, path: Path) -> None:
+        self._inner = inner
+        self._path = path
+        self.model = inner.model
+        self._cache: dict[str, list[float]] = (
+            json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+        )
+
+    def _key(self, text: str, input_type: InputType) -> str:
+        return hashlib.sha256(f"{self.model}\0{input_type}\0{text}".encode()).hexdigest()
+
+    def embed(self, texts: list[str], input_type: InputType) -> list[list[float]]:
+        keys = [self._key(t, input_type) for t in texts]
+        missing = [i for i, k in enumerate(keys) if k not in self._cache]
+        if missing:
+            fresh = self._inner.embed([texts[i] for i in missing], input_type)
+            for i, vector in zip(missing, fresh, strict=True):
+                self._cache[keys[i]] = vector
+            self._path.parent.mkdir(parents=True, exist_ok=True)
+            self._path.write_text(json.dumps(self._cache), encoding="utf-8")
+        return [self._cache[k] for k in keys]
