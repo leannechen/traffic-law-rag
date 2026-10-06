@@ -11,7 +11,7 @@
 ## 目前進度
 
 - 已完成：Step 1 專案骨架、Step 2 資料取得與格式確認
-- 下一步：Step 3 Chunking 與建索引（先提計畫並等確認；完成後必停等檢視）
+- 進行中：Step 3 Chunking 與建索引。程式、測試、ADR 0003 已完成；待 Leanne 設定 `VOYAGE_API_KEY` 後跑 `build_index` 產生真實索引，再停下來等檢視
 
 每完成一個 Step 就更新這一段。
 
@@ -61,6 +61,8 @@
 
 - 安裝：`pnpm install`；開發伺服器：`pnpm dev`（`/api` proxy 到 `BACKEND_URL`，預設 `http://localhost:8000`）
 - 檢查：`pnpm run ci`（Biome）、`pnpm typecheck`（tsc）；測試：`pnpm test`（Vitest）；注意 `pnpm ci` 是 pnpm 內建指令，要用 `pnpm run ci`
+
+索引（在 `backend/`，需先在 `.env` 設定 `VOYAGE_API_KEY`）：`uv run python -m app.ingestion.build_index`，輸出到 `data/index/`（不進版控）
 
 資料（在 `backend/`）：`uv run python -m app.ingestion.fetch` 下載、`uv run python -m app.ingestion.parse` 解析（說明見 `docs/data-format.md`）
 
