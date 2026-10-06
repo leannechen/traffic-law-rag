@@ -10,8 +10,8 @@
 
 ## 目前進度
 
-- 已完成：Step 1 專案骨架、Step 2 資料取得與格式確認
-- 已完成（待 Leanne 檢視）：Step 3 Chunking 與建索引。真實索引已建（489 chunk、voyage-4、data_version 2026-10-05）；**必停檢查點，等 Leanne 檢視後才進 Step 4**
+- 已完成：Step 1 專案骨架、Step 2 資料取得與格式確認、Step 3 Chunking 與建索引（Leanne 已檢視；489 chunk、voyage-4、data_version 2026-10-05）
+- 進行中：Step 4 檢索與評估集 v0（學習流程：已解釋概念、計畫待 Leanne 確認）
 
 每完成一個 Step 就更新這一段。
 
