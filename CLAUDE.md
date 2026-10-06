@@ -12,7 +12,7 @@
 
 - 已完成：Step 1 專案骨架、Step 2 資料取得與格式確認、Step 3 Chunking 與建索引（Leanne 已檢視；489 chunk、voyage-4、data_version 2026-10-05）
 - 已完成：Step 4 檢索與評估集 v0（Leanne 已檢視；40 題已驗證、27 可回答／13 範圍外；baseline 純向量 Recall@5 = 1.000、MRR = 0.858；hybrid 不如純向量，線上用純向量，ADR 0004；單一相似度門檻無法分開貼近主題的範圍外題）
-- 進行中：Step 5 生成、引用與拒答（學習流程：已解釋概念、計畫待 Leanne 確認；需要 `ANTHROPIC_API_KEY`）
+- 進行中：Step 5 生成、引用與拒答。程式、prompt、驗證、生成評估與 134 個測試已完成（模型 `claude-sonnet-5-5`；門檻 0.40；改寫預設關閉）；**待 Leanne 設定 `ANTHROPIC_API_KEY`**，才能跑真實評估、寫 ADR 0005 與 `docs/learning/step-5.md`，之後是必停檢查點
 
 每完成一個 Step 就更新這一段。
 
@@ -66,6 +66,8 @@
 索引（在 `backend/`，需先在 `.env` 設定 `VOYAGE_API_KEY`）：`uv run python -m app.ingestion.build_index`，輸出到 `data/index/`（不進版控）
 
 檢索與評估（在 `backend/`）：`uv run python -m app.pipeline.retrieve "問題" [--mode vector|hybrid|hybrid-bigram]`；`uv run python -m eval.run_eval [--retriever vector|hybrid|hybrid-bigram] --name <檔名>`（輸出 `eval/results/<檔名>.json`，baseline 為 `baseline-vector`）；評估集審核單：`uv run python -m eval.make_review`（產生 `eval/review.md`）
+
+問答與生成評估（在 `backend/`，需 `ANTHROPIC_API_KEY`）：`uv run python -m app.pipeline.answer "問題" [--rewrite]`；`uv run python -m eval.run_generation_eval --name <檔名> [--rewrite] [--refresh]`（LLM 回應快取在 `data/cache/`）
 
 資料（在 `backend/`）：`uv run python -m app.ingestion.fetch` 下載、`uv run python -m app.ingestion.parse` 解析（說明見 `docs/data-format.md`）
 
