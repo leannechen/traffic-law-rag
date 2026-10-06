@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     data_dir: Path = REPO_ROOT / "data"
 
     @property
+    def cache_dir(self) -> Path:
+        return self.data_dir / "cache"
+
+    @property
     def index_dir(self) -> Path:
         return self.data_dir / "index"
 
