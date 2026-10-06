@@ -1,0 +1,2444 @@
+{
+  "name": "baseline-vector",
+  "retriever": "vector",
+  "evaluated_at": "2026-10-06T15:10:54+00:00",
+  "config": {
+    "embedding_model": "voyage-4",
+    "data_version": "2026-10-05",
+    "chunk_count": 489,
+    "chunk_max_chars": 800,
+    "recall_k": 5,
+    "retrieval_depth": 10,
+    "unit": "article"
+  },
+  "counts": {
+    "total": 32,
+    "verified": 32,
+    "answerable": 27,
+    "out_of_scope": 5
+  },
+  "metrics": {
+    "recall_at_5": 1.0,
+    "mrr": 0.858,
+    "hit_rate_at_5": 1.0
+  },
+  "by_category": {
+    "fine_amount": {
+      "n": 10,
+      "recall_at_5": 1.0,
+      "mrr": 0.8833
+    },
+    "definition": {
+      "n": 4,
+      "recall_at_5": 1.0,
+      "mrr": 0.5833
+    },
+    "accident": {
+      "n": 4,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    "cross_law": {
+      "n": 4,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    "colloquial": {
+      "n": 5,
+      "recall_at_5": 1.0,
+      "mrr": 0.8
+    }
+  },
+  "score_distribution": {
+    "answerable_top1": {
+      "min": 0.4162,
+      "median": 0.6426,
+      "max": 0.735
+    },
+    "out_of_scope_top1": {
+      "min": 0.2608,
+      "max": 0.3997
+    }
+  },
+  "questions": [
+    {
+      "id": "q01",
+      "question": "紅燈右轉會被罰多少錢？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:53"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:53",
+          "chunk_id": "K0040012:53",
+          "score": 0.7151
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:53-1",
+          "chunk_id": "K0040012:53-1",
+          "score": 0.714
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:58",
+          "chunk_id": "K0040012:58",
+          "score": 0.5851
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:48",
+          "chunk_id": "K0040012:48",
+          "score": 0.552
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:45",
+          "chunk_id": "K0040012:45",
+          "score": 0.5506
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:39",
+          "chunk_id": "K0040012:39",
+          "score": 0.5363
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:42",
+          "chunk_id": "K0040012:42",
+          "score": 0.5269
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:49",
+          "chunk_id": "K0040012:49",
+          "score": 0.5223
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:52",
+          "chunk_id": "K0040012:52",
+          "score": 0.511
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:74",
+          "chunk_id": "K0040012:74",
+          "score": 0.4978
+        }
+      ],
+      "top_score": 0.7151,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q02",
+      "question": "開車沒繫安全帶會被罰多少？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:31"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:31",
+          "chunk_id": "K0040012:31",
+          "score": 0.693
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:35-1",
+          "chunk_id": "K0040012:35-1",
+          "score": 0.5407
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:24",
+          "chunk_id": "K0040012:24",
+          "score": 0.5386
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:90-1",
+          "chunk_id": "K0040012:90-1",
+          "score": 0.5386
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:92",
+          "chunk_id": "K0040012:92-p2",
+          "score": 0.5371
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:56-1",
+          "chunk_id": "K0040012:56-1",
+          "score": 0.5321
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:21-1",
+          "chunk_id": "K0040012:21-1",
+          "score": 0.527
+        },
+        {
+          "rank": 8,
+          "article_id": "G0390060:49",
+          "chunk_id": "G0390060:49",
+          "score": 0.527
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:19",
+          "chunk_id": "K0040012:19",
+          "score": 0.523
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:33",
+          "chunk_id": "K0040012:33",
+          "score": 0.5218
+        }
+      ],
+      "top_score": 0.693,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q03",
+      "question": "騎機車沒戴安全帽罰多少錢？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:31"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:92",
+          "chunk_id": "K0040012:92-p1",
+          "score": 0.5847
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:73",
+          "chunk_id": "K0040012:73",
+          "score": 0.5757
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:31",
+          "chunk_id": "K0040012:31",
+          "score": 0.5708
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:32",
+          "chunk_id": "K0040012:32",
+          "score": 0.5476
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:32-1",
+          "chunk_id": "K0040012:32-1",
+          "score": 0.5366
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:115-7",
+          "chunk_id": "K0040013:115-7",
+          "score": 0.5348
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:72",
+          "chunk_id": "K0040012:72",
+          "score": 0.532
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:90-1",
+          "chunk_id": "K0040012:90-1",
+          "score": 0.5319
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:71-1",
+          "chunk_id": "K0040012:71-1",
+          "score": 0.5304
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:21",
+          "chunk_id": "K0040012:21-p1",
+          "score": 0.5261
+        }
+      ],
+      "top_score": 0.5847,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.3333333333333333,
+      "first_hit_rank": 3
+    },
+    {
+      "id": "q04",
+      "question": "開車時用手拿著手機講電話會被罰多少？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:31-1"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:31-1",
+          "chunk_id": "K0040012:31-1",
+          "score": 0.7004
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040013:90",
+          "chunk_id": "K0040013:90",
+          "score": 0.5855
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:73",
+          "chunk_id": "K0040012:73",
+          "score": 0.5595
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:43",
+          "chunk_id": "K0040012:43",
+          "score": 0.5522
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:92",
+          "chunk_id": "K0040012:92-p2",
+          "score": 0.5441
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:63",
+          "chunk_id": "K0040012:63",
+          "score": 0.5349
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:22",
+          "chunk_id": "K0040012:22",
+          "score": 0.5346
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:21",
+          "chunk_id": "K0040012:21-p1",
+          "score": 0.53
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:33",
+          "chunk_id": "K0040012:33",
+          "score": 0.5299
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:40",
+          "chunk_id": "K0040012:40",
+          "score": 0.5295
+        }
+      ],
+      "top_score": 0.7004,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q05",
+      "question": "沒有駕照開車被抓到會罰多少？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:21"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:21",
+          "chunk_id": "K0040012:21-p1",
+          "score": 0.6847
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:21-1",
+          "chunk_id": "K0040012:21-1",
+          "score": 0.6742
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:22",
+          "chunk_id": "K0040012:22",
+          "score": 0.626
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:63-2",
+          "chunk_id": "K0040012:63-2",
+          "score": 0.5977
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:24",
+          "chunk_id": "K0040012:24",
+          "score": 0.5887
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:26",
+          "chunk_id": "K0040012:26",
+          "score": 0.5875
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:32",
+          "chunk_id": "K0040012:32",
+          "score": 0.5865
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:23",
+          "chunk_id": "K0040012:23",
+          "score": 0.5726
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:68",
+          "chunk_id": "K0040012:68",
+          "score": 0.5716
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:25",
+          "chunk_id": "K0040012:25",
+          "score": 0.5684
+        }
+      ],
+      "top_score": 0.6847,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q06",
+      "question": "酒駕被抓到要罰多少錢？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:35"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:35",
+          "chunk_id": "K0040012:35-p1",
+          "score": 0.5706
+        },
+        {
+          "rank": 2,
+          "article_id": "D0080029:19-2",
+          "chunk_id": "D0080029:19-2-p2",
+          "score": 0.5646
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:21",
+          "chunk_id": "K0040012:21-p1",
+          "score": 0.4999
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:92",
+          "chunk_id": "K0040012:92-p2",
+          "score": 0.4954
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:52",
+          "chunk_id": "K0040012:52",
+          "score": 0.4909
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:21-1",
+          "chunk_id": "K0040012:21-1",
+          "score": 0.4861
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:60",
+          "chunk_id": "K0040012:60",
+          "score": 0.4829
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:22",
+          "chunk_id": "K0040012:22",
+          "score": 0.4799
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:42",
+          "chunk_id": "K0040012:42",
+          "score": 0.4784
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:34",
+          "chunk_id": "K0040012:34",
+          "score": 0.4753
+        }
+      ],
+      "top_score": 0.5706,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q07",
+      "question": "超速超過規定的最高時速四十公里會怎麼處罰？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:43"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:40",
+          "chunk_id": "K0040012:40",
+          "score": 0.6426
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:43",
+          "chunk_id": "K0040012:43",
+          "score": 0.5712
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:72-1",
+          "chunk_id": "K0040012:72-1",
+          "score": 0.527
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:33",
+          "chunk_id": "K0040012:33",
+          "score": 0.5204
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:92",
+          "chunk_id": "K0040012:92-p2",
+          "score": 0.5187
+        },
+        {
+          "rank": 6,
+          "article_id": "D0080029:13",
+          "chunk_id": "D0080029:13",
+          "score": 0.5168
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:7-2",
+          "chunk_id": "K0040012:7-2",
+          "score": 0.5042
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:47",
+          "chunk_id": "K0040012:47",
+          "score": 0.4742
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:44",
+          "chunk_id": "K0040012:44",
+          "score": 0.4738
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:85-1",
+          "chunk_id": "K0040012:85-1",
+          "score": 0.4704
+        }
+      ],
+      "top_score": 0.6426,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.5,
+      "first_hit_rank": 2
+    },
+    {
+      "id": "q08",
+      "question": "汽車停在身心障礙專用停車位會被罰多少？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:56"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:56",
+          "chunk_id": "K0040012:56",
+          "score": 0.6426
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:55",
+          "chunk_id": "K0040012:55",
+          "score": 0.5752
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:74",
+          "chunk_id": "K0040012:74",
+          "score": 0.5732
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:57",
+          "chunk_id": "K0040012:57",
+          "score": 0.541
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:52",
+          "chunk_id": "K0040012:52",
+          "score": 0.5405
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:56-1",
+          "chunk_id": "K0040012:56-1",
+          "score": 0.5304
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:59",
+          "chunk_id": "K0040012:59",
+          "score": 0.5269
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:12",
+          "chunk_id": "K0040012:12",
+          "score": 0.5126
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:44",
+          "chunk_id": "K0040012:44",
+          "score": 0.5121
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040013:112",
+          "chunk_id": "K0040013:112-p1",
+          "score": 0.5113
+        }
+      ],
+      "top_score": 0.6426,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q09",
+      "question": "法律上的「臨時停車」和「停車」有什麼不一樣？",
+      "category": "definition",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:3"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:3",
+          "chunk_id": "K0040012:3",
+          "score": 0.5743
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:55",
+          "chunk_id": "K0040012:55",
+          "score": 0.5476
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040013:111",
+          "chunk_id": "K0040013:111",
+          "score": 0.5229
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040013:113",
+          "chunk_id": "K0040013:113",
+          "score": 0.5183
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:56",
+          "chunk_id": "K0040012:56",
+          "score": 0.5124
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:112",
+          "chunk_id": "K0040013:112-p1",
+          "score": 0.5063
+        },
+        {
+          "rank": 7,
+          "article_id": "D0080029:16",
+          "chunk_id": "D0080029:16-p2",
+          "score": 0.4875
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:5",
+          "chunk_id": "K0040012:5",
+          "score": 0.4663
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:7-1",
+          "chunk_id": "K0040012:7-1",
+          "score": 0.4629
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:57",
+          "chunk_id": "K0040012:57",
+          "score": 0.4542
+        }
+      ],
+      "top_score": 0.5743,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q10",
+      "question": "什麼樣的地方才算行人穿越道？",
+      "category": "definition",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:3"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040013:134",
+          "chunk_id": "K0040013:134",
+          "score": 0.6194
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:3",
+          "chunk_id": "K0040012:3",
+          "score": 0.5746
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040013:135-1",
+          "chunk_id": "K0040013:135-1",
+          "score": 0.551
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:78",
+          "chunk_id": "K0040012:78",
+          "score": 0.5394
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040013:133",
+          "chunk_id": "K0040013:133",
+          "score": 0.5393
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:103",
+          "chunk_id": "K0040013:103",
+          "score": 0.4953
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:80",
+          "chunk_id": "K0040012:80",
+          "score": 0.487
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040013:124-1",
+          "chunk_id": "K0040013:124-1",
+          "score": 0.4807
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:5",
+          "chunk_id": "K0040012:5",
+          "score": 0.4738
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:90-3",
+          "chunk_id": "K0040012:90-3",
+          "score": 0.4692
+        }
+      ],
+      "top_score": 0.6194,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.5,
+      "first_hit_rank": 2
+    },
+    {
+      "id": "q11",
+      "question": "騎樓算不算法律上的道路？",
+      "category": "definition",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:3"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040013:141",
+          "chunk_id": "K0040013:141",
+          "score": 0.4884
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:3",
+          "chunk_id": "K0040012:3",
+          "score": 0.4689
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040013:83-3",
+          "chunk_id": "K0040013:83-3",
+          "score": 0.4274
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:5",
+          "chunk_id": "K0040012:5",
+          "score": 0.4
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:32-1",
+          "chunk_id": "K0040012:32-1",
+          "score": 0.396
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:134",
+          "chunk_id": "K0040013:134",
+          "score": 0.3838
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040013:142",
+          "chunk_id": "K0040013:142",
+          "score": 0.3829
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:78",
+          "chunk_id": "K0040012:78",
+          "score": 0.3731
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040013:133",
+          "chunk_id": "K0040013:133",
+          "score": 0.3675
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:82",
+          "chunk_id": "K0040012:82",
+          "score": 0.3637
+        }
+      ],
+      "top_score": 0.4884,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.5,
+      "first_hit_rank": 2
+    },
+    {
+      "id": "q12",
+      "question": "怎樣算重機？",
+      "category": "definition",
+      "should_refuse": false,
+      "expected": [
+        "K0040013:3"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040013:83",
+          "chunk_id": "K0040013:83",
+          "score": 0.4162
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040013:40",
+          "chunk_id": "K0040013:40",
+          "score": 0.3904
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040013:3",
+          "chunk_id": "K0040013:3-p1",
+          "score": 0.3522
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040013:83-2",
+          "chunk_id": "K0040013:83-2",
+          "score": 0.3265
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040013:83-1",
+          "chunk_id": "K0040013:83-1",
+          "score": 0.3261
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:2",
+          "chunk_id": "K0040013:2-p1",
+          "score": 0.3238
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040013:38",
+          "chunk_id": "K0040013:38-p2",
+          "score": 0.3149
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:29-2",
+          "chunk_id": "K0040012:29-2",
+          "score": 0.3013
+        },
+        {
+          "rank": 9,
+          "article_id": "D0080029:19",
+          "chunk_id": "D0080029:19",
+          "score": 0.2951
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040013:88",
+          "chunk_id": "K0040013:88",
+          "score": 0.2877
+        }
+      ],
+      "top_score": 0.4162,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.3333333333333333,
+      "first_hit_rank": 3
+    },
+    {
+      "id": "q13",
+      "question": "發生車禍後，駕駛人第一步應該做什麼？",
+      "category": "accident",
+      "should_refuse": false,
+      "expected": [
+        "D0080090:3"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "D0080090:3",
+          "chunk_id": "D0080090:3",
+          "score": 0.6407
+        },
+        {
+          "rank": 2,
+          "article_id": "D0080090:9",
+          "chunk_id": "D0080090:9",
+          "score": 0.571
+        },
+        {
+          "rank": 3,
+          "article_id": "G0390060:34",
+          "chunk_id": "G0390060:34",
+          "score": 0.563
+        },
+        {
+          "rank": 4,
+          "article_id": "D0080090:10",
+          "chunk_id": "D0080090:10",
+          "score": 0.5392
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:62",
+          "chunk_id": "K0040012:62",
+          "score": 0.5321
+        },
+        {
+          "rank": 6,
+          "article_id": "D0080090:11",
+          "chunk_id": "D0080090:11",
+          "score": 0.5243
+        },
+        {
+          "rank": 7,
+          "article_id": "D0080090:6",
+          "chunk_id": "D0080090:6",
+          "score": 0.5159
+        },
+        {
+          "rank": 8,
+          "article_id": "D0080090:5",
+          "chunk_id": "D0080090:5",
+          "score": 0.5034
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040013:112",
+          "chunk_id": "K0040013:112-p2",
+          "score": 0.4984
+        },
+        {
+          "rank": 10,
+          "article_id": "D0080090:14",
+          "chunk_id": "D0080090:14",
+          "score": 0.4869
+        }
+      ],
+      "top_score": 0.6407,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q14",
+      "question": "高速公路上發生車禍，故障標誌要放在事故地點後方多遠？",
+      "category": "accident",
+      "should_refuse": false,
+      "expected": [
+        "D0080090:4"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "D0080090:4",
+          "chunk_id": "D0080090:4",
+          "score": 0.6529
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040013:112",
+          "chunk_id": "K0040013:112-p2",
+          "score": 0.579
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:59",
+          "chunk_id": "K0040012:59",
+          "score": 0.5171
+        },
+        {
+          "rank": 4,
+          "article_id": "D0080090:3",
+          "chunk_id": "D0080090:3",
+          "score": 0.5126
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040013:85",
+          "chunk_id": "K0040013:85",
+          "score": 0.5091
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:84",
+          "chunk_id": "K0040013:84-p2",
+          "score": 0.4942
+        },
+        {
+          "rank": 7,
+          "article_id": "D0080090:11",
+          "chunk_id": "D0080090:11",
+          "score": 0.4707
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040013:111",
+          "chunk_id": "K0040013:111",
+          "score": 0.4498
+        },
+        {
+          "rank": 9,
+          "article_id": "D0080090:9",
+          "chunk_id": "D0080090:9",
+          "score": 0.4475
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:62",
+          "chunk_id": "K0040012:62",
+          "score": 0.4362
+        }
+      ],
+      "top_score": 0.6529,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q15",
+      "question": "車禍之後多久可以向警察申請現場照片和初步分析研判表？",
+      "category": "accident",
+      "should_refuse": false,
+      "expected": [
+        "D0080090:13"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "D0080090:13",
+          "chunk_id": "D0080090:13",
+          "score": 0.735
+        },
+        {
+          "rank": 2,
+          "article_id": "D0080090:10",
+          "chunk_id": "D0080090:10",
+          "score": 0.5951
+        },
+        {
+          "rank": 3,
+          "article_id": "D0080090:9",
+          "chunk_id": "D0080090:9",
+          "score": 0.5225
+        },
+        {
+          "rank": 4,
+          "article_id": "D0080090:12",
+          "chunk_id": "D0080090:12",
+          "score": 0.5223
+        },
+        {
+          "rank": 5,
+          "article_id": "D0080090:11",
+          "chunk_id": "D0080090:11",
+          "score": 0.5176
+        },
+        {
+          "rank": 6,
+          "article_id": "G0390060:34",
+          "chunk_id": "G0390060:34",
+          "score": 0.4975
+        },
+        {
+          "rank": 7,
+          "article_id": "D0080090:3",
+          "chunk_id": "D0080090:3",
+          "score": 0.4928
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:90",
+          "chunk_id": "K0040012:90",
+          "score": 0.4819
+        },
+        {
+          "rank": 9,
+          "article_id": "D0080029:20",
+          "chunk_id": "D0080029:20",
+          "score": 0.462
+        },
+        {
+          "rank": 10,
+          "article_id": "D0080029:15",
+          "chunk_id": "D0080029:15",
+          "score": 0.4533
+        }
+      ],
+      "top_score": 0.735,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q16",
+      "question": "肇事逃逸會受到什麼處罰？",
+      "category": "accident",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:62"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:62",
+          "chunk_id": "K0040012:62",
+          "score": 0.6432
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:60",
+          "chunk_id": "K0040012:60",
+          "score": 0.5435
+        },
+        {
+          "rank": 3,
+          "article_id": "D0080090:5",
+          "chunk_id": "D0080090:5",
+          "score": 0.5421
+        },
+        {
+          "rank": 4,
+          "article_id": "D0080029:16",
+          "chunk_id": "D0080029:16-p2",
+          "score": 0.5407
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:61",
+          "chunk_id": "K0040012:61",
+          "score": 0.513
+        },
+        {
+          "rank": 6,
+          "article_id": "D0080029:19-1",
+          "chunk_id": "D0080029:19-1",
+          "score": 0.5099
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:10",
+          "chunk_id": "K0040012:10",
+          "score": 0.5054
+        },
+        {
+          "rank": 8,
+          "article_id": "D0080029:10",
+          "chunk_id": "D0080029:10",
+          "score": 0.5044
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:30-1",
+          "chunk_id": "K0040012:30-1",
+          "score": 0.4945
+        },
+        {
+          "rank": 10,
+          "article_id": "D0080029:43-1",
+          "chunk_id": "D0080029:43-1",
+          "score": 0.4922
+        }
+      ],
+      "top_score": 0.6432,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q17",
+      "question": "車禍沒人受傷、車子還能開，可以先把車移開嗎？",
+      "category": "cross_law",
+      "should_refuse": false,
+      "expected": [
+        "D0080090:3",
+        "K0040012:62"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "D0080090:3",
+          "chunk_id": "D0080090:3",
+          "score": 0.6148
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:62",
+          "chunk_id": "K0040012:62",
+          "score": 0.5563
+        },
+        {
+          "rank": 3,
+          "article_id": "D0080090:11",
+          "chunk_id": "D0080090:11",
+          "score": 0.5294
+        },
+        {
+          "rank": 4,
+          "article_id": "D0080090:9",
+          "chunk_id": "D0080090:9",
+          "score": 0.5117
+        },
+        {
+          "rank": 5,
+          "article_id": "D0080090:12",
+          "chunk_id": "D0080090:12",
+          "score": 0.5021
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:112",
+          "chunk_id": "K0040013:112-p2",
+          "score": 0.4896
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:59",
+          "chunk_id": "K0040012:59",
+          "score": 0.4815
+        },
+        {
+          "rank": 8,
+          "article_id": "D0080029:18",
+          "chunk_id": "D0080029:18",
+          "score": 0.4772
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:85-2",
+          "chunk_id": "K0040012:85-2",
+          "score": 0.4739
+        },
+        {
+          "rank": 10,
+          "article_id": "D0080029:16",
+          "chunk_id": "D0080029:16-p2",
+          "score": 0.4588
+        }
+      ],
+      "top_score": 0.6148,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q18",
+      "question": "酒測時拒絕配合會被怎麼處理？",
+      "category": "cross_law",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:35",
+        "D0080029:19-2"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "D0080029:19-2",
+          "chunk_id": "D0080029:19-2-p2",
+          "score": 0.6673
+        },
+        {
+          "rank": 2,
+          "article_id": "D0080029:19-4",
+          "chunk_id": "D0080029:19-4",
+          "score": 0.5952
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:35",
+          "chunk_id": "K0040012:35-p2",
+          "score": 0.5561
+        },
+        {
+          "rank": 4,
+          "article_id": "D0080029:19-1",
+          "chunk_id": "D0080029:19-1",
+          "score": 0.4682
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:67",
+          "chunk_id": "K0040012:67-p2",
+          "score": 0.4498
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:114",
+          "chunk_id": "K0040013:114",
+          "score": 0.4357
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:73",
+          "chunk_id": "K0040012:73",
+          "score": 0.4271
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:60",
+          "chunk_id": "K0040012:60",
+          "score": 0.4187
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040013:120",
+          "chunk_id": "K0040013:120",
+          "score": 0.39
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:24",
+          "chunk_id": "K0040012:24",
+          "score": 0.3899
+        }
+      ],
+      "top_score": 0.6673,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q19",
+      "question": "沒有投保強制汽車責任保險，會被罰多少？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "G0390060:49"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "G0390060:49",
+          "chunk_id": "G0390060:49",
+          "score": 0.717
+        },
+        {
+          "rank": 2,
+          "article_id": "G0390060:50",
+          "chunk_id": "G0390060:50",
+          "score": 0.6323
+        },
+        {
+          "rank": 3,
+          "article_id": "G0390060:48",
+          "chunk_id": "G0390060:48",
+          "score": 0.6247
+        },
+        {
+          "rank": 4,
+          "article_id": "G0390060:51",
+          "chunk_id": "G0390060:51",
+          "score": 0.6083
+        },
+        {
+          "rank": 5,
+          "article_id": "G0390060:51-1",
+          "chunk_id": "G0390060:51-1",
+          "score": 0.5928
+        },
+        {
+          "rank": 6,
+          "article_id": "G0390060:41",
+          "chunk_id": "G0390060:41",
+          "score": 0.5323
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:35-1",
+          "chunk_id": "K0040012:35-1",
+          "score": 0.5323
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:18",
+          "chunk_id": "K0040012:18",
+          "score": 0.5322
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:92",
+          "chunk_id": "K0040012:92-p2",
+          "score": 0.5322
+        },
+        {
+          "rank": 10,
+          "article_id": "G0390060:16",
+          "chunk_id": "G0390060:16",
+          "score": 0.5275
+        }
+      ],
+      "top_score": 0.717,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q20",
+      "question": "沒保強制險的汽車肇事，罰款是多少？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "G0390060:49"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "G0390060:49",
+          "chunk_id": "G0390060:49",
+          "score": 0.6817
+        },
+        {
+          "rank": 2,
+          "article_id": "G0390060:48",
+          "chunk_id": "G0390060:48",
+          "score": 0.5771
+        },
+        {
+          "rank": 3,
+          "article_id": "G0390060:50",
+          "chunk_id": "G0390060:50",
+          "score": 0.5719
+        },
+        {
+          "rank": 4,
+          "article_id": "G0390060:51",
+          "chunk_id": "G0390060:51",
+          "score": 0.5637
+        },
+        {
+          "rank": 5,
+          "article_id": "G0390060:41",
+          "chunk_id": "G0390060:41",
+          "score": 0.5428
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:20",
+          "chunk_id": "K0040012:20",
+          "score": 0.54
+        },
+        {
+          "rank": 7,
+          "article_id": "G0390060:51-1",
+          "chunk_id": "G0390060:51-1",
+          "score": 0.5253
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:18",
+          "chunk_id": "K0040012:18",
+          "score": 0.5239
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:27",
+          "chunk_id": "K0040012:27",
+          "score": 0.5221
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:21-1",
+          "chunk_id": "K0040012:21-1",
+          "score": 0.5215
+        }
+      ],
+      "top_score": 0.6817,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q21",
+      "question": "收到罰單後多久內可以去繳款結案？",
+      "category": "colloquial",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:9"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "D0080029:59",
+          "chunk_id": "D0080029:59",
+          "score": 0.6812
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:9",
+          "chunk_id": "K0040012:9",
+          "score": 0.6529
+        },
+        {
+          "rank": 3,
+          "article_id": "D0080029:41",
+          "chunk_id": "D0080029:41",
+          "score": 0.6225
+        },
+        {
+          "rank": 4,
+          "article_id": "D0080029:52",
+          "chunk_id": "D0080029:52",
+          "score": 0.6135
+        },
+        {
+          "rank": 5,
+          "article_id": "D0080029:55",
+          "chunk_id": "D0080029:55",
+          "score": 0.6106
+        },
+        {
+          "rank": 6,
+          "article_id": "D0080029:58",
+          "chunk_id": "D0080029:58",
+          "score": 0.6106
+        },
+        {
+          "rank": 7,
+          "article_id": "D0080029:45",
+          "chunk_id": "D0080029:45",
+          "score": 0.6095
+        },
+        {
+          "rank": 8,
+          "article_id": "D0080029:44",
+          "chunk_id": "D0080029:44",
+          "score": 0.5983
+        },
+        {
+          "rank": 9,
+          "article_id": "D0080029:48",
+          "chunk_id": "D0080029:48",
+          "score": 0.5982
+        },
+        {
+          "rank": 10,
+          "article_id": "D0080029:51",
+          "chunk_id": "D0080029:51",
+          "score": 0.5948
+        }
+      ],
+      "top_score": 0.6812,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.5,
+      "first_hit_rank": 2
+    },
+    {
+      "id": "q22",
+      "question": "聽到救護車鳴笛卻不讓路會怎樣？",
+      "category": "colloquial",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:45"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:74",
+          "chunk_id": "K0040012:74",
+          "score": 0.5539
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:45",
+          "chunk_id": "K0040012:45",
+          "score": 0.5503
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040013:129",
+          "chunk_id": "K0040013:129",
+          "score": 0.5101
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:44",
+          "chunk_id": "K0040012:44",
+          "score": 0.4903
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:60",
+          "chunk_id": "K0040012:60",
+          "score": 0.4871
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:78",
+          "chunk_id": "K0040012:78",
+          "score": 0.4848
+        },
+        {
+          "rank": 7,
+          "article_id": "D0080029:12",
+          "chunk_id": "D0080029:12-p1",
+          "score": 0.4776
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040013:101",
+          "chunk_id": "K0040013:101",
+          "score": 0.4762
+        },
+        {
+          "rank": 9,
+          "article_id": "D0080029:19-1",
+          "chunk_id": "D0080029:19-1",
+          "score": 0.4707
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:7-2",
+          "chunk_id": "K0040012:7-2",
+          "score": 0.4704
+        }
+      ],
+      "top_score": 0.5539,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.5,
+      "first_hit_rank": 2
+    },
+    {
+      "id": "q23",
+      "question": "騎機車可以上高速公路嗎？",
+      "category": "colloquial",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:92"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:92",
+          "chunk_id": "K0040012:92-p1",
+          "score": 0.6651
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040013:105",
+          "chunk_id": "K0040013:105",
+          "score": 0.5871
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040013:99",
+          "chunk_id": "K0040013:99",
+          "score": 0.5684
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040013:83-3",
+          "chunk_id": "K0040013:83-3",
+          "score": 0.5661
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040013:99-1",
+          "chunk_id": "K0040013:99-1",
+          "score": 0.5541
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:113-1",
+          "chunk_id": "K0040013:113-1",
+          "score": 0.528
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040013:61-1",
+          "chunk_id": "K0040013:61-1",
+          "score": 0.5204
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:32",
+          "chunk_id": "K0040012:32",
+          "score": 0.5188
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:33",
+          "chunk_id": "K0040012:33",
+          "score": 0.5167
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:32-1",
+          "chunk_id": "K0040012:32-1",
+          "score": 0.5129
+        }
+      ],
+      "top_score": 0.6651,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q24",
+      "question": "腳踏車可以載小孩嗎？",
+      "category": "colloquial",
+      "should_refuse": false,
+      "expected": [
+        "K0040013:122"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040013:122",
+          "chunk_id": "K0040013:122",
+          "score": 0.6185
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:76",
+          "chunk_id": "K0040012:76",
+          "score": 0.6042
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:31-2",
+          "chunk_id": "K0040012:31-2",
+          "score": 0.4891
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040013:88",
+          "chunk_id": "K0040013:88",
+          "score": 0.4545
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:72-2",
+          "chunk_id": "K0040012:72-2",
+          "score": 0.453
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:6",
+          "chunk_id": "K0040013:6",
+          "score": 0.4508
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040013:139",
+          "chunk_id": "K0040013:139",
+          "score": 0.4502
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040013:83-3",
+          "chunk_id": "K0040013:83-3",
+          "score": 0.4499
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:69",
+          "chunk_id": "K0040012:69",
+          "score": 0.4345
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:85-4",
+          "chunk_id": "K0040012:85-4",
+          "score": 0.4213
+        }
+      ],
+      "top_score": 0.6185,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q25",
+      "question": "車子沒去定期驗車會被罰多少？",
+      "category": "colloquial",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:17"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:17",
+          "chunk_id": "K0040012:17",
+          "score": 0.7073
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:18",
+          "chunk_id": "K0040012:18",
+          "score": 0.6293
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:26",
+          "chunk_id": "K0040012:26",
+          "score": 0.5979
+        },
+        {
+          "rank": 4,
+          "article_id": "G0390060:49",
+          "chunk_id": "G0390060:49",
+          "score": 0.5912
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:15",
+          "chunk_id": "K0040012:15",
+          "score": 0.5911
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:20",
+          "chunk_id": "K0040012:20",
+          "score": 0.5873
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040013:44",
+          "chunk_id": "K0040013:44",
+          "score": 0.5736
+        },
+        {
+          "rank": 8,
+          "article_id": "G0390060:51",
+          "chunk_id": "G0390060:51",
+          "score": 0.5662
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040013:36",
+          "chunk_id": "K0040013:36",
+          "score": 0.5608
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040013:46",
+          "chunk_id": "K0040013:46",
+          "score": 0.5594
+        }
+      ],
+      "top_score": 0.7073,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q26",
+      "question": "今天天氣怎麼樣？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "D0080029:4",
+          "chunk_id": "D0080029:4",
+          "score": 0.2608
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040013:146",
+          "chunk_id": "K0040013:146",
+          "score": 0.252
+        },
+        {
+          "rank": 3,
+          "article_id": "D0080029:81",
+          "chunk_id": "D0080029:81",
+          "score": 0.2385
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:42",
+          "chunk_id": "K0040012:42",
+          "score": 0.2342
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040013:7",
+          "chunk_id": "K0040013:7",
+          "score": 0.2336
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:142",
+          "chunk_id": "K0040013:142",
+          "score": 0.2334
+        },
+        {
+          "rank": 7,
+          "article_id": "D0080090:13",
+          "chunk_id": "D0080090:13",
+          "score": 0.2315
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040013:109",
+          "chunk_id": "K0040013:109",
+          "score": 0.2311
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:14",
+          "chunk_id": "K0040012:14",
+          "score": 0.2303
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:32-1",
+          "chunk_id": "K0040012:32-1",
+          "score": 0.2267
+        }
+      ],
+      "top_score": 0.2608
+    },
+    {
+      "id": "q27",
+      "question": "我要怎麼申報綜合所得稅？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "G0390060:17",
+          "chunk_id": "G0390060:17",
+          "score": 0.3376
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040013:16",
+          "chunk_id": "K0040013:16-p1",
+          "score": 0.3297
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040013:17",
+          "chunk_id": "K0040013:17",
+          "score": 0.3191
+        },
+        {
+          "rank": 4,
+          "article_id": "D0080029:52",
+          "chunk_id": "D0080029:52",
+          "score": 0.2989
+        },
+        {
+          "rank": 5,
+          "article_id": "D0080029:78",
+          "chunk_id": "D0080029:78",
+          "score": 0.2952
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:63",
+          "chunk_id": "K0040013:63",
+          "score": 0.2907
+        },
+        {
+          "rank": 7,
+          "article_id": "D0080029:40",
+          "chunk_id": "D0080029:40",
+          "score": 0.2901
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040013:17-1",
+          "chunk_id": "K0040013:17-1",
+          "score": 0.2894
+        },
+        {
+          "rank": 9,
+          "article_id": "D0080029:50",
+          "chunk_id": "D0080029:50",
+          "score": 0.2882
+        },
+        {
+          "rank": 10,
+          "article_id": "G0390060:46",
+          "chunk_id": "G0390060:46",
+          "score": 0.2865
+        }
+      ],
+      "top_score": 0.3376
+    },
+    {
+      "id": "q28",
+      "question": "離婚需要辦理哪些手續？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040013:22",
+          "chunk_id": "K0040013:22",
+          "score": 0.3899
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040013:63",
+          "chunk_id": "K0040013:63",
+          "score": 0.387
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040013:75",
+          "chunk_id": "K0040013:75",
+          "score": 0.3795
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040013:15",
+          "chunk_id": "K0040013:15",
+          "score": 0.3792
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040013:50",
+          "chunk_id": "K0040013:50-p2",
+          "score": 0.3737
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040013:32",
+          "chunk_id": "K0040013:32",
+          "score": 0.3697
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040013:16",
+          "chunk_id": "K0040013:16-p1",
+          "score": 0.3545
+        },
+        {
+          "rank": 8,
+          "article_id": "D0080029:69",
+          "chunk_id": "D0080029:69",
+          "score": 0.3449
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040013:24",
+          "chunk_id": "K0040013:24",
+          "score": 0.3448
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040013:33",
+          "chunk_id": "K0040013:33",
+          "score": 0.3438
+        }
+      ],
+      "top_score": 0.3899
+    },
+    {
+      "id": "q29",
+      "question": "高鐵從台北到左營的票價是多少？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:75",
+          "chunk_id": "K0040012:75",
+          "score": 0.2979
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:81-1",
+          "chunk_id": "K0040012:81-1",
+          "score": 0.2901
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:92",
+          "chunk_id": "K0040012:92-p2",
+          "score": 0.2891
+        },
+        {
+          "rank": 4,
+          "article_id": "K0040012:53-1",
+          "chunk_id": "K0040012:53-1",
+          "score": 0.2712
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:80",
+          "chunk_id": "K0040012:80",
+          "score": 0.269
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:33",
+          "chunk_id": "K0040012:33",
+          "score": 0.2558
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040013:2",
+          "chunk_id": "K0040013:2-p2",
+          "score": 0.2555
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:40",
+          "chunk_id": "K0040012:40",
+          "score": 0.2552
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:52",
+          "chunk_id": "K0040012:52",
+          "score": 0.2538
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:31",
+          "chunk_id": "K0040012:31",
+          "score": 0.2534
+        }
+      ],
+      "top_score": 0.2979
+    },
+    {
+      "id": "q30",
+      "question": "過失傷害罪最高可以判幾年有期徒刑？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:86",
+          "chunk_id": "K0040012:86",
+          "score": 0.3997
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:35-2",
+          "chunk_id": "K0040012:35-2",
+          "score": 0.3952
+        },
+        {
+          "rank": 3,
+          "article_id": "K0040012:21",
+          "chunk_id": "K0040012:21-p2",
+          "score": 0.3746
+        },
+        {
+          "rank": 4,
+          "article_id": "D0080029:2",
+          "chunk_id": "D0080029:2-p2",
+          "score": 0.3689
+        },
+        {
+          "rank": 5,
+          "article_id": "K0040012:61",
+          "chunk_id": "K0040012:61",
+          "score": 0.3663
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:30-1",
+          "chunk_id": "K0040012:30-1",
+          "score": 0.3638
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040012:90",
+          "chunk_id": "K0040012:90",
+          "score": 0.3598
+        },
+        {
+          "rank": 8,
+          "article_id": "K0040012:67-1",
+          "chunk_id": "K0040012:67-1",
+          "score": 0.3577
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:44",
+          "chunk_id": "K0040012:44",
+          "score": 0.3536
+        },
+        {
+          "rank": 10,
+          "article_id": "K0040012:37",
+          "chunk_id": "K0040012:37",
+          "score": 0.3417
+        }
+      ],
+      "top_score": 0.3997
+    },
+    {
+      "id": "q31",
+      "question": "酒駕肇事的話，強制險還會賠嗎？罰則又是什麼？",
+      "category": "cross_law",
+      "should_refuse": false,
+      "expected": [
+        "G0390060:29",
+        "K0040012:35"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "G0390060:29",
+          "chunk_id": "G0390060:29",
+          "score": 0.6169
+        },
+        {
+          "rank": 2,
+          "article_id": "K0040012:35",
+          "chunk_id": "K0040012:35-p2",
+          "score": 0.5341
+        },
+        {
+          "rank": 3,
+          "article_id": "D0080029:43-1",
+          "chunk_id": "D0080029:43-1",
+          "score": 0.5235
+        },
+        {
+          "rank": 4,
+          "article_id": "D0080029:19-2",
+          "chunk_id": "D0080029:19-2-p2",
+          "score": 0.5123
+        },
+        {
+          "rank": 5,
+          "article_id": "G0390060:28",
+          "chunk_id": "G0390060:28",
+          "score": 0.4869
+        },
+        {
+          "rank": 6,
+          "article_id": "K0040012:61",
+          "chunk_id": "K0040012:61",
+          "score": 0.4766
+        },
+        {
+          "rank": 7,
+          "article_id": "K0040013:114",
+          "chunk_id": "K0040013:114",
+          "score": 0.4759
+        },
+        {
+          "rank": 8,
+          "article_id": "G0390060:49",
+          "chunk_id": "G0390060:49",
+          "score": 0.4726
+        },
+        {
+          "rank": 9,
+          "article_id": "K0040012:62",
+          "chunk_id": "K0040012:62",
+          "score": 0.4621
+        },
+        {
+          "rank": 10,
+          "article_id": "G0390060:48",
+          "chunk_id": "G0390060:48",
+          "score": 0.4591
+        }
+      ],
+      "top_score": 0.6169,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    },
+    {
+      "id": "q32",
+      "question": "車禍後沒報警就離開現場會被罰嗎？",
+      "category": "cross_law",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:62",
+        "D0080090:3"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "article_id": "K0040012:62",
+          "chunk_id": "K0040012:62",
+          "score": 0.6129
+        },
+        {
+          "rank": 2,
+          "article_id": "D0080090:5",
+          "chunk_id": "D0080090:5",
+          "score": 0.5667
+        },
+        {
+          "rank": 3,
+          "article_id": "D0080090:3",
+          "chunk_id": "D0080090:3",
+          "score": 0.5598
+        },
+        {
+          "rank": 4,
+          "article_id": "D0080029:19-1",
+          "chunk_id": "D0080029:19-1",
+          "score": 0.5332
+        },
+        {
+          "rank": 5,
+          "article_id": "D0080029:16",
+          "chunk_id": "D0080029:16-p2",
+          "score": 0.515
+        },
+        {
+          "rank": 6,
+          "article_id": "D0080090:11",
+          "chunk_id": "D0080090:11",
+          "score": 0.5015
+        },
+        {
+          "rank": 7,
+          "article_id": "G0390060:50",
+          "chunk_id": "G0390060:50",
+          "score": 0.4957
+        },
+        {
+          "rank": 8,
+          "article_id": "G0390060:34",
+          "chunk_id": "G0390060:34",
+          "score": 0.4878
+        },
+        {
+          "rank": 9,
+          "article_id": "D0080029:10",
+          "chunk_id": "D0080029:10",
+          "score": 0.485
+        },
+        {
+          "rank": 10,
+          "article_id": "D0080029:18",
+          "chunk_id": "D0080029:18",
+          "score": 0.4849
+        }
+      ],
+      "top_score": 0.6129,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
+    }
+  ]
+}
