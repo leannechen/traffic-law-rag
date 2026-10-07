@@ -1,3 +1,4 @@
+from collections.abc import Iterator
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -6,7 +7,7 @@ import anthropic
 import httpx2 as httpx
 import pytest
 
-from app.core.llm import FALLBACK_BETA, AnthropicLLMClient, CachedLLMClient, LLMError
+from app.core.llm import FALLBACK_BETA, AnthropicLLMClient, CachedLLMClient, LLMError, LLMResponse
 from tests.fakes import FakeLLM
 
 
@@ -137,3 +138,108 @@ def test_cached_llm_refresh_ignores_existing_cache(tmp_path: Path) -> None:
     CachedLLMClient(FakeLLM("舊"), path).complete(**args)
     inner = FakeLLM("新")
     assert CachedLLMClient(inner, path, refresh=True).complete(**args).text == "新"
+
+
+def test_request_timeout_is_bounded() -> None:
+    client = AnthropicLLMClient("test-key", "claude-sonnet-5-5", timeout=7.0)
+    assert client._client.timeout == 7.0  # 預設是 10 分鐘，使用者等不了那麼久
+    assert AnthropicLLMClient("test-key", "claude-sonnet-5-5")._client.timeout == 60.0
+
+
+class FakeStreamManager:
+    def __init__(
+        self,
+        deltas: list[str],
+        final: Any,
+        *,
+        error_after: int | None = None,
+        error: Exception | None = None,
+    ) -> None:
+        self._deltas, self._final = deltas, final
+        self._error_after, self._error = error_after, error
+        self.exited = False
+        self.text_stream = self._iterate()
+
+    def _iterate(self) -> Iterator[str]:
+        for i, d in enumerate(self._deltas):
+            if self._error_after is not None and i >= self._error_after and self._error:
+                raise self._error
+            yield d
+
+    def __enter__(self) -> "FakeStreamManager":
+        return self
+
+    def __exit__(self, *exc: object) -> None:
+        self.exited = True
+
+    def get_final_message(self) -> Any:
+        return self._final
+
+
+class FakeStreamingMessages:
+    def __init__(self, manager: FakeStreamManager) -> None:
+        self.kwargs: dict[str, Any] = {}
+        self._manager = manager
+
+    def stream(self, **kwargs: Any) -> FakeStreamManager:
+        self.kwargs = kwargs
+        return self._manager
+
+
+def streaming_client(
+    messages: FakeStreamingMessages, *, fallbacks: bool = True
+) -> AnthropicLLMClient:
+    client = AnthropicLLMClient("test-key", "claude-sonnet-5-5", use_fallbacks=fallbacks)
+    client._client = SimpleNamespace(beta=SimpleNamespace(messages=messages), messages=messages)  # type: ignore[assignment]
+    return client
+
+
+def test_stream_yields_text_pieces_then_the_final_response() -> None:
+    manager = FakeStreamManager(["紅燈", "右轉"], sdk_response([THINKING, TEXT]))
+    messages = FakeStreamingMessages(manager)
+    items = list(
+        streaming_client(messages).stream(system="S", user="U", max_tokens=10, effort="medium")
+    )
+    assert items[:2] == ["紅燈", "右轉"]
+    final = items[2]
+    assert isinstance(final, LLMResponse) and final.text == "答案[[K:1]]"
+    assert (final.input_tokens, final.output_tokens) == (100, 20)
+    assert manager.exited  # 正常結束也會離開 with
+    assert messages.kwargs["fallbacks"] == "default" and "temperature" not in messages.kwargs
+
+
+def test_closing_the_stream_early_closes_the_http_stream() -> None:
+    manager = FakeStreamManager(["a", "b", "c"], sdk_response([TEXT]))
+    gen = streaming_client(FakeStreamingMessages(manager)).stream(
+        system="S", user="U", max_tokens=10, effort="low"
+    )
+    assert next(gen) == "a"
+    gen.close()  # 使用者斷線
+    assert manager.exited
+
+
+def test_stream_errors_become_llm_error() -> None:
+    request = httpx.Request("POST", "https://api.anthropic.com/v1/messages")
+    manager = FakeStreamManager(
+        ["a", "b"],
+        sdk_response([TEXT]),
+        error_after=1,
+        error=anthropic.APITimeoutError(request=request),
+    )
+    gen = streaming_client(FakeStreamingMessages(manager)).stream(
+        system="S", user="U", max_tokens=10, effort="low"
+    )
+    assert next(gen) == "a"
+    with pytest.raises(LLMError, match="逾時"):
+        next(gen)
+    assert manager.exited
+
+
+def test_stream_refusal_is_reported_in_the_final_response() -> None:
+    manager = FakeStreamManager([], sdk_response([], stop_reason="refusal"))
+    items = list(
+        streaming_client(FakeStreamingMessages(manager)).stream(
+            system="S", user="U", max_tokens=10, effort="low"
+        )
+    )
+    assert isinstance(items[-1], LLMResponse) and items[-1].refused

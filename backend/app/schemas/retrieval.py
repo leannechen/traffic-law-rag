@@ -10,6 +10,9 @@ class RetrievedChunk(BaseModel):
     chunk_id: str
     article_id: str  # "{pcode}:{article_no}"，UI 以條為單位
     pcode: str
+    law_name: str = ""
     law_short_name: str
     article_no: str
+    source_url: str = ""
+    amended_date: str = ""
     text: str

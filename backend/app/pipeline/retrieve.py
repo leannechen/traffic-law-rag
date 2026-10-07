@@ -35,8 +35,11 @@ def _to_hit(
         chunk_id=chunk_id,
         article_id=f"{meta['pcode']}:{meta['article_no']}",
         pcode=str(meta["pcode"]),
+        law_name=str(meta.get("law_name", "")),
         law_short_name=str(meta["law_short_name"]),
         article_no=str(meta["article_no"]),
+        source_url=str(meta.get("source_url", "")),
+        amended_date=str(meta.get("amended_date", "")),
         text=text,
     )
 
@@ -47,13 +50,16 @@ class Retriever:
         self._embedder = embedder
 
     @classmethod
-    def from_settings(cls) -> "Retriever":
+    def from_settings(cls, *, disk_cache: bool = True) -> "Retriever":
+        """disk_cache=True 時把問題的 embedding 存在本機檔案（評估與 CLI 用）。
+        線上服務必須用 False：多個請求同時寫同一個檔案會互相覆蓋，也不該把使用者的問題落地。"""
         settings = get_settings()
         collection = chromadb.PersistentClient(path=str(settings.index_dir)).get_collection(
             COLLECTION
         )
-        inner = VoyageEmbedder(settings.voyage_api_key, settings.embedding_model)
-        embedder = CachedEmbedder(inner, settings.cache_dir / "query_embeddings.json")
+        embedder: Embedder = VoyageEmbedder(settings.voyage_api_key, settings.embedding_model)
+        if disk_cache:
+            embedder = CachedEmbedder(embedder, settings.cache_dir / "query_embeddings.json")
         return cls(collection, embedder)
 
     def search(self, question: str, k: int = 5) -> list[RetrievedChunk]:

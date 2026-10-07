@@ -5,6 +5,8 @@ from typing import Any, Protocol
 
 from pydantic import BaseModel
 
+from app.schemas.chunk import ChunkDetail
+
 _PART_RE = re.compile(r"-p(\d+)$")
 
 
@@ -49,3 +51,55 @@ class ChromaArticleSource:
             )
         self._cache[article_id] = result
         return result
+
+
+class ChromaChunkStore:
+    """依 chunk_id 取回單一 chunk 的欄位，加上整條全文。"""
+
+    def __init__(self, collection: Any, articles: ArticleSource) -> None:
+        self._collection = collection
+        self._articles = articles
+
+    def get(self, chunk_id: str) -> ChunkDetail | None:
+        got = self._collection.get(ids=[chunk_id], include=["documents", "metadatas"])
+        if got["ids"]:
+            text, meta = got["documents"][0], got["metadatas"][0]
+        else:
+            # 引用事件裡的 id 是「條」，依項切分的條文沒有同名的 chunk：改取該條的第一塊
+            article_id = _PART_RE.sub("", chunk_id)
+            first = self._first_chunk(article_id)
+            if first is None:
+                return None
+            text, meta = first
+        article_id = f"{meta['pcode']}:{meta['article_no']}"
+        article = self._articles.get(article_id)
+        if article is None:
+            return None
+        return ChunkDetail(
+            chunk_id=chunk_id,
+            article_id=article_id,
+            pcode=str(meta["pcode"]),
+            law_name=str(meta["law_name"]),
+            law_short_name=str(meta["law_short_name"]),
+            law_level=meta["law_level"],
+            article_no=str(meta["article_no"]),
+            paragraph_no=meta.get("paragraph_no"),
+            chapter=meta.get("chapter"),
+            text=text,
+            source_url=str(meta["source_url"]),
+            amended_date=str(meta["amended_date"]),
+            data_version=str(meta["data_version"]),
+            article_text=article.text,
+        )
+
+    def _first_chunk(self, article_id: str) -> tuple[str, Any] | None:
+        pcode, article_no = article_id.split(":", 1)
+        got = self._collection.get(
+            where={"$and": [{"pcode": pcode}, {"article_no": article_no}]},
+            include=["documents", "metadatas"],
+        )
+        rows = list(zip(got["ids"], got["documents"] or [], got["metadatas"] or [], strict=True))
+        if not rows:
+            return None
+        rows.sort(key=lambda r: int(m.group(1)) if (m := _PART_RE.search(r[0])) else 0)
+        return rows[0][1], rows[0][2]
