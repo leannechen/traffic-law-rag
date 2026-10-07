@@ -72,10 +72,14 @@ describe('home', () => {
     expect(screen.getByRole('button', { name: /提問/ })).toBeDisabled()
   })
 
-  it('does not submit an empty question', () => {
-    stubFetch(() => json({}))
+  it('does not submit an empty question; the button just returns focus to the input', async () => {
+    const fetchMock = stubFetch(() => json({}))
     renderApp()
-    expect(screen.getByRole('button', { name: /提問/ })).toBeDisabled()
+    const button = screen.getByRole('button', { name: /提問/ })
+    expect(button).toBeEnabled() // 畫板：空白時按鈕和平常一樣
+    await userEvent.setup().click(button)
+    expect(screen.getByLabelText('你的問題')).toHaveFocus()
+    expect(fetchMock).not.toHaveBeenCalledWith('/api/ask', expect.anything())
   })
 })
 
@@ -142,7 +146,8 @@ describe('asking', () => {
     await ask('今天天氣怎麼樣？')
 
     expect(await screen.findByText('資料範圍內找不到相關規定')).toBeInTheDocument()
-    expect(screen.getByText('最高相似度 0.26 ＜ 門檻 0.40')).toBeInTheDocument()
+    expect(screen.getByText('0.26 ＜ 門檻 0.40')).toBeInTheDocument()
+    expect(screen.getByText('為什麼不回答')).toBeInTheDocument()
     expect(screen.getByRole('complementary', { name: '收錄範圍' })).toHaveTextContent(
       '道路交通管理處罰條例',
     )

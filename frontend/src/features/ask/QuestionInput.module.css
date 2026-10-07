@@ -14,22 +14,21 @@
 .field {
   display: flex;
   flex-direction: column;
-  border: 2px solid var(--ink);
-  background: var(--surface);
-}
-
-.invalid {
-  border-color: var(--err);
+  gap: 8px;
 }
 
 .input {
   min-width: 0;
-  border: 0;
-  background: transparent;
+  border: 2px solid var(--ink);
+  background: var(--surface);
   padding: 12px 14px;
   font-size: 17px;
   line-height: 1.6;
   resize: none;
+}
+
+.invalid .input {
+  border-color: var(--err);
 }
 
 .input:focus-visible {
@@ -73,12 +72,22 @@
     font-size: 14px;
   }
 
+  /* 桌面：輸入框與按鈕在同一個框裡（畫板 Main）；手機是分開的兩塊（畫板 MobileHome） */
   .field {
     flex-direction: row;
+    gap: 0;
+    border: 2px solid var(--ink);
+    background: var(--surface);
+  }
+
+  .invalid {
+    border-color: var(--err);
   }
 
   .input {
     flex-grow: 1;
+    border: 0;
+    background: transparent;
     padding: 18px 20px;
     font-size: 20px;
     height: 4.2rem;

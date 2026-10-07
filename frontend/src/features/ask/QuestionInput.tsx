@@ -1,4 +1,4 @@
-import { type FormEvent, type KeyboardEvent, useId, useState } from 'react'
+import { type FormEvent, type KeyboardEvent, useId, useRef, useState } from 'react'
 import { ArrowRightIcon } from '../../components/icons'
 import styles from './QuestionInput.module.css'
 
@@ -13,14 +13,17 @@ type Props = { onSubmit: (question: string) => void }
 
 export function QuestionInput({ onSubmit }: Props) {
   const id = useId()
+  const inputRef = useRef<HTMLTextAreaElement>(null)
   const [value, setValue] = useState('')
   const length = questionLength(value)
   const tooLong = length > MAX_QUESTION_LENGTH
-  const canSubmit = length > 0 && !tooLong
+  const canSubmit = !tooLong
 
   function submit(event?: FormEvent) {
     event?.preventDefault()
-    if (canSubmit) onSubmit(value.trim())
+    // 空白時按鈕看起來和平常一樣（畫板如此），按下去只是把游標帶回輸入框
+    if (length === 0) inputRef.current?.focus()
+    else if (canSubmit) onSubmit(value.trim())
   }
 
   function onKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
@@ -41,6 +44,7 @@ export function QuestionInput({ onSubmit }: Props) {
       <div className={`${styles.field} ${tooLong ? styles.invalid : ''}`}>
         <textarea
           id={id}
+          ref={inputRef}
           className={styles.input}
           rows={2}
           value={value}
@@ -50,7 +54,7 @@ export function QuestionInput({ onSubmit }: Props) {
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={onKeyDown}
         />
-        <button type="submit" className={styles.submit} disabled={!canSubmit}>
+        <button type="submit" className={styles.submit} disabled={tooLong}>
           提問
           <ArrowRightIcon size={18} />
         </button>

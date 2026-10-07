@@ -1,0 +1,133 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+
+.title {
+  font-size: 14px;
+  letter-spacing: 0.2em;
+}
+
+.queries {
+  font-size: 13px;
+  color: var(--ink3);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 120px;
+  gap: 12px;
+  align-items: center;
+  padding: 9px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.rank {
+  font-family: var(--font-mono);
+  color: var(--ink3);
+}
+
+.name {
+  font-weight: 700;
+}
+
+.tagCited,
+.tag {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.tagCited {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.tag {
+  color: var(--ink3);
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.track {
+  flex-grow: 1;
+  height: 6px;
+  background: var(--sunken);
+}
+
+.fill,
+.fillPlain {
+  display: block;
+  height: 6px;
+}
+
+.fill {
+  background: var(--accent);
+}
+
+.fillPlain {
+  background: var(--ink3);
+}
+
+.value {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.empty {
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+  color: var(--ink2);
+}
+
+.skeletonRow {
+  padding: 10px 0;
+}
+
+.skeleton {
+  height: 12px;
+  background: var(--sunken);
+}
+
+.skeletonBar {
+  height: 6px;
+  background: var(--sunken);
+}
+
+/* 手機：名稱獨佔一行，分數條在下方 */
+@media (max-width: 767px) {
+  .row {
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+  }
+
+  .score {
+    grid-column: 2 / -1;
+  }
+}
+
+@media (min-width: 768px) {
+  .row {
+    grid-template-columns: 28px minmax(0, 1fr) 72px 170px;
+  }
+
+  .row:not(:has(.tag, .tagCited)) {
+    grid-template-columns: 28px minmax(0, 1fr) 170px;
+  }
+}

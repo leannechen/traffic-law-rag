@@ -1,0 +1,78 @@
+.root {
+  border-top: 1px solid var(--rule-strong);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.title {
+  font-size: 15px;
+  letter-spacing: 0.3em;
+}
+
+.compare {
+  background: var(--sunken);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.strong {
+  font-weight: 700;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.track {
+  position: relative;
+  height: 10px;
+  background: var(--paper);
+}
+
+.fill,
+.fillPassed {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 10px;
+}
+
+.fill {
+  background: var(--warn);
+}
+
+.fillPassed {
+  background: var(--accent);
+}
+
+.marker {
+  position: absolute;
+  top: -4px;
+  width: 2px;
+  height: 18px;
+  background: var(--ink);
+}
+
+.scale {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink3);
+}
+
+.note {
+  font-size: 14px;
+  color: var(--ink2);
+}
