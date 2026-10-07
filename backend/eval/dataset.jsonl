@@ -37,4 +37,4 @@
 {"id": "q37", "question": "電動車充電站要怎麼申請設置？", "category": "out_of_scope", "expected_chunk_ids": [], "expected_facts": [], "should_refuse": true, "verified": true}
 {"id": "q38", "question": "計程車的起跳價是多少？", "category": "out_of_scope", "expected_chunk_ids": [], "expected_facts": [], "should_refuse": true, "verified": true}
 {"id": "q39", "question": "國道的通行費怎麼計算？", "category": "out_of_scope", "expected_chunk_ids": [], "expected_facts": [], "should_refuse": true, "verified": true}
-{"id": "q40", "question": "汽車多久要保養一次？", "category": "out_of_scope", "expected_chunk_ids": [], "expected_facts": [], "should_refuse": true, "verified": true}
+{"id": "q40", "question": "汽車多久要保養一次？", "category": "colloquial", "expected_chunk_ids": ["K0040013:39-3"], "expected_facts": ["汽車所有人除依規定接受車輛檢驗外，應依原廠規定時間自行實施保養及檢查"], "should_refuse": false, "verified": true}

@@ -1,7 +1,7 @@
 {
   "name": "hybrid-bigram",
   "retriever": "hybrid-bigram",
-  "evaluated_at": "2026-10-06T16:03:26+00:00",
+  "evaluated_at": "2026-10-07T03:48:22+00:00",
   "config": {
     "embedding_model": "voyage-4",
     "data_version": "2026-10-05",
@@ -14,12 +14,12 @@
   "counts": {
     "total": 40,
     "verified": 40,
-    "answerable": 27,
-    "out_of_scope": 13
+    "answerable": 28,
+    "out_of_scope": 12
   },
   "metrics": {
     "recall_at_5": 1.0,
-    "mrr": 0.7235,
+    "mrr": 0.7333,
     "hit_rate_at_5": 1.0
   },
   "by_category": {
@@ -44,9 +44,9 @@
       "mrr": 0.7083
     },
     "colloquial": {
-      "n": 5,
+      "n": 6,
       "recall_at_5": 1.0,
-      "mrr": 0.7
+      "mrr": 0.75
     }
   },
   "score_distribution": {
@@ -810,7 +810,7 @@
           "rank": 9,
           "article_id": "K0040012:56-1",
           "chunk_id": "K0040012:56-1",
-          "score": 0.02781,
+          "score": 0.02765,
           "vector_score": 0.4107
         },
         {
@@ -3037,45 +3037,45 @@
         },
         {
           "rank": 5,
+          "article_id": "K0040013:66",
+          "chunk_id": "K0040013:66",
+          "score": 0.02924,
+          "vector_score": 0.3923
+        },
+        {
+          "rank": 6,
           "article_id": "K0040013:111",
           "chunk_id": "K0040013:111",
           "score": 0.02908,
           "vector_score": 0.4252
         },
         {
-          "rank": 6,
+          "rank": 7,
           "article_id": "K0040012:7-2",
           "chunk_id": "K0040012:7-2",
-          "score": 0.02844,
+          "score": 0.02826,
           "vector_score": 0.3844
         },
         {
-          "rank": 7,
+          "rank": 8,
           "article_id": "K0040012:27",
           "chunk_id": "K0040012:27",
-          "score": 0.02819,
+          "score": 0.02801,
           "vector_score": 0.3863
         },
         {
-          "rank": 8,
+          "rank": 9,
           "article_id": "K0040012:56-1",
           "chunk_id": "K0040012:56-1",
           "score": 0.02679,
           "vector_score": 0.3935
         },
         {
-          "rank": 9,
+          "rank": 10,
           "article_id": "D0080029:68",
           "chunk_id": "D0080029:68",
           "score": 0.01613,
           "vector_score": null
-        },
-        {
-          "rank": 10,
-          "article_id": "K0040012:57",
-          "chunk_id": "K0040012:57",
-          "score": 0.01613,
-          "vector_score": 0.4742
         }
       ],
       "top_score": 0.5416
@@ -3323,9 +3323,11 @@
     {
       "id": "q40",
       "question": "汽車多久要保養一次？",
-      "category": "out_of_scope",
-      "should_refuse": true,
-      "expected": [],
+      "category": "colloquial",
+      "should_refuse": false,
+      "expected": [
+        "K0040013:39-3"
+      ],
       "retrieved": [
         {
           "rank": 1,
@@ -3398,7 +3400,10 @@
           "vector_score": null
         }
       ],
-      "top_score": 0.5194
+      "top_score": 0.5194,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "first_hit_rank": 1
     }
   ]
 }
