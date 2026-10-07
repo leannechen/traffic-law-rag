@@ -21,7 +21,13 @@ export type AskErrorCode =
   | 'network_error'
   | 'stream_interrupted'
 
-export type AskError = { code: AskErrorCode; message?: string; retryAfter?: number }
+export type AskError = {
+  code: AskErrorCode
+  message?: string
+  retryAfter?: number
+  /** code 為 http_error 時的 HTTP 狀態碼 */
+  status?: number
+}
 
 export type AskState = {
   phase: AskPhase

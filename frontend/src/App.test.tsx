@@ -277,6 +277,24 @@ describe('review fixes', () => {
   })
 })
 
+describe('wrong backend', () => {
+  it('explains a 404 from /api/ask as a probable wrong BACKEND_URL', async () => {
+    stubFetch(() => json({ detail: 'Not Found' }, 404))
+    renderApp()
+    await ask('紅燈右轉會被罰多少錢？')
+    expect(await screen.findByText('伺服器沒有回應預期的內容')).toBeInTheDocument()
+    expect(screen.getByText(/BACKEND_URL/)).toBeInTheDocument()
+    expect(screen.getByRole('alert')).toHaveTextContent('HTTP 404')
+  })
+
+  it('says the service is not ready for a 503', async () => {
+    stubFetch(() => json({ detail: '索引尚未建立' }, 503))
+    renderApp()
+    await ask('紅燈右轉會被罰多少錢？')
+    expect(await screen.findByText('問答服務暫時無法使用')).toBeInTheDocument()
+  })
+})
+
 describe('routes', () => {
   it('renders the about page', async () => {
     stubFetch(() => json({}))

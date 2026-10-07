@@ -11,7 +11,7 @@ export function toAskError(e: unknown, receivedAny: boolean): AskError {
       return { code: 'rate_limited', retryAfter: e.retryAfter ?? DEFAULT_RETRY_SECONDS }
     }
     if (e.status === 422) return { code: 'invalid_question', message: e.detail }
-    return { code: 'http_error', message: e.detail || `HTTP ${e.status}` }
+    return { code: 'http_error', message: e.detail || `HTTP ${e.status}`, status: e.status }
   }
   return { code: receivedAny ? 'stream_interrupted' : 'network_error' }
 }

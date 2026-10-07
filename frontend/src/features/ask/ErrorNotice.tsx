@@ -11,7 +11,7 @@ type Props = {
   onHome: () => void
 }
 
-const COPY: Record<string, { label: string; title: string; body: string }> = {
+const COPY: Record<string, Copy> = {
   stream_interrupted: {
     label: '連線中斷',
     title: '答案沒有完整送達',
@@ -54,6 +54,31 @@ const COPY: Record<string, { label: string; title: string; body: string }> = {
   },
 }
 
+type Copy = { label: string; title: string; body: string }
+
+// 我們的後端不會回 404／502／504：看到這些通常是 /api 轉到錯的地方（例如本機 8000 被其他專案佔用）
+const WRONG_BACKEND = [404, 502, 504]
+
+function copyFor(error: AskError): Copy {
+  if (error.code === 'http_error' && error.status !== undefined) {
+    if (WRONG_BACKEND.includes(error.status)) {
+      return {
+        label: '連不到問答服務',
+        title: '伺服器沒有回應預期的內容',
+        body: `收到 HTTP ${error.status}。請稍後再試；若是本機開發，請確認前端的 BACKEND_URL 指向這個專案的後端（見 frontend/.env.local）。`,
+      }
+    }
+    if (error.status === 503) {
+      return {
+        label: '服務尚未就緒',
+        title: '問答服務暫時無法使用',
+        body: '後端還沒準備好（可能缺少金鑰或索引），請稍後再試。',
+      }
+    }
+  }
+  return COPY[error.code] ?? COPY.http_error
+}
+
 export function ErrorNotice({ error, runId, onRetry, onHome }: Props) {
   const remaining = useCountdown(error.code === 'rate_limited' ? error.retryAfter : undefined)
 
@@ -85,7 +110,7 @@ export function ErrorNotice({ error, runId, onRetry, onHome }: Props) {
     )
   }
 
-  const copy = COPY[error.code] ?? COPY.http_error
+  const copy = copyFor(error)
   return (
     <div role="alert" className={`${styles.root} ${styles.err}`}>
       <div className={styles.label}>
@@ -108,6 +133,7 @@ export function ErrorNotice({ error, runId, onRetry, onHome }: Props) {
       </div>
       <p className={styles.code}>
         錯誤代碼 {error.code}
+        {error.status ? ` · HTTP ${error.status}` : ''}
         {runId ? ` · run ${runId.slice(0, 4)}` : ''}
       </p>
     </div>
