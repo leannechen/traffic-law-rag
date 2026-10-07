@@ -65,7 +65,7 @@ function setup(events: AskEvent[], mobile = false) {
 
 async function finish() {
   const user = userEvent.setup()
-  await user.type(screen.getByLabelText('你的問題'), '紅燈右轉會被罰多少錢？')
+  await user.type(screen.getByRole('textbox', { name: '你的問題' }), '紅燈右轉會被罰多少錢？')
   await user.click(screen.getByRole('button', { name: /提問/ }))
   await screen.findByRole('button', { name: '重新提問' })
   return user

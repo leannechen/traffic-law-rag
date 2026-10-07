@@ -34,7 +34,7 @@ function renderApp(path = '/') {
 
 async function ask(question: string) {
   const user = userEvent.setup()
-  await user.type(screen.getByLabelText('你的問題'), question)
+  await user.type(screen.getByRole('textbox', { name: '你的問題' }), question)
   await user.click(screen.getByRole('button', { name: /提問/ }))
   return user
 }
@@ -64,7 +64,7 @@ describe('home', () => {
   it('disables submit and shows an error beyond 200 characters', async () => {
     stubFetch(() => json({}))
     renderApp()
-    const input = screen.getByLabelText('你的問題')
+    const input = screen.getByRole('textbox', { name: '你的問題' })
     await userEvent.setup().click(input)
     await userEvent.setup().paste('字'.repeat(201))
     expect(screen.getByText(/問題超過 200 字/)).toBeInTheDocument()
@@ -78,7 +78,7 @@ describe('home', () => {
     const button = screen.getByRole('button', { name: /提問/ })
     expect(button).toBeEnabled() // 畫板：空白時按鈕和平常一樣
     await userEvent.setup().click(button)
-    expect(screen.getByLabelText('你的問題')).toHaveFocus()
+    expect(screen.getByRole('textbox', { name: '你的問題' })).toHaveFocus()
     expect(fetchMock).not.toHaveBeenCalledWith('/api/ask', expect.anything())
   })
 })
@@ -193,7 +193,7 @@ describe('asking', () => {
     renderApp()
     const user = await ask('紅燈右轉會被罰多少錢？')
     await user.click(await screen.findByRole('button', { name: '重新提問' }))
-    expect(screen.getByLabelText('你的問題')).toHaveValue('')
+    expect(await screen.findByRole('textbox', { name: '你的問題' })).toHaveValue('')
   })
 })
 
@@ -220,7 +220,7 @@ describe('review fixes', () => {
   it('does not submit when Enter confirms an IME composition (Safari keyCode 229)', async () => {
     const fetchMock = stubFetch(() => sseResponse(normalRun()))
     renderApp()
-    const input = screen.getByLabelText('你的問題')
+    const input = screen.getByRole('textbox', { name: '你的問題' })
     await userEvent.setup().type(input, '紅燈')
     fireEvent.keyDown(input, { key: 'Enter', keyCode: 229 })
     fireEvent.keyDown(input, { key: 'Enter', isComposing: true })

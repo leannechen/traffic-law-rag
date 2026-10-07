@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createMemoryRouter, RouterProvider, useLocation } from 'react-router-dom'
 import App from '../../App'
@@ -49,14 +49,14 @@ describe('question in the URL', () => {
   it('puts the question into the URL when asking, and clears it on 重新提問', async () => {
     setup()
     const user = userEvent.setup()
-    await user.type(screen.getByLabelText('你的問題'), '紅燈右轉會被罰多少錢？')
+    await user.type(screen.getByRole('textbox', { name: '你的問題' }), '紅燈右轉會被罰多少錢？')
     await user.click(screen.getByRole('button', { name: /提問/ }))
     await screen.findByRole('button', { name: '重新提問' })
     expect(url()).toHaveTextContent('/?q=紅燈右轉會被罰多少錢？')
 
     await user.click(screen.getByRole('button', { name: '重新提問' }))
+    expect(await screen.findByRole('textbox', { name: '你的問題' })).toHaveValue('')
     expect(url()).toHaveTextContent(/^\/$/)
-    expect(screen.getByLabelText('你的問題')).toHaveValue('')
   })
 
   it('asks immediately when the page is opened with ?q= (reload or shared link)', async () => {
@@ -76,7 +76,7 @@ describe('question in the URL', () => {
     await screen.findByRole('button', { name: '重新提問' })
 
     await router.navigate(-1)
-    await waitFor(() => expect(screen.getByLabelText('你的問題')).toBeInTheDocument())
+    await screen.findByRole('textbox', { name: '你的問題' })
     expect(url()).toHaveTextContent(/^\/$/)
 
     await router.navigate(1)
