@@ -3,13 +3,14 @@ import { SpinnerIcon, StopIcon } from '../../components/icons'
 import { PageShell } from '../../components/PageShell'
 import { MOBILE_QUERY, useMediaQuery } from '../../lib/useMediaQuery'
 import { useMeta } from '../../lib/useMeta'
+import { ProcessSection } from '../pipeline/ProcessSection'
+import { WhyRefused } from '../pipeline/WhyRefused'
 import { ArticleDrawer } from '../sources/ArticleDrawer'
 import { ArticlePanel } from '../sources/ArticlePanel'
 import { AnswerSection } from './AnswerSection'
 import { articleIdOf, groupArticles, sortForDone } from './articles'
 import type { AskState } from './askReducer'
 import { EvidenceList } from './EvidenceList'
-import { ProcessSection } from './ProcessSection'
 import { RefusalNotice } from './RefusalNotice'
 import styles from './ResultView.module.css'
 import { ScopeAside } from './ScopeAside'
@@ -60,10 +61,12 @@ export function ResultView({ state, onAsk, onStop, onReset }: Props) {
   const refused = phase === 'refused' && refusal !== null
   const interactive = done
 
-  const evidence = useMemo(() => {
-    const grouped = groupArticles(results)
-    return done ? sortForDone(grouped, cited) : grouped
-  }, [results, cited, done])
+  // 檢索結果以條為單位、依檢索名次排列（檢索過程用）；完成時依據欄把已引用的排到前面
+  const ranked = useMemo(() => groupArticles(results), [results])
+  const evidence = useMemo(
+    () => (done ? sortForDone(ranked, cited) : ranked),
+    [ranked, cited, done],
+  )
 
   const invalidIds = useMemo(
     () => new Set((validation?.invalid ?? []).map(articleIdOf)),
@@ -184,9 +187,7 @@ export function ResultView({ state, onAsk, onStop, onReset }: Props) {
       onReset={onReset}
     />
   )
-  const process = phase !== 'error' && (
-    <ProcessSection state={state} articleCount={evidence.length} />
-  )
+  const process = phase !== 'error' && <ProcessSection state={state} articles={ranked} />
   const evidenceList = phase !== 'error' && (
     <EvidenceList
       evidence={evidence}
@@ -226,7 +227,8 @@ export function ResultView({ state, onAsk, onStop, onReset }: Props) {
           <div className={styles.main}>
             {questionBlock}
             {statusLine}
-            <RefusalNotice refusal={refusal} onAsk={onAsk} onNewQuestion={onReset} />
+            <RefusalNotice onAsk={onAsk} onNewQuestion={onReset} />
+            <WhyRefused state={state} />
           </div>
           <ScopeAside />
         </div>

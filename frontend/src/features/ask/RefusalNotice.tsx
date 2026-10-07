@@ -1,17 +1,14 @@
 import { SearchOffIcon } from '../../components/icons'
-import type { AskState } from './askReducer'
 import { EXAMPLE_QUESTIONS } from './examples'
 import styles from './RefusalNotice.module.css'
 
 type Props = {
-  refusal: NonNullable<AskState['refusal']>
   onAsk: (question: string) => void
   onNewQuestion: () => void
 }
 
-/** 拒答。「為什麼不回答」的步驟分支與對照條留到 Step 9，這裡只先帶一行相似度對照。 */
-export function RefusalNotice({ refusal, onAsk, onNewQuestion }: Props) {
-  const { topScore, threshold, reason } = refusal
+/** 拒答。「為什麼不回答」（步驟分支與相似度對照條）在 WhyRefused。 */
+export function RefusalNotice({ onAsk, onNewQuestion }: Props) {
   return (
     <section aria-labelledby="refuse-title" className={styles.root}>
       <div className={styles.label}>
@@ -28,11 +25,6 @@ export function RefusalNotice({ refusal, onAsk, onNewQuestion }: Props) {
         <li>問題涉及的法規不在收錄範圍內</li>
         <li>問法比較籠統，系統對應不到具體條文</li>
       </ul>
-      {reason === 'low_relevance' && topScore !== null && (
-        <p className={styles.score}>
-          最高相似度 {topScore.toFixed(2)} ＜ 門檻 {threshold.toFixed(2)}
-        </p>
-      )}
       <div className={styles.suggest}>
         <h3 className={styles.suggestTitle}>可以試著這樣問</h3>
         <div className={styles.chips}>
