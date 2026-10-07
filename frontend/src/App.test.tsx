@@ -307,10 +307,4 @@ describe('routes', () => {
     expect(screen.getByRole('heading', { level: 1, name: /只根據條文回答/ })).toBeInTheDocument()
     expect(await screen.findByText(/目前版本為 2000-01-01/)).toBeInTheDocument()
   })
-
-  it('renders the eval page placeholder', () => {
-    stubFetch(() => json({}))
-    renderApp('/eval')
-    expect(screen.getByRole('heading', { name: '評估結果' })).toBeInTheDocument()
-  })
 })

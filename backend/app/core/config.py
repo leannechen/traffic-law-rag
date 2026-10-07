@@ -35,6 +35,11 @@ class Settings(BaseSettings):
     def index_dir(self) -> Path:
         return self.data_dir / "index"
 
+    @property
+    def eval_latest_path(self) -> Path:
+        """評估頁顯示的那一份結果（用 run_generation_eval --publish 產生）。"""
+        return REPO_ROOT / "backend" / "eval" / "results" / "latest.json"
+
 
 @lru_cache
 def get_settings() -> Settings:

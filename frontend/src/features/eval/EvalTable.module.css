@@ -1,0 +1,217 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px 16px;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+}
+
+.count {
+  font-size: 13px;
+  color: var(--ink3);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .filters {
+    margin-left: auto;
+  }
+}
+
+.chip {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.chipOn {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 700;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.table th {
+  padding: 10px 8px;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+  text-align: left;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink2);
+}
+
+.table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.idCol {
+  width: 56px;
+  padding-left: 0;
+}
+
+.col {
+  width: 110px;
+}
+
+.toggleCol {
+  width: 48px;
+}
+
+.expanded td {
+  background: var(--surface);
+}
+
+.id {
+  font-family: var(--font-mono);
+  color: var(--ink3);
+}
+
+.question {
+  font-weight: 700;
+}
+
+.category {
+  color: var(--ink2);
+}
+
+.cell {
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.cellLabel {
+  margin-right: 6px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink3);
+}
+
+.ok {
+  color: var(--ok);
+}
+
+.warn {
+  color: var(--warn);
+}
+
+.err {
+  color: var(--err);
+}
+
+.na {
+  color: var(--ink3);
+  font-weight: 400;
+}
+
+.toggle {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--ink);
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  padding: 4px 0 8px;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .detail {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+
+.detailTitle {
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.detailText {
+  color: var(--ink2);
+  overflow-wrap: anywhere;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.legend {
+  font-size: 13px;
+  color: var(--ink2);
+}
+
+/* 手機：每題一張卡片 */
+.cards {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardButton {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 10px;
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+}
+
+.cardButton .category {
+  grid-column: 2;
+  font-size: 13px;
+}
+
+.cardCells {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 14px;
+}

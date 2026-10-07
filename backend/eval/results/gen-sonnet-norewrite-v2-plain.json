@@ -1,6 +1,6 @@
 {
   "name": "gen-sonnet-norewrite-v2-plain",
-  "evaluated_at": "2026-10-07T07:43:45+00:00",
+  "evaluated_at": "2026-10-07T09:21:40+00:00",
   "config": {
     "llm_model": "claude-sonnet-5-5",
     "rewrite": false,
@@ -9,8 +9,8 @@
     "prompt_version": "a284558ee0",
     "embedding_model": "voyage-4",
     "data_version": "2026-10-05",
-    "llm_calls": 34,
-    "llm_cache_hits": 0,
+    "llm_calls": 0,
+    "llm_cache_hits": 34,
     "estimated_cost_usd_first_run": 0.296
   },
   "counts": {
@@ -93,6 +93,28 @@
         "K0040012:52",
         "K0040012:74"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:53",
+          "score": 0.7151
+        },
+        {
+          "article_id": "K0040012:53-1",
+          "score": 0.714
+        },
+        {
+          "article_id": "K0040012:58",
+          "score": 0.5851
+        },
+        {
+          "article_id": "K0040012:48",
+          "score": 0.552
+        },
+        {
+          "article_id": "K0040012:45",
+          "score": 0.5506
+        }
+      ],
       "gate_top_score": 0.7151,
       "refused": false,
       "refusal_layer": null,
@@ -138,6 +160,28 @@
         "K0040012:19",
         "K0040012:33"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:31",
+          "score": 0.693
+        },
+        {
+          "article_id": "K0040012:35-1",
+          "score": 0.5407
+        },
+        {
+          "article_id": "K0040012:24",
+          "score": 0.5386
+        },
+        {
+          "article_id": "K0040012:90-1",
+          "score": 0.5386
+        },
+        {
+          "article_id": "K0040012:92",
+          "score": 0.5371
+        }
+      ],
       "gate_top_score": 0.693,
       "refused": false,
       "refusal_layer": null,
@@ -181,6 +225,28 @@
         "K0040012:90-1",
         "K0040012:71-1",
         "K0040012:21"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:92",
+          "score": 0.5847
+        },
+        {
+          "article_id": "K0040012:73",
+          "score": 0.5757
+        },
+        {
+          "article_id": "K0040012:31",
+          "score": 0.5708
+        },
+        {
+          "article_id": "K0040012:32",
+          "score": 0.5476
+        },
+        {
+          "article_id": "K0040012:32-1",
+          "score": 0.5366
+        }
       ],
       "gate_top_score": 0.5847,
       "refused": false,
@@ -227,6 +293,28 @@
         "K0040012:33",
         "K0040012:40"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:31-1",
+          "score": 0.7004
+        },
+        {
+          "article_id": "K0040013:90",
+          "score": 0.5855
+        },
+        {
+          "article_id": "K0040012:73",
+          "score": 0.5595
+        },
+        {
+          "article_id": "K0040012:43",
+          "score": 0.5522
+        },
+        {
+          "article_id": "K0040012:92",
+          "score": 0.5441
+        }
+      ],
       "gate_top_score": 0.7004,
       "refused": false,
       "refusal_layer": null,
@@ -270,6 +358,28 @@
         "K0040012:23",
         "K0040012:68",
         "K0040012:25"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:21",
+          "score": 0.6847
+        },
+        {
+          "article_id": "K0040012:21-1",
+          "score": 0.6742
+        },
+        {
+          "article_id": "K0040012:22",
+          "score": 0.626
+        },
+        {
+          "article_id": "K0040012:63-2",
+          "score": 0.5977
+        },
+        {
+          "article_id": "K0040012:24",
+          "score": 0.5887
+        }
       ],
       "gate_top_score": 0.6847,
       "refused": false,
@@ -316,6 +426,28 @@
         "K0040012:42",
         "K0040012:34"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:35",
+          "score": 0.5706
+        },
+        {
+          "article_id": "D0080029:19-2",
+          "score": 0.5646
+        },
+        {
+          "article_id": "K0040012:21",
+          "score": 0.4999
+        },
+        {
+          "article_id": "K0040012:92",
+          "score": 0.4954
+        },
+        {
+          "article_id": "K0040012:52",
+          "score": 0.4909
+        }
+      ],
       "gate_top_score": 0.5706,
       "refused": false,
       "refusal_layer": null,
@@ -359,6 +491,28 @@
         "K0040012:47",
         "K0040012:44",
         "K0040012:85-1"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:40",
+          "score": 0.6426
+        },
+        {
+          "article_id": "K0040012:43",
+          "score": 0.5712
+        },
+        {
+          "article_id": "K0040012:72-1",
+          "score": 0.527
+        },
+        {
+          "article_id": "K0040012:33",
+          "score": 0.5204
+        },
+        {
+          "article_id": "K0040012:92",
+          "score": 0.5187
+        }
       ],
       "gate_top_score": 0.6426,
       "refused": false,
@@ -405,6 +559,28 @@
         "K0040012:44",
         "K0040013:112"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:56",
+          "score": 0.6426
+        },
+        {
+          "article_id": "K0040012:55",
+          "score": 0.5752
+        },
+        {
+          "article_id": "K0040012:74",
+          "score": 0.5732
+        },
+        {
+          "article_id": "K0040012:57",
+          "score": 0.541
+        },
+        {
+          "article_id": "K0040012:52",
+          "score": 0.5405
+        }
+      ],
       "gate_top_score": 0.6426,
       "refused": false,
       "refusal_layer": null,
@@ -448,6 +624,28 @@
         "K0040012:5",
         "K0040012:7-1",
         "K0040012:57"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:3",
+          "score": 0.5743
+        },
+        {
+          "article_id": "K0040012:55",
+          "score": 0.5476
+        },
+        {
+          "article_id": "K0040013:111",
+          "score": 0.5229
+        },
+        {
+          "article_id": "K0040013:113",
+          "score": 0.5183
+        },
+        {
+          "article_id": "K0040012:56",
+          "score": 0.5124
+        }
       ],
       "gate_top_score": 0.5743,
       "refused": false,
@@ -494,6 +692,28 @@
         "K0040012:5",
         "K0040012:90-3"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040013:134",
+          "score": 0.6194
+        },
+        {
+          "article_id": "K0040012:3",
+          "score": 0.5746
+        },
+        {
+          "article_id": "K0040013:135-1",
+          "score": 0.551
+        },
+        {
+          "article_id": "K0040012:78",
+          "score": 0.5394
+        },
+        {
+          "article_id": "K0040013:133",
+          "score": 0.5393
+        }
+      ],
       "gate_top_score": 0.6194,
       "refused": false,
       "refusal_layer": null,
@@ -537,6 +757,28 @@
         "K0040012:78",
         "K0040013:133",
         "K0040012:82"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040013:141",
+          "score": 0.4884
+        },
+        {
+          "article_id": "K0040012:3",
+          "score": 0.4689
+        },
+        {
+          "article_id": "K0040013:83-3",
+          "score": 0.4274
+        },
+        {
+          "article_id": "K0040012:5",
+          "score": 0.4
+        },
+        {
+          "article_id": "K0040012:32-1",
+          "score": 0.396
+        }
       ],
       "gate_top_score": 0.4884,
       "refused": false,
@@ -582,6 +824,28 @@
         "D0080029:19",
         "K0040013:88"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040013:83",
+          "score": 0.4162
+        },
+        {
+          "article_id": "K0040013:40",
+          "score": 0.3904
+        },
+        {
+          "article_id": "K0040013:3",
+          "score": 0.3522
+        },
+        {
+          "article_id": "K0040013:83-2",
+          "score": 0.3265
+        },
+        {
+          "article_id": "K0040013:83-1",
+          "score": 0.3261
+        }
+      ],
       "gate_top_score": 0.4162,
       "refused": false,
       "refusal_layer": null,
@@ -626,6 +890,28 @@
         "D0080090:5",
         "K0040013:112",
         "D0080090:14"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "D0080090:3",
+          "score": 0.6407
+        },
+        {
+          "article_id": "D0080090:9",
+          "score": 0.571
+        },
+        {
+          "article_id": "G0390060:34",
+          "score": 0.563
+        },
+        {
+          "article_id": "D0080090:10",
+          "score": 0.5392
+        },
+        {
+          "article_id": "K0040012:62",
+          "score": 0.5321
+        }
       ],
       "gate_top_score": 0.6407,
       "refused": false,
@@ -673,6 +959,28 @@
         "D0080090:9",
         "K0040012:62"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "D0080090:4",
+          "score": 0.6529
+        },
+        {
+          "article_id": "K0040013:112",
+          "score": 0.579
+        },
+        {
+          "article_id": "K0040012:59",
+          "score": 0.5171
+        },
+        {
+          "article_id": "D0080090:3",
+          "score": 0.5126
+        },
+        {
+          "article_id": "K0040013:85",
+          "score": 0.5091
+        }
+      ],
       "gate_top_score": 0.6529,
       "refused": false,
       "refusal_layer": null,
@@ -718,6 +1026,28 @@
         "D0080029:20",
         "D0080029:15"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "D0080090:13",
+          "score": 0.735
+        },
+        {
+          "article_id": "D0080090:10",
+          "score": 0.5951
+        },
+        {
+          "article_id": "D0080090:9",
+          "score": 0.5225
+        },
+        {
+          "article_id": "D0080090:12",
+          "score": 0.5223
+        },
+        {
+          "article_id": "D0080090:11",
+          "score": 0.5176
+        }
+      ],
       "gate_top_score": 0.735,
       "refused": false,
       "refusal_layer": null,
@@ -761,6 +1091,28 @@
         "D0080029:10",
         "K0040012:30-1",
         "D0080029:43-1"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:62",
+          "score": 0.6432
+        },
+        {
+          "article_id": "K0040012:60",
+          "score": 0.5435
+        },
+        {
+          "article_id": "D0080090:5",
+          "score": 0.5421
+        },
+        {
+          "article_id": "D0080029:16",
+          "score": 0.5407
+        },
+        {
+          "article_id": "K0040012:61",
+          "score": 0.513
+        }
       ],
       "gate_top_score": 0.6432,
       "refused": false,
@@ -808,6 +1160,28 @@
         "K0040012:85-2",
         "D0080029:16"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "D0080090:3",
+          "score": 0.6148
+        },
+        {
+          "article_id": "K0040012:62",
+          "score": 0.5563
+        },
+        {
+          "article_id": "D0080090:11",
+          "score": 0.5294
+        },
+        {
+          "article_id": "D0080090:9",
+          "score": 0.5117
+        },
+        {
+          "article_id": "D0080090:12",
+          "score": 0.5021
+        }
+      ],
       "gate_top_score": 0.6148,
       "refused": false,
       "refusal_layer": null,
@@ -854,6 +1228,28 @@
         "K0040013:120",
         "K0040012:24"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "D0080029:19-2",
+          "score": 0.6673
+        },
+        {
+          "article_id": "D0080029:19-4",
+          "score": 0.5952
+        },
+        {
+          "article_id": "K0040012:35",
+          "score": 0.5561
+        },
+        {
+          "article_id": "D0080029:19-1",
+          "score": 0.4682
+        },
+        {
+          "article_id": "K0040012:67",
+          "score": 0.4498
+        }
+      ],
       "gate_top_score": 0.6673,
       "refused": false,
       "refusal_layer": null,
@@ -898,6 +1294,28 @@
         "K0040012:18",
         "K0040012:92",
         "G0390060:16"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "G0390060:49",
+          "score": 0.717
+        },
+        {
+          "article_id": "G0390060:50",
+          "score": 0.6323
+        },
+        {
+          "article_id": "G0390060:48",
+          "score": 0.6247
+        },
+        {
+          "article_id": "G0390060:51",
+          "score": 0.6083
+        },
+        {
+          "article_id": "G0390060:51-1",
+          "score": 0.5928
+        }
       ],
       "gate_top_score": 0.717,
       "refused": false,
@@ -945,6 +1363,28 @@
         "K0040012:27",
         "K0040012:21-1"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "G0390060:49",
+          "score": 0.6817
+        },
+        {
+          "article_id": "G0390060:48",
+          "score": 0.5771
+        },
+        {
+          "article_id": "G0390060:50",
+          "score": 0.5719
+        },
+        {
+          "article_id": "G0390060:51",
+          "score": 0.5637
+        },
+        {
+          "article_id": "G0390060:41",
+          "score": 0.5428
+        }
+      ],
       "gate_top_score": 0.6817,
       "refused": false,
       "refusal_layer": null,
@@ -988,6 +1428,28 @@
         "D0080029:44",
         "D0080029:48",
         "D0080029:51"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "D0080029:59",
+          "score": 0.6812
+        },
+        {
+          "article_id": "K0040012:9",
+          "score": 0.6529
+        },
+        {
+          "article_id": "D0080029:41",
+          "score": 0.6225
+        },
+        {
+          "article_id": "D0080029:52",
+          "score": 0.6135
+        },
+        {
+          "article_id": "D0080029:55",
+          "score": 0.6106
+        }
       ],
       "gate_top_score": 0.6812,
       "refused": false,
@@ -1035,6 +1497,28 @@
         "D0080029:19-1",
         "K0040012:7-2"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:74",
+          "score": 0.5539
+        },
+        {
+          "article_id": "K0040012:45",
+          "score": 0.5503
+        },
+        {
+          "article_id": "K0040013:129",
+          "score": 0.5101
+        },
+        {
+          "article_id": "K0040012:44",
+          "score": 0.4903
+        },
+        {
+          "article_id": "K0040012:60",
+          "score": 0.4871
+        }
+      ],
       "gate_top_score": 0.5539,
       "refused": false,
       "refusal_layer": null,
@@ -1081,6 +1565,28 @@
         "K0040012:33",
         "K0040012:32-1"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:92",
+          "score": 0.6651
+        },
+        {
+          "article_id": "K0040013:105",
+          "score": 0.5871
+        },
+        {
+          "article_id": "K0040013:99",
+          "score": 0.5684
+        },
+        {
+          "article_id": "K0040013:83-3",
+          "score": 0.5661
+        },
+        {
+          "article_id": "K0040013:99-1",
+          "score": 0.5541
+        }
+      ],
       "gate_top_score": 0.6651,
       "refused": false,
       "refusal_layer": null,
@@ -1124,6 +1630,28 @@
         "K0040013:83-3",
         "K0040012:69",
         "K0040012:85-4"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040013:122",
+          "score": 0.6185
+        },
+        {
+          "article_id": "K0040012:76",
+          "score": 0.6042
+        },
+        {
+          "article_id": "K0040012:31-2",
+          "score": 0.4891
+        },
+        {
+          "article_id": "K0040013:88",
+          "score": 0.4545
+        },
+        {
+          "article_id": "K0040012:72-2",
+          "score": 0.453
+        }
       ],
       "gate_top_score": 0.6185,
       "refused": false,
@@ -1170,6 +1698,28 @@
         "K0040013:36",
         "K0040013:46"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:17",
+          "score": 0.7073
+        },
+        {
+          "article_id": "K0040012:18",
+          "score": 0.6293
+        },
+        {
+          "article_id": "K0040012:26",
+          "score": 0.5979
+        },
+        {
+          "article_id": "G0390060:49",
+          "score": 0.5912
+        },
+        {
+          "article_id": "K0040012:15",
+          "score": 0.5911
+        }
+      ],
       "gate_top_score": 0.7073,
       "refused": false,
       "refusal_layer": null,
@@ -1212,6 +1762,28 @@
         "K0040012:14",
         "K0040012:32-1"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "D0080029:4",
+          "score": 0.2608
+        },
+        {
+          "article_id": "K0040013:146",
+          "score": 0.252
+        },
+        {
+          "article_id": "D0080029:81",
+          "score": 0.2385
+        },
+        {
+          "article_id": "K0040012:42",
+          "score": 0.2342
+        },
+        {
+          "article_id": "K0040013:7",
+          "score": 0.2336
+        }
+      ],
       "gate_top_score": 0.2608,
       "refused": true,
       "refusal_layer": "gate",
@@ -1244,6 +1816,28 @@
         "K0040013:17-1",
         "D0080029:50",
         "G0390060:46"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "G0390060:17",
+          "score": 0.3376
+        },
+        {
+          "article_id": "K0040013:16",
+          "score": 0.3297
+        },
+        {
+          "article_id": "K0040013:17",
+          "score": 0.3191
+        },
+        {
+          "article_id": "D0080029:52",
+          "score": 0.2989
+        },
+        {
+          "article_id": "D0080029:78",
+          "score": 0.2952
+        }
       ],
       "gate_top_score": 0.3376,
       "refused": true,
@@ -1278,6 +1872,28 @@
         "K0040013:24",
         "K0040013:33"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040013:22",
+          "score": 0.3899
+        },
+        {
+          "article_id": "K0040013:63",
+          "score": 0.387
+        },
+        {
+          "article_id": "K0040013:75",
+          "score": 0.3795
+        },
+        {
+          "article_id": "K0040013:15",
+          "score": 0.3792
+        },
+        {
+          "article_id": "K0040013:50",
+          "score": 0.3737
+        }
+      ],
       "gate_top_score": 0.3899,
       "refused": true,
       "refusal_layer": "gate",
@@ -1311,6 +1927,28 @@
         "K0040012:52",
         "K0040012:31"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:75",
+          "score": 0.2979
+        },
+        {
+          "article_id": "K0040012:81-1",
+          "score": 0.2901
+        },
+        {
+          "article_id": "K0040012:92",
+          "score": 0.2891
+        },
+        {
+          "article_id": "K0040012:53-1",
+          "score": 0.2712
+        },
+        {
+          "article_id": "K0040012:80",
+          "score": 0.269
+        }
+      ],
       "gate_top_score": 0.2979,
       "refused": true,
       "refusal_layer": "gate",
@@ -1343,6 +1981,28 @@
         "K0040012:67-1",
         "K0040012:44",
         "K0040012:37"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:86",
+          "score": 0.3997
+        },
+        {
+          "article_id": "K0040012:35-2",
+          "score": 0.3952
+        },
+        {
+          "article_id": "K0040012:21",
+          "score": 0.3746
+        },
+        {
+          "article_id": "D0080029:2",
+          "score": 0.3689
+        },
+        {
+          "article_id": "K0040012:61",
+          "score": 0.3663
+        }
       ],
       "gate_top_score": 0.3997,
       "refused": true,
@@ -1379,6 +2039,28 @@
         "G0390060:49",
         "K0040012:62",
         "G0390060:48"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "G0390060:29",
+          "score": 0.6169
+        },
+        {
+          "article_id": "K0040012:35",
+          "score": 0.5341
+        },
+        {
+          "article_id": "D0080029:43-1",
+          "score": 0.5235
+        },
+        {
+          "article_id": "D0080029:19-2",
+          "score": 0.5123
+        },
+        {
+          "article_id": "G0390060:28",
+          "score": 0.4869
+        }
       ],
       "gate_top_score": 0.6169,
       "refused": false,
@@ -1426,6 +2108,28 @@
         "D0080029:10",
         "D0080029:18"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:62",
+          "score": 0.6129
+        },
+        {
+          "article_id": "D0080090:5",
+          "score": 0.5667
+        },
+        {
+          "article_id": "D0080090:3",
+          "score": 0.5598
+        },
+        {
+          "article_id": "D0080029:19-1",
+          "score": 0.5332
+        },
+        {
+          "article_id": "D0080029:16",
+          "score": 0.515
+        }
+      ],
       "gate_top_score": 0.6129,
       "refused": false,
       "refusal_layer": null,
@@ -1469,6 +2173,28 @@
         "K0040013:60",
         "K0040013:65"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040013:66",
+          "score": 0.6179
+        },
+        {
+          "article_id": "K0040013:63",
+          "score": 0.5359
+        },
+        {
+          "article_id": "K0040013:70",
+          "score": 0.5066
+        },
+        {
+          "article_id": "K0040013:57",
+          "score": 0.4995
+        },
+        {
+          "article_id": "K0040013:56",
+          "score": 0.4972
+        }
+      ],
       "gate_top_score": 0.6179,
       "refused": true,
       "refusal_layer": "model",
@@ -1501,6 +2227,28 @@
         "K0040013:24-1",
         "K0040013:15",
         "K0040013:44"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040013:17",
+          "score": 0.5396
+        },
+        {
+          "article_id": "K0040013:8",
+          "score": 0.5304
+        },
+        {
+          "article_id": "K0040013:17-1",
+          "score": 0.5214
+        },
+        {
+          "article_id": "K0040012:13",
+          "score": 0.5196
+        },
+        {
+          "article_id": "K0040012:16",
+          "score": 0.5185
+        }
       ],
       "gate_top_score": 0.5396,
       "refused": true,
@@ -1535,6 +2283,28 @@
         "G0390060:38",
         "G0390060:43"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "G0390060:32",
+          "score": 0.3723
+        },
+        {
+          "article_id": "G0390060:42",
+          "score": 0.3692
+        },
+        {
+          "article_id": "G0390060:39",
+          "score": 0.3664
+        },
+        {
+          "article_id": "G0390060:11",
+          "score": 0.3613
+        },
+        {
+          "article_id": "G0390060:33",
+          "score": 0.3598
+        }
+      ],
       "gate_top_score": 0.3723,
       "refused": true,
       "refusal_layer": "gate",
@@ -1567,6 +2337,28 @@
         "K0040012:52",
         "D0080029:2",
         "K0040012:56-1"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:56",
+          "score": 0.5416
+        },
+        {
+          "article_id": "K0040012:57",
+          "score": 0.4742
+        },
+        {
+          "article_id": "K0040012:55",
+          "score": 0.4635
+        },
+        {
+          "article_id": "K0040013:112",
+          "score": 0.4568
+        },
+        {
+          "article_id": "K0040013:111",
+          "score": 0.4252
+        }
       ],
       "gate_top_score": 0.5416,
       "refused": true,
@@ -1601,6 +2393,28 @@
         "K0040013:47",
         "K0040013:24-1"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040013:17-1",
+          "score": 0.477
+        },
+        {
+          "article_id": "K0040012:36",
+          "score": 0.4679
+        },
+        {
+          "article_id": "K0040012:69-1",
+          "score": 0.4593
+        },
+        {
+          "article_id": "K0040013:80-1",
+          "score": 0.4592
+        },
+        {
+          "article_id": "K0040013:20",
+          "score": 0.4554
+        }
+      ],
       "gate_top_score": 0.477,
       "refused": true,
       "refusal_layer": "model",
@@ -1634,6 +2448,28 @@
         "D0080029:8",
         "K0040012:81"
       ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:38",
+          "score": 0.4631
+        },
+        {
+          "article_id": "K0040012:36",
+          "score": 0.4223
+        },
+        {
+          "article_id": "K0040013:78",
+          "score": 0.4101
+        },
+        {
+          "article_id": "K0040013:24-1",
+          "score": 0.3813
+        },
+        {
+          "article_id": "K0040012:81-1",
+          "score": 0.377
+        }
+      ],
       "gate_top_score": 0.4631,
       "refused": true,
       "refusal_layer": "model",
@@ -1666,6 +2502,28 @@
         "K0040013:80",
         "K0040013:84",
         "K0040012:7-2"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040012:27",
+          "score": 0.477
+        },
+        {
+          "article_id": "G0390060:45",
+          "score": 0.4381
+        },
+        {
+          "article_id": "K0040012:92",
+          "score": 0.4333
+        },
+        {
+          "article_id": "G0390060:44",
+          "score": 0.4326
+        },
+        {
+          "article_id": "K0040012:33",
+          "score": 0.4301
+        }
       ],
       "gate_top_score": 0.477,
       "refused": true,
@@ -1701,6 +2559,28 @@
         "K0040013:46",
         "K0040012:17",
         "K0040013:28"
+      ],
+      "retrieved_top": [
+        {
+          "article_id": "K0040013:44",
+          "score": 0.5194
+        },
+        {
+          "article_id": "K0040013:39-3",
+          "score": 0.4986
+        },
+        {
+          "article_id": "K0040013:45",
+          "score": 0.4871
+        },
+        {
+          "article_id": "K0040013:14",
+          "score": 0.4822
+        },
+        {
+          "article_id": "K0040013:36",
+          "score": 0.4667
+        }
       ],
       "gate_top_score": 0.5194,
       "refused": false,
