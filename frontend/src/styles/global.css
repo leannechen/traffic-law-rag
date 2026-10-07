@@ -62,3 +62,8 @@ button {
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+:root {
+  /* 桌面全文面板的高度；開啟時頁面底部留出同樣高度，答案與依據才能捲到最底 */
+  --panel-height: min(380px, 50vh);
+}
