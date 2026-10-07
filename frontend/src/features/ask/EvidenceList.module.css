@@ -1,0 +1,109 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-top: 3px solid var(--ink);
+  padding-top: 10px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+}
+
+.count {
+  font-size: 13px;
+  color: var(--ink3);
+}
+
+.skeletons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skeleton {
+  height: 96px;
+  background: var(--sunken);
+}
+
+.card {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cited {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+}
+
+.uncited {
+  border: 1px dashed var(--ink3);
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tagCited {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--on-accent);
+  background: var(--accent);
+  padding: 1px 8px;
+  white-space: nowrap;
+}
+
+.tagUncited {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink2);
+  border: 1px solid var(--ink3);
+  padding: 0 8px;
+  white-space: nowrap;
+}
+
+.cardTitle {
+  font-size: 17px;
+}
+
+.uncited .cardTitle {
+  color: var(--ink2);
+}
+
+.snippet {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.cited .snippet {
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.uncited .snippet {
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  font-size: 15px;
+  color: var(--ink2);
+}
+
+.amended {
+  font-size: 13px;
+  color: var(--ink3);
+}

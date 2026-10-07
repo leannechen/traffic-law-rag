@@ -1,0 +1,61 @@
+/* 設計 token（docs/design/README.md §3）。元件只用變數，不寫死色碼。 */
+:root {
+  color-scheme: light dark;
+
+  --paper: #f6eee3;
+  --surface: #fcf7f0;
+  --sunken: #eee2d2;
+  --ink: #1c1917;
+  --ink2: #4f4842;
+  --ink3: #645b53;
+  --rule: #d8c8b4;
+  --rule-strong: #1c1917;
+  --accent: #0b5d66;
+  --accent-soft: #dcebe8;
+  --on-accent: #ffffff;
+  --kicker: #8a1538;
+  --ok: #2e6a39;
+  --ok-soft: #ddebdd;
+  --warn: #7a5000;
+  --warn-soft: #f6e5bf;
+  --err: #a12a2a;
+  --err-soft: #f6dcd8;
+  --band: #1e2a2e;
+  --on-band: #f6eee3;
+  --band-ink2: #b9c6c8;
+  --shadow: rgba(28, 25, 23, 0.28);
+  --scrim: rgba(28, 25, 23, 0.45);
+
+  --font-serif: "Noto Serif TC", serif;
+  --font-sans: "Noto Sans TC", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+/* 暗色模式跟隨系統設定（spec 5.5-G4），不做切換按鈕 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #151311;
+    --surface: #1f1b18;
+    --sunken: #2a2420;
+    --ink: #f3ebe1;
+    --ink2: #cfc4b8;
+    --ink3: #a99d91;
+    --rule: #3e3630;
+    --rule-strong: #f3ebe1;
+    --accent: #7cc6c8;
+    --accent-soft: #1d3739;
+    --on-accent: #0f1a1b;
+    --kicker: #e894ab;
+    --ok: #86c994;
+    --ok-soft: #1e3322;
+    --warn: #e7bc5e;
+    --warn-soft: #3a2e13;
+    --err: #f09088;
+    --err-soft: #3f1f1d;
+    --band: #0e1517;
+    --on-band: #f3ebe1;
+    --band-ink2: #9fb1b3;
+    --shadow: rgba(0, 0, 0, 0.75);
+    --scrim: rgba(0, 0, 0, 0.6);
+  }
+}

@@ -1,0 +1,91 @@
+.root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--ink);
+  background: var(--surface);
+}
+
+.invalid {
+  border-color: var(--err);
+}
+
+.input {
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding: 12px 14px;
+  font-size: 17px;
+  line-height: 1.6;
+  resize: none;
+}
+
+.input:focus-visible {
+  outline-offset: 4px;
+}
+
+.submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  border: 0;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.submit:disabled {
+  background: var(--rule);
+  color: var(--ink2);
+  cursor: not-allowed;
+}
+
+.help {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--ink3);
+}
+
+.helpInvalid {
+  color: var(--err);
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .label {
+    font-size: 14px;
+  }
+
+  .field {
+    flex-direction: row;
+  }
+
+  .input {
+    flex-grow: 1;
+    padding: 18px 20px;
+    font-size: 20px;
+    height: 4.2rem;
+  }
+
+  .submit {
+    padding: 0 28px;
+    font-size: 18px;
+  }
+}

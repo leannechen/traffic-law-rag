@@ -1,0 +1,64 @@
+.hero {
+  padding: 24px 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.kicker {
+  color: var(--kicker);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  line-height: 1.35;
+}
+
+.titleDesktop,
+.lede {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 0 44px;
+    text-align: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .kicker {
+    font-size: 15px;
+    letter-spacing: 0.08em;
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1.32;
+  }
+
+  .titleDesktop {
+    display: inline;
+  }
+
+  .titleMobile {
+    display: none;
+  }
+
+  .lede {
+    display: block;
+    max-width: 640px;
+    font-size: 18px;
+    color: var(--ink2);
+  }
+
+  .hero > form {
+    margin-top: 16px;
+  }
+}
