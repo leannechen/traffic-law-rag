@@ -101,3 +101,32 @@ uv run pytest tests/test_stream_parser.py -v
 
 **3. 怎麼防止別人把你的 API 刷爆？**
 三層：問題長度上限 200 字、每個 IP 每分鐘 10 次的速率限制（超過回 429 並附 `Retry-After` 讓前端顯示倒數）、模型逾時 60 秒。我也坦白它的限制：計數存在記憶體只對單一實例有效、沒有身分驗證，擋得住誤用但擋不住有意的分散式濫用；而且預設不信任 `X-Forwarded-For`，因為那個標頭用戶端可以偽造。
+
+## 實驗紀錄
+請你自己跑的實驗清單(在 backend/ 底下)                      
+1. 看串流:uv run uvicorn app.main:app --port 8021,另一個終端機貼上 CLAUDE.md 的 curl -N 指令,觀察事件逐個出現。
+2. 看兩種拒答:問「今天天氣怎麼樣?」和「公車專用道可以走嗎?」,比較事件序列(後者多了 generate 步驟)。
+3. 試刁鑽輸入:很長(201 字)、空白、一直重送(第 11 次看 429 與 Retry-After)。         
+  ```
+  string_too_long
+  問題不可為空白
+  {"detail":"請求太頻繁，請稍後再試"}%
+  ```
+4. 試斷線:送一個長問題(例如「酒駕肇事的話,強制險還會賠嗎?罰則又是什麼?」),在輸出一半時按 Ctrl+C,看伺服器 log 有沒有「提早結束」。
+有：
+```
+2026-10-07 14:33:46,973 INFO app.ask run=c4319f073ef5492281cd23374070061f 提早結束（1478 ms）
+```
+5. 看整條條文:curl localhost:8021/api/chunks/K0040012:35-p2,比較 text(這一塊)和 article_text(整條)。
+   - `text`:這一個 chunk 的內容,也就是索引裡實際存的那一塊。
+   - `article_text`:這個 chunk 所屬的整條條文,同一條所有 chunk 依序接起來。
+   - 第 35 條很長(1,990 字),超過 800 字上限,所以依「項」切成 `K0040012:35-p1` 和 `-p2` 兩塊。查 `-p2` 時,`text` 只有後半段,`article_text` 是整條。沒被切開的條文,兩者內容相同。
+   - 為什麼要兩個:檢索用小塊比對,命中比較準;但使用者看出處、模型回答時,只看半條可能漏掉但書或例外,所以給整條。UI 的全文面板也用 `article_text`。
+   - 驗證長度與包含關係(預期 `text` 比 `article_text` 短,且後者包含前者):
+     ```bash
+     curl -s localhost:8021/api/chunks/K0040012:35-p2 | python3 -c "
+     import sys, json; d = json.load(sys.stdin)
+     print('text', len(d['text']), '字 / article_text', len(d['article_text']), '字')
+     print('text 是 article_text 的一段:', d['text'] in d['article_text'])"
+     ```
+6. 看測試怎麼測標記切點:uv run pytest tests/test_stream_parser.py -v,每個切點(把 [[K…]] 切在任意位置)都有測試。
