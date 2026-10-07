@@ -26,6 +26,8 @@
 }
 
 .title {
+  /* 標題只是被程式聚焦（切換頁面時帶走焦點），不是可操作的元件，不顯示焦點框 */
+  outline: none;
   font-family: var(--font-serif);
   font-size: 26px;
   line-height: 1.35;

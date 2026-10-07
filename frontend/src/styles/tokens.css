@@ -31,9 +31,11 @@
   --font-mono: "IBM Plex Mono", monospace;
 }
 
-/* 暗色模式跟隨系統設定（spec 5.5-G4），不做切換按鈕 */
+/* 暗色：跟隨系統設定（prefers-color-scheme），使用者也可在頁首手動選亮色或暗色（data-theme）。
+   兩個區塊的內容必須相同：CSS 沒辦法讓「媒體查詢」與「屬性選擇器」共用同一組宣告。 */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --paper: #151311;
     --surface: #1f1b18;
     --sunken: #2a2420;
@@ -58,4 +60,35 @@
     --shadow: rgba(0, 0, 0, 0.75);
     --scrim: rgba(0, 0, 0, 0.6);
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #151311;
+  --surface: #1f1b18;
+  --sunken: #2a2420;
+  --ink: #f3ebe1;
+  --ink2: #cfc4b8;
+  --ink3: #a99d91;
+  --rule: #3e3630;
+  --rule-strong: #f3ebe1;
+  --accent: #7cc6c8;
+  --accent-soft: #1d3739;
+  --on-accent: #0f1a1b;
+  --kicker: #e894ab;
+  --ok: #86c994;
+  --ok-soft: #1e3322;
+  --warn: #e7bc5e;
+  --warn-soft: #3a2e13;
+  --err: #f09088;
+  --err-soft: #3f1f1d;
+  --band: #0e1517;
+  --on-band: #f3ebe1;
+  --band-ink2: #9fb1b3;
+  --shadow: rgba(0, 0, 0, 0.75);
+  --scrim: rgba(0, 0, 0, 0.6);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
 }

@@ -9,6 +9,16 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap"
     />
+    <script>
+      // 在畫面繪製前套用使用者選的外觀，避免先閃一下系統預設的顏色
+      let theme = null
+      try {
+        theme = localStorage.getItem('theme')
+      } catch {
+        // 讀不到（無痕視窗、禁用儲存）就跟隨系統
+      }
+      if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme
+    </script>
     <title>交通法規資料庫</title>
   </head>
   <body>
