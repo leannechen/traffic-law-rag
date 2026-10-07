@@ -16,6 +16,7 @@ from typing import Any
 
 from app.pipeline.answer import AnswerResult
 from app.pipeline.validate import extract_quantities
+from app.schemas.retrieval import RetrievedChunk
 from eval.dataset import EvalQuestion
 from eval.metrics import mean, score_question
 
@@ -28,6 +29,20 @@ def article_of(chunk_id: str) -> str:
 
 def _round(value: float) -> float:
     return round(value, 4)
+
+
+def top_articles(hits: list[RetrievedChunk], k: int = 5) -> list[dict[str, Any]]:
+    """檢索結果合併成「條」，依名次取前 k 條，附上餘弦相似度（評估頁顯示用）。"""
+    seen: set[str] = set()
+    top: list[dict[str, Any]] = []
+    for hit in hits:
+        if hit.article_id in seen:
+            continue
+        seen.add(hit.article_id)
+        top.append({"article_id": hit.article_id, "score": hit.vector_score})
+        if len(top) == k:
+            break
+    return top
 
 
 def evaluate_generation(
@@ -44,6 +59,7 @@ def evaluate_generation(
             "expected": q.expected_chunk_ids,
             "queries": result.queries,
             "retrieved": [h.article_id for h in result.retrieved],
+            "retrieved_top": top_articles(result.retrieved),
             "gate_top_score": result.gate_top_score,
             "refused": result.refused,
             "refusal_layer": result.refusal_layer,

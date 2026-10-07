@@ -3,6 +3,7 @@
     uv run python -m eval.run_generation_eval --name gen-sonnet-norewrite
     uv run python -m eval.run_generation_eval --name gen-sonnet-rewrite --rewrite
     uv run python -m eval.run_generation_eval --name x --refresh   # 忽略 LLM 快取，重新呼叫
+    uv run python -m eval.run_generation_eval --name x --publish   # 同時發布成 latest.json
 
 LLM 的回應存在 data/cache/llm_responses.json（不進版控）：prompt 與參數不變就不會重複呼叫，
 結果可重現也不花錢。改了 prompt 或模型，快取鍵自然不同，會重新呼叫。
@@ -25,6 +26,8 @@ from eval.dataset import load_dataset
 from eval.gen_eval import evaluate_generation
 from eval.run_eval import RESULTS_DIR
 
+PUBLISHED_NAME = "latest.json"
+
 # 估算費用用（USD／百萬 token）。僅供參考，實際以帳單為準。
 PRICES = {"claude-sonnet-5-5": (2.0, 10.0), "claude-opus-5-5": (4.0, 20.0)}
 
@@ -41,6 +44,11 @@ def main() -> None:
     parser.add_argument("--name", required=True)
     parser.add_argument("--rewrite", action="store_true")
     parser.add_argument("--refresh", action="store_true")
+    parser.add_argument(
+        "--publish",
+        action="store_true",
+        help="同時寫成 eval/results/latest.json，評估頁（/api/eval/latest）顯示的就是這份",
+    )
     args = parser.parse_args()
 
     settings = get_settings()
@@ -87,8 +95,12 @@ def main() -> None:
     RESULTS_DIR.mkdir(exist_ok=True)
     path = RESULTS_DIR / f"{args.name}.json"
     path.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+    if args.publish:
+        (RESULTS_DIR / PUBLISHED_NAME).write_text(
+            path.read_text(encoding="utf-8"), encoding="utf-8"
+        )
     print_summary(out)
-    print(f"\n已寫入 {path}")
+    print(f"\n已寫入 {path}" + (f" 並發布為 {PUBLISHED_NAME}" if args.publish else ""))
 
 
 def print_summary(r: dict[str, Any]) -> None:

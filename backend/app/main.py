@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import ask, chunks, health, meta
+from app.api import ask, chunks, eval, health, meta
 from app.core.config import get_settings
 from app.core.logging import configure_logging
 
@@ -20,6 +20,7 @@ def create_app() -> FastAPI:
     app.include_router(meta.router, prefix="/api")
     app.include_router(ask.router, prefix="/api")
     app.include_router(chunks.router, prefix="/api")
+    app.include_router(eval.router, prefix="/api")
     return app
 
 

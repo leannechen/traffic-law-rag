@@ -19,6 +19,7 @@
 - 已完成：問題放進網址（spec 5.5-G8 修訂）。`/?q=<問題>` 是結果頁、`/` 是首頁；提問新增瀏覽紀錄，上一頁／下一頁／重新整理／分享連結都會重新提問
 - 已完成：亮暗色切換按鈕（主選單最右邊，跟隨系統／亮色／暗色；spec 5.5-G4 修訂）
 - 已完成（待 Leanne 檢視）：Step 9 前端檢索過程。PipelineSteps（等待／進行中／完成／略過／相關度不足／已停止）、RetrievalPanel（改寫查詢、名次、分數條、已引用／未引用）、桌面完成時自動收合並可展開、手機預設展開直式列表、拒答頁「為什麼不回答」（拒答分支＋相似度對照條）；Vitest 101 個。**必停檢查點：請對照設計稿（桌面、手機、暗色）後才進 Step 10**
+- 已完成（待驗收）：Step 10 評估頁。後端 `GET /api/eval/latest`（讀 `eval/results/latest.json`，由 `run_generation_eval --publish` 產生；逐題結果補上檢索前 5 條與分數）；前端 `/eval`：MetricCard × 5、逐題表格（類別篩選、可展開看標準答案與檢索前 5 筆、符號說明）、手機為卡片列表；頁面數字與 CLI 一致（Recall@5 100%、MRR 0.85、引用／數字／拒答 100%；40 題、範圍外 12 題）。後端測試 284 個、Vitest 111 個。**Step 12 部署要注意：後端映像只複製 `app/`，`eval/results/latest.json` 要另外放進去**
 
 每完成一個 Step 就更新這一段。
 
@@ -75,7 +76,7 @@
 
 API（在 `backend/`，需 `ANTHROPIC_API_KEY`、`VOYAGE_API_KEY` 與已建好的索引）：`uv run uvicorn app.main:app --port 8021`；`curl -N -X POST localhost:8021/api/ask -H 'Content-Type: application/json' -d '{"question":"紅燈右轉會被罰多少錢？"}'`（本機 8000 常被其他專案佔用，compose 用 8010）
 
-問答與生成評估（在 `backend/`，需 `ANTHROPIC_API_KEY`）：`uv run python -m app.pipeline.answer "問題" [--rewrite]`；`uv run python -m eval.run_generation_eval --name <檔名> [--rewrite] [--refresh]`（LLM 回應快取在 `data/cache/`）
+問答與生成評估（在 `backend/`，需 `ANTHROPIC_API_KEY`）：`uv run python -m app.pipeline.answer "問題" [--rewrite]`；`uv run python -m eval.run_generation_eval --name <檔名> [--rewrite] [--refresh] [--publish]`（`--publish` 同時寫成 `eval/results/latest.json`，評估頁 `/api/eval/latest` 顯示的就是這份）（LLM 回應快取在 `data/cache/`）
 
 資料（在 `backend/`）：`uv run python -m app.ingestion.fetch` 下載、`uv run python -m app.ingestion.parse` 解析（說明見 `docs/data-format.md`）
 
