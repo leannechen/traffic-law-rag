@@ -1,0 +1,12 @@
+.text {
+  max-width: 820px;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 2;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.state {
+  color: var(--ink2);
+}

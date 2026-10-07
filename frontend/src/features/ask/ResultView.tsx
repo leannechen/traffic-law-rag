@@ -1,11 +1,13 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { SpinnerIcon, StopIcon } from '../../components/icons'
 import { PageShell } from '../../components/PageShell'
+import { MOBILE_QUERY, useMediaQuery } from '../../lib/useMediaQuery'
 import { useMeta } from '../../lib/useMeta'
-import { AnswerStream } from './AnswerStream'
-import { groupArticles, sortForDone } from './articles'
+import { ArticleDrawer } from '../sources/ArticleDrawer'
+import { ArticlePanel } from '../sources/ArticlePanel'
+import { AnswerSection } from './AnswerSection'
+import { articleIdOf, groupArticles, sortForDone } from './articles'
 import type { AskState } from './askReducer'
-import { ErrorNotice } from './ErrorNotice'
 import { EvidenceList } from './EvidenceList'
 import { ProcessSection } from './ProcessSection'
 import { RefusalNotice } from './RefusalNotice'
@@ -28,11 +30,24 @@ const STATUS_TEXT: Record<AskState['phase'], string> = {
   error: '發生錯誤',
 }
 
-/** 問答結果頁。左欄固定順序：你的問題 → 檢索過程 → 答案；右欄是依據（5.5-A）。 */
+type Tab = 'answer' | 'process'
+
+/**
+ * 問答結果頁。左欄固定順序：你的問題 → 檢索過程 → 答案；右欄是依據（5.5-A）。
+ * 手機（< 768px）改成兩個分頁：答案｜過程與依據（5.5-E）。
+ * `activeArticleId` 全頁唯一，答案的引用標記、依據卡片、全文面板（抽屜）都讀它（5.5-C）。
+ */
 export function ResultView({ state, onAsk, onStop, onReset }: Props) {
-  const { phase, question, segments, results, cited, refusal, validation, totalMs, error } = state
+  const { phase, question, results, cited, refusal, validation } = state
   const { data: meta } = useMeta()
+  const isMobile = useMediaQuery(MOBILE_QUERY)
   const titleRef = useRef<HTMLHeadingElement>(null)
+  const openerRef = useRef<HTMLElement | null>(null)
+
+  const [activeId, setActiveId] = useState<string | null>(null)
+  const [hoverId, setHoverId] = useState<string | null>(null)
+  const [panelOpen, setPanelOpen] = useState(false)
+  const [tab, setTab] = useState<Tab>('answer')
 
   // 從首頁切到結果頁：被卸載的輸入框／範例按鈕原本有焦點，把焦點與捲動位置帶到「你的問題」
   useEffect(() => {
@@ -40,121 +55,243 @@ export function ResultView({ state, onAsk, onStop, onReset }: Props) {
     titleRef.current?.focus()
   }, [])
 
-  const evidence = useMemo(() => {
-    const grouped = groupArticles(results)
-    return phase === 'done' ? sortForDone(grouped, cited) : grouped
-  }, [results, cited, phase])
-
+  const done = phase === 'done'
   const streaming = phase === 'streaming'
   const refused = phase === 'refused' && refusal !== null
+  const interactive = done
+
+  const evidence = useMemo(() => {
+    const grouped = groupArticles(results)
+    return done ? sortForDone(grouped, cited) : grouped
+  }, [results, cited, done])
+
+  const invalidIds = useMemo(
+    () => new Set((validation?.invalid ?? []).map(articleIdOf)),
+    [validation],
+  )
+
+  // 重新產生或重新提問後，互動狀態一律重來
+  useEffect(() => {
+    if (!done) {
+      setActiveId(null)
+      setHoverId(null)
+      setPanelOpen(false)
+    }
+  }, [done])
+
+  // 回答完成時，預設 active 為答案中的第一個（有對應條文的）引用；全文面板預設關閉（5.5-G1）
+  const firstCited = cited.find((id) => evidence.some((e) => e.articleId === id)) ?? null
+  const effectiveActive = done ? (activeId ?? firstCited) : null
+  const activeArticle = evidence.find((e) => e.articleId === effectiveActive) ?? null
+
+  function openPanel() {
+    if (!panelOpen) openerRef.current = document.activeElement as HTMLElement | null
+    setPanelOpen(true)
+  }
+
+  function closePanel() {
+    setPanelOpen(false)
+    openerRef.current?.focus()
+    openerRef.current = null
+  }
+
+  /** 點引用標記：設為 active，不開啟面板（手機沒有常駐面板，所以直接開抽屜）。 */
+  function selectCitation(articleId: string) {
+    setActiveId(articleId)
+    if (isMobile) {
+      openPanel()
+    } else {
+      document.getElementById(`card-${articleId}`)?.scrollIntoView({ block: 'nearest' })
+    }
+  }
+
+  /** 點卡片標題或「查看全文」：設為 active 並開啟全文。 */
+  function openArticle(articleId: string) {
+    setActiveId(articleId)
+    openPanel()
+  }
+
+  // Esc 關閉全文面板與抽屜（5.5-G5）
+  useEffect(() => {
+    if (!panelOpen) return
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') closePanel()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  })
+
+  // 桌面面板開啟時，頁面底部留出面板高度，答案與依據才能捲到最底
+  useEffect(() => {
+    if (!panelOpen || isMobile) return
+    document.body.style.paddingBottom = 'var(--panel-height)'
+    return () => {
+      document.body.style.paddingBottom = ''
+    }
+  }, [panelOpen, isMobile])
+
+  const citationSelection = {
+    interactive,
+    activeId: effectiveActive,
+    hoverId,
+    invalidIds,
+    onSelect: selectCitation,
+    onHover: setHoverId,
+  }
+  const evidenceSelection = {
+    interactive,
+    activeId: effectiveActive,
+    hoverId,
+    onOpen: openArticle,
+    onHover: setHoverId,
+  }
+
+  const questionBlock = (
+    <section aria-label="你的問題" className={styles.question}>
+      <p className={styles.kicker}>你的問題</p>
+      <h1 ref={titleRef} tabIndex={-1} className={styles.title}>
+        {question}
+      </h1>
+      {streaming && (
+        <div className={styles.status}>
+          <span className={styles.working} role="status">
+            <SpinnerIcon size={16} className={styles.spinner} />
+            正在產生答案…
+          </span>
+          <button type="button" className={styles.stop} onClick={onStop}>
+            <StopIcon />
+            停止
+          </button>
+        </div>
+      )}
+    </section>
+  )
+
+  const statusLine = !streaming && (
+    // 只播報階段變化一次；逐字出現的答案本身不設 aria-live，避免每個 delta 都被念出來
+    <p className="visually-hidden" role="status">
+      {STATUS_TEXT[phase]}
+    </p>
+  )
+
+  const answer = (
+    <AnswerSection
+      state={state}
+      evidence={evidence}
+      selection={citationSelection}
+      dataVersion={meta?.data_version}
+      onAsk={onAsk}
+      onReset={onReset}
+    />
+  )
+  const process = phase !== 'error' && (
+    <ProcessSection state={state} articleCount={evidence.length} />
+  )
+  const evidenceList = phase !== 'error' && (
+    <EvidenceList
+      evidence={evidence}
+      cited={cited}
+      loading={streaming}
+      selection={evidenceSelection}
+      compact={isMobile}
+      panelOpen={panelOpen}
+    />
+  )
+
+  const drawerIndex = evidence.findIndex((e) => e.articleId === effectiveActive)
+
+  const dialogs =
+    panelOpen && activeArticle ? (
+      isMobile ? (
+        <ArticleDrawer
+          articles={evidence}
+          index={drawerIndex}
+          cited={cited.includes(activeArticle.articleId)}
+          onClose={closePanel}
+          onNavigate={setActiveId}
+        />
+      ) : (
+        <ArticlePanel
+          article={activeArticle}
+          cited={cited.includes(activeArticle.articleId)}
+          onClose={closePanel}
+        />
+      )
+    ) : null
+
+  if (refused) {
+    return (
+      <PageShell>
+        <div className={styles.grid}>
+          <div className={styles.main}>
+            {questionBlock}
+            {statusLine}
+            <RefusalNotice refusal={refusal} onAsk={onAsk} onNewQuestion={onReset} />
+          </div>
+          <ScopeAside />
+        </div>
+      </PageShell>
+    )
+  }
+
+  // 手機：串流中停在「答案」分頁，檢索過程在「過程與依據」分頁更新（5.5-G3）
+  if (isMobile && phase !== 'error') {
+    return (
+      <PageShell>
+        <div className={styles.mobile}>
+          <div role="tablist" aria-label="結果內容" className={styles.tabs}>
+            {(['answer', 'process'] as const).map((id) => (
+              <button
+                key={id}
+                id={`tab-${id}`}
+                type="button"
+                role="tab"
+                aria-selected={tab === id}
+                aria-controls={`tabpanel-${id}`}
+                className={`${styles.tab} ${tab === id ? styles.tabActive : ''}`}
+                onClick={() => setTab(id)}
+              >
+                {id === 'answer' ? '答案' : '過程與依據'}
+              </button>
+            ))}
+          </div>
+          {statusLine}
+          <div
+            id={`tabpanel-${tab}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${tab}`}
+            className={styles.main}
+          >
+            {tab === 'answer' ? (
+              <>
+                {questionBlock}
+                {answer}
+              </>
+            ) : (
+              <>
+                {process}
+                {evidenceList}
+              </>
+            )}
+          </div>
+        </div>
+        {dialogs}
+      </PageShell>
+    )
+  }
 
   return (
     <PageShell>
       <div className={styles.grid}>
         <div className={styles.main}>
-          <section aria-label="你的問題" className={styles.question}>
-            <p className={styles.kicker}>你的問題</p>
-            <h1 ref={titleRef} tabIndex={-1} className={styles.title}>
-              {question}
-            </h1>
-            {streaming && (
-              <div className={styles.status}>
-                <span className={styles.working} role="status">
-                  <SpinnerIcon size={16} className={styles.spinner} />
-                  正在產生答案…
-                </span>
-                <button type="button" className={styles.stop} onClick={onStop}>
-                  <StopIcon />
-                  停止
-                </button>
-              </div>
-            )}
-          </section>
-
-          {!streaming && (
-            // 只播報階段變化一次；逐字出現的答案本身不設 aria-live，避免每個 delta 都被念出來
-            <p className="visually-hidden" role="status">
-              {STATUS_TEXT[phase]}
-            </p>
-          )}
-
-          {refused ? (
-            <RefusalNotice refusal={refusal} onAsk={onAsk} onNewQuestion={onReset} />
-          ) : (
-            <>
-              {phase !== 'error' && <ProcessSection state={state} articleCount={evidence.length} />}
-              <section aria-label="答案" className={styles.answer}>
-                <h2 className={styles.answerTitle}>答案</h2>
-                {segments.length === 0 && streaming && (
-                  <p className={styles.waiting}>等待第一段回答…</p>
-                )}
-                {segments.length > 0 && (
-                  <AnswerStream
-                    segments={segments}
-                    evidence={evidence}
-                    streaming={streaming}
-                    stopped={phase === 'stopped'}
-                  />
-                )}
-                {phase === 'stopped' && (
-                  <div className={styles.stopped}>
-                    <span className={styles.stoppedText}>
-                      <StopIcon />
-                      你已停止產生，答案不完整
-                    </span>
-                    <button
-                      type="button"
-                      className={styles.secondary}
-                      onClick={() => onAsk(question)}
-                    >
-                      重新產生
-                    </button>
-                  </div>
-                )}
-                {phase === 'error' && error && (
-                  <ErrorNotice
-                    error={error}
-                    runId={state.runId}
-                    onRetry={() => onAsk(question)}
-                    onHome={onReset}
-                  />
-                )}
-                {phase === 'done' && (
-                  <div className={styles.info}>
-                    {validation && validation.invalid.length > 0 ? (
-                      <p className={styles.warn}>
-                        有 {validation.invalid.length} 個引用未通過驗證，請以條文原文為準。
-                      </p>
-                    ) : (
-                      validation && (
-                        <p className={styles.ok}>
-                          ✓ 引用驗證：{validation.valid.length} /{' '}
-                          {validation.valid.length + validation.invalid.length} 通過
-                        </p>
-                      )
-                    )}
-                    <p className={styles.meta}>
-                      {meta && `資料版本 ${meta.data_version}`}
-                      {totalMs !== null && ` · 耗時 ${(totalMs / 1000).toFixed(1)} 秒`}
-                    </p>
-                    <button type="button" className={styles.secondary} onClick={onReset}>
-                      重新提問
-                    </button>
-                  </div>
-                )}
-              </section>
-            </>
-          )}
+          {questionBlock}
+          {statusLine}
+          {process}
+          {answer}
         </div>
-
-        {refused ? (
-          <ScopeAside />
-        ) : (
-          phase !== 'error' && (
-            <EvidenceList evidence={evidence} cited={cited} loading={streaming} />
-          )
-        )}
+        {evidenceList}
       </div>
+      {dialogs}
     </PageShell>
   )
 }

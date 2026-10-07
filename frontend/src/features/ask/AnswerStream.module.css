@@ -28,6 +28,75 @@
   cursor: default;
 }
 
+.button {
+  cursor: pointer;
+}
+
+.hover,
+.button:hover {
+  background: var(--surface);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.active,
+.active:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+  text-decoration: none;
+}
+
+.invalidWrap {
+  position: relative;
+  display: inline-block;
+  margin: 0 2px;
+  vertical-align: 2px;
+}
+
+.invalid {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  padding: 0 8px;
+  border: 1.5px dashed var(--warn);
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.8;
+  white-space: nowrap;
+  cursor: help;
+}
+
+.tip {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 3;
+  width: 280px;
+  margin-top: 6px;
+  padding: 14px 16px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: normal;
+}
+
+.tip strong {
+  display: block;
+}
+
+.invalidWrap:hover .tip,
+.invalidWrap:focus-within .tip,
+.tipOpen {
+  display: block;
+}
+
 .cursor {
   display: inline-block;
   width: 2px;

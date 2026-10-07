@@ -170,3 +170,28 @@
     animation: none;
   }
 }
+
+.mobile {
+  padding-top: 8px;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 20px;
+}
+
+.tab {
+  min-height: 48px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  font-weight: 700;
+  color: var(--ink2);
+}
+
+.tabActive {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
