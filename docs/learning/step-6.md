@@ -26,6 +26,71 @@
 - **模型說到一半才說要拒答**：已經送出去的字收不回來，會先看到字再看到「拒答」。prompt 要求拒答時只輸出標記，評估中沒出現過。
 - **標記解析**只認 `[[…]]`；模型若改用別的引用格式就抓不到（會被驗證步驟看成沒有引用）。
 
+## 自己動手的實驗
+
+在 `backend/` 底下做。先啟動伺服器（需要 `.env` 有 `ANTHROPIC_API_KEY`、`VOYAGE_API_KEY`），再另開一個終端機送請求。`curl -N` 要用**大寫 N**（關閉輸出緩衝，事件才會即時出現；小寫 `-n` 是另一個意思）。
+
+```bash
+uv run uvicorn app.main:app --port 8021
+```
+
+**1. 看串流**：觀察事件一個一個出現，順序應該是 `run.started` → 各步驟 `step.started`／`step.completed` → `retrieval.results` → 多個 `answer.delta` 與 `answer.citation` → `validate.result` → `run.completed`。
+
+```bash
+curl -N -X POST localhost:8021/api/ask \
+  -H 'Content-Type: application/json' \
+  -d '{"question":"紅燈右轉會被罰多少錢？"}'
+```
+
+**2. 看兩種拒答**：兩者事件序列不同，後者多了 generate 步驟。
+
+```bash
+# 範圍外：門檻擋下，不呼叫模型，約 0.26 秒，送 answer.refused（low_relevance）
+curl -N -X POST localhost:8021/api/ask -H 'Content-Type: application/json' \
+  -d '{"question":"今天天氣怎麼樣？"}'
+
+# 通過門檻但條文不足：模型拒答，約 1.7 秒，送 answer.refused（out_of_scope）
+curl -N -X POST localhost:8021/api/ask -H 'Content-Type: application/json' \
+  -d '{"question":"公車專用道可以走嗎？"}'
+```
+
+**3. 試刁鑽輸入**：
+
+```bash
+# 超過 200 字 → 422
+curl -s -X POST localhost:8021/api/ask -H 'Content-Type: application/json' \
+  -d "{\"question\":\"$(printf '字%.0s' {1..201})\"}"
+
+# 空白 → 422
+curl -s -X POST localhost:8021/api/ask -H 'Content-Type: application/json' \
+  -d '{"question":"   "}'
+
+# 連送 11 次，第 11 次回 429（-i 才看得到 Retry-After 標頭）
+for i in {1..11}; do curl -s -o /dev/null -w "%{http_code}\n" -X POST localhost:8021/api/ask \
+  -H 'Content-Type: application/json' -d '{"question":"紅燈右轉會被罰多少錢？"}'; done
+```
+
+上面連送 11 次會真的呼叫模型 10 次。只想看 429 的話，用 `RATE_LIMIT_REQUESTS=2 uv run uvicorn app.main:app --port 8021` 啟動，兩次後就會被擋。
+
+**4. 試斷線**：送一個長問題，輸出到一半按 Ctrl+C，看伺服器的 log 有沒有「提早結束」，並確認沒有錯誤堆疊。
+
+```bash
+curl -N -X POST localhost:8021/api/ask -H 'Content-Type: application/json' \
+  -d '{"question":"酒駕肇事的話，強制險還會賠嗎？罰則又是什麼？"}'
+```
+
+**5. 看整條條文**：比較 `text`（這一塊）和 `article_text`（整條）。
+
+```bash
+curl localhost:8021/api/chunks/K0040012:35-p2
+```
+
+**6. 看測試怎麼測標記切點**：每個切點（把 `[[K…]]` 切在任意位置）都有測試。
+
+```bash
+uv run pytest tests/test_stream_parser.py -v
+```
+
 ## 面試可能被問的 3 個問題
 
 **1. SSE 和一般 API、WebSocket 有什麼不同？為什麼選 SSE？**
