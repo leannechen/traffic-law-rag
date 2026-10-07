@@ -9,11 +9,9 @@ const GITHUB_URL = 'https://github.com/leannechen/traffic-law-rag'
 type Props = {
   /** 首頁（尚未提問）用置中的大刊頭；其他頁面與狀態用精簡頁首 */
   masthead: boolean
-  /** 點「問答」「收錄範圍」時回到首頁的空狀態 */
-  onGoHome: () => void
 }
 
-export function Header({ masthead, onGoHome }: Props) {
+export function Header({ masthead }: Props) {
   const { data: meta } = useMeta()
   const [menuOpen, setMenuOpen] = useState(false)
   const { pathname, hash } = useLocation()
@@ -48,7 +46,7 @@ export function Header({ masthead, onGoHome }: Props) {
       <div className={styles.bar}>
         <div className={styles.barInner}>
           <span className={styles.eyebrow}>TRAFFIC LAW Q&amp;A</span>
-          <Link to="/" onClick={onGoHome} className={styles.title}>
+          <Link to="/" className={styles.title}>
             交通法規資料庫
           </Link>
           <a className={styles.github} href={GITHUB_URL} target="_blank" rel="noreferrer">
@@ -70,10 +68,10 @@ export function Header({ masthead, onGoHome }: Props) {
           aria-label="主選單"
           className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}
         >
-          <NavLink to="/" end onClick={onGoHome} className={navClass}>
+          <NavLink to="/" end className={navClass}>
             問答
           </NavLink>
-          <Link to={{ pathname: '/', hash: '#scope' }} onClick={onGoHome} className={styles.link}>
+          <Link to={{ pathname: '/', hash: '#scope' }} className={styles.link}>
             收錄範圍
           </Link>
           <NavLink to="/eval" className={navClass}>

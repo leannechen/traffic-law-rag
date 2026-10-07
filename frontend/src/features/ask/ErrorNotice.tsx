@@ -8,7 +8,6 @@ type Props = {
   error: AskError
   runId: string | null
   onRetry: () => void
-  onHome: () => void
 }
 
 const COPY: Record<string, Copy> = {
@@ -79,7 +78,7 @@ function copyFor(error: AskError): Copy {
   return COPY[error.code] ?? COPY.http_error
 }
 
-export function ErrorNotice({ error, runId, onRetry, onHome }: Props) {
+export function ErrorNotice({ error, runId, onRetry }: Props) {
   const remaining = useCountdown(error.code === 'rate_limited' ? error.retryAfter : undefined)
 
   if (error.code === 'rate_limited') {
@@ -127,7 +126,7 @@ export function ErrorNotice({ error, runId, onRetry, onHome }: Props) {
             重試
           </button>
         )}
-        <Link to="/" className={styles.secondary} onClick={onHome}>
+        <Link to="/" className={styles.secondary}>
           回首頁
         </Link>
       </div>
