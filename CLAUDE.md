@@ -63,7 +63,7 @@
 
 前端（在 `frontend/`，pnpm）：
 
-- 安裝：`pnpm install`；開發伺服器：`pnpm dev`（`/api` proxy 到 `BACKEND_URL`，預設 `http://localhost:8000`）
+- 安裝：`pnpm install`；開發伺服器：`pnpm dev`（`/api` proxy 到 `BACKEND_URL`：環境變數優先，其次 `frontend/.env.local`（不進版控，本機寫 `BACKEND_URL=http://localhost:8021`），預設 `http://localhost:8000`；8000 常被其他專案佔用，連錯時畫面會顯示 HTTP 404）
 - 檢查：`pnpm run ci`（Biome）、`pnpm typecheck`（tsc）；測試：`pnpm test`（Vitest）；注意 `pnpm ci` 是 pnpm 內建指令，要用 `pnpm run ci`
 
 索引（在 `backend/`，需先在 `.env` 設定 `VOYAGE_API_KEY`）：`uv run python -m app.ingestion.build_index`，輸出到 `data/index/`（不進版控）
