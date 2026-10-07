@@ -99,3 +99,17 @@ describe('streamAsk', () => {
     expect(error).toMatchObject({ status: 422, detail: 'too long', retryAfter: null })
   })
 })
+
+describe('readSse CRLF', () => {
+  it('handles \\r and \\n arriving in different chunks', async () => {
+    const encoder = new TextEncoder()
+    const parts = ['event: a\r', '\ndata: 1\r', '\n\r', '\n']
+    const body = new ReadableStream<Uint8Array>({
+      start(controller) {
+        for (const p of parts) controller.enqueue(encoder.encode(p))
+        controller.close()
+      },
+    })
+    expect(await collect(readSse(body))).toEqual([{ event: 'a', data: '1' }])
+  })
+})

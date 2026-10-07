@@ -125,3 +125,49 @@ describe('askReducer', () => {
     expect(askReducer(run(normalRun()), { type: 'reset' })).toEqual(initialAskState)
   })
 })
+
+describe('askReducer edge cases', () => {
+  it('ignores events that arrive after an error', () => {
+    const s = run([
+      ev('error', { code: 'llm_error', message: 'x' }),
+      ev('answer.delta', { text: '遲到' }),
+      ev('run.completed', { total_ms: 1 }),
+    ])
+    expect(s.phase).toBe('error')
+    expect(s.segments).toEqual([])
+  })
+
+  it('after a refusal only run.completed is applied (no error, no new steps)', () => {
+    const s = run([
+      ev('answer.refused', { reason: 'out_of_scope', top_score: 0.5, threshold: 0.4 }),
+      ev('step.started', { step: 'validate' }),
+      ev('error', { code: 'internal_error', message: 'x' }),
+    ])
+    expect(s.phase).toBe('refused')
+    expect(s.currentStep).toBeNull()
+    expect(s.error).toBeNull()
+  })
+
+  it('submit while streaming starts a clean run', () => {
+    const streaming = run([ev('answer.delta', { text: '舊答案' })])
+    const s = askReducer(streaming, { type: 'submit', question: '新問題' })
+    expect(s).toMatchObject({ phase: 'streaming', question: '新問題', segments: [], cited: [] })
+  })
+
+  it('a failed request after the run finished does not overwrite the result', () => {
+    const s = askReducer(run(normalRun()), {
+      type: 'failed',
+      error: { code: 'network_error' },
+    })
+    expect(s.phase).toBe('done')
+  })
+
+  it('reports an answer cut off by the length limit as an error with its code', () => {
+    const s = run([
+      ev('answer.delta', { text: '半句' }),
+      ev('error', { code: 'truncated', message: '答案太長，被截斷了。' }),
+    ])
+    expect(s.phase).toBe('error')
+    expect(s.error?.code).toBe('truncated')
+  })
+})

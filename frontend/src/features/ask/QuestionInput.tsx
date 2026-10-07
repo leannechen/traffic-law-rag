@@ -25,7 +25,9 @@ export function QuestionInput({ onSubmit }: Props) {
 
   function onKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
     // 輸入法選字中的 Enter 不送出
-    if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
+    // Safari 在選字完成的那次 Enter 會回報 isComposing=false、keyCode=229，兩個都要擋
+    const composing = event.nativeEvent.isComposing || event.keyCode === 229
+    if (event.key === 'Enter' && !event.shiftKey && !composing) {
       event.preventDefault()
       submit()
     }

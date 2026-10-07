@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, waitFor, within } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import App from './App'
@@ -189,6 +189,91 @@ describe('asking', () => {
     const user = await ask('紅燈右轉會被罰多少錢？')
     await user.click(await screen.findByRole('button', { name: '重新提問' }))
     expect(screen.getByLabelText('你的問題')).toHaveValue('')
+  })
+})
+
+describe('review fixes', () => {
+  it('has no tabbable element in the answer or evidence while streaming', async () => {
+    stubFetch(() =>
+      openStream([
+        ev('retrieval.results', { items: [item('K0040012:53', 1, 0.7)] }),
+        ev('answer.delta', { text: '回答中[[K0040012:53]]' }),
+      ]),
+    )
+    renderApp()
+    await ask('紅燈右轉會被罰多少錢？')
+    const answer = await screen.findByRole('region', { name: '答案' })
+    await waitFor(() => expect(answer).toHaveTextContent('回答中'))
+    const evidence = screen.getByRole('complementary', { name: '依據' })
+    for (const area of [answer, evidence]) {
+      expect(area.querySelectorAll('a, button, input, textarea, select, [tabindex]')).toHaveLength(
+        0,
+      )
+    }
+  })
+
+  it('does not submit when Enter confirms an IME composition (Safari keyCode 229)', async () => {
+    const fetchMock = stubFetch(() => sseResponse(normalRun()))
+    renderApp()
+    const input = screen.getByLabelText('你的問題')
+    await userEvent.setup().type(input, '紅燈')
+    fireEvent.keyDown(input, { key: 'Enter', keyCode: 229 })
+    fireEvent.keyDown(input, { key: 'Enter', isComposing: true })
+    expect(fetchMock).not.toHaveBeenCalledWith('/api/ask', expect.anything())
+    fireEvent.keyDown(input, { key: 'Enter' })
+    await waitFor(() =>
+      expect(fetchMock).toHaveBeenCalledWith(
+        '/api/ask',
+        expect.objectContaining({ method: 'POST' }),
+      ),
+    )
+  })
+
+  it('goes back to the home scope section from another page even with a result open', async () => {
+    stubFetch(() => sseResponse(normalRun()))
+    renderApp()
+    const user = await ask('紅燈右轉會被罰多少錢？')
+    await screen.findByRole('button', { name: '重新提問' })
+    await user.click(screen.getByRole('link', { name: '關於' }))
+    await user.click(screen.getByRole('link', { name: '收錄範圍' }))
+    expect(await screen.findByRole('heading', { name: '收錄範圍' })).toBeInTheDocument()
+  })
+
+  it('offers no retry button for an invalid question', async () => {
+    stubFetch(() => json({ detail: [{ msg: '問題不能超過 200 字' }] }, 422))
+    renderApp()
+    await ask('紅燈')
+    expect(await screen.findByText('問題格式不符')).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: '重試' })).not.toBeInTheDocument()
+  })
+
+  it('hides process and evidence when the run failed', async () => {
+    stubFetch(() =>
+      sseResponse([
+        ev('retrieval.results', { items: [item('K0040012:53', 1, 0.7)] }),
+        ev('error', { code: 'llm_error', message: 'x' }),
+      ]),
+    )
+    renderApp()
+    await ask('紅燈右轉會被罰多少錢？')
+    await screen.findByRole('alert')
+    expect(screen.queryByRole('complementary', { name: '依據' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('region', { name: '檢索過程' })).not.toBeInTheDocument()
+  })
+
+  it('shows only the article number for a citation outside the retrieved evidence', async () => {
+    stubFetch(() =>
+      sseResponse([
+        ev('retrieval.results', { items: [item('K0040012:53', 1, 0.7)] }),
+        ev('answer.delta', { text: '亂引用[[K9999999:77]]' }),
+        ev('run.completed', { total_ms: 1 }),
+      ]),
+    )
+    renderApp()
+    await ask('紅燈右轉會被罰多少錢？')
+    const answer = await screen.findByRole('region', { name: '答案' })
+    await waitFor(() => expect(answer).toHaveTextContent('§77'))
+    expect(answer).not.toHaveTextContent('K9999999')
   })
 })
 

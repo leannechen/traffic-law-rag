@@ -75,6 +75,12 @@ class StreamParser:
                 self._emit_text(items, self._buffer[:start])
                 self._buffer = self._buffer[start:]
             end = self._buffer.find("]]")
+            inner = self._buffer.find("[[", 2)
+            if inner != -1 and (end == -1 or inner < end):
+                # 開頭的 "[[" 之後又出現 "[["：前面那個不是標記，當文字送出，從後面那個重新判斷
+                self._emit_text(items, self._buffer[:inner])
+                self._buffer = self._buffer[inner:]
+                continue
             if end == -1:
                 if final or len(self._buffer) > MAX_MARKER_LENGTH:
                     self._emit_text(items, self._buffer)

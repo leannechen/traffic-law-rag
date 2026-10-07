@@ -29,6 +29,8 @@ class ChromaArticleSource:
     def get(self, article_id: str) -> ArticleText | None:
         if article_id in self._cache:
             return self._cache[article_id]
+        if ":" not in article_id:
+            return None
         pcode, article_no = article_id.split(":", 1)
         got = self._collection.get(
             where={"$and": [{"pcode": pcode}, {"article_no": article_no}]},
@@ -66,8 +68,9 @@ class ChromaChunkStore:
             text, meta = got["documents"][0], got["metadatas"][0]
         else:
             # 引用事件裡的 id 是「條」，依項切分的條文沒有同名的 chunk：改取該條的第一塊
-            article_id = _PART_RE.sub("", chunk_id)
-            first = self._first_chunk(article_id)
+            if _PART_RE.search(chunk_id):
+                return None  # 指名了不存在的項（例如 -p9），不要退回第一塊
+            first = self._first_chunk(chunk_id)
             if first is None:
                 return None
             text, meta = first
@@ -93,6 +96,8 @@ class ChromaChunkStore:
         )
 
     def _first_chunk(self, article_id: str) -> tuple[str, Any] | None:
+        if ":" not in article_id:
+            return None
         pcode, article_no = article_id.split(":", 1)
         got = self._collection.get(
             where={"$and": [{"pcode": pcode}, {"article_no": article_no}]},

@@ -79,3 +79,11 @@ def test_article_with_dash_number_is_not_confused_with_its_neighbour(client: Tes
 def test_unknown_chunk_is_404(client: TestClient) -> None:
     assert client.get("/api/chunks/K0040012:999").status_code == 404
     assert client.get("/api/chunks/K0040012:999-p2").status_code == 404
+
+
+def test_id_without_a_colon_is_404_not_500(client: TestClient) -> None:
+    assert client.get("/api/chunks/foo").status_code == 404
+
+
+def test_missing_part_of_a_split_article_is_404(client: TestClient) -> None:
+    assert client.get("/api/chunks/K0040012:35-p9").status_code == 404

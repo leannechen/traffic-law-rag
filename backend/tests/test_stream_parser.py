@@ -127,3 +127,24 @@ def test_refusal_in_the_middle_is_reported_after_streamed_text() -> None:
 def test_chinese_text_is_never_split_mid_character() -> None:
     items, _ = run(list("紅燈右轉[[K:1]]罰款"))  # 一次一個字元
     assert merged_text(items) == "紅燈右轉[[K:1]]罰款"
+
+
+def test_a_stray_double_bracket_does_not_swallow_a_real_citation_after_it() -> None:
+    parser = StreamParser()
+    items = parser.feed("see [[ note [[K1]] end") + parser.finish()
+    assert Citation(marker="[[K1]]", chunk_id="K1") in items
+    assert "".join(i.text for i in items if isinstance(i, Text)) == "see [[ note [[K1]] end"
+
+
+def test_a_stray_double_bracket_split_across_deltas_keeps_the_later_citation() -> None:
+    parser = StreamParser()
+    items: list[object] = []
+    for piece in ["see [[ no", "te [[K", "1]] end"]:
+        items += parser.feed(piece)
+    items += parser.finish()
+    assert Citation(marker="[[K1]]", chunk_id="K1") in items
+
+
+def test_whitespace_before_the_refusal_marker_sends_no_text() -> None:
+    parser = StreamParser()
+    assert parser.feed("  [[REFUSE]]") == [Refusal()]

@@ -26,7 +26,10 @@ export function renderBold(text: string): ReactNode[] {
 
 function badgeLabel(articleId: string, evidence: ArticleEvidence[]): string {
   const found = evidence.find((e) => e.articleId === articleId)
-  return found ? `${found.lawShortName} §${found.articleNo}` : articleId
+  // 不在檢索結果裡的引用（驗證會判為無效）：不露出內部 id，只顯示條號
+  return found
+    ? `${found.lawShortName} §${found.articleNo}`
+    : `§${articleId.split(':')[1] ?? articleId}`
 }
 
 /**

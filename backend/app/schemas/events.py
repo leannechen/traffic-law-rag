@@ -78,7 +78,7 @@ class RunCompletedData(BaseModel):
 
 
 class ErrorData(BaseModel):
-    code: Literal["llm_error", "embedding_error", "internal_error"]
+    code: Literal["llm_error", "embedding_error", "internal_error", "truncated"]
     message: str
 
 
