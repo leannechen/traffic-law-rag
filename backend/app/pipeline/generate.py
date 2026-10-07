@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from app.core.llm import LLMClient, LLMResponse
-from app.schemas.retrieval import RetrievedChunk
+from app.pipeline.articles import ArticleText
 
 PROMPTS_DIR = Path(__file__).resolve().parents[1] / "prompts"
 REFUSAL_MARKER = "[[REFUSE]]"
@@ -17,11 +17,11 @@ def load_prompt(name: str) -> str:
     return (PROMPTS_DIR / name).read_text(encoding="utf-8")
 
 
-def build_user_prompt(question: str, chunks: list[RetrievedChunk]) -> str:
+def build_user_prompt(question: str, articles_in_context: list[ArticleText]) -> str:
     articles = "\n".join(
-        f'<條文 id="{c.chunk_id}" 出處="{c.law_short_name} 第 {c.article_no} 條">'
-        f"\n{c.text}\n</條文>"
-        for c in chunks
+        f'<條文 id="{a.article_id}" 出處="{a.law_short_name} 第 {a.article_no} 條">'
+        f"\n{a.text}\n</條文>"
+        for a in articles_in_context
     )
     return f"<條文列表>\n{articles}\n</條文列表>\n\n<問題>\n{question}\n</問題>"
 
@@ -46,10 +46,10 @@ class Generation:
     response: LLMResponse
 
 
-def generate_answer(llm: LLMClient, question: str, chunks: list[RetrievedChunk]) -> Generation:
+def generate_answer(llm: LLMClient, question: str, articles: list[ArticleText]) -> Generation:
     response = llm.complete(
         system=load_prompt("generate.md"),
-        user=build_user_prompt(question, chunks),
+        user=build_user_prompt(question, articles),
         max_tokens=MAX_TOKENS,
         effort="medium",
     )

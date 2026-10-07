@@ -3,6 +3,8 @@
 指標定義（ADR 0005）：
 - 引用正確率 = 有作答、且至少引用一條標準答案（以「條」比對）的題數 ÷ 可回答題數。
   被誤拒的題目算錯；另外單獨回報「已作答題目」的比例與無效引用數。
+  這個定義寬鬆（多引用別條不扣分），所以另附「引用精確率」= 引用的條中屬於標準答案的比例。
+  引用精確率偏低未必是錯：額外引用的條文可能也相關，需要人工判讀。
 - 數字正確率 = 答案中的數量（數字＋單位）能在「它引用的條文」找到的比例（微平均）。
   另附：每個答案的數字全部正確的比例、「重點金額涵蓋率」（expected_facts 的數量有多少出現在答案）。
 - 拒答正確率 = (範圍外題有拒答 + 可回答題有作答) ÷ 全部題數；並分開回報兩個成分與擋下的層級。
@@ -59,6 +61,8 @@ def evaluate_generation(
             row.update(recall_at_5=s.recall_at_k, reciprocal_rank=s.reciprocal_rank)
             cited = {article_of(c) for c in result.citations_valid}
             row["citation_hit"] = (not result.refused) and bool(cited & set(q.expected_chunk_ids))
+            row["citations_cited"] = len(cited)
+            row["citations_in_expected"] = len(cited & set(q.expected_chunk_ids))
             if not result.refused:
                 wanted = set(extract_quantities(" ".join(q.expected_facts)))
                 got = set(extract_quantities(result.answer))
@@ -99,6 +103,7 @@ def _metrics(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "refused": sum(r["refused"] for r in rs),
         }
 
+    cited_ok = sum(r["citations_in_expected"] for r in answered)
     correct_refusal = sum(r["refused"] for r in oos) + len(answered)
     return {
         "recall_at_5": _round(mean([r["recall_at_5"] for r in answerable])),
@@ -106,6 +111,11 @@ def _metrics(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "citation_accuracy": _round(mean([1.0 if r["citation_hit"] else 0.0 for r in answerable])),
         "citation_accuracy_answered": _round(
             mean([1.0 if r["citation_hit"] else 0.0 for r in answered])
+        ),
+        "citation_precision": (
+            _round(cited_ok / cited_all)
+            if (cited_all := sum(r["citations_cited"] for r in answered))
+            else None
         ),
         "invalid_citations": sum(len(r["citations_invalid"]) for r in answered),
         "answers_with_invalid_citation": sum(bool(r["citations_invalid"]) for r in answered),

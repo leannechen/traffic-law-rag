@@ -18,6 +18,7 @@ from app.core.config import get_settings
 from app.core.llm import AnthropicLLMClient, CachedLLMClient
 from app.ingestion.build_index import META_FILE
 from app.pipeline.answer import CONTEXT_K, AnswerResult, answer_question
+from app.pipeline.articles import ChromaArticleSource
 from app.pipeline.generate import PROMPTS_DIR
 from app.pipeline.retrieve import Retriever
 from eval.dataset import load_dataset
@@ -48,12 +49,14 @@ def main() -> None:
     )
     llm = CachedLLMClient(inner, settings.cache_dir / "llm_responses.json", refresh=args.refresh)
     searcher = Retriever.from_settings()
+    articles = ChromaArticleSource(searcher._collection)
     index_meta = json.loads((settings.index_dir / META_FILE).read_text(encoding="utf-8"))
 
     def pipeline(question: str) -> AnswerResult:
         return answer_question(
             question,
             searcher=searcher,
+            articles=articles,
             llm=llm,
             threshold=settings.gate_threshold,
             rewrite=args.rewrite,
@@ -103,6 +106,7 @@ def print_summary(r: dict[str, Any]) -> None:
         f"2. MRR                 {m['mrr']:.3f}",
         f"3. 引用正確率          {m['citation_accuracy']:.3f}",
         f"     已作答題目中 {m['citation_accuracy_answered']:.3f}",
+        f"     引用精確率 {m['citation_precision']}（引用的條文中屬於標準答案的比例）",
         f"     無效引用 {m['invalid_citations']} 個",
         f"4. 數字正確率          {na_text}",
         f"     答案數字全對的比例 {m['answers_all_numbers_ok']:.3f}",

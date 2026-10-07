@@ -11,8 +11,10 @@ _DIGITS = {
 _SMALL_UNITS = {"十": 10, "百": 100, "千": 1000}
 _NUM = r"[零〇一二兩三四五六七八九十百千萬億\d,]+"
 _UNITS = "立方公分|公里|公分|公尺|公斤|馬力|個月|分鐘|小時|元|年|月|日|天|秒|歲|次|倍|點|人|輛"
-_FRACTION_RE = re.compile(rf"({_NUM})分之({_NUM})")
-_QUANTITY_RE = re.compile(rf"({_NUM})({_UNITS})")
+# 數字必須從「數字串的開頭」開始比對，且前面不是「第」：「第一次違反」「第二十次」是序數，不是數量。
+_START = r"(?<![第零〇一二兩三四五六七八九十百千萬億\d,])"
+_FRACTION_RE = re.compile(rf"{_START}({_NUM})分之({_NUM})")
+_QUANTITY_RE = re.compile(rf"{_START}({_NUM})({_UNITS})")
 
 
 def chinese_to_int(text: str) -> int:

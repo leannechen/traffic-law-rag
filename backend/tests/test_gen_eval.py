@@ -140,3 +140,17 @@ def test_unverified_questions_are_skipped() -> None:
     unverified = q("a", ["K:1"]).model_copy(update={"verified": False})
     out = run([unverified], {})
     assert out["counts"]["verified"] == 0
+
+
+def test_citation_precision_counts_extra_citations() -> None:
+    out = run(
+        [q("a", ["K:1"]), q("b", ["K:2"])],
+        {
+            "問題a": result(
+                "問題a", ["K:1"], answer="x", citations_valid=["K:1", "K:9"]
+            ),  # 多引用一條
+            "問題b": result("問題b", ["K:2"], answer="x", citations_valid=["K:2"]),
+        },
+    )
+    assert out["metrics"]["citation_precision"] == round(2 / 3, 4)
+    assert out["metrics"]["citation_accuracy"] == 1.0  # 寬鬆定義：多引用不扣分

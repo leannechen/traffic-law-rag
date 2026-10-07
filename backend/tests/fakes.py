@@ -2,6 +2,7 @@ from collections.abc import Callable
 from typing import Any
 
 from app.core.llm import Effort, LLMResponse
+from app.pipeline.articles import ArticleText
 from app.schemas.retrieval import RetrievedChunk
 
 
@@ -61,3 +62,21 @@ class FakeSearcher:
         self.queries.append(question)
         hits = self._results.get(question, [])
         return [h.model_copy(update={"rank": i}) for i, h in enumerate(hits[:k], start=1)]
+
+
+class FakeArticles:
+    """article_id → 整條原文；沒設定的條退回 None（pipeline 會改用檢索到的那一塊）。"""
+
+    def __init__(self, texts: dict[str, str] | None = None) -> None:
+        self._texts = texts or {}
+
+    def get(self, article_id: str) -> ArticleText | None:
+        if article_id not in self._texts:
+            return None
+        pcode, no = article_id.split(":")
+        return ArticleText(
+            article_id=article_id,
+            law_short_name="測試法",
+            article_no=no,
+            text=self._texts[article_id],
+        )

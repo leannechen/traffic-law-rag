@@ -11,6 +11,7 @@ from pydantic import BaseModel
 
 from app.core.config import get_settings
 from app.core.llm import AnthropicLLMClient, LLMClient
+from app.pipeline.articles import ArticleSource, ArticleText, ChromaArticleSource
 from app.pipeline.gate import GateResult, check_gate
 from app.pipeline.generate import generate_answer
 from app.pipeline.retrieve import FUSION_DEPTH, Retriever, rrf
@@ -80,10 +81,25 @@ class _Usage:
     output_tokens: int = 0
 
 
+def build_context(retrieved: list[RetrievedChunk], source: ArticleSource) -> list[ArticleText]:
+    """前 CONTEXT_K 條，每條給整條原文（不只是檢索到的那一塊）。"""
+    context: list[ArticleText] = []
+    for hit in retrieved[:CONTEXT_K]:
+        article = source.get(hit.article_id) or ArticleText(
+            article_id=hit.article_id,
+            law_short_name=hit.law_short_name,
+            article_no=hit.article_no,
+            text=hit.text,
+        )
+        context.append(article)
+    return context
+
+
 def answer_question(
     question: str,
     *,
     searcher: Searcher,
+    articles: ArticleSource,
     llm: LLMClient,
     threshold: float,
     rewrite: bool = False,
@@ -117,7 +133,7 @@ def answer_question(
             output_tokens=usage.output_tokens,
         )
 
-    context = retrieved[:CONTEXT_K]
+    context = build_context(retrieved, articles)
     generation = generate_answer(llm, question, context)
     usage.input_tokens += generation.response.input_tokens
     usage.output_tokens += generation.response.output_tokens
@@ -132,8 +148,8 @@ def answer_question(
             output_tokens=usage.output_tokens,
         )
 
-    citation: CitationCheck = validate_citations(parsed.citations, {c.chunk_id for c in context})
-    cited_texts = [c.text for c in context if c.chunk_id in set(citation.valid)]
+    citation: CitationCheck = validate_citations(parsed.citations, {a.article_id for a in context})
+    cited_texts = [a.text for a in context if a.article_id in set(citation.valid)]
     numbers: NumberCheck = check_numbers(parsed.text, cited_texts)
     return AnswerResult(
         **base,
@@ -159,9 +175,11 @@ def main() -> None:
     llm = AnthropicLLMClient(
         settings.anthropic_api_key, settings.llm_model, settings.llm_use_fallbacks
     )
+    retriever = Retriever.from_settings()
     result = answer_question(
         args.question,
-        searcher=Retriever.from_settings(),
+        searcher=retriever,
+        articles=ChromaArticleSource(retriever._collection),
         llm=llm,
         threshold=settings.gate_threshold,
         rewrite=args.rewrite,
@@ -170,7 +188,7 @@ def main() -> None:
     top = f"{result.gate_top_score:.3f}" if result.gate_top_score is not None else "無"
     print(f"門檻：最高相似度 {top}／門檻 {result.gate_threshold}")
     for h in result.retrieved[:CONTEXT_K]:
-        print(f"  {h.rank}. {h.chunk_id}（{h.vector_score}）")
+        print(f"  {h.rank}. {h.article_id}（{h.vector_score}）")
     if result.refused:
         print(f"\n【拒答】由「{result.refusal_layer}」擋下")
         return
