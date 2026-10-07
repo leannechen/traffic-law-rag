@@ -1,0 +1,1665 @@
+{
+  "name": "gen-sonnet-norewrite",
+  "evaluated_at": "2026-10-07T02:59:05+00:00",
+  "config": {
+    "llm_model": "claude-sonnet-5-5",
+    "rewrite": false,
+    "gate_threshold": 0.4,
+    "context_k": 5,
+    "prompt_version": "8690d97ff3",
+    "embedding_model": "voyage-4",
+    "data_version": "2026-10-05",
+    "llm_calls": 34,
+    "llm_cache_hits": 0,
+    "estimated_cost_usd_first_run": 0.26
+  },
+  "counts": {
+    "verified": 40,
+    "answerable": 27,
+    "out_of_scope": 13
+  },
+  "metrics": {
+    "recall_at_5": 1.0,
+    "mrr": 0.858,
+    "citation_accuracy": 1.0,
+    "citation_accuracy_answered": 1.0,
+    "invalid_citations": 0,
+    "answers_with_invalid_citation": 0,
+    "number_accuracy": 0.9934,
+    "answers_all_numbers_ok": 0.963,
+    "fact_amount_coverage": 0.8939,
+    "refusal_accuracy": 0.975,
+    "out_of_scope_refused": "12/13",
+    "out_of_scope_refused_by_layer": {
+      "gate": 6,
+      "model": 6
+    },
+    "false_refusals": "0/27",
+    "false_refusals_by_layer": {},
+    "tokens": {
+      "input": 86916,
+      "output": 8639
+    },
+    "by_category": {
+      "fine_amount": {
+        "n": 10,
+        "citation_accuracy": 1.0,
+        "refused": 0
+      },
+      "definition": {
+        "n": 4,
+        "citation_accuracy": 1.0,
+        "refused": 0
+      },
+      "accident": {
+        "n": 4,
+        "citation_accuracy": 1.0,
+        "refused": 0
+      },
+      "cross_law": {
+        "n": 4,
+        "citation_accuracy": 1.0,
+        "refused": 0
+      },
+      "colloquial": {
+        "n": 5,
+        "citation_accuracy": 1.0,
+        "refused": 0
+      }
+    }
+  },
+  "questions": [
+    {
+      "id": "q01",
+      "question": "紅燈右轉會被罰多少錢？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:53"
+      ],
+      "queries": [
+        "紅燈右轉會被罰多少錢？"
+      ],
+      "retrieved": [
+        "K0040012:53",
+        "K0040012:53-1",
+        "K0040012:58",
+        "K0040012:48",
+        "K0040012:45",
+        "K0040012:39",
+        "K0040012:42",
+        "K0040012:49",
+        "K0040012:52",
+        "K0040012:74"
+      ],
+      "gate_top_score": 0.7151,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "汽車駕駛人在有燈光號誌管制的交岔路口紅燈右轉，處新臺幣六百元以上一千八百元以下罰鍰。[[K0040012:53]]\n\n如果是在大眾捷運系統車輛共用通行的交岔路口紅燈右轉，則處新臺幣一千二百元以上三千六百元以下罰鍰。[[K0040012:53-1]]",
+      "citations_valid": [
+        "K0040012:53",
+        "K0040012:53-1"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 4,
+      "numbers_matched": 4,
+      "numbers_unmatched": [],
+      "input_tokens": 2204,
+      "output_tokens": 141,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 4,
+      "fact_amounts_found": 4
+    },
+    {
+      "id": "q02",
+      "question": "開車沒繫安全帶會被罰多少？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:31"
+      ],
+      "queries": [
+        "開車沒繫安全帶會被罰多少？"
+      ],
+      "retrieved": [
+        "K0040012:31",
+        "K0040012:35-1",
+        "K0040012:24",
+        "K0040012:90-1",
+        "K0040012:92",
+        "K0040012:56-1",
+        "K0040012:21-1",
+        "G0390060:49",
+        "K0040012:19",
+        "K0040012:33"
+      ],
+      "gate_top_score": 0.693,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "汽車行駛於道路上，駕駛人、前座或小型車後座乘客未依規定繫安全帶者，處駕駛人新臺幣一千五百元罰鍰；營業大客車駕駛人未依規定繫安全帶者，處駕駛人新臺幣二千元罰鍰。[[K0040012:31]]\n\n若是行駛於高速公路或快速公路，處駕駛人新臺幣三千元以上六千元以下罰鍰。[[K0040012:31]]\n\n營業大客車、計程車或租賃車輛的代僱駕駛人已盡告知義務，乘客仍未繫安全帶時，處罰該乘客。[[K0040012:31]]",
+      "citations_valid": [
+        "K0040012:31"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 4,
+      "numbers_matched": 4,
+      "numbers_unmatched": [],
+      "input_tokens": 2221,
+      "output_tokens": 236,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 3,
+      "fact_amounts_found": 3
+    },
+    {
+      "id": "q03",
+      "question": "騎機車沒戴安全帽罰多少錢？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:31"
+      ],
+      "queries": [
+        "騎機車沒戴安全帽罰多少錢？"
+      ],
+      "retrieved": [
+        "K0040012:92",
+        "K0040012:73",
+        "K0040012:31",
+        "K0040012:32",
+        "K0040012:32-1",
+        "K0040013:115-7",
+        "K0040012:72",
+        "K0040012:90-1",
+        "K0040012:71-1",
+        "K0040012:21"
+      ],
+      "gate_top_score": 0.5847,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "機車駕駛人或附載座人未依規定戴安全帽者，處駕駛人新臺幣五百元罰鍰。[[K0040012:31]]\n\n若是大型重型機車（汽缸排氣量五百五十立方公分以上）行駛高速公路，未依規定戴安全帽者，則處駕駛人新臺幣三千元以上六千元以下罰鍰。[[K0040012:92-p1]]",
+      "citations_valid": [
+        "K0040012:31",
+        "K0040012:92-p1"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 4,
+      "numbers_matched": 4,
+      "numbers_unmatched": [],
+      "input_tokens": 3231,
+      "output_tokens": 146,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.3333333333333333,
+      "citation_hit": true,
+      "fact_amounts_expected": 1,
+      "fact_amounts_found": 1
+    },
+    {
+      "id": "q04",
+      "question": "開車時用手拿著手機講電話會被罰多少？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:31-1"
+      ],
+      "queries": [
+        "開車時用手拿著手機講電話會被罰多少？"
+      ],
+      "retrieved": [
+        "K0040012:31-1",
+        "K0040013:90",
+        "K0040012:73",
+        "K0040012:43",
+        "K0040012:92",
+        "K0040012:63",
+        "K0040012:22",
+        "K0040012:21",
+        "K0040012:33",
+        "K0040012:40"
+      ],
+      "gate_top_score": 0.7004,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "汽車駕駛人行駛於道路時，以手持方式使用行動電話進行撥接、通話等行為，處新臺幣三千元罰鍰。[[K0040012:31-1]]\n\n警備車、消防車及救護車的駕駛人，依法執行任務所必要或其他法令許可者，不受此限制。[[K0040012:31-1]]",
+      "citations_valid": [
+        "K0040012:31-1"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 1,
+      "numbers_matched": 1,
+      "numbers_unmatched": [],
+      "input_tokens": 2664,
+      "output_tokens": 123,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 2,
+      "fact_amounts_found": 1
+    },
+    {
+      "id": "q05",
+      "question": "沒有駕照開車被抓到會罰多少？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:21"
+      ],
+      "queries": [
+        "沒有駕照開車被抓到會罰多少？"
+      ],
+      "retrieved": [
+        "K0040012:21",
+        "K0040012:21-1",
+        "K0040012:22",
+        "K0040012:63-2",
+        "K0040012:24",
+        "K0040012:26",
+        "K0040012:32",
+        "K0040012:23",
+        "K0040012:68",
+        "K0040012:25"
+      ],
+      "gate_top_score": 0.6847,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "沒有駕照開車的罰則，要看開的是什麼車：\n\n- **機車**：處新臺幣一萬八千元以上三萬六千元以下罰鍰，並當場移置保管該機車。[[K0040012:21-p1]]\n- **小型車**：處新臺幣三萬六千元以上六萬元以下罰鍰，並當場移置保管該汽車。[[K0040012:21-p1]]\n- **聯結車、大客車或大貨車**：汽車所有人及駕駛人各處新臺幣四萬元以上八萬元以下罰鍰，並當場移置保管該汽車。但汽車所有人已善盡查證駕駛人駕駛執照資格之注意，或縱加以相當之注意而仍不免發生違規者，不受處罰。[[K0040012:21-1]]\n\n補充條件：\n- 自本條例一百十四年十月二十八日修正公布條文施行之日起，十年內第二次違規者，機車、小型車依前述罰鍰最高額處罰；第三次以上者，按前次所處罰鍰金額加罰新臺幣一萬二千元。如肇事致人重傷或死亡，沒入該汽機車。[[K0040012:21-p1]]\n- 駕駛聯結車、大客車或大貨車者，十年內第二次違規依最高額處罰；第三次以上按前次所處罰鍰金額加罰新臺幣二萬四千元。如肇事致人重傷或死亡，沒入該汽車。[[K0040012:21-1]]\n- 駕駛聯結車、大客車或大貨車的駕駛人，另應吊扣其駕駛執照一年至二年。[[K0040012:21-1]]",
+      "citations_valid": [
+        "K0040012:21-p1",
+        "K0040012:21-1"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 19,
+      "numbers_matched": 19,
+      "numbers_unmatched": [],
+      "input_tokens": 3981,
+      "output_tokens": 578,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 3,
+      "fact_amounts_found": 3
+    },
+    {
+      "id": "q06",
+      "question": "酒駕被抓到要罰多少錢？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:35"
+      ],
+      "queries": [
+        "酒駕被抓到要罰多少錢？"
+      ],
+      "retrieved": [
+        "K0040012:35",
+        "D0080029:19-2",
+        "K0040012:21",
+        "K0040012:92",
+        "K0040012:52",
+        "K0040012:21-1",
+        "K0040012:60",
+        "K0040012:22",
+        "K0040012:42",
+        "K0040012:34"
+      ],
+      "gate_top_score": 0.5706,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "依條文，經測試檢定酒精濃度超過規定標準時：\n\n- 機車駕駛人處新臺幣一萬八千元以上十二萬元以下罰鍰，汽車駕駛人處新臺幣三萬六千元以上十五萬元以下罰鍰，並當場移置保管該汽機車。[[K0040012:35-p1]]\n- 酒精濃度超過標準者，另吊扣駕駛執照一年至二年；附載未滿十二歲兒童或因而肇事致人受傷者，吊扣駕駛執照二年至四年。[[K0040012:35-p1]]\n- 十年內第二次違反，依駕駛車輛所定罰鍰最高額處罰；第三次以上，按前次所處罰鍰金額加罰新臺幣九萬元，並吊銷駕駛執照。[[K0040012:35-p1]]\n- 致人重傷或死亡者，吊銷駕駛執照，並不得再考領。[[K0040012:35-p1]]\n- 若是拒絕接受測試檢定，處新臺幣十八萬元罰鍰，並吊銷駕駛執照。[[K0040012:35-p1]]",
+      "citations_valid": [
+        "K0040012:35-p1"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 14,
+      "numbers_matched": 14,
+      "numbers_unmatched": [],
+      "input_tokens": 3336,
+      "output_tokens": 404,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 6,
+      "fact_amounts_found": 6
+    },
+    {
+      "id": "q07",
+      "question": "超速超過規定的最高時速四十公里會怎麼處罰？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:43"
+      ],
+      "queries": [
+        "超速超過規定的最高時速四十公里會怎麼處罰？"
+      ],
+      "retrieved": [
+        "K0040012:40",
+        "K0040012:43",
+        "K0040012:72-1",
+        "K0040012:33",
+        "K0040012:92",
+        "D0080029:13",
+        "K0040012:7-2",
+        "K0040012:47",
+        "K0040012:44",
+        "K0040012:85-1"
+      ],
+      "gate_top_score": 0.6426,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "行車速度超過規定最高時速四十公里的，處新臺幣六千元以上三萬六千元以下罰鍰，並當場禁止其駕駛。[[K0040012:43]]\n\n補充：\n- 汽車駕駛人有此行為，並吊扣該汽車牌照六個月。[[K0040012:43]]\n- 二輛以上汽車共同違反，或在道路上競駛、競技者，處汽車駕駛人新臺幣三萬元以上九萬元以下罰鍰，並當場禁止其駕駛及吊銷其駕駛執照。[[K0040012:43]]\n- 未滿十八歲的駕駛人違反者，得由警察機關公布其法定代理人或監護人姓名。[[K0040012:43]]\n- 若超速未達此情形，則依第四十條處新臺幣一千二百元以上二千四百元以下罰鍰。[[K0040012:40]]",
+      "citations_valid": [
+        "K0040012:43",
+        "K0040012:40"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 10,
+      "numbers_matched": 10,
+      "numbers_unmatched": [],
+      "input_tokens": 2216,
+      "output_tokens": 314,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.5,
+      "citation_hit": true,
+      "fact_amounts_expected": 3,
+      "fact_amounts_found": 3
+    },
+    {
+      "id": "q08",
+      "question": "汽車停在身心障礙專用停車位會被罰多少？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:56"
+      ],
+      "queries": [
+        "汽車停在身心障礙專用停車位會被罰多少？"
+      ],
+      "retrieved": [
+        "K0040012:56",
+        "K0040012:55",
+        "K0040012:74",
+        "K0040012:57",
+        "K0040012:52",
+        "K0040012:56-1",
+        "K0040012:59",
+        "K0040012:12",
+        "K0040012:44",
+        "K0040013:112"
+      ],
+      "gate_top_score": 0.6426,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "汽車駕駛人在身心障礙專用停車位違規停車，屬於處新臺幣六百元以上一千二百元以下罰鍰的情形之一 [[K0040012:56]]。不過條文也規定，這一款應以最高額處罰之 [[K0040012:56]]。",
+      "citations_valid": [
+        "K0040012:56"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 2,
+      "numbers_matched": 2,
+      "numbers_unmatched": [],
+      "input_tokens": 2431,
+      "output_tokens": 101,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 2,
+      "fact_amounts_found": 2
+    },
+    {
+      "id": "q09",
+      "question": "法律上的「臨時停車」和「停車」有什麼不一樣？",
+      "category": "definition",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:3"
+      ],
+      "queries": [
+        "法律上的「臨時停車」和「停車」有什麼不一樣？"
+      ],
+      "retrieved": [
+        "K0040012:3",
+        "K0040012:55",
+        "K0040013:111",
+        "K0040013:113",
+        "K0040012:56",
+        "K0040013:112",
+        "D0080029:16",
+        "K0040012:5",
+        "K0040012:7-1",
+        "K0040012:57"
+      ],
+      "gate_top_score": 0.5743,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "依條文定義，兩者的差別在於停止的時間與車輛的狀態：\n\n- **臨時停車**：車輛因上、下人、客，或裝卸物品而停止，停止時間未滿三分鐘，且保持立即行駛的狀態。[[K0040012:3]]\n- **停車**：車輛停放於道路兩側或停車場所，而不立即行駛。[[K0040012:3]]\n\n補充：接送未滿七歲的兒童、行動不便的人上、下車時，臨時停車不受三分鐘的限制。[[K0040012:55]]",
+      "citations_valid": [
+        "K0040012:3",
+        "K0040012:55"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 3,
+      "numbers_matched": 3,
+      "numbers_unmatched": [],
+      "input_tokens": 2685,
+      "output_tokens": 195,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 1,
+      "fact_amounts_found": 1
+    },
+    {
+      "id": "q10",
+      "question": "什麼樣的地方才算行人穿越道？",
+      "category": "definition",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:3"
+      ],
+      "queries": [
+        "什麼樣的地方才算行人穿越道？"
+      ],
+      "retrieved": [
+        "K0040013:134",
+        "K0040012:3",
+        "K0040013:135-1",
+        "K0040012:78",
+        "K0040013:133",
+        "K0040013:103",
+        "K0040012:80",
+        "K0040013:124-1",
+        "K0040012:5",
+        "K0040012:90-3"
+      ],
+      "gate_top_score": 0.6194,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "行人穿越道是指在道路上以標線劃設、供行人穿越道路的地方。[[K0040012:3]]",
+      "citations_valid": [
+        "K0040012:3"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 2394,
+      "output_tokens": 43,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.5,
+      "citation_hit": true,
+      "fact_amounts_expected": 0,
+      "fact_amounts_found": 0
+    },
+    {
+      "id": "q11",
+      "question": "騎樓算不算法律上的道路？",
+      "category": "definition",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:3"
+      ],
+      "queries": [
+        "騎樓算不算法律上的道路？"
+      ],
+      "retrieved": [
+        "K0040013:141",
+        "K0040012:3",
+        "K0040013:83-3",
+        "K0040012:5",
+        "K0040012:32-1",
+        "K0040013:134",
+        "K0040013:142",
+        "K0040012:78",
+        "K0040013:133",
+        "K0040012:82"
+      ],
+      "gate_top_score": 0.4884,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "算。依條文，「道路」是指公路、街道、巷衖、廣場、騎樓、走廊或其他供公眾通行之地方，騎樓有明確列在其中。[[K0040012:3]]\n\n補充：騎樓同時也屬於「人行道」的定義範圍，即專供行人通行之騎樓、走廊。[[K0040012:3]]",
+      "citations_valid": [
+        "K0040012:3"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 1578,
+      "output_tokens": 125,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.5,
+      "citation_hit": true,
+      "fact_amounts_expected": 0,
+      "fact_amounts_found": 0
+    },
+    {
+      "id": "q12",
+      "question": "怎樣算重機？",
+      "category": "definition",
+      "should_refuse": false,
+      "expected": [
+        "K0040013:3"
+      ],
+      "queries": [
+        "怎樣算重機？"
+      ],
+      "retrieved": [
+        "K0040013:83",
+        "K0040013:40",
+        "K0040013:3",
+        "K0040013:83-2",
+        "K0040013:83-1",
+        "K0040013:2",
+        "K0040013:38",
+        "K0040012:29-2",
+        "D0080029:19",
+        "K0040013:88"
+      ],
+      "gate_top_score": 0.4162,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "「重機」在條文裡可能指兩種東西，分別說明如下。\n\n**一、重型機車**\n- 普通重型機車是汽缸總排氣量逾五十立方公分且在二百五十立方公分以下的二輪或三輪機車。[[K0040013:3-p1]]\n- 電動機車的馬達及控制器最大輸出馬力逾五馬力且在四十馬力（HP）以下的二輪或三輪機車，也屬普通重型機車。[[K0040013:3-p1]]\n- 大型重型機車是汽缸總排氣量逾二百五十立方公分的二輪或三輪機車。[[K0040013:3-p1]]\n\n**二、工程重機械（動力機械）**\n- 動力機械是不屬於汽車範圍的機械，例如不經曳引而能以原動機行駛的工程重機械。[[K0040013:83]]\n- 其中「重型動力機械」是總重量逾四十二公噸且在七十五公噸以下，或總重量在四十二公噸以下但全長、全寬及全高尺度逾第三十八條規定的大貨車尺度限制。[[K0040013:83]]\n- 總重量逾七十五公噸的是「大型重型動力機械」。[[K0040013:83]]",
+      "citations_valid": [
+        "K0040013:3-p1",
+        "K0040013:83"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 5,
+      "numbers_matched": 5,
+      "numbers_unmatched": [],
+      "input_tokens": 3886,
+      "output_tokens": 768,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.3333333333333333,
+      "citation_hit": true,
+      "fact_amounts_expected": 4,
+      "fact_amounts_found": 4
+    },
+    {
+      "id": "q13",
+      "question": "發生車禍後，駕駛人第一步應該做什麼？",
+      "category": "accident",
+      "should_refuse": false,
+      "expected": [
+        "D0080090:3"
+      ],
+      "queries": [
+        "發生車禍後，駕駛人第一步應該做什麼？"
+      ],
+      "retrieved": [
+        "D0080090:3",
+        "D0080090:9",
+        "G0390060:34",
+        "D0080090:10",
+        "K0040012:62",
+        "D0080090:11",
+        "D0080090:6",
+        "D0080090:5",
+        "K0040013:112",
+        "D0080090:14"
+      ],
+      "gate_top_score": 0.6407,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "發生道路交通事故後，駕駛人或肇事人應先做下列處置 [[D0080090:3]]：\n\n1. 事故地點在車道或路肩時，應在適當距離處豎立車輛故障標誌或其他明顯警告設施 [[D0080090:3]]。\n2. 有人受傷時，應迅速救護，並儘速通知消防機關 [[D0080090:3]]。\n3. 發生火災時，應迅速撲救，防止災情擴大，並儘速通知消防機關 [[D0080090:3]]。\n4. 不得任意移動肇事車輛及現場痕跡證據 [[D0080090:3]]。\n5. 通知警察機關，並配合必要之調查 [[D0080090:3]]。\n\n例外與條件：\n- 無人傷亡且車輛尚能行駛，或有人受傷且當事人均同意移置車輛時，應先標繪車輛位置及現場痕跡證據，再將車輛移置不妨礙交通之處所 [[D0080090:3]]。\n- 無人受傷或死亡，且當事人當場自行和解者，可不必通知警察機關 [[D0080090:3]]。\n- 肇事致人受傷或死亡時，應即採取救護措施並通知警察機關處理，違反者處新臺幣三千元以上九千元以下罰鍰 [[K0040012:62]]。",
+      "citations_valid": [
+        "D0080090:3",
+        "K0040012:62"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 2,
+      "numbers_matched": 2,
+      "numbers_unmatched": [],
+      "input_tokens": 3120,
+      "output_tokens": 467,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 0,
+      "fact_amounts_found": 0
+    },
+    {
+      "id": "q14",
+      "question": "高速公路上發生車禍，故障標誌要放在事故地點後方多遠？",
+      "category": "accident",
+      "should_refuse": false,
+      "expected": [
+        "D0080090:4"
+      ],
+      "queries": [
+        "高速公路上發生車禍，故障標誌要放在事故地點後方多遠？"
+      ],
+      "retrieved": [
+        "D0080090:4",
+        "K0040013:112",
+        "K0040012:59",
+        "D0080090:3",
+        "K0040013:85",
+        "K0040013:84",
+        "D0080090:11",
+        "K0040013:111",
+        "D0080090:9",
+        "K0040012:62"
+      ],
+      "gate_top_score": 0.6529,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "高速公路上發生事故時，車輛故障標誌（或其他明顯警告設施）應豎立在事故地點後方一百公尺處。[[D0080090:4]]\n\n補充：事故地點在車道或路肩時，駕駛人或肇事人應先在適當距離處豎立標誌，事故現場排除後應即撤除。[[D0080090:3]] 遇雨霧致視線不清時，適當距離應酌予增加。[[D0080090:4]]",
+      "citations_valid": [
+        "D0080090:4",
+        "D0080090:3"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 1,
+      "numbers_matched": 1,
+      "numbers_unmatched": [],
+      "input_tokens": 2000,
+      "output_tokens": 161,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 1,
+      "fact_amounts_found": 1
+    },
+    {
+      "id": "q15",
+      "question": "車禍之後多久可以向警察申請現場照片和初步分析研判表？",
+      "category": "accident",
+      "should_refuse": false,
+      "expected": [
+        "D0080090:13"
+      ],
+      "queries": [
+        "車禍之後多久可以向警察申請現場照片和初步分析研判表？"
+      ],
+      "retrieved": [
+        "D0080090:13",
+        "D0080090:10",
+        "D0080090:9",
+        "D0080090:12",
+        "D0080090:11",
+        "G0390060:34",
+        "D0080090:3",
+        "K0040012:90",
+        "D0080029:20",
+        "D0080029:15"
+      ],
+      "gate_top_score": 0.735,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "當事人或利害關係人可以向警察機關申請：\n\n- 現場照片：於事故七日後，得申請閱覽或提供現場圖、現場照片。[[D0080090:13]]\n- 初步分析研判表：於事故三十日後，得申請提供道路交通事故初步分析研判表。[[D0080090:13]]\n\n補充：資料的閱覽應在警察機關的辦公處所進行，不得攜出或塗改增刪；警察機關得以複印或備份方式提供現場照片。[[D0080090:13]] 申請提供資料所需費用，由申請人負擔。[[D0080090:13]]",
+      "citations_valid": [
+        "D0080090:13"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 2,
+      "numbers_matched": 2,
+      "numbers_unmatched": [],
+      "input_tokens": 2596,
+      "output_tokens": 213,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 2,
+      "fact_amounts_found": 2
+    },
+    {
+      "id": "q16",
+      "question": "肇事逃逸會受到什麼處罰？",
+      "category": "accident",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:62"
+      ],
+      "queries": [
+        "肇事逃逸會受到什麼處罰？"
+      ],
+      "retrieved": [
+        "K0040012:62",
+        "K0040012:60",
+        "D0080090:5",
+        "D0080029:16",
+        "K0040012:61",
+        "D0080029:19-1",
+        "K0040012:10",
+        "D0080029:10",
+        "K0040012:30-1",
+        "D0080029:43-1"
+      ],
+      "gate_top_score": 0.6432,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "依提供的條文，肇事逃逸的處罰依傷亡情形而不同：\n\n**無人受傷或死亡而逃逸：** 處新臺幣一千元以上三千元以下罰鍰，並吊扣駕駛執照一個月至三個月。[[K0040012:62]]\n\n**肇事致人受傷而逃逸：** 吊銷駕駛執照。[[K0040012:62]]\n\n**致人重傷或死亡而逃逸：** 吊銷駕駛執照，並不得再考領。[[K0040012:62]]\n\n**補充：**\n- 肇事逃逸案件經通知汽車所有人到場說明，無故不到場說明，或不提供汽車駕駛人相關資料者，吊扣該汽車牌照一個月至三個月。[[K0040012:62]]\n- 車輛所有人接獲警察機關查處肇事逃逸案件通知後，應依通知日期時間到場說明或提供車輛駕駛人相關資料。[[D0080090:5]]",
+      "citations_valid": [
+        "K0040012:62",
+        "D0080090:5"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 6,
+      "numbers_matched": 6,
+      "numbers_unmatched": [],
+      "input_tokens": 3115,
+      "output_tokens": 343,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 2,
+      "fact_amounts_found": 2
+    },
+    {
+      "id": "q17",
+      "question": "車禍沒人受傷、車子還能開，可以先把車移開嗎？",
+      "category": "cross_law",
+      "should_refuse": false,
+      "expected": [
+        "D0080090:3",
+        "K0040012:62"
+      ],
+      "queries": [
+        "車禍沒人受傷、車子還能開，可以先把車移開嗎？"
+      ],
+      "retrieved": [
+        "D0080090:3",
+        "K0040012:62",
+        "D0080090:11",
+        "D0080090:9",
+        "D0080090:12",
+        "K0040013:112",
+        "K0040012:59",
+        "D0080029:18",
+        "K0040012:85-2",
+        "D0080029:16"
+      ],
+      "gate_top_score": 0.6148,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "可以移，但要先標繪。無人傷亡且車輛尚能行駛時，不得任意移動肇事車輛及現場痕跡證據，應先標繪車輛位置及現場痕跡證據，再把車移置到不妨礙交通的處所 [[D0080090:3]]。這種情形的標繪也可以用攝影或錄影等設備記錄 [[D0080090:3]]。\n\n車輛尚能行駛卻不儘速將車輛位置標繪並移到路邊，導致妨礙交通的，駕駛人處新臺幣六百元以上一千八百元以下罰鍰 [[K0040012:62]]。\n\n另外，若事故地點在車道或路肩，應在適當距離處豎立車輛故障標誌或其他明顯警告設施 [[D0080090:3]]。",
+      "citations_valid": [
+        "D0080090:3",
+        "K0040012:62"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 2,
+      "numbers_matched": 2,
+      "numbers_unmatched": [],
+      "input_tokens": 2897,
+      "output_tokens": 277,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 2,
+      "fact_amounts_found": 2
+    },
+    {
+      "id": "q18",
+      "question": "酒測時拒絕配合會被怎麼處理？",
+      "category": "cross_law",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:35",
+        "D0080029:19-2"
+      ],
+      "queries": [
+        "酒測時拒絕配合會被怎麼處理？"
+      ],
+      "retrieved": [
+        "D0080029:19-2",
+        "D0080029:19-4",
+        "K0040012:35",
+        "D0080029:19-1",
+        "K0040012:67",
+        "K0040013:114",
+        "K0040012:73",
+        "K0040012:60",
+        "K0040013:120",
+        "K0040012:24"
+      ],
+      "gate_top_score": 0.6673,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "汽車駕駛人拒絕接受酒精濃度測試檢定者，處新臺幣十八萬元罰鍰，吊銷駕駛執照及吊扣該車輛牌照二年；肇事致人重傷或死亡者，並得沒入車輛。[[D0080029:19-2-p2]]\n\n補充條件：\n- 十年內第二次違反者，處新臺幣三十六萬元罰鍰，第三次以上者按前次違反所處罰鍰金額加罰新臺幣十八萬元，並吊銷駕駛執照，公路主管機關得公布姓名、照片及違法事實，同時吊扣該車輛牌照二年。[[D0080029:19-2-p2]]\n- 租賃車業者已盡告知處罰規定的義務，汽機車駕駛人仍拒絕者，依所處罰鍰加罰二分之一。[[D0080029:19-2-p2]]\n- 慢車駕駛人拒絕接受酒精濃度測試檢定者，處新臺幣四千八百元罰鍰，並當場禁止其駕駛；駕駛微型電動二輪車者，並當場移置保管該微型電動二輪車。[[D0080029:19-2-p2]]\n- 拒絕配合檢測者，會依本條例第三十五條第四項、第五項或第七十三條第三項製單舉發。[[D0080029:19-2-p2]]\n- 汽機車駕駛人駕車發生交通事故，涉犯刑法第一百八十五條之三第一項或陸海空軍刑法第五十四條第一項嫌疑而拒絕測試檢定者，司法警察官或司法警察得報請檢察官核發鑑定許可書，將其強制移由受委託醫療或檢驗機構實施血液檢體採樣及酒精濃度測試檢定。[[K0040012:35-p2]]",
+      "citations_valid": [
+        "D0080029:19-2-p2",
+        "K0040012:35-p2"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 10,
+      "numbers_matched": 10,
+      "numbers_unmatched": [],
+      "input_tokens": 3615,
+      "output_tokens": 639,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 2,
+      "fact_amounts_found": 2
+    },
+    {
+      "id": "q19",
+      "question": "沒有投保強制汽車責任保險，會被罰多少？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "G0390060:49"
+      ],
+      "queries": [
+        "沒有投保強制汽車責任保險，會被罰多少？"
+      ],
+      "retrieved": [
+        "G0390060:49",
+        "G0390060:50",
+        "G0390060:48",
+        "G0390060:51",
+        "G0390060:51-1",
+        "G0390060:41",
+        "K0040012:35-1",
+        "K0040012:18",
+        "K0040012:92",
+        "G0390060:16"
+      ],
+      "gate_top_score": 0.717,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "未依規定投保強制汽車責任保險，罰鍰依情形而定：\n\n- 經公路監理機關路邊稽查、警察機關執行交通勤務，或因違反道路交通管理處罰條例併同舉發的，汽車處新臺幣三千元以上一萬五千元以下罰鍰；機車處新臺幣一千五百元以上三千元以下罰鍰；微型電動二輪車處新臺幣七百五十元以上一千五百元以下罰鍰。[[G0390060:49]]\n- 未投保的汽車肇事時，處新臺幣九千元以上三萬二千元以下罰鍰。[[G0390060:49]]\n\n補充：所處罰鍰得分期繳納。[[G0390060:49]] 罰鍰未繳納前，公路監理機關不予受理應投保汽車辦理換發牌照、異動登記或檢驗。[[G0390060:51]] 保險期間屆滿逾六個月仍未再投保的，主管機關得移請公路監理機關註銷其牌照。[[G0390060:51-1]]",
+      "citations_valid": [
+        "G0390060:49",
+        "G0390060:51",
+        "G0390060:51-1"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 9,
+      "numbers_matched": 9,
+      "numbers_unmatched": [],
+      "input_tokens": 1907,
+      "output_tokens": 368,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 3,
+      "fact_amounts_found": 3
+    },
+    {
+      "id": "q20",
+      "question": "沒保強制險的汽車肇事，罰款是多少？",
+      "category": "fine_amount",
+      "should_refuse": false,
+      "expected": [
+        "G0390060:49"
+      ],
+      "queries": [
+        "沒保強制險的汽車肇事，罰款是多少？"
+      ],
+      "retrieved": [
+        "G0390060:49",
+        "G0390060:48",
+        "G0390060:50",
+        "G0390060:51",
+        "G0390060:41",
+        "K0040012:20",
+        "G0390060:51-1",
+        "K0040012:18",
+        "K0040012:27",
+        "K0040012:21-1"
+      ],
+      "gate_top_score": 0.6817,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "未依規定投保強制險的汽車肇事，由公路監理機關處新臺幣九千元以上三萬二千元以下罰鍰。[[G0390060:49]]\n\n補充：若是在路邊稽查、執行交通勤務時被查獲，或因違反道路交通管理處罰條例而併同舉發，汽車的罰鍰則是新臺幣三千元以上一萬五千元以下。[[G0390060:49]]\n\n所處罰鍰得分期繳納。[[G0390060:49]]",
+      "citations_valid": [
+        "G0390060:49"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 4,
+      "numbers_matched": 4,
+      "numbers_unmatched": [],
+      "input_tokens": 1879,
+      "output_tokens": 175,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 2,
+      "fact_amounts_found": 2
+    },
+    {
+      "id": "q21",
+      "question": "收到罰單後多久內可以去繳款結案？",
+      "category": "colloquial",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:9"
+      ],
+      "queries": [
+        "收到罰單後多久內可以去繳款結案？"
+      ],
+      "retrieved": [
+        "D0080029:59",
+        "K0040012:9",
+        "D0080029:41",
+        "D0080029:52",
+        "D0080029:55",
+        "D0080029:58",
+        "D0080029:45",
+        "D0080029:44",
+        "D0080029:48",
+        "D0080029:51"
+      ],
+      "gate_top_score": 0.6812,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "受處罰人接獲違反道路交通管理事件通知單後，於三十日內，可以不經裁決，直接依罰鍰基準規定，到指定的處所繳納結案。[[K0040012:9]]\n\n若不服舉發事實，則應於三十日內向處罰機關陳述意見。[[K0040012:9]]\n\n如果沒有依通知所定期限前往指定處所聽候裁決，也沒有在規定期限內繳納罰鍰結案或向處罰機關陳述意見，處罰機關得逕行裁決。[[K0040012:9]]\n\n另外，逾應到案期限才向代收機構繳納罰鍰的，代收機構原則上不得收繳，但以代收機構即時銷案、信用卡或金融卡轉帳等其他方式繳納的，不在此限。[[D0080029:59]]",
+      "citations_valid": [
+        "K0040012:9",
+        "D0080029:59"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 2,
+      "numbers_matched": 2,
+      "numbers_unmatched": [],
+      "input_tokens": 1845,
+      "output_tokens": 285,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.5,
+      "citation_hit": true,
+      "fact_amounts_expected": 1,
+      "fact_amounts_found": 1
+    },
+    {
+      "id": "q22",
+      "question": "聽到救護車鳴笛卻不讓路會怎樣？",
+      "category": "colloquial",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:45"
+      ],
+      "queries": [
+        "聽到救護車鳴笛卻不讓路會怎樣？"
+      ],
+      "retrieved": [
+        "K0040012:74",
+        "K0040012:45",
+        "K0040013:129",
+        "K0040012:44",
+        "K0040012:60",
+        "K0040012:78",
+        "D0080029:12",
+        "K0040013:101",
+        "D0080029:19-1",
+        "K0040012:7-2"
+      ],
+      "gate_top_score": 0.5539,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "聽到救護車警號卻不立即避讓，處罰依駕駛的車種而不同：\n\n**汽車駕駛人**：處新臺幣六千元以上三萬元以下罰鍰，並吊銷駕駛執照及吊扣該汽車牌照六個月。[[K0040012:45]] 如果因此致人死傷，則處新臺幣一萬元以上十萬元以下罰鍰，並吊銷駕駛執照及該汽車牌照。[[K0040012:45]]\n\n**慢車駕駛人**：聞救護車警號不立即避讓，處新臺幣三百元以上一千二百元以下罰鍰。[[K0040012:74]] 此外，慢車行駛或停止時聽到警號，應立即靠道路右側避讓；在單行道則應靠道路兩側避讓，並暫時停車於適當地點，供執行緊急任務的車輛超越。[[K0040013:129]]",
+      "citations_valid": [
+        "K0040012:45",
+        "K0040012:74",
+        "K0040013:129"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 7,
+      "numbers_matched": 7,
+      "numbers_unmatched": [],
+      "input_tokens": 3157,
+      "output_tokens": 319,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.5,
+      "citation_hit": true,
+      "fact_amounts_expected": 3,
+      "fact_amounts_found": 3
+    },
+    {
+      "id": "q23",
+      "question": "騎機車可以上高速公路嗎？",
+      "category": "colloquial",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:92"
+      ],
+      "queries": [
+        "騎機車可以上高速公路嗎？"
+      ],
+      "retrieved": [
+        "K0040012:92",
+        "K0040013:105",
+        "K0040013:99",
+        "K0040013:83-3",
+        "K0040013:99-1",
+        "K0040013:113-1",
+        "K0040013:61-1",
+        "K0040012:32",
+        "K0040012:33",
+        "K0040012:32-1"
+      ],
+      "gate_top_score": 0.6651,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "機車原則上禁止行駛高速公路。[[K0040012:92-p1]]\n\n例外是汽缸排氣量五百五十立方公分以上的大型重型機車，可依交通部公告規定的路段及時段行駛高速公路。[[K0040012:92-p1]] 這類機車的駕駛人，須有得駕駛汽缸排氣量五百五十立方公分以上大型重型機車的駕駛執照一年以上，以及小型車以上的駕駛執照。[[K0040012:92-p1]]\n\n若違反上述規定，例如行駛未經公告允許的路段、未依公告時段行駛，處駕駛人新臺幣三千元以上六千元以下罰鍰。[[K0040012:92-p1]]",
+      "citations_valid": [
+        "K0040012:92-p1"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 5,
+      "numbers_matched": 5,
+      "numbers_unmatched": [],
+      "input_tokens": 2449,
+      "output_tokens": 254,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 1,
+      "fact_amounts_found": 1
+    },
+    {
+      "id": "q24",
+      "question": "腳踏車可以載小孩嗎？",
+      "category": "colloquial",
+      "should_refuse": false,
+      "expected": [
+        "K0040013:122"
+      ],
+      "queries": [
+        "腳踏車可以載小孩嗎？"
+      ],
+      "retrieved": [
+        "K0040013:122",
+        "K0040012:76",
+        "K0040012:31-2",
+        "K0040013:88",
+        "K0040012:72-2",
+        "K0040013:6",
+        "K0040013:139",
+        "K0040013:83-3",
+        "K0040012:69",
+        "K0040012:85-4"
+      ],
+      "gate_top_score": 0.6185,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "可以，但有條件限制。\n\n- 自行車原則上不得附載坐人，但腳踏自行車或電動輔助自行車依規定附載一名幼童的，不在此限。[[K0040013:122]]\n- 駕駛人須年滿十八歲，並使用合格腳踏自行車或電動輔助自行車，且安裝合格兒童座椅。[[K0040013:122]]\n- 安裝前座椅的，以附載一歲以上四歲以下且重量十五公斤以下幼童為限；安裝後座椅的，以附載一歲以上六歲以下且重量二十二公斤以下幼童為限。[[K0040013:122]]\n- 腳踏自行車或電動輔助自行車須標示合格標章，才可依規定附載幼童行駛道路。[[K0040013:122]]\n- 若駕駛人未滿十八歲、幼童年齡或體重超過規定、未依規定使用合格兒童座椅或車輛，或未依規定附載幼童，處新臺幣三百元以上六百元以下罰鍰。[[K0040012:76]]",
+      "citations_valid": [
+        "K0040013:122",
+        "K0040012:76"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 10,
+      "numbers_matched": 10,
+      "numbers_unmatched": [],
+      "input_tokens": 2802,
+      "output_tokens": 371,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 6,
+      "fact_amounts_found": 6
+    },
+    {
+      "id": "q25",
+      "question": "車子沒去定期驗車會被罰多少？",
+      "category": "colloquial",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:17"
+      ],
+      "queries": [
+        "車子沒去定期驗車會被罰多少？"
+      ],
+      "retrieved": [
+        "K0040012:17",
+        "K0040012:18",
+        "K0040012:26",
+        "G0390060:49",
+        "K0040012:15",
+        "K0040012:20",
+        "K0040013:44",
+        "G0390060:51",
+        "K0040013:36",
+        "K0040013:46"
+      ],
+      "gate_top_score": 0.7073,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "汽車不依限期參加定期檢驗者，處汽車所有人新臺幣九百元以上一千八百元以下罰鍰。[[K0040012:17]]\n\n補充：\n- 逾期一個月以上者，並吊扣其牌照，至檢驗合格後發還。[[K0040012:17]]\n- 逾期六個月以上者，註銷其牌照。[[K0040012:17]]",
+      "citations_valid": [
+        "K0040012:17"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 4,
+      "numbers_matched": 4,
+      "numbers_unmatched": [],
+      "input_tokens": 1839,
+      "output_tokens": 138,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 3,
+      "fact_amounts_found": 3
+    },
+    {
+      "id": "q26",
+      "question": "今天天氣怎麼樣？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "今天天氣怎麼樣？"
+      ],
+      "retrieved": [
+        "D0080029:4",
+        "K0040013:146",
+        "D0080029:81",
+        "K0040012:42",
+        "K0040013:7",
+        "K0040013:142",
+        "D0080090:13",
+        "K0040013:109",
+        "K0040012:14",
+        "K0040012:32-1"
+      ],
+      "gate_top_score": 0.2608,
+      "refused": true,
+      "refusal_layer": "gate",
+      "answer": "",
+      "citations_valid": [],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "id": "q27",
+      "question": "我要怎麼申報綜合所得稅？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "我要怎麼申報綜合所得稅？"
+      ],
+      "retrieved": [
+        "G0390060:17",
+        "K0040013:16",
+        "K0040013:17",
+        "D0080029:52",
+        "D0080029:78",
+        "K0040013:63",
+        "D0080029:40",
+        "K0040013:17-1",
+        "D0080029:50",
+        "G0390060:46"
+      ],
+      "gate_top_score": 0.3376,
+      "refused": true,
+      "refusal_layer": "gate",
+      "answer": "",
+      "citations_valid": [],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "id": "q28",
+      "question": "離婚需要辦理哪些手續？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "離婚需要辦理哪些手續？"
+      ],
+      "retrieved": [
+        "K0040013:22",
+        "K0040013:63",
+        "K0040013:75",
+        "K0040013:15",
+        "K0040013:50",
+        "K0040013:32",
+        "K0040013:16",
+        "D0080029:69",
+        "K0040013:24",
+        "K0040013:33"
+      ],
+      "gate_top_score": 0.3899,
+      "refused": true,
+      "refusal_layer": "gate",
+      "answer": "",
+      "citations_valid": [],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "id": "q29",
+      "question": "高鐵從台北到左營的票價是多少？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "高鐵從台北到左營的票價是多少？"
+      ],
+      "retrieved": [
+        "K0040012:75",
+        "K0040012:81-1",
+        "K0040012:92",
+        "K0040012:53-1",
+        "K0040012:80",
+        "K0040012:33",
+        "K0040013:2",
+        "K0040012:40",
+        "K0040012:52",
+        "K0040012:31"
+      ],
+      "gate_top_score": 0.2979,
+      "refused": true,
+      "refusal_layer": "gate",
+      "answer": "",
+      "citations_valid": [],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "id": "q30",
+      "question": "過失傷害罪最高可以判幾年有期徒刑？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "過失傷害罪最高可以判幾年有期徒刑？"
+      ],
+      "retrieved": [
+        "K0040012:86",
+        "K0040012:35-2",
+        "K0040012:21",
+        "D0080029:2",
+        "K0040012:61",
+        "K0040012:30-1",
+        "K0040012:90",
+        "K0040012:67-1",
+        "K0040012:44",
+        "K0040012:37"
+      ],
+      "gate_top_score": 0.3997,
+      "refused": true,
+      "refusal_layer": "gate",
+      "answer": "",
+      "citations_valid": [],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "id": "q31",
+      "question": "酒駕肇事的話，強制險還會賠嗎？罰則又是什麼？",
+      "category": "cross_law",
+      "should_refuse": false,
+      "expected": [
+        "G0390060:29",
+        "K0040012:35"
+      ],
+      "queries": [
+        "酒駕肇事的話，強制險還會賠嗎？罰則又是什麼？"
+      ],
+      "retrieved": [
+        "G0390060:29",
+        "K0040012:35",
+        "D0080029:43-1",
+        "D0080029:19-2",
+        "G0390060:28",
+        "K0040012:61",
+        "K0040013:114",
+        "G0390060:49",
+        "K0040012:62",
+        "G0390060:48"
+      ],
+      "gate_top_score": 0.6169,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "強制險部分：被保險人飲酒後駕駛，吐氣或血液中酒精濃度超過道路交通管理法規規定的標準，致被保險汽車發生汽車交通事故時，保險人仍應依本法規定負保險給付之責，但得在給付金額範圍內，代位行使請求權人對被保險人的請求權。[[G0390060:29]] 這個代位權，自保險人為保險給付之日起，二年間不行使而消滅。[[G0390060:29]]\n\n另外，若是受害人或其他請求權人本身故意行為或從事犯罪行為所致，保險人不負保險給付責任。[[G0390060:28]]\n\n罰則部分：\n- 違反第三十五條第一項、第三項至第五項之情形之一，吊扣該汽機車牌照二年，並於移置保管該汽機車時扣繳其牌照；因而肇事致人重傷或死亡，沒入該車輛。[[K0040012:35-p2]]\n- 十年內第二次違反者，處新臺幣三十六萬元罰鍰；第三次以上者，按前次違反本項所處罰鍰金額加罰新臺幣十八萬元，並均應當場移置保管該汽機車、吊銷其駕駛執照。[[K0040012:35-p2]]\n- 如肇事致人重傷或死亡者，吊銷其駕駛執照，並不得再考領。[[K0040012:35-p2]]\n- 汽機車所有人明知駕駛人有第一項各款情形而不予禁止駕駛者，依第一項規定之罰鍰處罰。[[K0040012:35-p2]]\n- 年滿十八歲的同車乘客，在駕駛人經測試檢定吐氣所含酒精濃度達每公升零點二五毫克或血液中酒精濃度達百分之零點零五以上時，處新臺幣六千元以上一萬五千元以下罰鍰；但年滿七十歲、心智障礙或汽車運輸業之乘客，不在此限。[[K0040012:35-p2]]\n- 因而肇事致人重傷或死亡時，要沒入車輛，須符合下列情形之一：行為時駕駛人同時為車輛所有人；車輛所有人明知駕駛人已有飲酒等行為，或所有人亦搭乘該車輛；或其他符合行政罰法第二十二條規定得處罰沒入之情形。[[D0080029:43-1]]\n\n提供的條文中沒有第一次違反時酒駕本身的罰鍰金額規定。",
+      "citations_valid": [
+        "G0390060:29",
+        "G0390060:28",
+        "K0040012:35-p2",
+        "D0080029:43-1"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 14,
+      "numbers_matched": 13,
+      "numbers_unmatched": [
+        "1次"
+      ],
+      "input_tokens": 3121,
+      "output_tokens": 866,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 7,
+      "fact_amounts_found": 1
+    },
+    {
+      "id": "q32",
+      "question": "車禍後沒報警就離開現場會被罰嗎？",
+      "category": "cross_law",
+      "should_refuse": false,
+      "expected": [
+        "K0040012:62",
+        "D0080090:3"
+      ],
+      "queries": [
+        "車禍後沒報警就離開現場會被罰嗎？"
+      ],
+      "retrieved": [
+        "K0040012:62",
+        "D0080090:5",
+        "D0080090:3",
+        "D0080029:19-1",
+        "D0080029:16",
+        "D0080090:11",
+        "G0390060:50",
+        "G0390060:34",
+        "D0080029:10",
+        "D0080029:18"
+      ],
+      "gate_top_score": 0.6129,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "車禍後未依規定處置就離開現場，依條文會受到處罰，處罰內容依有無人受傷或死亡而不同：\n\n**無人受傷或死亡：**\n- 未依規定處置者，處新臺幣一千元以上三千元以下罰鍰；逃逸者，並吊扣駕駛執照一個月至三個月。[[K0040012:62]]\n- 事故處理上，無人受傷或死亡且當事人當場自行和解的，不必通知警察機關。[[D0080090:3]]\n\n**有人受傷或死亡：**\n- 駕駛人應即採取救護措施及依規定處置，並通知警察機關處理，違反者處新臺幣三千元以上九千元以下罰鍰。[[K0040012:62]]\n- 肇事致人受傷而逃逸者，吊銷駕駛執照；致人重傷或死亡而逃逸者，吊銷駕駛執照，並不得再考領。[[K0040012:62]]\n\n**對車輛所有人：**\n- 肇事逃逸案件經通知車輛所有人到場說明，無故不到場，或不提供駕駛人相關資料者，吊扣該汽車牌照一個月至三個月。[[K0040012:62]]",
+      "citations_valid": [
+        "K0040012:62",
+        "D0080090:3"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 8,
+      "numbers_matched": 8,
+      "numbers_unmatched": [],
+      "input_tokens": 2709,
+      "output_tokens": 419,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "citation_hit": true,
+      "fact_amounts_expected": 2,
+      "fact_amounts_found": 2
+    },
+    {
+      "id": "q33",
+      "question": "考汽車駕照的報名費要多少錢？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "考汽車駕照的報名費要多少錢？"
+      ],
+      "retrieved": [
+        "K0040013:66",
+        "K0040013:63",
+        "K0040013:70",
+        "K0040013:57",
+        "K0040013:56",
+        "K0040012:21",
+        "K0040012:92",
+        "K0040013:65-1",
+        "K0040013:60",
+        "K0040013:65"
+      ],
+      "gate_top_score": 0.6179,
+      "refused": true,
+      "refusal_layer": "model",
+      "answer": "",
+      "citations_valid": [],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 1857,
+      "output_tokens": 11
+    },
+    {
+      "id": "q34",
+      "question": "汽車的牌照稅一年要繳多少？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "汽車的牌照稅一年要繳多少？"
+      ],
+      "retrieved": [
+        "K0040013:17",
+        "K0040013:8",
+        "K0040013:17-1",
+        "K0040012:13",
+        "K0040012:16",
+        "K0040012:12",
+        "K0040012:15",
+        "K0040013:24-1",
+        "K0040013:15",
+        "K0040013:44"
+      ],
+      "gate_top_score": 0.5396,
+      "refused": true,
+      "refusal_layer": "model",
+      "answer": "",
+      "citations_valid": [],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 2366,
+      "output_tokens": 11
+    },
+    {
+      "id": "q35",
+      "question": "車禍對方要賠我精神慰撫金，金額怎麼算？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "車禍對方要賠我精神慰撫金，金額怎麼算？"
+      ],
+      "retrieved": [
+        "G0390060:32",
+        "G0390060:42",
+        "G0390060:39",
+        "G0390060:11",
+        "G0390060:33",
+        "G0390060:7",
+        "G0390060:31",
+        "K0040012:35-2",
+        "G0390060:38",
+        "G0390060:43"
+      ],
+      "gate_top_score": 0.3723,
+      "refused": true,
+      "refusal_layer": "gate",
+      "answer": "",
+      "citations_valid": [],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "id": "q36",
+      "question": "停車場的收費標準是多少？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "停車場的收費標準是多少？"
+      ],
+      "retrieved": [
+        "K0040012:56",
+        "K0040012:57",
+        "K0040012:55",
+        "K0040013:112",
+        "K0040013:111",
+        "K0040013:131",
+        "K0040012:3",
+        "K0040012:52",
+        "D0080029:2",
+        "K0040012:56-1"
+      ],
+      "gate_top_score": 0.5416,
+      "refused": true,
+      "refusal_layer": "model",
+      "answer": "",
+      "citations_valid": [],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 2924,
+      "output_tokens": 11
+    },
+    {
+      "id": "q37",
+      "question": "電動車充電站要怎麼申請設置？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "電動車充電站要怎麼申請設置？"
+      ],
+      "retrieved": [
+        "K0040013:17-1",
+        "K0040012:36",
+        "K0040012:69-1",
+        "K0040013:80-1",
+        "K0040013:20",
+        "K0040013:16",
+        "K0040013:115-2",
+        "K0040013:8",
+        "K0040013:47",
+        "K0040013:24-1"
+      ],
+      "gate_top_score": 0.477,
+      "refused": true,
+      "refusal_layer": "model",
+      "answer": "",
+      "citations_valid": [],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 2112,
+      "output_tokens": 11
+    },
+    {
+      "id": "q38",
+      "question": "計程車的起跳價是多少？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "計程車的起跳價是多少？"
+      ],
+      "retrieved": [
+        "K0040012:38",
+        "K0040012:36",
+        "K0040013:78",
+        "K0040013:24-1",
+        "K0040012:81-1",
+        "K0040012:37",
+        "K0040012:56-1",
+        "K0040013:42",
+        "D0080029:8",
+        "K0040012:81"
+      ],
+      "gate_top_score": 0.4631,
+      "refused": true,
+      "refusal_layer": "model",
+      "answer": "",
+      "citations_valid": [],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 1737,
+      "output_tokens": 11
+    },
+    {
+      "id": "q39",
+      "question": "國道的通行費怎麼計算？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "國道的通行費怎麼計算？"
+      ],
+      "retrieved": [
+        "K0040012:27",
+        "G0390060:45",
+        "K0040012:92",
+        "G0390060:44",
+        "K0040012:33",
+        "K0040013:105",
+        "K0040013:40",
+        "K0040013:80",
+        "K0040013:84",
+        "K0040012:7-2"
+      ],
+      "gate_top_score": 0.477,
+      "refused": true,
+      "refusal_layer": "model",
+      "answer": "",
+      "citations_valid": [],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 2022,
+      "output_tokens": 11
+    },
+    {
+      "id": "q40",
+      "question": "汽車多久要保養一次？",
+      "category": "out_of_scope",
+      "should_refuse": true,
+      "expected": [],
+      "queries": [
+        "汽車多久要保養一次？"
+      ],
+      "retrieved": [
+        "K0040013:44",
+        "K0040013:39-3",
+        "K0040013:45",
+        "K0040013:14",
+        "K0040013:36",
+        "K0040013:29",
+        "K0040012:18",
+        "K0040013:46",
+        "K0040012:17",
+        "K0040013:28"
+      ],
+      "gate_top_score": 0.5194,
+      "refused": false,
+      "refusal_layer": null,
+      "answer": "汽車所有人除了依規定接受車輛檢驗外，應依原廠規定的時間，自行實施保養及檢查。[[K0040013:39-3]]\n\n條文只寫「依原廠規定時間」，沒有規定具體的保養間隔或次數。[[K0040013:39-3]]",
+      "citations_valid": [
+        "K0040013:39-3"
+      ],
+      "citations_invalid": [],
+      "numbers_total": 0,
+      "numbers_matched": 0,
+      "numbers_unmatched": [],
+      "input_tokens": 2020,
+      "output_tokens": 104
+    }
+  ]
+}

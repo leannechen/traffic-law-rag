@@ -97,3 +97,11 @@ def test_check_numbers_flags_derived_figures() -> None:
 def test_check_numbers_with_no_numbers_is_ok() -> None:
     result = check_numbers("需要接受講習。", ["應接受講習。"])
     assert result.ok and result.total == 0
+
+
+def test_ordinals_are_not_quantities() -> None:
+    assert extract_quantities("第一次違反者處罰鍰") == []
+    assert extract_quantities("第二十次") == []  # 不能只切出「十次」
+    assert extract_quantities("十年內第二次違反") == ["10年"]
+    assert extract_quantities("二次以上") == ["2次"]  # 「二次以上」是數量
+    assert extract_quantities("第三年") == []
