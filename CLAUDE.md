@@ -13,7 +13,7 @@
 - 已完成：Step 1 專案骨架、Step 2 資料取得與格式確認、Step 3 Chunking 與建索引（Leanne 已檢視；489 chunk、voyage-4、data_version 2026-10-05）
 - 已完成：Step 4 檢索與評估集 v0（Leanne 已檢視；40 題已驗證、28 可回答／12 範圍外（q40 改標為可回答，標準答案 `K0040013:39-3`）；baseline 純向量 Recall@5 = 1.000、MRR = 0.845；hybrid 不如純向量，線上用純向量，ADR 0004；單一相似度門檻無法分開貼近主題的範圍外題）
 - 已完成：Step 5 生成、引用與拒答（Leanne 已檢視）。模型 `claude-sonnet-5-5`、給模型整條條文、門檻 0.40、改寫預設關閉（ADR 0005）。40 題（28 可回答／12 範圍外）：Recall@5 1.000、MRR 0.845、引用正確率 1.000（精確率 0.653）、數字正確率 1.000、拒答正確率 1.000（範圍外 12/12、誤拒 0/28）。
-- 進行中：Step 6 SSE 串流 API（學習流程：已解釋概念、計畫待 Leanne 確認）
+- 已完成（待 Leanne 檢視）：Step 6 SSE 串流 API。`POST /api/ask`（SSE，依 spec 5.3）、`GET /api/chunks/{id}`（含整條 `article_text`）、速率限制（每 IP 每分鐘 10 次）、200 字上限；265 個測試；`curl -N` 已用真實索引與模型驗證一般回答與兩種拒答（ADR 0006）。**必停檢查點，等 Leanne 用 `curl -N` 檢視事件序列後才進 Step 7**
 
 每完成一個 Step 就更新這一段。
 
@@ -67,6 +67,8 @@
 索引（在 `backend/`，需先在 `.env` 設定 `VOYAGE_API_KEY`）：`uv run python -m app.ingestion.build_index`，輸出到 `data/index/`（不進版控）
 
 檢索與評估（在 `backend/`）：`uv run python -m app.pipeline.retrieve "問題" [--mode vector|hybrid|hybrid-bigram]`；`uv run python -m eval.run_eval [--retriever vector|hybrid|hybrid-bigram] --name <檔名>`（輸出 `eval/results/<檔名>.json`，baseline 為 `baseline-vector`）；評估集審核單：`uv run python -m eval.make_review`（產生 `eval/review.md`）
+
+API（在 `backend/`，需 `ANTHROPIC_API_KEY`、`VOYAGE_API_KEY` 與已建好的索引）：`uv run uvicorn app.main:app --port 8021`；`curl -N -X POST localhost:8021/api/ask -H 'Content-Type: application/json' -d '{"question":"紅燈右轉會被罰多少錢？"}'`（本機 8000 常被其他專案佔用，compose 用 8010）
 
 問答與生成評估（在 `backend/`，需 `ANTHROPIC_API_KEY`）：`uv run python -m app.pipeline.answer "問題" [--rewrite]`；`uv run python -m eval.run_generation_eval --name <檔名> [--rewrite] [--refresh]`（LLM 回應快取在 `data/cache/`）
 

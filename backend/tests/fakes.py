@@ -1,4 +1,4 @@
-from collections.abc import Callable
+from collections.abc import Callable, Generator
 from typing import Any
 
 from app.core.llm import Effort, LLMResponse
@@ -11,10 +11,22 @@ class FakeLLM:
 
     model = "fake-llm"
 
-    def __init__(self, respond: Callable[[str, str], str] | str, *, refused: bool = False) -> None:
+    def __init__(
+        self,
+        respond: Callable[[str, str], str] | str,
+        *,
+        refused: bool = False,
+        chunk_size: int = 4,
+        fail_after: int | None = None,
+        error: Exception | None = None,
+    ) -> None:
         self._respond = respond
         self._refused = refused
+        self._chunk_size = chunk_size  # 串流時每段幾個字元（刻意切得很碎，測標記跨段）
+        self._fail_after = fail_after  # 串流送出幾段後丟出 error
+        self._error = error
         self.calls: list[dict[str, Any]] = []
+        self.closed = False
 
     def complete(
         self,
@@ -33,6 +45,11 @@ class FakeLLM:
             text=text, model=self.model, refused=self._refused, input_tokens=10, output_tokens=5
         )
 
+    def stream(
+        self, *, system: str, user: str, max_tokens: int, effort: Effort
+    ) -> Generator[str | LLMResponse, None, None]:
+        return _stream(self, system, user, effort)
+
 
 def chunk(
     chunk_id: str, text: str, score: float = 0.7, *, law: str = "測試法", rank: int = 1
@@ -49,6 +66,25 @@ def chunk(
         article_no=rest.split("-p")[0],
         text=text,
     )
+
+
+def _stream(
+    self: FakeLLM, system: str, user: str, effort: Effort
+) -> Generator[str | LLMResponse, None, None]:
+    self.calls.append({"system": system, "user": user, "effort": effort, "stream": True})
+    text = self._respond if isinstance(self._respond, str) else self._respond(system, user)
+    try:
+        step = self._chunk_size
+        for sent, i in enumerate(range(0, len(text), step)):
+            if self._fail_after is not None and sent >= self._fail_after:
+                raise self._error or RuntimeError("boom")
+            yield text[i : i + step]
+        yield LLMResponse(
+            text=text, model=self.model, refused=self._refused, input_tokens=10, output_tokens=5
+        )
+    except GeneratorExit:
+        self.closed = True  # 呼叫端提前關閉（例如使用者斷線）
+        raise
 
 
 class FakeSearcher:

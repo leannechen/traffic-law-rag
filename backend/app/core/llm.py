@@ -5,6 +5,7 @@ pipeline 只依賴 LLMClient，測試與評估可換成假實作或有快取的�
 
 import hashlib
 import json
+from collections.abc import Generator
 from pathlib import Path
 from typing import Any, Literal, Protocol
 
@@ -43,6 +44,17 @@ class LLMClient(Protocol):
         json_schema: dict[str, Any] | None = None,
     ) -> LLMResponse: ...
 
+    def stream(
+        self,
+        *,
+        system: str,
+        user: str,
+        max_tokens: int,
+        effort: Effort,
+    ) -> Generator[str | LLMResponse, None, None]:
+        """逐段產生文字（str），最後一個元素是完整的 LLMResponse（含用量與是否被拒）。"""
+        ...
+
 
 class AnthropicLLMClient:
     """Claude API（Python SDK）。
@@ -52,12 +64,15 @@ class AnthropicLLMClient:
     - 以 content block 的 type 取文字，不依位置（thinking block 可能排在前面且內容為空）。
     """
 
-    def __init__(self, api_key: str, model: str, use_fallbacks: bool = True) -> None:
+    def __init__(
+        self, api_key: str, model: str, use_fallbacks: bool = True, timeout: float = 60.0
+    ) -> None:
         if not api_key:
             raise LLMError("缺少 ANTHROPIC_API_KEY，請設定在 .env")
         self.model = model
         self._use_fallbacks = use_fallbacks
-        self._client = anthropic.Anthropic(api_key=api_key)
+        # 逾時：連線與「兩段資料之間」最久等多久；超過就丟 APITimeoutError → LLMError → error 事件
+        self._client = anthropic.Anthropic(api_key=api_key, timeout=timeout)
 
     def _request_params(
         self,
@@ -111,6 +126,41 @@ class AnthropicLLMClient:
             output_tokens=response.usage.output_tokens,
         )
 
+    def stream(
+        self,
+        *,
+        system: str,
+        user: str,
+        max_tokens: int,
+        effort: Effort,
+    ) -> Generator[str | LLMResponse, None, None]:
+        params = self._request_params(system, user, max_tokens, effort, None)
+        try:
+            if self._use_fallbacks:
+                manager: Any = self._client.beta.messages.stream(
+                    **params, betas=[FALLBACK_BETA], fallbacks="default"
+                )
+            else:
+                manager = self._client.messages.stream(**params)
+            # 離開 with（含呼叫端關閉這個產生器）時會關閉 HTTP 串流，停止產生與計費
+            with manager as stream:
+                yield from stream.text_stream
+                final: Any = stream.get_final_message()
+        except anthropic.APITimeoutError as e:
+            raise LLMError("呼叫 Claude API 逾時") from e
+        except anthropic.APIConnectionError as e:
+            raise LLMError("無法連線 Claude API") from e
+        except anthropic.APIStatusError as e:
+            raise LLMError(f"Claude API 回應 {e.status_code}：{e.message}") from e
+        yield LLMResponse(
+            text="".join(b.text for b in final.content if b.type == "text"),
+            model=final.model,
+            refused=final.stop_reason == "refusal",
+            stop_reason=final.stop_reason,
+            input_tokens=final.usage.input_tokens,
+            output_tokens=final.usage.output_tokens,
+        )
+
 
 class CachedLLMClient:
     """把成功的回應存在本機 JSON（鍵 = 模型＋參數＋prompt 內容的雜湊）。
@@ -159,3 +209,14 @@ class CachedLLMClient:
             self._path.parent.mkdir(parents=True, exist_ok=True)
             self._path.write_text(json.dumps(self._cache, ensure_ascii=False), encoding="utf-8")
         return response
+
+    def stream(
+        self,
+        *,
+        system: str,
+        user: str,
+        max_tokens: int,
+        effort: Effort,
+    ) -> Generator[str | LLMResponse, None, None]:
+        """串流不快取（評估不走串流路徑），直接轉給內層。"""
+        return self._inner.stream(system=system, user=user, max_tokens=max_tokens, effort=effort)
