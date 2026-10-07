@@ -1,6 +1,6 @@
 {
   "name": "gen-sonnet-norewrite",
-  "evaluated_at": "2026-10-07T03:06:40+00:00",
+  "evaluated_at": "2026-10-07T03:48:12+00:00",
   "config": {
     "llm_model": "claude-sonnet-5-5",
     "rewrite": false,
@@ -15,27 +15,27 @@
   },
   "counts": {
     "verified": 40,
-    "answerable": 27,
-    "out_of_scope": 13
+    "answerable": 28,
+    "out_of_scope": 12
   },
   "metrics": {
     "recall_at_5": 1.0,
-    "mrr": 0.858,
+    "mrr": 0.8452,
     "citation_accuracy": 1.0,
     "citation_accuracy_answered": 1.0,
-    "citation_precision": 0.6458,
+    "citation_precision": 0.6531,
     "invalid_citations": 0,
     "answers_with_invalid_citation": 0,
     "number_accuracy": 1.0,
     "answers_all_numbers_ok": 1.0,
     "fact_amount_coverage": 0.9848,
-    "refusal_accuracy": 0.975,
-    "out_of_scope_refused": "12/13",
+    "refusal_accuracy": 1.0,
+    "out_of_scope_refused": "12/12",
     "out_of_scope_refused_by_layer": {
       "gate": 6,
       "model": 6
     },
-    "false_refusals": "0/27",
+    "false_refusals": "0/28",
     "false_refusals_by_layer": {},
     "tokens": {
       "input": 103144,
@@ -63,7 +63,7 @@
         "refused": 0
       },
       "colloquial": {
-        "n": 5,
+        "n": 6,
         "citation_accuracy": 1.0,
         "refused": 0
       }
@@ -1682,9 +1682,11 @@
     {
       "id": "q40",
       "question": "汽車多久要保養一次？",
-      "category": "out_of_scope",
-      "should_refuse": true,
-      "expected": [],
+      "category": "colloquial",
+      "should_refuse": false,
+      "expected": [
+        "K0040013:39-3"
+      ],
       "queries": [
         "汽車多久要保養一次？"
       ],
@@ -1712,7 +1714,14 @@
       "numbers_matched": 0,
       "numbers_unmatched": [],
       "input_tokens": 2020,
-      "output_tokens": 104
+      "output_tokens": 104,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 0.5,
+      "citation_hit": true,
+      "citations_cited": 1,
+      "citations_in_expected": 1,
+      "fact_amounts_expected": 0,
+      "fact_amounts_found": 0
     }
   ]
 }
