@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useMeta } from '../lib/useMeta'
 import styles from './Header.module.css'
 import { CloseIcon, MenuIcon } from './icons'
+import { ThemeToggle } from './ThemeToggle'
 
 const GITHUB_URL = 'https://github.com/leannechen/traffic-law-rag'
 
@@ -80,6 +81,7 @@ export function Header({ masthead }: Props) {
           <NavLink to="/about" className={navClass}>
             關於
           </NavLink>
+          <ThemeToggle />
         </nav>
       </div>
     </header>
