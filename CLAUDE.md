@@ -16,6 +16,7 @@
 - 已完成（Leanne 已檢視）：Step 6 SSE 串流 API。`POST /api/ask`（SSE，依 spec 5.3）、`GET /api/chunks/{id}`（含整條 `article_text`）、速率限制（每 IP 每分鐘 10 次）、200 字上限；265 個測試；`curl -N` 已用真實索引與模型驗證一般回答與兩種拒答（ADR 0006）。
 - 已完成（待驗收）：Step 7 前端版面骨架、提問與串流答案。token／頁首頁尾／路由、`lib/sse.ts`、問答狀態機（`idle → streaming → done | refused | stopped | error`）、首頁、結果頁骨架、RefusalNotice、ErrorNotice（含速率限制倒數）、關於頁；Vitest 45 個。引用標記與依據卡片此步不可點（Step 8）
 - 已完成（待驗收）：Step 8 前端引用、依據與條文全文。全頁唯一的 `activeArticleId`、可點的引用標記與依據卡片（串流中不可點）、桌面下方全文面板（整條 `article_text`）、手機兩個分頁與條文抽屜（上一則／下一則）、引用驗證失敗的虛線 badge 與警告列；Esc 關閉並還原焦點；Vitest 69 個
+- 已完成（待確認）：問題放進網址（spec 5.5-G8 修訂）。`/?q=<問題>` 是結果頁、`/` 是首頁；提問新增瀏覽紀錄，上一頁／下一頁／重新整理／分享連結都會重新提問。後續順序：亮暗色切換按鈕（右上角，spec 5.5-G4 修訂）→ Step 9
 
 每完成一個 Step 就更新這一段。
 

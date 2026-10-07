@@ -50,12 +50,7 @@ export function AnswerSection({ state, evidence, selection, dataVersion, onAsk, 
         </div>
       )}
       {phase === 'error' && error && (
-        <ErrorNotice
-          error={error}
-          runId={state.runId}
-          onRetry={() => onAsk(question)}
-          onHome={onReset}
-        />
+        <ErrorNotice error={error} runId={state.runId} onRetry={() => onAsk(question)} />
       )}
       {phase === 'done' && (
         <div className={styles.info}>

@@ -5,9 +5,9 @@ import { Footer } from './Footer'
 import { Header } from './Header'
 
 export function Layout() {
-  const { state, reset } = useAskContext()
+  const { question } = useAskContext()
   const { pathname, hash } = useLocation()
-  const masthead = pathname === '/' && state.phase === 'idle'
+  const masthead = pathname === '/' && !question
 
   // 換頁時回到頁面頂端；有 hash（#scope）的由該頁自己捲動
   // biome-ignore lint/correctness/useExhaustiveDependencies: 以路由變動作為觸發條件
@@ -17,7 +17,7 @@ export function Layout() {
 
   return (
     <>
-      <Header masthead={masthead} onGoHome={reset} />
+      <Header masthead={masthead} />
       <Outlet />
       <Footer />
     </>
