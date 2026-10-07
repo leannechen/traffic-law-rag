@@ -1,0 +1,58 @@
+.root {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.95;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.stopped {
+  color: var(--ink2);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 2px;
+  padding: 0 8px;
+  min-height: 28px;
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.8;
+  white-space: nowrap;
+  vertical-align: 2px;
+  cursor: default;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 2px;
+  background: var(--ink);
+  vertical-align: -3px;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+@media (min-width: 768px) {
+  .root {
+    font-size: 21px;
+    line-height: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+}

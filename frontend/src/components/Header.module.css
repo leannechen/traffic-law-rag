@@ -1,0 +1,211 @@
+.root {
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.band {
+  background: var(--band);
+  color: var(--on-band);
+}
+
+.bandInner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 6px 16px;
+  display: flex;
+  gap: 8px 28px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.bandMobile {
+  color: var(--band-ink2);
+}
+
+.bandDesktop {
+  display: none;
+}
+
+.level {
+  color: var(--band-ink2);
+}
+
+.updated {
+  display: none;
+  margin-left: auto;
+  color: var(--band-ink2);
+}
+
+.bar {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.barInner {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.eyebrow,
+.github {
+  display: none;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.menuButton {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav {
+  display: none;
+  flex-direction: column;
+  padding: 0 16px 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.navOpen {
+  display: flex;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+
+.link:hover {
+  color: var(--ink);
+}
+
+.active {
+  color: var(--ink);
+}
+
+@media (min-width: 768px) {
+  .bandDesktop strong {
+    margin-right: 0.25em;
+  }
+
+  .masthead .law {
+    margin-left: 0.5em;
+  }
+
+  .bandInner {
+    padding: 8px 32px;
+    font-size: 13px;
+  }
+
+  .bandMobile,
+  .menuButton {
+    display: none;
+  }
+
+  .bandDesktop,
+  .updated {
+    display: inline;
+  }
+
+  /* 精簡頁首：產品名稱與主選單同一列 */
+  .bar {
+    display: flex;
+    align-items: center;
+  }
+
+  .barInner {
+    padding: 16px 0 16px 32px;
+    justify-content: flex-start;
+    gap: 32px;
+  }
+
+  .title {
+    font-size: 26px;
+    letter-spacing: 0.1em;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    padding: 0 32px;
+    font-size: 14px;
+  }
+
+  .link {
+    min-height: 0;
+    padding-bottom: 4px;
+    border-bottom: 3px solid transparent;
+  }
+
+  .active {
+    border-bottom-color: var(--accent);
+  }
+
+  /* 首頁刊頭：置中的大標題，主選單在下方 */
+  .masthead {
+    border-bottom: 0;
+  }
+
+  .masthead .bar {
+    display: block;
+    max-width: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .masthead .barInner {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    padding: 24px 32px 14px;
+    gap: 16px;
+  }
+
+  .masthead .eyebrow {
+    display: block;
+    font-size: 12px;
+    color: var(--ink2);
+    letter-spacing: 0.12em;
+  }
+
+  .masthead .title {
+    font-size: 42px;
+    letter-spacing: 0.12em;
+  }
+
+  .masthead .github {
+    display: inline-flex;
+    justify-self: end;
+    align-items: center;
+    padding: 8px 14px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .masthead .nav {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+}

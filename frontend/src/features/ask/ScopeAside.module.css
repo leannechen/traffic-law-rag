@@ -1,0 +1,47 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.head {
+  border-top: 3px solid var(--ink);
+  padding-top: 10px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+}
+
+.lede {
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.item:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.name {
+  font-weight: 700;
+}
+
+.level {
+  font-size: 13px;
+  color: var(--ink3);
+}

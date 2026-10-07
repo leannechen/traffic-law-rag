@@ -1,0 +1,35 @@
+.root {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  background: var(--sunken);
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+.box {
+  padding: 16px 18px;
+  font-size: 15px;
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.root strong {
+  color: var(--ink);
+}
+
+.gap {
+  display: inline-block;
+  width: 1em;
+}
+
+/* 手機只放精簡版（頁尾） */
+@media (max-width: 767px) {
+  .root:not(.box) {
+    display: none;
+  }
+}

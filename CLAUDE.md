@@ -13,7 +13,8 @@
 - 已完成：Step 1 專案骨架、Step 2 資料取得與格式確認、Step 3 Chunking 與建索引（Leanne 已檢視；489 chunk、voyage-4、data_version 2026-10-05）
 - 已完成：Step 4 檢索與評估集 v0（Leanne 已檢視；40 題已驗證、28 可回答／12 範圍外（q40 改標為可回答，標準答案 `K0040013:39-3`）；baseline 純向量 Recall@5 = 1.000、MRR = 0.845；hybrid 不如純向量，線上用純向量，ADR 0004；單一相似度門檻無法分開貼近主題的範圍外題）
 - 已完成：Step 5 生成、引用與拒答（Leanne 已檢視）。模型 `claude-sonnet-5-5`、給模型整條條文、門檻 0.40、改寫預設關閉（ADR 0005）。40 題（28 可回答／12 範圍外）：Recall@5 1.000、MRR 0.845、引用正確率 1.000（精確率 0.653）、數字正確率 1.000、拒答正確率 1.000（範圍外 12/12、誤拒 0/28）。
-- 已完成（待 Leanne 檢視）：Step 6 SSE 串流 API。`POST /api/ask`（SSE，依 spec 5.3）、`GET /api/chunks/{id}`（含整條 `article_text`）、速率限制（每 IP 每分鐘 10 次）、200 字上限；265 個測試；`curl -N` 已用真實索引與模型驗證一般回答與兩種拒答（ADR 0006）。**必停檢查點，等 Leanne 用 `curl -N` 檢視事件序列後才進 Step 7**
+- 已完成（Leanne 已檢視）：Step 6 SSE 串流 API。`POST /api/ask`（SSE，依 spec 5.3）、`GET /api/chunks/{id}`（含整條 `article_text`）、速率限制（每 IP 每分鐘 10 次）、200 字上限；265 個測試；`curl -N` 已用真實索引與模型驗證一般回答與兩種拒答（ADR 0006）。
+- 已完成（待驗收）：Step 7 前端版面骨架、提問與串流答案。token／頁首頁尾／路由、`lib/sse.ts`、問答狀態機（`idle → streaming → done | refused | stopped | error`）、首頁、結果頁骨架、RefusalNotice、ErrorNotice（含速率限制倒數）、關於頁；Vitest 45 個。引用標記與依據卡片此步不可點（Step 8）
 
 每完成一個 Step 就更新這一段。
 

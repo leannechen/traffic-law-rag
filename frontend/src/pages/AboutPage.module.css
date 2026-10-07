@@ -1,0 +1,191 @@
+.root {
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.intro {
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kicker {
+  color: var(--kicker);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  line-height: 1.3;
+}
+
+.lede {
+  font-size: 16px;
+  color: var(--ink2);
+}
+
+.does {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-top: 3px solid var(--ink);
+}
+
+.doesCol {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.doesCol ul {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--ink2);
+}
+
+.doesNot {
+  border-top: 1px solid var(--rule);
+}
+
+.h2 {
+  font-family: var(--font-serif);
+  font-size: 24px;
+}
+
+.h2Big {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  border-top: 1px solid var(--rule-strong);
+  padding-top: 14px;
+}
+
+.how {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+.step {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stepHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.stepIcon {
+  color: var(--accent);
+  display: inline-flex;
+}
+
+.stepNo {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink3);
+}
+
+.stepText {
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+.source {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  border-top: 1px solid var(--rule-strong);
+  padding-top: 14px;
+}
+
+.sourceMain,
+.sourceCode {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sourceMain p,
+.sourceCode p {
+  color: var(--ink2);
+}
+
+.github {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.github:hover {
+  color: var(--paper);
+}
+
+@media (min-width: 768px) {
+  .root {
+    padding-top: 40px;
+    gap: 40px;
+  }
+
+  .title {
+    font-size: 44px;
+  }
+
+  .lede {
+    font-size: 18px;
+  }
+
+  .does {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .doesCol {
+    padding-right: 28px;
+  }
+
+  .doesNot {
+    border-top: 0;
+    border-left: 1px solid var(--rule);
+    padding: 20px 0 20px 28px;
+  }
+
+  .h2Big {
+    font-size: 28px;
+  }
+
+  .steps {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .source {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  }
+}
