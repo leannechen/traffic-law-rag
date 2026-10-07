@@ -1,6 +1,7 @@
 from functools import lru_cache
 from pathlib import Path
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -19,8 +20,8 @@ class Settings(BaseSettings):
     # 問題改寫預設關閉；評估顯示有益才開啟（ADR 0005）
     rewrite_enabled: bool = False
     # /api/ask 速率限制：每個來源 IP 在視窗內最多幾次（單一實例、記憶體內計數）
-    rate_limit_requests: int = 10
-    rate_limit_window_seconds: int = 60
+    rate_limit_requests: int = Field(default=10, ge=1)
+    rate_limit_window_seconds: int = Field(default=60, ge=1)
     # 部署在反向代理後面時才開，否則 X-Forwarded-For 可被偽造
     trust_proxy: bool = False
     cors_origins: list[str] = ["http://localhost:5173"]

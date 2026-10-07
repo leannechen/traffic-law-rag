@@ -239,3 +239,23 @@ def test_streaming_and_non_streaming_pipelines_agree(llm_text: str) -> None:
         result = next(e for e in events if e.type == "validate.result").data
         assert result.valid == reference.citations_valid
         assert result.invalid == reference.citations_invalid
+
+
+def test_answer_cut_off_by_the_length_limit_is_an_error_not_a_complete_answer() -> None:
+    llm = FakeLLM(ANSWER, chunk_size=5, stop_reason="max_tokens")
+    events = collect("紅燈右轉？", make_deps(llm))
+    assert events[-1].type == "error" and events[-1].data.code == "truncated"
+    assert "run.completed" not in types(events)
+    assert "validate.result" not in types(events)
+
+
+def test_normal_end_turn_is_not_reported_as_truncated() -> None:
+    events = collect("紅燈右轉？", make_deps(FakeLLM(ANSWER, stop_reason="end_turn")))
+    assert events[-1].type == "run.completed"
+
+
+def test_model_stream_is_closed_as_soon_as_a_refusal_marker_is_seen() -> None:
+    llm = FakeLLM("[[REFUSE]]後面還有很長很長的廢話" * 5, chunk_size=5)
+    events = collect("紅燈右轉？", make_deps(llm))
+    assert "answer.refused" in types(events)
+    assert llm.closed  # 不再讀完整個串流

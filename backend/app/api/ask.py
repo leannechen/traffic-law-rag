@@ -6,7 +6,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, field_validator
 
 from app.api.deps import client_key, get_ask_deps, get_rate_limiter
 from app.core.rate_limit import RateLimiter
@@ -25,14 +25,20 @@ SSE_HEADERS = {
 
 
 class AskRequest(BaseModel):
-    question: str = Field(max_length=MAX_QUESTION_CHARS)
+    question: str
+
+    @field_validator("question", mode="before")
+    @classmethod
+    def strip(cls, value: object) -> object:
+        return value.strip() if isinstance(value, str) else value  # 長度以去掉頭尾空白後計
 
     @field_validator("question")
     @classmethod
-    def not_blank(cls, value: str) -> str:
-        value = value.strip()
+    def check_length(cls, value: str) -> str:
         if not value:
             raise ValueError("問題不能是空白")
+        if len(value) > MAX_QUESTION_CHARS:
+            raise ValueError(f"問題不能超過 {MAX_QUESTION_CHARS} 字")
         return value
 
 

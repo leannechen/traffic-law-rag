@@ -16,7 +16,7 @@ export type RetrievalItem = {
 }
 
 export type RefusalReason = 'low_relevance' | 'out_of_scope'
-export type ServerErrorCode = 'llm_error' | 'embedding_error' | 'internal_error'
+export type ServerErrorCode = 'llm_error' | 'embedding_error' | 'internal_error' | 'truncated'
 
 type Envelope<T extends string, D> = { type: T; run_id: string; ts: number; data: D }
 

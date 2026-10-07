@@ -1,3 +1,5 @@
+import pytest
+
 from app.core.rate_limit import RateLimiter
 
 
@@ -67,3 +69,12 @@ def test_expired_keys_are_pruned_when_too_many() -> None:
         assert len(limiter._hits) <= 2
     finally:
         module.MAX_TRACKED_KEYS = original
+
+
+def test_configuration_below_one_is_rejected() -> None:
+    from pydantic import ValidationError
+
+    from app.core.config import Settings
+
+    with pytest.raises(ValidationError):
+        Settings(rate_limit_requests=0)

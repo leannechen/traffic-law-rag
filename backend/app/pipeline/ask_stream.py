@@ -209,6 +209,8 @@ def _run(question: str, deps: AskDeps, run_id: str, t0: float) -> Iterator[Event
                 continue
             items = parser.feed(piece)
             yield from convert(list(items))
+            if parser.refused:
+                break  # 已確定是拒答：不必再讀完整個串流（finally 會關閉對模型的串流，停止計費）
         yield from convert(list(parser.finish()))
     finally:
         stream.close()  # 呼叫端提早結束（例如斷線）時，連帶關閉對模型的串流
@@ -222,6 +224,16 @@ def _run(question: str, deps: AskDeps, run_id: str, t0: float) -> Iterator[Event
             ),
         )
         yield _completed(run_id, t0)
+        return
+    if final is not None and final.stop_reason == "max_tokens":
+        # 答案被長度上限截斷：不能當成完整答案送出
+        log.warning("answer truncated run=%s", run_id)
+        yield ErrorEvent(
+            run_id=run_id,
+            data=ErrorData(
+                code="truncated", message="答案太長，被截斷了。請把問題問得更具體一點。"
+            ),
+        )
         return
     yield step.completed(f"{len(cited)} 個引用")
 

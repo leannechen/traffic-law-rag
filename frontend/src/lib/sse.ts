@@ -26,7 +26,9 @@ export async function* readSse(body: ReadableStream<Uint8Array>): AsyncGenerator
     while (true) {
       const { done, value } = await reader.read()
       buffer += decoder.decode(value, { stream: !done })
-      buffer = buffer.replace(/\r\n?/g, '\n')
+      // 結尾單獨的 \r 可能是 \r\n 的前半，留到下一段再一起處理
+      const held = !done && buffer.endsWith('\r') ? '\r' : ''
+      buffer = buffer.slice(0, buffer.length - held.length).replace(/\r\n?/g, '\n') + held
       let end = buffer.indexOf('\n\n')
       while (end !== -1) {
         const message = parseSseBlock(buffer.slice(0, end))

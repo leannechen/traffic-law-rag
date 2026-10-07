@@ -209,3 +209,41 @@ def test_chunks_endpoint_dependency_is_overridable_and_404s_unknown() -> None:
         assert TestClient(app).get("/api/chunks/K0040012:999").status_code == 404
     finally:
         app.dependency_overrides.clear()
+
+
+def test_question_length_is_counted_after_stripping(client: TestClient) -> None:
+    padded = "  " + "字" * 200 + "  "
+    assert client.post("/api/ask", json={"question": padded}).status_code == 200
+
+
+def test_disconnect_while_waiting_for_the_next_event_closes_the_generator(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """使用者在等下一個事件時斷線：產生器要被關閉（連帶停止對模型計費），之後不再執行後面的步驟。"""
+    closed: list[bool] = []
+    after_disconnect: list[bool] = []
+
+    def gen(question: str, deps: AskDeps) -> Generator[Any, None, None]:
+        try:
+            yield RunStarted(run_id="r", data=RunStartedData(question=question))
+            time.sleep(0.2)  # 模擬等模型
+            yield RunStarted(run_id="r", data=RunStartedData(question="第二個"))
+            after_disconnect.append(True)
+        finally:
+            closed.append(True)
+
+    class DroppedClient:
+        async def is_disconnected(self) -> bool:
+            return True
+
+    monkeypatch.setattr(ask_module, "run_ask", gen)
+
+    async def drive() -> list[str]:
+        stream = ask_module._event_stream(DroppedClient(), gen("x", None))  # type: ignore[arg-type]
+        return [chunk async for chunk in stream]
+
+    import asyncio
+
+    chunks = asyncio.run(drive())
+    assert len(chunks) == 1  # 送出第一個事件後發現斷線就結束
+    assert closed == [True] and after_disconnect == []

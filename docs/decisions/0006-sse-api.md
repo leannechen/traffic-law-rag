@@ -52,3 +52,12 @@
 
 - 事件的 schema（`app/schemas/events.py`）是前後端的契約；Step 7 的 `types/events.ts` 要依它手寫（或另外產生）並保持一致。
 - 串流版與非串流版（`answer_question`，評估用）有重複的流程；有測試驗證兩者對同樣的模型輸出結論一致，改其中一個要記得另一個。
+
+## 獨立 review 後的修訂
+
+- **答案被長度上限截斷**（`stop_reason == "max_tokens"`）改送 `error` 事件，代碼 `truncated`，不再當成完整答案走到驗證與 `run.completed`。
+- 偵測到回答開頭的 `[[REFUSE]]` 後立刻停止讀取模型串流（原本會讀到結束，持續計費）。
+- 串流解析器：單獨的 `[[` 之後又出現 `[[` 時，前者視為文字，後者重新判斷，不再連帶吞掉後面的真引用。
+- 問題長度改成「去掉頭尾空白後」才算 200 字；`RATE_LIMIT_REQUESTS`、`RATE_LIMIT_WINDOW_SECONDS` 必須 ≥ 1。
+- `GET /api/chunks/{id}`：沒有 `:` 的 id、或指名了不存在的項（`-p9`）回 404（原本分別是 500 與退回第一塊）。
+- 已知但未處理：部署在反向代理後要設 `TRUST_PROXY`，且多層代理時取最後一個 `X-Forwarded-For` 會落到最外層代理的 IP（Step 12 要設定並實測）；`lru_cache` 建構沒有鎖（冷啟動時兩個同時請求可能各建一份，無害）。

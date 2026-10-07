@@ -19,12 +19,14 @@ class FakeLLM:
         chunk_size: int = 4,
         fail_after: int | None = None,
         error: Exception | None = None,
+        stop_reason: str | None = None,
     ) -> None:
         self._respond = respond
         self._refused = refused
         self._chunk_size = chunk_size  # 串流時每段幾個字元（刻意切得很碎，測標記跨段）
         self._fail_after = fail_after  # 串流送出幾段後丟出 error
         self._error = error
+        self._stop_reason = stop_reason
         self.calls: list[dict[str, Any]] = []
         self.closed = False
 
@@ -80,7 +82,12 @@ def _stream(
                 raise self._error or RuntimeError("boom")
             yield text[i : i + step]
         yield LLMResponse(
-            text=text, model=self.model, refused=self._refused, input_tokens=10, output_tokens=5
+            text=text,
+            model=self.model,
+            refused=self._refused,
+            stop_reason=self._stop_reason,
+            input_tokens=10,
+            output_tokens=5,
         )
     except GeneratorExit:
         self.closed = True  # 呼叫端提前關閉（例如使用者斷線）

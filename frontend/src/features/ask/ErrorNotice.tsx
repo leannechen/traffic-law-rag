@@ -32,6 +32,11 @@ const COPY: Record<string, { label: string; title: string; body: string }> = {
     title: '檢索服務暫時無法使用',
     body: '找不到相關條文的服務暫時沒有回應，請稍後重試。',
   },
+  truncated: {
+    label: '答案不完整',
+    title: '答案太長，被截斷了',
+    body: '請把問題問得更具體一點再問一次。已顯示的內容不完整。',
+  },
   internal_error: {
     label: '發生錯誤',
     title: '發生未預期的錯誤',
@@ -71,7 +76,9 @@ export function ErrorNotice({ error, runId, onRetry, onHome }: Props) {
             重試
           </button>
           {remaining > 0 && (
-            <span className={styles.countdown}>{formatCountdown(remaining)} 後可再提問</span>
+            <span className={styles.countdown} aria-hidden="true">
+              {formatCountdown(remaining)} 後可再提問
+            </span>
           )}
         </div>
       </div>
@@ -90,9 +97,11 @@ export function ErrorNotice({ error, runId, onRetry, onHome }: Props) {
         {error.code === 'invalid_question' && error.message ? error.message : copy.body}
       </p>
       <div className={styles.actions}>
-        <button type="button" className={styles.primary} onClick={onRetry}>
-          重試
-        </button>
+        {error.code !== 'invalid_question' && (
+          <button type="button" className={styles.primary} onClick={onRetry}>
+            重試
+          </button>
+        )}
         <Link to="/" className={styles.secondary} onClick={onHome}>
           回首頁
         </Link>
