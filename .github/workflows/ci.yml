@@ -39,3 +39,36 @@ jobs:
       - run: pnpm run ci
       - run: pnpm typecheck
       - run: pnpm test
+
+  # E2E：真的瀏覽器＋真的前端＋真的 FastAPI（模型、檢索、條文用假的，不需要任何金鑰）。
+  # 比較慢，所以只在 push 到 main 時跑，PR 不跑。
+  e2e:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --frozen
+        working-directory: backend
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+        working-directory: frontend
+      - run: pnpm exec playwright install --with-deps chromium
+        working-directory: frontend
+      - run: pnpm e2e
+        working-directory: frontend
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: |
+            frontend/playwright-report
+            frontend/test-results
+          retention-days: 7

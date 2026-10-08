@@ -20,6 +20,7 @@
 - 已完成：亮暗色切換按鈕（主選單最右邊，跟隨系統／亮色／暗色；spec 5.5-G4 修訂）
 - 已完成（待 Leanne 檢視）：Step 9 前端檢索過程。PipelineSteps（等待／進行中／完成／略過／相關度不足／已停止）、RetrievalPanel（改寫查詢、名次、分數條、已引用／未引用）、桌面完成時自動收合並可展開、手機預設展開直式列表、拒答頁「為什麼不回答」（拒答分支＋相似度對照條）；Vitest 101 個。**必停檢查點：請對照設計稿（桌面、手機、暗色）後才進 Step 10**
 - 已完成（待驗收）：Step 10 評估頁。後端 `GET /api/eval/latest`（讀 `eval/results/latest.json`，由 `run_generation_eval --publish` 產生；逐題結果補上檢索前 5 條與分數）；前端 `/eval`：MetricCard × 5、逐題表格（類別篩選、可展開看標準答案與檢索前 5 筆、符號說明）、手機為卡片列表；頁面數字與 CLI 一致（Recall@5 100%、MRR 0.85、引用／數字／拒答 100%；40 題、範圍外 12 題）。後端測試 284 個、Vitest 111 個。**Step 12 部署要注意：後端映像只複製 `app/`，`eval/results/latest.json` 要另外放進去**
+- 已完成（待驗收）：Step 11 測試與品質收尾。後端測試 296 個（補上 Voyage 嵌入客戶端的重試／錯誤處理與來源 IP 判斷）；Playwright E2E 12 個（桌面 10、手機 2）跑在假後端上；CI 新增 e2e job（只在 push 到 main）；README 放了 CI badge（完整 README 是 Step 13）
 
 每完成一個 Step 就更新這一段。
 
@@ -68,7 +69,7 @@
 前端（在 `frontend/`，pnpm）：
 
 - 安裝：`pnpm install`；開發伺服器：`pnpm dev`（`/api` proxy 到 `BACKEND_URL`：環境變數優先，其次 `frontend/.env.local`（不進版控，本機寫 `BACKEND_URL=http://localhost:8021`），預設 `http://localhost:8000`；8000 常被其他專案佔用，連錯時畫面會顯示 HTTP 404）
-- 檢查：`pnpm run ci`（Biome）、`pnpm typecheck`（tsc）；測試：`pnpm test`（Vitest）；注意 `pnpm ci` 是 pnpm 內建指令，要用 `pnpm run ci`
+- 檢查：`pnpm run ci`（Biome）、`pnpm typecheck`（tsc）；測試：`pnpm test`（Vitest）；注意 `pnpm ci` 是 pnpm 內建指令，要用 `pnpm run ci`；E2E：`pnpm e2e`（Playwright，首次要 `pnpm exec playwright install chromium`；會自己啟動假後端 `backend/tests/e2e_server.py` 與前端，不需要金鑰；CI 只在 push 到 main 時跑）
 
 索引（在 `backend/`，需先在 `.env` 設定 `VOYAGE_API_KEY`）：`uv run python -m app.ingestion.build_index`，輸出到 `data/index/`（不進版控）
 
