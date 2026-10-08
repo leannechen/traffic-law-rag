@@ -13,4 +13,20 @@ cp .env.example .env            # 填入 ANTHROPIC_API_KEY、VOYAGE_API_KEY
 docker compose up --build       # 前端 http://localhost:5173、後端 http://localhost:8010
 ```
 
+## 測試
+
+```bash
+# 後端（在 backend/）
+uv run pytest
+
+# 前端單元測試（在 frontend/）
+pnpm test
+
+# 前端 E2E（在 frontend/）：Playwright 驅動真實瀏覽器
+pnpm exec playwright install chromium   # 首次才需要
+pnpm e2e                                # 跑全部；加 --ui 開互動模式
+```
+
+E2E 會自己啟動前端與一個假後端（`backend/tests/e2e_server.py`，模型、檢索、條文都是假資料），不需要 API 金鑰或索引。CI 只在 push 到 main 時跑 E2E。
+
 開發與測試指令見 [CLAUDE.md](CLAUDE.md)；實作規格見 [docs/02-implementation-spec.md](docs/02-implementation-spec.md)，技術決策見 [docs/decisions/](docs/decisions/)。
