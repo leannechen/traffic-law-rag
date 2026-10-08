@@ -78,3 +78,64 @@ uv run python -m app.ingestion.parse   # 讀最新的 raw，輸出 data/processe
 ```
 
 `data/raw/` 不進版控；`data/processed/` 只含目標法規，其餘法規在串流解析時即丟棄。
+
+## 索引的資料結構（`data/index/`）
+
+`build_index` 把 chunk 寫進本機 Chroma（`data/index/`，不進版控，可由 `data/processed/` 重建）。每次整個重建，不做增量。**要看或查索引內容，請用 Chroma 的 Python API，不要直接查裡面的 `chroma.sqlite3`**：那是 Chroma 的內部格式（表名、`chroma:document` 這類鍵都不是我們定義的），升級 Chroma 後可能改變。
+
+### Collection
+
+| 項目 | 值 |
+|---|---|
+| collection 名稱 | `law_chunks` |
+| 距離 | cosine（`hnsw:space`） |
+| 向量 | 1024 維（`voyage-4`，型號記在 `index_meta.json`） |
+| 筆數 | 489（目前；以 `index_meta.json` 的 `chunk_count` 為準） |
+
+### 每筆資料
+
+| Chroma 欄位 | 內容 |
+|---|---|
+| `id` | `chunk_id`：整條一塊為 `{pcode}:{條號}`（如 `K0040012:53`）；超過 800 字被切開時為 `{pcode}:{條號}-p{n}`（如 `K0040012:35-p2`，n 是這條的第幾塊） |
+| `document` | `text`：這一塊的條文原文。給人看與給模型的全文，不用於比對 |
+| `embedding` | 由 `embed_text` 算出：標頭 + 換行 + 條文原文。標頭是「法規全名 章名 第 N 條」（沒有章名就省略），如 `道路交通管理處罰條例 第 二 章 汽車 第 53 條`，讓模型知道這段文字屬於哪部法規、哪一章 |
+| `metadata` | 見下表。值為 `None` 的欄位不寫入（Chroma 不接受 None） |
+
+metadata 的 key（來自 `LawChunk`，不含 `text`、`embed_text`）：
+
+| key | 型別 | 說明 |
+|---|---|---|
+| `chunk_id` | str | 同 `id` |
+| `pcode` | str | 法規代碼，如 `K0040012` |
+| `law_name`、`law_short_name` | str | 法規全名與簡稱（畫面上用簡稱） |
+| `law_level` | str | `法律` 或 `命令` |
+| `article_no` | str | 條號，可含連字號，如 `8-1`、`39-3` |
+| `paragraph_no` | int | 這一塊從第幾項開始；**整條一塊時沒有這個 key** |
+| `chapter` | str | 章名；沒有章時沒有這個 key |
+| `source_url` | str | 全國法規資料庫該條的網址（只當連結，我們不抓取該網站） |
+| `amended_date` | str | 該法規最新異動日，`YYYYMMDD` |
+| `data_version` | str | 資料版本（下載日），如 `2026-10-05` |
+
+「條」的識別碼 `article_id` 是 `{pcode}:{條號}`（去掉 `-p{n}`），引用與全文面板都以它為單位；它不是 metadata 欄位，由 `chunk_id` 推得。
+
+### 旁邊的 `index_meta.json`
+
+同一個目錄下，記錄 `data_version`、`built_at`、`embedding_model`、`chunk_count`，以及每部法規的條數與 chunk 數。`/api/meta` 由它讀出。
+
+### 怎麼查（在 `backend/`）
+
+```python
+import chromadb
+from app.core.config import get_settings
+
+collection = chromadb.PersistentClient(path=str(get_settings().index_dir)).get_collection("law_chunks")
+print(collection.count())
+
+# 取特定 chunk 的原文與 metadata
+r = collection.get(ids=["K0040012:35-p2"], include=["documents", "metadatas"])
+
+# 某部法規的全部 chunk（依 metadata 過濾）
+r = collection.get(where={"pcode": "K0040012"}, include=["metadatas"])
+```
+
+統計各法規 chunk 數、被切成多塊的條文，直接跑 `uv run python -m app.ingestion.build_index` 的輸出，或看 `index_meta.json`。
