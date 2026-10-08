@@ -17,7 +17,6 @@
   line-height: 1.35;
 }
 
-.titleDesktop,
 .lede {
   display: none;
 }
@@ -43,18 +42,11 @@
     line-height: 1.32;
   }
 
-  .titleDesktop {
-    display: inline;
-  }
-
-  .titleMobile {
-    display: none;
-  }
-
   .lede {
     display: block;
-    max-width: 640px;
+    max-width: 720px;
     font-size: 18px;
+    text-wrap: balance; /* 窄一點的視窗折行時，不留下單獨一個字的最後一行 */
     color: var(--ink2);
   }
 

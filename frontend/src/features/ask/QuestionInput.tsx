@@ -1,4 +1,4 @@
-import { type FormEvent, type KeyboardEvent, useId, useRef, useState } from 'react'
+import { type FormEvent, type KeyboardEvent, useId, useLayoutEffect, useRef, useState } from 'react'
 import { ArrowRightIcon } from '../../components/icons'
 import styles from './QuestionInput.module.css'
 
@@ -18,6 +18,21 @@ export function QuestionInput({ onSubmit }: Props) {
   const length = questionLength(value)
   const tooLong = length > MAX_QUESTION_LENGTH
   const canSubmit = !tooLong
+
+  // 高度跟著內容長：固定高度加上換行（Shift+Enter 或超過一行）會出現多餘的捲軸。
+  // 超過最大高度才捲動。value 變動就是要重算。
+  // biome-ignore lint/correctness/useExhaustiveDependencies: 以輸入內容作為觸發條件
+  useLayoutEffect(() => {
+    const el = inputRef.current
+    if (!el || el.scrollHeight === 0) return // jsdom 沒有排版，量不到
+    // 先縮到 0 再量：height:auto 會以 rows 屬性的行數為底，桌面就會多出一行。
+    // 最小高度（桌面 1 行、手機 2 行）由 CSS 的 min-height 保證。
+    el.style.height = '0px'
+    const max = Number.parseFloat(getComputedStyle(el).maxHeight)
+    const next = Number.isFinite(max) ? Math.min(el.scrollHeight, max) : el.scrollHeight
+    el.style.height = `${next}px`
+    el.style.overflowY = el.scrollHeight > next ? 'auto' : 'hidden'
+  }, [value])
 
   function submit(event?: FormEvent) {
     event?.preventDefault()

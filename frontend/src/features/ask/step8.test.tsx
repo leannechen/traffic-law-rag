@@ -108,6 +108,15 @@ describe('citations, evidence and the full-text panel (desktop)', () => {
     expect(pressed()[0]).toHaveTextContent('§35')
   })
 
+  it('tells the user that Esc closes the panel', async () => {
+    setup(run())
+    const user = await finish()
+    await user.click(screen.getByRole('button', { name: '查看道交處罰條例 第 53 條全文' }))
+    const panel = await screen.findByRole('region', { name: '條文全文' })
+    expect(within(panel).getByText('Esc')).toBeInTheDocument()
+    expect(within(panel).getByText(/可關閉面板/)).toBeInTheDocument()
+  })
+
   it('opens an uncited article too, and labels it as retrieved', async () => {
     setup(run())
     const user = await finish()

@@ -32,24 +32,50 @@
   font-weight: 700;
 }
 
-.grid {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
+.caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
 }
 
-.law {
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  font-weight: inherit;
+}
+
+.table thead {
+  display: none;
+}
+
+/* 手機：每部法規一塊——類別與名稱在上，簡稱、條文數、異動日在下 */
+.table tbody tr {
+  display: grid;
+  grid-template-columns: auto auto auto minmax(0, 1fr);
+  column-gap: 12px;
+  row-gap: 4px;
+  align-items: baseline;
   padding: 12px 0;
   border-top: 1px solid var(--rule);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+}
+
+.table tbody tr:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.levelCell {
+  grid-row: 1;
+  grid-column: 1;
 }
 
 .level {
-  align-self: flex-start;
+  display: inline-block;
   font-size: 12px;
   font-weight: 700;
   padding: 1px 8px;
@@ -58,19 +84,41 @@
 }
 
 .name {
+  grid-row: 1;
+  grid-column: 2 / -1;
   font-family: var(--font-serif);
   font-size: 20px;
   line-height: 1.45;
+  font-weight: 400;
+}
+
+.short,
+.meta {
+  grid-row: 2;
+  font-size: 14px;
+  color: var(--ink2);
+  font-variant-numeric: tabular-nums;
 }
 
 .short {
-  font-size: 14px;
-  color: var(--ink2);
+  grid-column: 2;
 }
 
-.stats {
+.meta {
   font-size: 13px;
   color: var(--ink3);
+}
+
+.table td:nth-child(4) {
+  grid-column: 3;
+}
+
+.table td:nth-child(5) {
+  grid-column: 4;
+}
+
+.num {
+  text-align: left;
 }
 
 @media (min-width: 768px) {
@@ -82,40 +130,66 @@
     font-size: 28px;
   }
 
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* 桌面：表格（畫板 Main 的新版）。欄寬：類別 64、簡稱 160、條文數 80、最新異動 150 */
+  .table thead {
+    display: table-header-group;
   }
 
-  .law {
+  .table thead th {
+    padding: 8px 20px 8px 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink2);
+  }
+
+  .table tbody tr {
+    display: table-row;
+    padding: 0;
     border-top: 0;
-    padding: 4px 24px 8px;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .law:nth-child(odd) {
-    padding-left: 0;
+  .table tbody tr:last-child {
+    border-bottom: 1px solid var(--rule);
   }
 
-  .law:nth-child(even) {
-    border-left: 1px solid var(--rule);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .table tbody th,
+  .table tbody td {
+    padding: 14px 20px 14px 0;
+    vertical-align: baseline;
   }
 
-  .law:nth-child(n) {
-    padding: 4px 24px 8px;
-    border-left: 1px solid var(--rule);
+  .table th:nth-child(1),
+  .table td:nth-child(1) {
+    width: 64px;
   }
 
-  .law:first-child {
-    padding-left: 0;
-    border-left: 0;
+  .table th:nth-child(3),
+  .table td:nth-child(3) {
+    width: 160px;
   }
 
-  .law:last-child {
+  .table th:nth-child(4),
+  .table td:nth-child(4) {
+    width: 80px;
+  }
+
+  .table th:nth-child(5),
+  .table td:nth-child(5) {
+    width: 150px;
     padding-right: 0;
+  }
+
+  .table th.num,
+  .table td.num {
+    text-align: right;
+  }
+
+  .short,
+  .meta {
+    font-size: 14px;
   }
 }

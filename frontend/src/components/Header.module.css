@@ -47,7 +47,6 @@
   justify-content: space-between;
 }
 
-.eyebrow,
 .github {
   display: none;
 }
@@ -162,52 +161,46 @@
     border-bottom-color: var(--accent);
   }
 
-  /* 首頁刊頭：置中的大標題，主選單在下方 */
+  /* 首頁刊頭（畫板 Main 新版）：沒有產品名稱那一列，只有主選單；GitHub 是選單右端的圖示 */
   .masthead {
     border-bottom: 0;
   }
 
   .masthead .bar {
-    display: block;
     max-width: none;
     border-bottom: 1px solid var(--rule);
   }
 
   .masthead .barInner {
-    max-width: 1240px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    padding: 24px 32px 14px;
-    gap: 16px;
-  }
-
-  .masthead .eyebrow {
-    display: block;
-    font-size: 12px;
-    color: var(--ink2);
-    letter-spacing: 0.12em;
-  }
-
-  .masthead .title {
-    font-size: 42px;
-    letter-spacing: 0.12em;
-  }
-
-  .masthead .github {
-    display: inline-flex;
-    justify-self: end;
-    align-items: center;
-    padding: 8px 14px;
-    border: 1px solid var(--ink);
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
+    display: none;
   }
 
   .masthead .nav {
     max-width: 1240px;
     margin: 0 auto;
+    padding: 8px 32px 0;
+    align-items: flex-end;
+  }
+
+  .masthead .link {
+    padding: 8px 0 10px;
+  }
+
+  .masthead .nav > :global(button) {
+    align-self: center;
+  }
+
+  .masthead .github {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    color: var(--ink2);
+  }
+
+  .masthead .github:hover {
+    color: var(--ink);
   }
 }

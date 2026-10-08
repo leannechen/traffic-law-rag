@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useMeta } from '../lib/useMeta'
 import styles from './Header.module.css'
-import { CloseIcon, MenuIcon } from './icons'
+import { CloseIcon, GitHubIcon, MenuIcon } from './icons'
 import { ThemeToggle } from './ThemeToggle'
 
 const GITHUB_URL = 'https://github.com/leannechen/traffic-law-rag'
+// repo 公開之前先不在畫面上顯示 GitHub 連結；公開後改成 true
+const SHOW_GITHUB_LINK = false
 
 type Props = {
   /** 首頁（尚未提問）用置中的大刊頭；其他頁面與狀態用精簡頁首 */
@@ -46,13 +48,9 @@ export function Header({ masthead }: Props) {
 
       <div className={styles.bar}>
         <div className={styles.barInner}>
-          <span className={styles.eyebrow}>TRAFFIC LAW Q&amp;A</span>
           <Link to="/" className={styles.title}>
             交通法規資料庫
           </Link>
-          <a className={styles.github} href={GITHUB_URL} target="_blank" rel="noreferrer">
-            GitHub 原始碼
-          </a>
           <button
             type="button"
             className={styles.menuButton}
@@ -82,6 +80,18 @@ export function Header({ masthead }: Props) {
             關於
           </NavLink>
           <ThemeToggle />
+          {masthead && SHOW_GITHUB_LINK && (
+            <a
+              className={styles.github}
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub 原始碼（另開新視窗）"
+              title="GitHub 原始碼"
+            >
+              <GitHubIcon size={18} />
+            </a>
+          )}
         </nav>
       </div>
     </header>

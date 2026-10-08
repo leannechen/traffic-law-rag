@@ -58,6 +58,20 @@
   text-decoration: underline;
 }
 
+.hint {
+  font-size: 12px;
+  color: var(--band-ink2);
+  white-space: nowrap;
+}
+
+.key {
+  padding: 0 5px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+}
+
 .close {
   width: 44px;
   height: 44px;
