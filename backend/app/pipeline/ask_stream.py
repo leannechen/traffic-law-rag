@@ -215,6 +215,15 @@ def _run(question: str, deps: AskDeps, run_id: str, t0: float) -> Iterator[Event
     finally:
         stream.close()  # 呼叫端提早結束（例如斷線）時，連帶關閉對模型的串流
 
+    if final is not None:  # 只記數字不記問題內容，供估算每次提問的成本
+        log.info(
+            "usage run=%s model=%s input_tokens=%d output_tokens=%d",
+            run_id,
+            final.model,
+            final.input_tokens,
+            final.output_tokens,
+        )
+
     if parser.refused or (final is not None and final.refused):
         yield step.completed("條文不足，模型拒答")
         yield AnswerRefused(

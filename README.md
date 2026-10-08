@@ -65,6 +65,6 @@ fly deploy
 | 主機費用 | 常駐約 US$3.69／月（`shared-cpu-1x` 512 MB，按秒計費）；`auto_stop` 沒流量時機器不計運算費，只剩儲存費（US$0.15／GB／月，映像約 0.66 GB，約 US$0.10／月） | [Fly.io pricing](https://docs.fly.io/about/pricing) |
 | 模型單價 | Sonnet 5.5：輸入 US$2／百萬 token、輸出 US$10／百萬 token | Anthropic 價目頁 |
 | Embedding 單價 | Voyage：US$0.06／百萬 token；每次提問只嵌入一句短問題，可忽略 | [Voyage pricing](https://docs.voyageai.com/docs/pricing) |
-| 每次提問的模型費用 | 待量測：目前後端沒有記錄 token 用量，需上線後或補記 `usage` 再用上面單價換算 | — |
+| 每次提問的模型費用 | 約 US$0.006–0.019，三題平均約 US$0.012（輸入 2.3k–6.2k、輸出 134–653 token，依單價換算）；只量了 3 題，是粗估 | 本機實測（後端會在 log 記 `usage` 一行） |
 
 開發與測試指令見 [CLAUDE.md](CLAUDE.md)；實作規格見 [docs/02-implementation-spec.md](docs/02-implementation-spec.md)，技術決策見 [docs/decisions/](docs/decisions/)。
