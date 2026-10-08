@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createMemoryRouter, RouterProvider, useLocation } from 'react-router-dom'
 import App from '../../App'
@@ -75,11 +75,11 @@ describe('question in the URL', () => {
     await user.click(screen.getByRole('button', { name: /紅燈右轉會被罰多少錢/ }))
     await screen.findByRole('button', { name: '重新提問' })
 
-    await router.navigate(-1)
+    await act(() => router.navigate(-1))
     await screen.findByRole('textbox', { name: '你的問題' })
     expect(url()).toHaveTextContent(/^\/$/)
 
-    await router.navigate(1)
+    await act(() => router.navigate(1))
     await screen.findByRole('button', { name: '重新提問' })
     expect(asks()).toHaveLength(2)
   })
@@ -120,7 +120,7 @@ describe('question in the URL', () => {
     await user.click(await screen.findByRole('button', { name: '紅燈右轉會被罰多少錢？' }))
     await screen.findByRole('button', { name: '重新提問' })
     expect(url()).toHaveTextContent('/?q=紅燈右轉會被罰多少錢？')
-    await router.navigate(-1)
+    await act(() => router.navigate(-1))
     expect(await screen.findByText('資料範圍內找不到相關規定')).toBeInTheDocument()
   })
 
@@ -135,8 +135,8 @@ describe('question in the URL', () => {
   it('keeps the running answer while visiting another page and coming back', async () => {
     const { router, asks } = setup('/?q=紅燈右轉會被罰多少錢？')
     await screen.findByRole('button', { name: '重新提問' })
-    await router.navigate('/about')
-    await router.navigate(-1)
+    await act(() => router.navigate('/about'))
+    await act(() => router.navigate(-1))
     expect(await screen.findByRole('button', { name: '重新提問' })).toBeInTheDocument()
     expect(asks()).toHaveLength(1) // 沒有重新提問
   })

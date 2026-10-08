@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, waitFor, within } from '@testing-library/react'
+import { act, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import App from '../../App'
@@ -146,7 +146,7 @@ describe('citations, evidence and the full-text panel (desktop)', () => {
     setup(run())
     const user = await finish()
     const badge = screen.getByRole('button', { name: '道交處罰條例 §35' })
-    badge.focus()
+    act(() => badge.focus())
     await user.keyboard('{Enter}')
     expect(badge).toHaveAttribute('aria-pressed', 'true')
   })
