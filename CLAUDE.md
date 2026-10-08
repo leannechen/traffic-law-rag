@@ -22,7 +22,7 @@
 - 已完成（待驗收）：Step 10 評估頁。後端 `GET /api/eval/latest`（讀 `eval/results/latest.json`，由 `run_generation_eval --publish` 產生；逐題結果補上檢索前 5 條與分數）；前端 `/eval`：MetricCard × 5、逐題表格（類別篩選、可展開看標準答案與檢索前 5 筆、符號說明）、手機為卡片列表；頁面數字與 CLI 一致（Recall@5 100%、MRR 0.85、引用／數字／拒答 100%；40 題、範圍外 12 題）。後端測試 284 個、Vitest 111 個。**Step 12 部署要注意：後端映像只複製 `app/`，`eval/results/latest.json` 要另外放進去**
 - 已完成（待驗收）：Step 11 測試與品質收尾。後端測試 296 個（補上 Voyage 嵌入客戶端的重試／錯誤處理與來源 IP 判斷）；Playwright E2E 12 個（桌面 10、手機 2）跑在假後端上；CI 新增 e2e job（只在 push 到 main）；README 放了 CI badge（完整 README 是 Step 13）
 
-- 已完成（待上線）：Step 12 部署準備。單一映像（根目錄 `Dockerfile`：前端建置檔由後端一併提供，`STATIC_DIR`）、`fly.toml`、ADR 0007（索引當 artifact 放進映像、單機、手動每月更新）；映像已在本機建置並用真實索引與模型驗證（啟動到 health 約 2.5 秒、記憶體約 200 MB）；每次提問在 log 記 token 用量（`usage run=… input_tokens=… output_tokens=…`，不含問題內容）；CI 新增 `image` job（建映像並 smoke test）。全站每日提問上限 `DAILY_ASK_LIMIT`（預設 300，超過回 503 `daily_limit`，前端有專屬說明）、`max_tokens` 降為 2000；後端測試 308 個、Vitest 113 個。**尚未上線：需要 Leanne 的 Fly.io 帳號與金鑰；公開 URL、喚醒時間、月成本待上線後補進 README**
+- 已完成（待驗收）：Step 12 部署。公開網址 https://traffic-law-rag.fly.dev/ （Fly.io，單機，nrt；部署用 `fly deploy --ha=false`）。單一映像（根目錄 `Dockerfile`：前端建置檔由後端一併提供，`STATIC_DIR`）、`fly.toml`、ADR 0007（索引當 artifact 放進映像、單機、手動每月更新）；映像已在本機建置並用真實索引與模型驗證（啟動到 health 約 2.5 秒、記憶體約 200 MB）；每次提問在 log 記 token 用量（`usage run=… input_tokens=… output_tokens=…`，不含問題內容）；CI 新增 `image` job（建映像並 smoke test）。全站每日提問上限 `DAILY_ASK_LIMIT`（預設 300，超過回 503 `daily_limit`，前端有專屬說明）、`max_tokens` 降為 2000；後端測試 308 個、Vitest 113 個。已在公開網址驗證：問答串流、404、速率限制（偽造 X-Forwarded-For 無法繞過）；停機後喚醒第一個請求約 9.7 秒。
 
 每完成一個 Step 就更新這一段。
 
