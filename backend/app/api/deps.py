@@ -6,6 +6,7 @@ from functools import lru_cache
 import chromadb
 from fastapi import HTTPException, Request
 
+from app.core.budget import DailyBudget
 from app.core.config import get_settings
 from app.core.embedder import EmbeddingError
 from app.core.llm import AnthropicLLMClient, LLMError
@@ -56,6 +57,11 @@ def get_chunk_store() -> ChromaChunkStore:
 def get_rate_limiter() -> RateLimiter:
     settings = get_settings()
     return RateLimiter(settings.rate_limit_requests, settings.rate_limit_window_seconds)
+
+
+@lru_cache
+def get_daily_budget() -> DailyBudget:
+    return DailyBudget(get_settings().daily_ask_limit)
 
 
 def client_key(request: Request) -> str:

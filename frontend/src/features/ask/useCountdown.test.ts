@@ -37,6 +37,13 @@ describe('toAskError', () => {
     expect(toAskError(new AskHttpError(429, '', null), false)).toMatchObject({ retryAfter: 60 })
   })
 
+  it('maps a 503 with the daily_limit code to daily_limit, but not other 503s', () => {
+    expect(toAskError(new AskHttpError(503, 'daily_limit', null), false)).toEqual({
+      code: 'daily_limit',
+    })
+    expect(toAskError(new AskHttpError(503, '索引尚未建立', null), false).code).toBe('http_error')
+  })
+
   it('distinguishes a network failure before and after the stream began', () => {
     expect(toAskError(new TypeError('network'), false).code).toBe('network_error')
     expect(toAskError(new TypeError('network'), true).code).toBe('stream_interrupted')

@@ -22,6 +22,8 @@ class Settings(BaseSettings):
     # /api/ask 速率限制：每個來源 IP 在視窗內最多幾次（單一實例、記憶體內計數）
     rate_limit_requests: int = Field(default=10, ge=1)
     rate_limit_window_seconds: int = Field(default=60, ge=1)
+    # 全站每天（UTC）最多幾次提問，保護自己的 API 額度（ADR 0007）
+    daily_ask_limit: int = Field(default=300, ge=1)
     # 部署在反向代理後面時才開，否則 X-Forwarded-For 可被偽造
     trust_proxy: bool = False
     cors_origins: list[str] = ["http://localhost:5173"]

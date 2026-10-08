@@ -7,7 +7,8 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.api import ask as ask_module
-from app.api.deps import get_ask_deps, get_chunk_store, get_rate_limiter
+from app.api.deps import get_ask_deps, get_chunk_store, get_daily_budget, get_rate_limiter
+from app.core.budget import DailyBudget
 from app.core.embedder import EmbeddingError
 from app.core.llm import LLMError
 from app.core.rate_limit import RateLimiter
@@ -33,6 +34,7 @@ def make_deps(llm: FakeLLM | None = None, score: float = 0.72) -> AskDeps:
 def client() -> Iterator[TestClient]:
     app.dependency_overrides[get_ask_deps] = lambda: make_deps()
     app.dependency_overrides[get_rate_limiter] = lambda: RateLimiter(100, 60)
+    app.dependency_overrides[get_daily_budget] = lambda: DailyBudget(1000)
     yield TestClient(app)
     app.dependency_overrides.clear()
 
@@ -247,3 +249,24 @@ def test_disconnect_while_waiting_for_the_next_event_closes_the_generator(
     chunks = asyncio.run(drive())
     assert len(chunks) == 1  # 送出第一個事件後發現斷線就結束
     assert closed == [True] and after_disconnect == []
+
+
+def test_daily_budget_exhausted_returns_503_with_a_code(client: TestClient) -> None:
+    budget = DailyBudget(1)
+    app.dependency_overrides[get_daily_budget] = lambda: budget
+    assert client.post("/api/ask", json={"question": "紅燈右轉？"}).status_code == 200
+    blocked = client.post("/api/ask", json={"question": "紅燈右轉？"})
+    assert blocked.status_code == 503
+    assert blocked.json()["detail"] == "daily_limit"
+
+
+def test_requests_blocked_by_the_rate_limit_do_not_use_the_daily_budget(
+    client: TestClient,
+) -> None:
+    budget = DailyBudget(2)
+    limiter = RateLimiter(1, 60)  # 只建一次：lambda 每次建新的就永遠不會擋
+    app.dependency_overrides[get_daily_budget] = lambda: budget
+    app.dependency_overrides[get_rate_limiter] = lambda: limiter
+    assert client.post("/api/ask", json={"question": "紅燈右轉？"}).status_code == 200
+    assert client.post("/api/ask", json={"question": "紅燈右轉？"}).status_code == 429
+    assert budget.try_acquire() is True  # 額度 2，只用掉 1：被 429 擋下的那次沒有扣
