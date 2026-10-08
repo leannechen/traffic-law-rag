@@ -1,3 +1,4 @@
+import json
 import shutil
 from pathlib import Path
 
@@ -88,7 +89,32 @@ def test_meta_endpoint(processed: Path, tmp_path: Path, monkeypatch: pytest.Monk
     assert res.status_code == 200
     body = res.json()
     assert body["data_version"] == "2026-10-05"
-    assert {law["pcode"] for law in body["laws"]} == {"K0040012", "D0080090"}
+    # 順序以 targets.yaml 為準（K0040012 在 D0080090 前面），不是依 pcode 的字母順序
+    assert [law["pcode"] for law in body["laws"]] == ["K0040012", "D0080090"]
+
+
+def test_meta_endpoint_keeps_unknown_laws_last(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    index_dir = tmp_path / "index"
+    index_dir.mkdir()
+    law = {
+        "law_name": "x", "law_short_name": "x", "law_level": "命令",
+        "article_count": 1, "chunk_count": 1, "amended_date": "20260101",
+    }  # fmt: skip
+    laws = [{**law, "pcode": p} for p in ("A9999999", "G0390060", "K0040012")]
+    meta = {
+        "data_version": "v",
+        "built_at": "t",
+        "embedding_model": "m",
+        "chunk_count": 3,
+        "laws": laws,
+    }
+    (index_dir / "index_meta.json").write_text(json.dumps(meta), encoding="utf-8")
+    monkeypatch.setattr(meta_api, "get_settings", lambda: Settings(data_dir=tmp_path))
+
+    res = TestClient(app).get("/api/meta")
+    assert [law["pcode"] for law in res.json()["laws"]] == ["K0040012", "G0390060", "A9999999"]
 
 
 def test_meta_endpoint_without_index(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
