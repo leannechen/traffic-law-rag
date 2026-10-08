@@ -62,7 +62,9 @@ fly deploy
 | 容器剛啟動後第一次提問 | 約 4.5 秒（含載入索引） | 本機 Docker 實測 |
 | Fly 機器從停機喚醒 | 待上線後實測 | — |
 | 執行時記憶體 | 約 200 MB（設定 512 MB） | 本機 Docker 實測 |
-| 主機費用 | 待確認（常駐 `shared-cpu-1x` 512 MB 約每月數美元；`auto_stop` 沒流量時只付儲存） | 需對照 Fly.io 當下價目 |
-| 每次提問的模型費用 | 待估算：實際 token 用量 × Anthropic 當下單價 | 需對照價目 |
+| 主機費用 | 常駐約 US$3.69／月（`shared-cpu-1x` 512 MB，按秒計費）；`auto_stop` 沒流量時機器不計運算費，只剩儲存費（US$0.15／GB／月，映像約 0.66 GB，約 US$0.10／月） | [Fly.io pricing](https://docs.fly.io/about/pricing) |
+| 模型單價 | Sonnet 5.5：輸入 US$2／百萬 token、輸出 US$10／百萬 token | Anthropic 價目頁 |
+| Embedding 單價 | Voyage：US$0.06／百萬 token；每次提問只嵌入一句短問題，可忽略 | [Voyage pricing](https://docs.voyageai.com/docs/pricing) |
+| 每次提問的模型費用 | 待量測：目前後端沒有記錄 token 用量，需上線後或補記 `usage` 再用上面單價換算 | — |
 
 開發與測試指令見 [CLAUDE.md](CLAUDE.md)；實作規格見 [docs/02-implementation-spec.md](docs/02-implementation-spec.md)，技術決策見 [docs/decisions/](docs/decisions/)。

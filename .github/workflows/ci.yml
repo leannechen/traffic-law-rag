@@ -72,3 +72,20 @@ jobs:
             frontend/playwright-report
             frontend/test-results
           retention-days: 7
+
+  # 只驗證部署映像「建得起來、跑得起來」。真正的索引不進 git，這裡用空目錄頂替，所以不測問答
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: mkdir -p data/index && touch data/index/.placeholder
+      - run: docker build -t traffic-law-rag .
+      - name: Smoke test
+        run: |
+          docker run -d --name app -p 8000:8000 traffic-law-rag
+          for i in $(seq 1 30); do curl -sf localhost:8000/api/health && break; sleep 1; done
+          curl -sf localhost:8000/api/health
+          curl -sf localhost:8000/eval | grep -q '<div id="root">'
+          test "$(curl -s -o /dev/null -w '%{http_code}' localhost:8000/api/nope)" = 404
+          test "$(curl -s -o /dev/null -w '%{http_code}' localhost:8000/assets/nope.js)" = 404
+          docker logs app
