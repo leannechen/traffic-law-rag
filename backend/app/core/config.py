@@ -26,6 +26,8 @@ class Settings(BaseSettings):
     trust_proxy: bool = False
     cors_origins: list[str] = ["http://localhost:5173"]
     data_dir: Path = REPO_ROOT / "data"
+    # 設了才由後端一併提供前端建置檔（部署用，同源所以不需要 CORS；ADR 0007）
+    static_dir: Path | None = None
 
     @property
     def cache_dir(self) -> Path:

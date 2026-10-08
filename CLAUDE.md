@@ -22,6 +22,8 @@
 - 已完成（待驗收）：Step 10 評估頁。後端 `GET /api/eval/latest`（讀 `eval/results/latest.json`，由 `run_generation_eval --publish` 產生；逐題結果補上檢索前 5 條與分數）；前端 `/eval`：MetricCard × 5、逐題表格（類別篩選、可展開看標準答案與檢索前 5 筆、符號說明）、手機為卡片列表；頁面數字與 CLI 一致（Recall@5 100%、MRR 0.85、引用／數字／拒答 100%；40 題、範圍外 12 題）。後端測試 284 個、Vitest 111 個。**Step 12 部署要注意：後端映像只複製 `app/`，`eval/results/latest.json` 要另外放進去**
 - 已完成（待驗收）：Step 11 測試與品質收尾。後端測試 296 個（補上 Voyage 嵌入客戶端的重試／錯誤處理與來源 IP 判斷）；Playwright E2E 12 個（桌面 10、手機 2）跑在假後端上；CI 新增 e2e job（只在 push 到 main）；README 放了 CI badge（完整 README 是 Step 13）
 
+- 已完成（待上線）：Step 12 部署準備。單一映像（根目錄 `Dockerfile`：前端建置檔由後端一併提供，`STATIC_DIR`）、`fly.toml`、ADR 0007（索引當 artifact 放進映像、單機、手動每月更新）；映像已在本機建置並用真實索引與模型驗證（啟動到 health 約 2.5 秒、記憶體約 200 MB）；後端測試 303 個。**尚未上線：需要 Leanne 的 Fly.io 帳號與金鑰；公開 URL、喚醒時間、月成本待上線後補進 README**
+
 每完成一個 Step 就更新這一段。
 
 ## 工作方式
@@ -80,5 +82,7 @@ API（在 `backend/`，需 `ANTHROPIC_API_KEY`、`VOYAGE_API_KEY` 與已建好�
 問答與生成評估（在 `backend/`，需 `ANTHROPIC_API_KEY`）：`uv run python -m app.pipeline.answer "問題" [--rewrite]`；`uv run python -m eval.run_generation_eval --name <檔名> [--rewrite] [--refresh] [--publish]`（`--publish` 同時寫成 `eval/results/latest.json`，評估頁 `/api/eval/latest` 顯示的就是這份）（LLM 回應快取在 `data/cache/`）
 
 資料（在 `backend/`）：`uv run python -m app.ingestion.fetch` 下載、`uv run python -m app.ingestion.parse` 解析（說明見 `docs/data-format.md`）
+
+部署（在 repo 根目錄，需先有 `data/index/`）：`docker build -t traffic-law-rag .`；`docker run -p 8031:8000 --env-file .env traffic-law-rag`；上線 `fly deploy`（見 README 與 ADR 0007）。
 
 整體：`docker compose up --build`（前端 http://localhost:5173、後端 http://localhost:8010，容器內仍是 8000；本機 8000 常被其他專案佔用）。設定放 `.env`（範本見 `.env.example`）。

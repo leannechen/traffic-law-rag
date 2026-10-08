@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api import ask, chunks, eval, health, meta
 from app.core.config import get_settings
 from app.core.logging import configure_logging
+from app.core.static import mount_frontend
 
 
 def create_app() -> FastAPI:
@@ -21,6 +22,9 @@ def create_app() -> FastAPI:
     app.include_router(ask.router, prefix="/api")
     app.include_router(chunks.router, prefix="/api")
     app.include_router(eval.router, prefix="/api")
+    static_dir = get_settings().static_dir
+    if static_dir is not None:
+        mount_frontend(app, static_dir)  # 必須最後掛，才不會蓋掉 /api
     return app
 
 
