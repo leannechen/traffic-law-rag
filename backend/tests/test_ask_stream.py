@@ -259,3 +259,12 @@ def test_model_stream_is_closed_as_soon_as_a_refusal_marker_is_seen() -> None:
     events = collect("紅燈右轉？", make_deps(llm))
     assert "answer.refused" in types(events)
     assert llm.closed  # 不再讀完整個串流
+
+
+def test_token_usage_is_logged_without_the_question(caplog: pytest.LogCaptureFixture) -> None:
+    caplog.set_level("INFO", logger="app.ask")
+    collect("紅燈右轉？", make_deps(FakeLLM(ANSWER)))
+    usage = [r.getMessage() for r in caplog.records if "usage" in r.getMessage()]
+    assert len(usage) == 1
+    assert "input_tokens=10 output_tokens=5" in usage[0]
+    assert "紅燈" not in usage[0]
