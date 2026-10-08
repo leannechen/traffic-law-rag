@@ -15,7 +15,8 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 # 目錄結構刻意與 repo 相同（/app/backend、/app/data），config.py 的 REPO_ROOT 才會指到 /app
 WORKDIR /app/backend
 COPY backend/pyproject.toml backend/uv.lock ./
-RUN uv sync --frozen --no-dev --no-install-project
+# 預先編譯 .pyc：Fly 機器每次停機後檔案系統會重置，沒有 .pyc 的話每次冷啟動都要重新編譯所有套件
+RUN UV_COMPILE_BYTECODE=1 uv sync --frozen --no-dev --no-install-project
 COPY backend/app ./app
 COPY backend/eval/results/latest.json ./eval/results/latest.json
 COPY data/index /app/data/index
