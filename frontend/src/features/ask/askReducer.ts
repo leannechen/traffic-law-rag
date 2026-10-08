@@ -16,6 +16,7 @@ export type StepState = { status: 'running' | 'done'; durationMs?: number; summa
 export type AskErrorCode =
   | ServerErrorCode
   | 'rate_limited'
+  | 'daily_limit'
   | 'invalid_question'
   | 'http_error'
   | 'network_error'

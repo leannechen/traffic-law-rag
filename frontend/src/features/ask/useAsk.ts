@@ -10,6 +10,7 @@ export function toAskError(e: unknown, receivedAny: boolean): AskError {
     if (e.status === 429) {
       return { code: 'rate_limited', retryAfter: e.retryAfter ?? DEFAULT_RETRY_SECONDS }
     }
+    if (e.status === 503 && e.detail === 'daily_limit') return { code: 'daily_limit' }
     if (e.status === 422) return { code: 'invalid_question', message: e.detail }
     return { code: 'http_error', message: e.detail || `HTTP ${e.status}`, status: e.status }
   }

@@ -46,6 +46,11 @@ const COPY: Record<string, Copy> = {
     title: '問題格式不符',
     body: '請確認問題不是空白，且不超過 200 字。',
   },
+  daily_limit: {
+    label: '今日額度已用完',
+    title: '今天的提問額度用完了',
+    body: '為了控制費用，這個示範站每天只開放固定次數的提問。請明天再來試試。',
+  },
   http_error: {
     label: '發生錯誤',
     title: '伺服器回應異常',
@@ -121,7 +126,7 @@ export function ErrorNotice({ error, runId, onRetry }: Props) {
         {error.code === 'invalid_question' && error.message ? error.message : copy.body}
       </p>
       <div className={styles.actions}>
-        {error.code !== 'invalid_question' && (
+        {error.code !== 'invalid_question' && error.code !== 'daily_limit' && (
           <button type="button" className={styles.primary} onClick={onRetry}>
             重試
           </button>

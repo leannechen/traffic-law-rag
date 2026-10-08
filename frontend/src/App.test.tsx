@@ -188,6 +188,16 @@ describe('asking', () => {
     expect(screen.getByRole('button', { name: '重試' })).toBeDisabled()
   })
 
+  it('explains that the daily quota is used up and offers no pointless retry', async () => {
+    stubFetch(() => json({ detail: 'daily_limit' }, 503))
+    renderApp()
+    await ask('紅燈右轉會被罰多少錢？')
+
+    expect(await screen.findByText('今天的提問額度用完了')).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: '重試' })).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: '回首頁' })).toBeInTheDocument()
+  })
+
   it('starts a new run from the restart button', async () => {
     stubFetch(() => sseResponse(normalRun()))
     renderApp()

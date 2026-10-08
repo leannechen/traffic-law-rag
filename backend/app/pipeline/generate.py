@@ -10,7 +10,7 @@ from app.pipeline.articles import ArticleText
 PROMPTS_DIR = Path(__file__).resolve().parents[1] / "prompts"
 REFUSAL_MARKER = "[[REFUSE]]"
 CITATION_RE = re.compile(r"\[\[([^\[\]\n]+?)\]\]")
-MAX_TOKENS = 8000
+MAX_TOKENS = 2000  # 實測輸出最多約 650；上限放低，避免單次被誘導寫很長而多花錢
 
 
 def load_prompt(name: str) -> str:

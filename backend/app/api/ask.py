@@ -8,7 +8,8 @@ from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, field_validator
 
-from app.api.deps import client_key, get_ask_deps, get_rate_limiter
+from app.api.deps import client_key, get_ask_deps, get_daily_budget, get_rate_limiter
+from app.core.budget import DailyBudget
 from app.core.rate_limit import RateLimiter
 from app.pipeline.ask_stream import AskDeps, run_ask
 from app.schemas.events import Event, to_sse
@@ -16,6 +17,7 @@ from app.schemas.events import Event, to_sse
 router = APIRouter()
 
 MAX_QUESTION_CHARS = 200
+DAILY_LIMIT_DETAIL = "daily_limit"
 HEARTBEAT_SECONDS = 15.0  # 模型思考時可能很久沒有事件，送註解行避免中間的代理關掉閒置連線
 
 SSE_HEADERS = {
@@ -75,6 +77,7 @@ async def ask(
     request: Request,
     deps: Annotated[AskDeps, Depends(get_ask_deps)],
     limiter: Annotated[RateLimiter, Depends(get_rate_limiter)],
+    budget: Annotated[DailyBudget, Depends(get_daily_budget)],
 ) -> StreamingResponse:
     retry_after = limiter.check(client_key(request))
     if retry_after is not None:
@@ -83,6 +86,9 @@ async def ask(
             detail="請求太頻繁，請稍後再試",
             headers={"Retry-After": str(retry_after)},
         )
+    if not budget.try_acquire():
+        # detail 是給前端判斷用的代碼，不是顯示文字
+        raise HTTPException(status_code=503, detail=DAILY_LIMIT_DETAIL)
     events = run_ask(body.question, deps)
     return StreamingResponse(
         _event_stream(request, events),
