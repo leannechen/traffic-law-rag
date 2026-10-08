@@ -1,9 +1,13 @@
 services:
   backend:
-    build: ./backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
     env_file:
       - path: .env
         required: false
+    volumes:
+      - ./data/index:/app/data/index  # 索引由本機 build_index 產生（Chroma 要能寫，不能唯讀）
     ports:
       - "8010:8000"
     healthcheck:
