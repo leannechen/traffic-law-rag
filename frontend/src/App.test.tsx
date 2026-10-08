@@ -58,7 +58,36 @@ describe('home', () => {
     renderApp()
     expect(screen.getByRole('link', { name: '交通法規資料庫' })).toBeInTheDocument()
     expect(screen.getAllByRole('button', { name: /紅燈右轉會被罰多少錢/ })).toHaveLength(1)
-    expect(await screen.findByRole('heading', { name: '道路交通管理處罰條例' })).toBeInTheDocument()
+    expect(
+      await screen.findByRole('rowheader', { name: '道路交通管理處罰條例' }),
+    ).toBeInTheDocument()
+  })
+
+  it('lists the scope as a table with the five columns', async () => {
+    stubFetch(() => json({}))
+    renderApp()
+    const table = await screen.findByRole('table', { name: '收錄法規' })
+    const headers = within(table)
+      .getAllByRole('columnheader')
+      .map((h) => h.textContent)
+    expect(headers).toEqual(['類別', '法規名稱', '簡稱', '條文數', '最新異動'])
+    const row = within(table).getByRole('row', { name: /道路交通管理處罰條例/ })
+    expect(within(row).getByText('道交處罰條例')).toBeInTheDocument()
+  })
+
+  it('uses the same title on every screen size', () => {
+    stubFetch(() => json({}))
+    renderApp()
+    expect(
+      screen.getByRole('heading', { level: 1, name: '交通法規白話文搜尋' }),
+    ).toBeInTheDocument()
+    expect(screen.queryByText('用白話問交通法規，每個答案都附上條文依據。')).not.toBeInTheDocument()
+  })
+
+  it('does not show the GitHub link while the repository is not public', () => {
+    stubFetch(() => json({}))
+    renderApp()
+    expect(screen.queryByRole('link', { name: /GitHub/ })).not.toBeInTheDocument()
   })
 
   it('disables submit and shows an error beyond 200 characters', async () => {

@@ -42,6 +42,9 @@ export function ArticlePanel({ article, cited, onClose }: Props) {
           >
             在全國法規資料庫查看 ↗
           </a>
+          <span className={styles.hint}>
+            按 <kbd className={styles.key}>Esc</kbd> 可關閉面板
+          </span>
           <button
             type="button"
             className={styles.close}

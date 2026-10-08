@@ -25,6 +25,9 @@
   font-size: 17px;
   line-height: 1.6;
   resize: none;
+  overflow-y: hidden;
+  min-height: calc(3.2em + 28px); /* 手機：2 行（畫板 MobileHome） */
+  max-height: 12rem;
 }
 
 .invalid .input {
@@ -90,7 +93,8 @@
     background: transparent;
     padding: 18px 20px;
     font-size: 20px;
-    height: 4.2rem;
+    min-height: calc(1.6em + 36px); /* 桌面：1 行（畫板 Main） */
+    max-height: 12rem;
   }
 
   .submit {

@@ -24,6 +24,8 @@
 
 - 已完成（待驗收）：Step 12 部署。公開網址 https://traffic-law-rag.fly.dev/ （Fly.io，單機，nrt；部署用 `fly deploy --ha=false`）。單一映像（根目錄 `Dockerfile`：前端建置檔由後端一併提供，`STATIC_DIR`）、`fly.toml`、ADR 0007（索引當 artifact 放進映像、單機、手動每月更新）；映像已在本機建置並用真實索引與模型驗證（啟動到 health 約 2.5 秒、記憶體約 200 MB）；每次提問在 log 記 token 用量（`usage run=… input_tokens=… output_tokens=…`，不含問題內容）；CI 新增 `image` job（建映像並 smoke test）。全站每日提問上限 `DAILY_ASK_LIMIT`（預設 300，超過回 503 `daily_limit`，前端有專屬說明）、`max_tokens` 降為 2000；後端測試 308 個、Vitest 113 個。已在公開網址驗證：問答串流、404、速率限制（偽造 X-Forwarded-For 無法繞過）；停機後喚醒第一個請求約 6.5 秒（映像預編譯 `.pyc` 後；之前約 9.7 秒）。
 
+- 已完成（待 Leanne 檢視）：首頁與全文面板的 UI 修正（Main.dc.html 新版）。頁首沒有產品名稱那一列（桌面）、外觀切換在選單右端（GitHub 圖示先隱藏：repo 公開前 `Header.tsx` 的 `SHOW_GITHUB_LINK = false`）、收錄範圍改五欄表格、手機首頁標題與桌面一致、全文面板加「按 Esc 可關閉面板」、輸入框換行時會長高（不再出現多餘捲軸）；另修一個後端問題：兩個請求同時第一次使用時，Chroma 客戶端會同時建立而當掉（500），改成加鎖。後端測試 310 個、Vitest 117 個、E2E 14 個。**尚未重新部署**
+
 每完成一個 Step 就更新這一段。
 
 ## 工作方式
