@@ -4,6 +4,8 @@
 
 用白話問台灣交通法規，系統只根據條文回答，並標註每一句話的出處。FastAPI 後端＋React 前端。
 
+**線上版：https://traffic-law-rag.fly.dev/**（沒人用時機器會停機，第一次開啟要等約 10 秒）
+
 > 這份 README 是 Step 11 暫放的簡版（讓 CI badge 有地方放）；完整的介紹、架構圖、評估結果與技術取捨會在 Step 13 改寫。
 
 ## 快速開始
@@ -38,7 +40,7 @@ E2E 會自己啟動前端與一個假後端（`backend/tests/e2e_server.py`，�
 fly launch --no-deploy --copy-config
 fly secrets set ANTHROPIC_API_KEY=... VOYAGE_API_KEY=...
 # 之後每次（需要本機有 data/index/）
-fly deploy
+fly deploy --ha=false      # 一定要單機：速率限制與每日額度存在記憶體，兩台會各算各的
 ```
 
 ### 每月更新資料
@@ -60,7 +62,7 @@ fly deploy
 |---|---|---|
 | 容器啟動到 `/api/health` 可用 | 約 2.5 秒 | 本機 Docker 實測 |
 | 容器剛啟動後第一次提問 | 約 4.5 秒（含載入索引） | 本機 Docker 實測 |
-| Fly 機器從停機喚醒 | 待上線後實測 | — |
+| Fly 機器從停機喚醒 | 第一個請求約 9.7 秒才回應，之後第一次提問約 3.2 秒；停機約在 6 分鐘沒流量後發生（各只量 1 次） | Fly.io 實測，來源：台灣 |
 | 執行時記憶體 | 約 200 MB（設定 512 MB） | 本機 Docker 實測 |
 | 主機費用 | 常駐約 US$3.69／月（`shared-cpu-1x` 512 MB，按秒計費）；`auto_stop` 沒流量時機器不計運算費，只剩儲存費（US$0.15／GB／月，映像約 0.66 GB，約 US$0.10／月） | [Fly.io pricing](https://docs.fly.io/about/pricing) |
 | 模型單價 | Sonnet 5.5：輸入 US$2／百萬 token、輸出 US$10／百萬 token | Anthropic 價目頁 |
