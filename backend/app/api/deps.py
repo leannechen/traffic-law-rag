@@ -1,6 +1,7 @@
 """API 的相依物件。真實的相依（索引、模型客戶端）在第一次用到時才建立，
 所以 /api/health 不需要金鑰或索引；測試用 app.dependency_overrides 換成假的。"""
 
+import threading
 from functools import lru_cache
 
 import chromadb
@@ -16,16 +17,27 @@ from app.pipeline.articles import ChromaArticleSource, ChromaChunkStore
 from app.pipeline.ask_stream import AskDeps
 from app.pipeline.retrieve import Retriever
 
+# Chroma 的客戶端不能同時建立：兩個執行緒同時第一次開同一個索引，
+# 會有一個拿到建到一半的物件而當掉（機器剛喚醒、同時進來兩個請求就會遇到）。
+# lru_cache 不擋同時進入，所以在外面加鎖；建好之後只是查快取。
+_init_lock = threading.RLock()
+
+
+def _collection() -> chromadb.Collection:
+    with _init_lock:
+        return _collection_cached()
+
 
 @lru_cache
-def _collection() -> chromadb.Collection:
+def _collection_cached() -> chromadb.Collection:
     settings = get_settings()
     return chromadb.PersistentClient(path=str(settings.index_dir)).get_collection(COLLECTION)
 
 
 def get_ask_deps() -> AskDeps:
     try:
-        return _build_ask_deps()
+        with _init_lock:
+            return _build_ask_deps()
     except (EmbeddingError, LLMError, ValueError, chromadb.errors.ChromaError) as e:
         raise HTTPException(status_code=503, detail="服務尚未就緒（索引或金鑰未設定）") from e
 
