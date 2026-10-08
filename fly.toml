@@ -1,0 +1,30 @@
+# Fly.io 設定。首次：fly launch --no-deploy --copy-config；之後：fly deploy
+# 金鑰不寫在這裡：fly secrets set ANTHROPIC_API_KEY=... VOYAGE_API_KEY=...
+app = "traffic-law-rag"
+primary_region = "nrt"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  # 同源部署，不需要 CORS；TRUST_PROXY 已在映像內設為 true（Fly 代理會帶 X-Forwarded-For）
+  CORS_ORIGINS = "[]"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  # 沒人用時縮到 0 台省錢；代價是冷啟動（README 會寫實測時間）
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [[http_service.checks]]
+    method = "GET"
+    path = "/api/health"
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "10s"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"

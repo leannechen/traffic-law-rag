@@ -1,0 +1,16 @@
+.git
+.env
+.env.*
+**/node_modules
+**/.venv
+**/__pycache__
+frontend/dist
+frontend/test-results
+frontend/e2e
+data/raw
+data/cache
+data/processed
+backend/tests
+backend/eval/results/*
+!backend/eval/results/latest.json
+docs
