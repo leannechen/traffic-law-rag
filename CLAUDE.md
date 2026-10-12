@@ -26,7 +26,7 @@
 
 - 已完成（待 Leanne 檢視）：首頁與全文面板的 UI 修正（Main.dc.html 新版）。頁首沒有產品名稱那一列（桌面）、外觀切換在選單右端（GitHub 圖示先隱藏：repo 公開前 `Header.tsx` 的 `SHOW_GITHUB_LINK = false`）、收錄範圍改五欄表格、手機首頁標題與桌面一致、全文面板加「按 Esc 可關閉面板」、輸入框換行時會長高（不再出現多餘捲軸）；另修一個後端問題：兩個請求同時第一次使用時，Chroma 客戶端會同時建立而當掉（500），改成加鎖。法規順序以 `targets.yaml` 為準（處罰條例、安全規則、事故處理辦法、強制險法、裁罰基準；`/api/meta` 排序，頁首深色帶、收錄範圍、拒答頁右欄一致）。後端測試 311 個、Vitest 117 個、E2E 14 個。已於 2026-10-08 重新部署
 
-- 已完成（待 Leanne 驗收）：Step 13 README 與 demo 素材。README 已由 Leanne 改寫（問題與 Input／Output、Mermaid 架構圖、評估結果與限制、技術取捨表連到 ADR、困難與解法、限制、免責與資料授權；原有的部署與成本表移到後段）；README 有兩份：`README.md` 是英文預設版（翻譯稿）、`README.zh-TW.md` 是 Leanne 的繁中版，兩邊要同步維護；README 放兩支各約 10 秒、各約 0.5 MB 的 GIF：`docs/media/demo-answer.gif`（紅燈右轉，成功路徑）與 `docs/media/demo-refusal.gif`（公車專用道，拒答路徑）；舊的 `demo.gif`（31 秒、3.3 MB）暫時保留在 repo，README 已不引用由 `frontend/scripts/record-demo.mjs`（`pnpm demo:record`，Playwright 錄 webm → ffmpeg → gifski，需 brew 安裝 ffmpeg 與 gifski）在公開網址上錄製。待確認：GitHub 上 Mermaid 圖與 GIF 的渲染、找沒看過專案的人試讀（驗收：三分鐘內理解系統做什麼、好在哪）。
+- 已完成（待 Leanne 驗收）：Step 13 README 與 demo 素材。README 已由 Leanne 改寫（問題與 Input／Output、Mermaid 架構圖、評估結果與限制、技術取捨表連到 ADR、困難與解法、限制、免責與資料授權；原有的部署與成本表移到後段）；README 有兩份：`README.md` 是英文預設版（翻譯稿）、`README.zh-TW.md` 是 Leanne 的繁中版，兩邊要同步維護；README 只放一支約 9 秒、約 140 KB 的 GIF：`docs/media/demo-answer.gif`（紅燈右轉，成功路徑）；載入太慢，拒答那支（公車專用道）已從 README 與 repo 移除，腳本仍可用 `pnpm demo:record -- --only refusal` 重錄；舊的 `demo.gif`（31 秒、3.3 MB）暫時保留在 repo，README 不引用由 `frontend/scripts/record-demo.mjs`（`pnpm demo:record`，Playwright 錄 webm → ffmpeg → gifski，需 brew 安裝 ffmpeg 與 gifski）在公開網址上錄製。待確認：GitHub 上 Mermaid 圖與 GIF 的渲染、找沒看過專案的人試讀（驗收：三分鐘內理解系統做什麼、好在哪）。
 
 每完成一個 Step 就更新這一段。
 

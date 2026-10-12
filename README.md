@@ -6,13 +6,7 @@
 
 Ask Taiwan's traffic laws in plain language. The system answers only from the statute text and cites the source of every claim. When it finds no basis, it refuses instead of guessing.
 
-**Happy path**: a question the laws can answer, with a citation on every claim and the retrieval process.
-
-![Demo: answering 「紅燈右轉會被罰多少錢？」 (How much is the fine for turning right on red?)](docs/media/demo-answer.gif)
-
-**Bad path**: a question the retrieved articles cannot support. The system refuses and shows why.
-
-![Demo: refusing 「公車專用道可以走嗎？」 (Can I drive in a bus lane?)](docs/media/demo-refusal.gif)
+![Demo: answering 「紅燈右轉會被罰多少錢？」 (How much is the fine for turning right on red?) with citations and the retrieval process](docs/media/demo-answer.gif)
 
 **Live demo: https://traffic-law-rag.fly.dev/** (the machine stops when nobody is using it, so the first visit takes about 6–7 seconds). The interface and the law texts are in Traditional Chinese.
 

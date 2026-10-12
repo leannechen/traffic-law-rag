@@ -4,6 +4,7 @@
 //
 //   pnpm demo:record                       錄線上版（會呼叫真實模型，兩題約 US$0.02）
 //   pnpm demo:record -- --url http://localhost:5173
+//   pnpm demo:record -- --only answer      只錄其中一支（answer 或 refusal）
 //
 // 需要：brew install ffmpeg gifski；首次要 pnpm exec playwright install chromium
 // 輸出：docs/media/demo-answer.gif、docs/media/demo-refusal.gif（中間檔放在系統暫存資料夾）
@@ -20,9 +21,9 @@ const urlFlag = args.indexOf('--url')
 const BASE_URL = urlFlag >= 0 ? args[urlFlag + 1] : 'https://traffic-law-rag.fly.dev/'
 
 const VIEWPORT = { width: 1280, height: 720 }
-const GIF_WIDTH = 880
-const GIF_FPS = 12
-const GIF_QUALITY = 70
+const GIF_WIDTH = 720
+const GIF_FPS = 10
+const GIF_QUALITY = 45
 const OUT_DIR = resolve(fileURLToPath(import.meta.url), '../../../docs/media')
 
 const pause = (ms) => new Promise((r) => setTimeout(r, ms))
@@ -31,9 +32,9 @@ const pause = (ms) => new Promise((r) => setTimeout(r, ms))
 async function answer(page) {
   await ask(page, '紅燈右轉會被罰多少錢？')
   await page.getByRole('button', { name: '重新提問' }).waitFor({ timeout: 60_000 })
-  await pause(1200)
+  await pause(900)
   await page.getByRole('button', { name: /檢索過程/ }).click()
-  await pause(2200)
+  await pause(1500)
 }
 
 // 拒答題：過了相似度門檻，但模型判斷條文不足；等拒答說明出現，再往下捲看「為什麼不回答」
@@ -113,5 +114,9 @@ async function record(browser, { name, run }) {
 }
 
 const browser = await chromium.launch()
-for (const scenario of SCENARIOS) await record(browser, scenario)
+const onlyFlag = args.indexOf('--only')
+const only = onlyFlag >= 0 ? args[onlyFlag + 1] : null
+for (const scenario of SCENARIOS) {
+  if (!only || scenario.name === `demo-${only}`) await record(browser, scenario)
+}
 await browser.close()
