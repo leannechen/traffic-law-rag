@@ -24,7 +24,9 @@
 
 - 已完成（待驗收）：Step 12 部署。公開網址 https://traffic-law-rag.fly.dev/ （Fly.io，單機，nrt；部署用 `fly deploy --ha=false`）。單一映像（根目錄 `Dockerfile`：前端建置檔由後端一併提供，`STATIC_DIR`）、`fly.toml`、ADR 0007（索引當 artifact 放進映像、單機、手動每月更新）；映像已在本機建置並用真實索引與模型驗證（啟動到 health 約 2.5 秒、記憶體約 200 MB）；每次提問在 log 記 token 用量（`usage run=… input_tokens=… output_tokens=…`，不含問題內容）；CI 新增 `image` job（建映像並 smoke test）。全站每日提問上限 `DAILY_ASK_LIMIT`（預設 300，超過回 503 `daily_limit`，前端有專屬說明）、`max_tokens` 降為 2000；後端測試 308 個、Vitest 113 個。已在公開網址驗證：問答串流、404、速率限制（偽造 X-Forwarded-For 無法繞過）；停機後喚醒第一個請求約 6.5 秒（映像預編譯 `.pyc` 後；之前約 9.7 秒）。
 
-- 已完成（待 Leanne 檢視）：首頁與全文面板的 UI 修正（Main.dc.html 新版）。頁首沒有產品名稱那一列（桌面）、外觀切換在選單右端（GitHub 圖示先隱藏：repo 公開前 `Header.tsx` 的 `SHOW_GITHUB_LINK = false`）、收錄範圍改五欄表格、手機首頁標題與桌面一致、全文面板加「按 Esc 可關閉面板」、輸入框換行時會長高（不再出現多餘捲軸）；另修一個後端問題：兩個請求同時第一次使用時，Chroma 客戶端會同時建立而當掉（500），改成加鎖。法規順序以 `targets.yaml` 為準（處罰條例、安全規則、事故處理辦法、強制險法、裁罰基準；`/api/meta` 排序，頁首深色帶、收錄範圍、拒答頁右欄一致）。後端測試 311 個、Vitest 117 個、E2E 14 個。**尚未重新部署**
+- 已完成（待 Leanne 檢視）：首頁與全文面板的 UI 修正（Main.dc.html 新版）。頁首沒有產品名稱那一列（桌面）、外觀切換在選單右端（GitHub 圖示先隱藏：repo 公開前 `Header.tsx` 的 `SHOW_GITHUB_LINK = false`）、收錄範圍改五欄表格、手機首頁標題與桌面一致、全文面板加「按 Esc 可關閉面板」、輸入框換行時會長高（不再出現多餘捲軸）；另修一個後端問題：兩個請求同時第一次使用時，Chroma 客戶端會同時建立而當掉（500），改成加鎖。法規順序以 `targets.yaml` 為準（處罰條例、安全規則、事故處理辦法、強制險法、裁罰基準；`/api/meta` 排序，頁首深色帶、收錄範圍、拒答頁右欄一致）。後端測試 311 個、Vitest 117 個、E2E 14 個。已於 2026-10-08 重新部署
+
+- 已完成（待 Leanne 驗收）：Step 13 README 與 demo 素材。README 已由 Leanne 改寫（問題與 Input／Output、Mermaid 架構圖、評估結果與限制、技術取捨表連到 ADR、困難與解法、限制、免責與資料授權；原有的部署與成本表移到後段）；`docs/media/demo.gif`（約 31 秒：紅燈右轉、發生車禍時該怎麼辦？兩題成功，公車專用道一題拒答）由 `frontend/scripts/record-demo.mjs`（`pnpm demo:record`，Playwright 錄 webm → ffmpeg → gifski，需 brew 安裝 ffmpeg 與 gifski）在公開網址上錄製。待確認：GitHub 上 Mermaid 圖與 GIF 的渲染、找沒看過專案的人試讀（驗收：三分鐘內理解系統做什麼、好在哪）。
 
 每完成一個 Step 就更新這一段。
 
@@ -85,6 +87,6 @@ API（在 `backend/`，需 `ANTHROPIC_API_KEY`、`VOYAGE_API_KEY` 與已建好�
 
 資料（在 `backend/`）：`uv run python -m app.ingestion.fetch` 下載、`uv run python -m app.ingestion.parse` 解析（說明見 `docs/data-format.md`）
 
-部署（在 repo 根目錄，需先有 `data/index/`）：`docker build -t traffic-law-rag .`；`docker run -p 8031:8000 --env-file .env traffic-law-rag`；上線 `fly deploy`（見 README 與 ADR 0007）。
+部署（在 repo 根目錄，需先有 `data/index/`）：`docker build -t traffic-law-rag .`；`docker run -p 8031:8000 --env-file .env traffic-law-rag`；上線 `fly deploy --ha=false`（見 README 與 ADR 0007）。
 
 整體：`docker compose up --build`（前端 http://localhost:5173、後端 http://localhost:8010，容器內仍是 8000；本機 8000 常被其他專案佔用）。設定放 `.env`（範本見 `.env.example`）。
