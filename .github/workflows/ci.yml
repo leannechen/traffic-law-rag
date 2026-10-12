@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch: # 手動部署：Actions 頁面選 main 後 Run workflow（跳過「只改文件」的判斷）
 
 jobs:
   backend:
@@ -41,9 +42,9 @@ jobs:
       - run: pnpm test
 
   # E2E：真的瀏覽器＋真的前端＋真的 FastAPI（模型、檢索、條文用假的，不需要任何金鑰）。
-  # 比較慢，所以只在 push 到 main 時跑，PR 不跑。
+  # 比較慢，所以 PR 不跑（push 到 main 與手動觸發才跑）。
   e2e:
-    if: github.event_name == 'push'
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -89,3 +90,75 @@ jobs:
           test "$(curl -s -o /dev/null -w '%{http_code}' localhost:8000/api/nope)" = 404
           test "$(curl -s -o /dev/null -w '%{http_code}' localhost:8000/assets/nope.js)" = 404
           docker logs app
+
+  # CD：push 到 main 且上面四個 job 都成功後，自動部署到 Fly.io（見 ADR 0008）。
+  # 索引不進 git，放在 GitHub Release（tag data-YYYY-MM-DD，asset index.tar.gz），這裡下載最新一份。
+  # 只改文件、CI 設定、測試時不部署：部署會重啟機器，記憶體裡的速率限制與每日額度會歸零。
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: [backend, frontend, e2e, image]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    concurrency:
+      group: deploy
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      APP_URL: https://traffic-law-rag.fly.dev
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Decide whether this push needs a deploy
+        id: changes
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          # 手動觸發、新分支、或找不到上一個 commit（例如 force push）：一律部署
+          if [ "${{ github.event_name }}" != "push" ] || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          # 不影響映像內容的路徑：文件、CI 設定、測試、錄 demo 的腳本
+          changed=$(git diff --name-only "$BEFORE" "$GITHUB_SHA" \
+            | grep -Ev '^(docs/|\.github/|frontend/scripts/|frontend/e2e/|frontend/playwright\.config\.ts|backend/tests/|README.*\.md|CLAUDE\.md|\.gitignore)' || true)
+          if [ -z "$changed" ]; then
+            echo "Only docs/CI/tests changed, skip deploy."
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "$changed"
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Download the latest index from GitHub Releases
+        if: steps.changes.outputs.deploy == 'true'
+        run: |
+          tag=$(gh release list --json tagName --jq '[.[].tagName | select(startswith("data-"))] | sort | last')
+          test -n "$tag" || { echo "No data-* release found"; exit 1; }
+          echo "Using index from release $tag"
+          gh release download "$tag" --pattern index.tar.gz
+          mkdir -p data
+          tar -xzf index.tar.gz -C data
+          test -f data/index/index_meta.json
+          jq '{data_version, embedding_model, chunk_count}' data/index/index_meta.json
+
+      - uses: superfly/flyctl-actions/setup-flyctl@ed8efb33836e8b2096c7fd3ba1c8afe303ebbff1 # v1.6
+        if: steps.changes.outputs.deploy == 'true'
+
+      - name: Deploy (single machine only)
+        if: steps.changes.outputs.deploy == 'true'
+        run: flyctl deploy --remote-only --ha=false
+
+      - name: Smoke test the live site
+        if: steps.changes.outputs.deploy == 'true'
+        run: |
+          curl -sf --retry 10 --retry-delay 5 --retry-connrefused "$APP_URL/api/health"
+          live=$(curl -sf --retry 3 --retry-delay 5 "$APP_URL/api/meta")
+          want=$(jq -c '{data_version, embedding_model, chunk_count}' data/index/index_meta.json)
+          got=$(echo "$live" | jq -c '{data_version, embedding_model, chunk_count}')
+          echo "want $want"; echo "got  $got"
+          test "$want" = "$got"
+          curl -sf "$APP_URL/" | grep -q '<div id="root">'
+          flyctl status

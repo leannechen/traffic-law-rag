@@ -37,6 +37,6 @@
 ## 後果
 
 - 更新資料的流程是手動、每月一次：重跑 ingestion → `build_index` → `run_generation_eval --publish`（若要更新評估頁）→ `fly deploy`。索引與評估結果因此永遠跟著映像一起版本化。
-- 部署必須在**有 `data/index/` 的機器上**做（本機）；CI 不部署，也因此不能在 CI 建這個映像。
+- 部署當時必須在**有 `data/index/` 的機器上**做（本機）；CI 不部署，也因此不能在 CI 建這個映像。**後來由 [ADR 0008](0008-continuous-deployment.md) 補上 CD**：索引放 GitHub Release，push 到 main 後自動部署。
 - 冷啟動 ＝ 機器啟動 ＋ 第一次請求載入索引與建立客戶端。機器停機時第一個使用者會等比較久。
 - 單一機器、單一區域：沒有備援。作品集可以接受。

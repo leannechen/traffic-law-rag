@@ -155,11 +155,15 @@ E2E starts the frontend and a fake backend by itself (`backend/tests/e2e_server.
 
 One image, with the backend also serving the frontend (see [ADR 0007](docs/decisions/0007-deployment.md)).
 
+**Deploys are automatic.** A push to `main` that passes CI deploys to Fly.io (see [ADR 0008](docs/decisions/0008-continuous-deployment.md)). The search index is not in git; it is downloaded from the latest `data-*` GitHub Release. Pushes that only touch docs, CI config or tests skip the deploy, because a deploy restarts the machine and resets the in-memory quotas.
+
+Manual deploy, for the first setup or as a fallback:
+
 ```bash
 # First time
 fly launch --no-deploy --copy-config
 fly secrets set ANTHROPIC_API_KEY=... VOYAGE_API_KEY=...
-# Every time after (needs data/index/ locally)
+# Manual deploy (needs data/index/ locally)
 fly deploy --ha=false      # must be a single machine: the rate limit and daily quota live in memory, so two machines would count separately
 ```
 
@@ -172,8 +176,8 @@ uv run python -m app.ingestion.fetch          # download
 uv run python -m app.ingestion.parse          # parse
 uv run python -m app.ingestion.build_index    # rebuild the index (needs VOYAGE_API_KEY)
 uv run python -m eval.run_generation_eval --name <name> --publish   # optional: update the evaluation page
-# back in the repo root
-fly deploy --ha=false
+# back in the repo root: publish the new index as a GitHub Release, then deploy
+# (publish commands are in docs/operations.md; deploy via Actions → Run workflow, or fly deploy --ha=false)
 ```
 
 ### Cold Start and Cost

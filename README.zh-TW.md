@@ -155,11 +155,15 @@ E2E 會自己啟動前端與一個假後端（`backend/tests/e2e_server.py`，�
 
 單一映像，後端一併提供前端（見 [ADR 0007](docs/decisions/0007-deployment.md)）。
 
+**部署是自動的**：push 到 `main` 且 CI 通過後，會自動部署到 Fly.io（見 [ADR 0008](docs/decisions/0008-continuous-deployment.md)）。索引不在 git 裡，而是從最新的 `data-*` GitHub Release 下載。只改文件、CI 設定或測試的 push 不會部署，因為部署會重啟機器，記憶體裡的額度會歸零。
+
+手動部署（首次設定或備援）：
+
 ```bash
 # 首次
 fly launch --no-deploy --copy-config
 fly secrets set ANTHROPIC_API_KEY=... VOYAGE_API_KEY=...
-# 之後每次（需要本機有 data/index/）
+# 手動部署（需要本機有 data/index/）
 fly deploy --ha=false      # 一定要單機：速率限制與每日額度存在記憶體，兩台會各算各的
 ```
 
@@ -172,8 +176,8 @@ uv run python -m app.ingestion.fetch          # 下載
 uv run python -m app.ingestion.parse          # 解析
 uv run python -m app.ingestion.build_index    # 重建索引（需要 VOYAGE_API_KEY）
 uv run python -m eval.run_generation_eval --name <檔名> --publish   # 選用：更新評估頁
-# 回到 repo 根目錄
-fly deploy --ha=false
+# 回到 repo 根目錄：把新索引發佈成 GitHub Release，再部署
+# （發佈指令見 docs/operations.md；部署可用 Actions → Run workflow，或 fly deploy --ha=false）
 ```
 
 ### 冷啟動與成本

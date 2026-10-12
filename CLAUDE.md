@@ -28,6 +28,8 @@
 
 - 已完成（Leanne 已驗收）：Step 13 README 與 demo 素材。README 已由 Leanne 改寫（問題與 Input／Output、Mermaid 架構圖、評估結果與限制、技術取捨表連到 ADR、困難與解法、限制、免責與資料授權；原有的部署與成本表移到後段）；README 有兩份：`README.md` 是英文預設版（翻譯稿）、`README.zh-TW.md` 是 Leanne 的繁中版，兩邊要同步維護；README 只放一支約 9 秒、約 140 KB 的 GIF：`docs/media/demo-answer.gif`（紅燈右轉，成功路徑）；載入太慢，拒答那支（公車專用道）已從 README 與 repo 移除，腳本仍可用 `pnpm demo:record -- --only refusal` 重錄；舊的 `demo.gif`（31 秒、3.3 MB）暫時保留在 repo，README 不引用由 `frontend/scripts/record-demo.mjs`（`pnpm demo:record`，Playwright 錄 webm → ffmpeg → gifski，需 brew 安裝 ffmpeg 與 gifski）在公開網址上錄製。已在 GitHub 上確認 Mermaid 圖與 GIF 渲染正常（未另外找人試讀）。
 
+- 進行中（待 Leanne 完成帳號步驟後驗證）：CD（ADR 0008）。`ci.yml` 新增 `deploy` job：push 到 main 且四個 job 都過後，下載最新的 `data-*` GitHub Release 索引，`flyctl deploy --remote-only --ha=false`，再做 smoke test（`/api/meta` 的 `data_version`、`embedding_model`、`chunk_count` 要與索引一致）；只改文件／CI／測試時跳過（部署會重啟、額度歸零）；`workflow_dispatch` 可手動部署。**要先做**：`fly tokens create deploy -a traffic-law-rag` → GitHub secret `FLY_API_TOKEN`，並發佈第一個資料 Release（指令見 `docs/operations.md`），否則 `deploy` job 會失敗（找不到 Release 時尚未部署，線上不受影響）。單機部署失敗時沒有備援，回復方式見 `docs/operations.md`。
+
 每完成一個 Step 就更新這一段。
 
 ## 工作方式
@@ -87,6 +89,6 @@ API（在 `backend/`，需 `ANTHROPIC_API_KEY`、`VOYAGE_API_KEY` 與已建好�
 
 資料（在 `backend/`）：`uv run python -m app.ingestion.fetch` 下載、`uv run python -m app.ingestion.parse` 解析（說明見 `docs/data-format.md`）
 
-部署（在 repo 根目錄，需先有 `data/index/`）：`docker build -t traffic-law-rag .`；`docker run -p 8031:8000 --env-file .env traffic-law-rag`；上線 `fly deploy --ha=false`（見 README 與 ADR 0007）。
+部署（在 repo 根目錄，需先有 `data/index/`）：`docker build -t traffic-law-rag .`；`docker run -p 8031:8000 --env-file .env traffic-law-rag`；上線：push 到 main 由 CI 自動部署（ADR 0008）；手動備援 `fly deploy --ha=false`。
 
 整體：`docker compose up --build`（前端 http://localhost:5173、後端 http://localhost:8010，容器內仍是 8000；本機 8000 常被其他專案佔用）。設定放 `.env`（範本見 `.env.example`）。

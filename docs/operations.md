@@ -4,6 +4,27 @@
 
 ## 部署
 
+**平常是自動的**（ADR 0008）：push 到 main，CI 的四個 job 都過了之後，`deploy` job 會下載最新的資料 Release、`flyctl deploy --remote-only --ha=false`，再對公開網址做 smoke test。只改文件、CI 設定、測試時會跳過（部署會重啟機器，額度歸零）。
+
+- 需要 GitHub secret `FLY_API_TOKEN`（`fly tokens create deploy -a traffic-law-rag`，Settings → Secrets and variables → Actions）。token 外洩或輪替時，先撤銷（`fly tokens list`、`fly tokens revoke`）再重建並更新 secret。
+- 不想等 push、或跳過了但想部署：Actions 頁面 → CI → Run workflow（選 main）；手動觸發一律部署。
+- `deploy` job 失敗：先看 job 的 log；常見原因是找不到 `data-*` Release（這種情況還沒部署，線上不受影響）、token 失效、smoke test 的 `data_version` 與 Release 不符。若是部署到一半失敗、線上壞了：單機沒有備援，用 `fly releases` 找上一版，`fly deploy --image <上一版映像> --ha=false` 回復。
+- 改了 chunk 結構或 embedding 模型時，**先建新索引並發新 Release，再 push 程式碼**，否則 CD 會把舊索引配上新程式碼。
+
+### 發佈索引 Release（首次與每月更新）
+
+在 repo 根目錄、`data/index/` 是你要發佈的那份：
+
+```bash
+tar -czf /tmp/index.tar.gz -C data index
+ver=$(jq -r .data_version data/index/index_meta.json)
+gh release create "data-$ver" /tmp/index.tar.gz --title "Index $ver" --notes "data_version $ver"
+```
+
+之後 CD 會自動用 tag 日期最新的 `data-*` Release。
+
+### 手動部署（備援）
+
 在 repo 根目錄、本機要有 `data/index/`：
 
 ```bash
@@ -42,7 +63,7 @@ fly logs --no-tail | grep usage | tail
 
 ## 每月更新資料
 
-見 README 的「每月更新資料」。重點：索引是 artifact，重建後要重新 `fly deploy --ha=false` 才會生效；若要更新評估頁，先 `run_generation_eval --publish`。
+見 README 的「每月更新資料」。重點：索引是 artifact，重建後要**發佈成新的 `data-*` Release**（見上方「發佈索引 Release」），再到 Actions 手動觸發部署（或本機 `fly deploy --ha=false`）才會生效；若要更新評估頁，先 `run_generation_eval --publish`（`latest.json` 要 commit 並 push，CD 會把它帶進映像）。
 
 ## 已知小事
 
