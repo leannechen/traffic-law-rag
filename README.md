@@ -1,196 +1,200 @@
-# 交通法規資料庫（Traffic Law RAG）
+# Traffic Law RAG (交通法規資料庫)
+
+**English** | [繁體中文](README.zh-TW.md)
 
 [![CI](https://github.com/leannechen/traffic-law-rag/actions/workflows/ci.yml/badge.svg)](https://github.com/leannechen/traffic-law-rag/actions/workflows/ci.yml)
 
-用白話問台灣交通法規，系統只根據條文回答，並標註每一句話的出處；找不到依據時，它會拒答，不會自己猜測。
+Ask Taiwan's traffic laws in plain language. The system answers only from the statute text and cites the source of every claim. When it finds no basis, it refuses instead of guessing.
 
-![Demo：兩題成功回答（附引用與檢索過程）、一題拒答](docs/media/demo.gif)
+![Demo: two answered questions (with citations and the retrieval process) and one refusal](docs/media/demo.gif)
 
-**線上版：https://traffic-law-rag.fly.dev/**（沒人用時機器會停機，第一次開啟要等約 6–7 秒）
+**Live demo: https://traffic-law-rag.fly.dev/** (the machine stops when nobody is using it, so the first visit takes about 6–7 seconds). The interface and the law texts are in Traditional Chinese.
 
-## 要解決的問題
+## Problem
 
-當沒有特定限制範圍時，使用者對 LLM 詢問法律問題會遇到兩種狀況：
-1. 用語落差：法律是用文言與專業用語寫的，但問題常是口語行文。
-2. 容易得到看起來合理、卻對不上現行條文的答案：例如引用不存在的條號、金額記錯，或對法規沒有載入的事硬答。
+Asking an LLM a legal question with no scope limit tends to go wrong in two ways:
 
-這個專案想做到三件事：
+1. **Vocabulary gap**: statutes are written in formal legal language, but people ask in everyday speech.
+2. **Plausible but wrong answers**: the answer sounds reasonable but does not match the current text, for example a citation of an article that does not exist, a wrong fine amount, or a confident answer about something the loaded laws do not cover.
 
-1. **答案找得到出處**：每個論點後面都標註條號，點開可看整條原文。
-2. **引用能被驗證**：系統會檢查答案引用的條文確實是這次檢索到的條文；答案裡的金額必須出現在它引用的條文。
-3. **不知道就說不知道**：範圍外或條文不足的問題，明確拒答並說明原因。
+This project aims to do three things:
 
-|  | 內容 |
+1. **Answers have sources**: every claim is followed by an article number, and the full article text is one click away.
+2. **Citations are verifiable**: the system checks that every cited article was actually retrieved for this question, and every amount in the answer must appear in the article it cites.
+3. **"I don't know" is a valid answer**: for questions that are out of scope or not supported by the retrieved articles, it refuses and explains why.
+
+| | Details |
 |---|---|
-| **Input** | 一句白話問題（上限 200 字） |
-| **Output** | 串流的中文答案，每句附 `[條號]` 引用；依據卡片（檢索到的條文與相似度）；或拒答說明 |
-| **收錄範圍** | 道路交通管理處罰條例、道路交通安全規則、道路交通事故處理辦法、強制汽車責任保險法、違反道路交通管理事件統一裁罰基準及處理細則（共 5 部，462 條，約 489 個 chunk） |
+| **Input** | One plain-language question (up to 200 characters) |
+| **Output** | A streamed answer in Chinese with an article citation on every claim; evidence cards (retrieved articles with similarity scores); or a refusal with the reason |
+| **Scope** | Five regulations (462 articles, about 489 chunks): the Act Governing the Punishment of Road Traffic Violations, the Road Traffic Safety Regulations, the Regulations for Handling Road Traffic Accidents, the Compulsory Automobile Liability Insurance Act, and the Standards for Fines and Handling of Road Traffic Violations |
 
-> 「統一裁罰基準」的附表（各違規行為的罰款表）在開放資料裡只有檔名、沒有內容，所以系統不收錄附表，也不會把它當金額來源。見 [ADR 0002](docs/decisions/0002-data-source.md)。
+> The fine tables attached to the "Standards for Fines" are not included: in the open data they exist only as file names with no content, so the system neither indexes them nor uses them as a source of amounts. See [ADR 0002](docs/decisions/0002-data-source.md).
 
-
-## 架構
+## Architecture
 
 ```mermaid
 flowchart LR
-  subgraph Browser["瀏覽器（React + TypeScript）"]
-    UI["提問 / 串流答案 / 引用 / 檢索過程"]
+  subgraph Browser["Browser (React + TypeScript)"]
+    UI["Ask / streamed answer / citations / retrieval process"]
   end
-  subgraph Backend["FastAPI 後端（Fly.io，單一映像一併提供前端）"]
+  subgraph Backend["FastAPI backend (Fly.io, one image also serves the frontend)"]
     direction TB
-    A["POST /api/ask（SSE）"] --> B["嵌入問題<br/>Voyage voyage-4"]
-    B --> C["向量檢索 top 5<br/>Chroma（索引隨映像發佈）"]
-    C --> D{"最高相似度<br/>≥ 0.40？"}
-    D -- 否 --> R1["拒答：相關度不足"]
-    D -- 是 --> E["給模型整條條文<br/>Claude Sonnet 5.5"]
-    E --> F{"模型判斷<br/>條文足夠？"}
-    F -- 否 --> R2["拒答：條文不足"]
-    F -- 是 --> G["驗證引用與數字"]
+    A["POST /api/ask (SSE)"] --> B["Embed the question<br/>Voyage voyage-4"]
+    B --> C["Vector search, top 5<br/>Chroma (index ships in the image)"]
+    C --> D{"Top similarity<br/>≥ 0.40?"}
+    D -- No --> R1["Refuse: low relevance"]
+    D -- Yes --> E["Give the model whole articles<br/>Claude Sonnet 5.5"]
+    E --> F{"Model: are the<br/>articles enough?"}
+    F -- No --> R2["Refuse: not enough articles"]
+    F -- Yes --> G["Verify citations and numbers"]
   end
-  UI -- "問題" --> A
+  UI -- "question" --> A
   G -- "answer.delta / validate.result" --> UI
   R1 --> UI
   R2 --> UI
-  Data["data.gov.tw 開放資料<br/>每月手動更新"] -. "fetch → parse → build_index" .-> C
+  Data["data.gov.tw open data<br/>refreshed monthly by hand"] -. "fetch → parse → build_index" .-> C
 ```
 
-一次提問會依序送出這些事件（SSE），前端的「檢索過程」就是照這些事件畫的：改寫問題 → 檢索條文 → 相關度檢查 → 產生答案 → 驗證引用。細節見 [ADR 0006](docs/decisions/0006-sse-api.md)。
+One question produces these events in order (over SSE), and the "retrieval process" in the UI is drawn from them: rewrite the question → retrieve articles → relevance check → generate the answer → verify citations. Details in [ADR 0006](docs/decisions/0006-sse-api.md).
 
+## Evaluation
 
-## 評估結果與方法
+The evaluation set has 40 questions: 28 answerable and 12 out of scope (7 of them deliberately close to the topic, such as "exam registration fee" and "parking lot charges"). Claude Code drafted the questions after reading the articles, and **I checked every gold answer (the correct articles and the key amounts) by hand against the original text.**
 
-評估集共 40 題：28 題可回答、12 題範圍外（其中 7 題刻意貼近主題，例如「考照報名費」「停車場收費」）。題目由 Claude Code 讀條文後擬稿，**標準答案（正確條文與重點金額）則是全部人工逐題對照原文確認**。
-
-| 指標 | 結果 | 意思 |
+| Metric | Result | Meaning |
 |---|---|---|
-| Recall@5 | 1.000 | 前 5 名檢索結果涵蓋所有標準答案條文 |
-| MRR | 0.845 | 第一個正確條文平均排在很前面（1.0 = 永遠第一） |
-| 引用正確率 | 1.000 | 答案至少引用一條標準答案條文 |
-| 引用精確率 | 0.653 | 答案引用的條文中，屬於標準答案的比例（額外引用的條文不一定錯） |
-| 數字正確率 | 1.000 | 答案中的金額、期限都能在它引用的條文找到 |
-| 拒答正確率 | 1.000 | 範圍外 12/12 拒答（門檻擋 6、模型擋 6），可回答題 0/28 誤拒 |
+| Recall@5 | 1.000 | The top 5 retrieved results cover all gold articles |
+| MRR | 0.845 | The first correct article ranks near the top on average (1.0 = always first) |
+| Citation correctness | 1.000 | The answer cites at least one gold article |
+| Citation precision | 0.653 | Share of cited articles that are gold articles (an extra citation is not necessarily wrong) |
+| Number correctness | 1.000 | Every amount and period in the answer appears in the article it cites |
+| Refusal correctness | 1.000 | 12/12 out-of-scope questions refused (6 stopped by the threshold, 6 by the model); 0/28 answerable questions wrongly refused |
 
-每次提問約 US$0.012（Sonnet 5.5；只量了 3 題，是粗估）。
+Each question costs about US$0.012 with Sonnet 5.5 (measured on only 3 questions, so a rough estimate).
 
-**怎麼看這些數字（限制）**：
+**How to read these numbers (caveats):**
 
-- 只有 28 題可回答，一題的名次變動就會讓 MRR 動好幾個百分點；這是方向性的證據，不是精確值。
-- 題目是讀過條文的人擬的，所以用詞可能會比真實使用者更貼近條文，Recall@5 的滿分可能高估真實表現。
-- 評估頁（Demo 站的「評估結果」）顯示的就是這份結果，逐題可展開看標準答案與檢索前 5 筆。
+- Only 28 questions are answerable, so one rank change moves MRR by several points. Treat this as directional evidence, not a precise value.
+- The questions were written by someone who had read the articles, so their wording may be closer to the statutes than real users' wording, and the perfect Recall@5 may overstate real-world performance.
+- The evaluation page of the live demo ("評估結果") shows this same result, and each question expands to its gold answer and top 5 retrieved items.
 
-重現：
+To reproduce:
 
 ```bash
 cd backend
-uv run python -m eval.run_eval --retriever vector --name baseline-vector     # 檢索
-uv run python -m eval.run_generation_eval --name my-run                      # 生成、引用、拒答（需 ANTHROPIC_API_KEY）
+uv run python -m eval.run_eval --retriever vector --name baseline-vector     # retrieval
+uv run python -m eval.run_generation_eval --name my-run                      # generation, citation, refusal (needs ANTHROPIC_API_KEY)
 ```
 
-## 技術取捨
+## Technical Trade-offs
 
-每個決策都有一份對應的 ADR，描述背景、採用或放棄的選項與設計考量：
+Every decision has an ADR with the background, the options, and the reasoning. The ADRs are written in Traditional Chinese.
 
-| 主題 | 採用                           | 放棄 | 詳見 |
-|---|------------------------------|---|---|
-| 資料來源 | data.gov.tw 開放資料打包檔          | 爬法規資料庫網頁（robots.txt 禁止、HTML 易變） | [ADR 0002](docs/decisions/0002-data-source.md) |
-| Chunk 策略 | 一條一個 chunk，超過 800 字才依項、款的邊界切 | 固定長度滑動視窗（切開後對不回條號） | [ADR 0003](docs/decisions/0003-chunking.md) |
-| 向量庫 | Chroma，索引隨映像發佈               | pgvector（資料只有數百個 chunk，不需要資料庫服務） | [ADR 0001](docs/decisions/0001-tech-stack.md)、[0007](docs/decisions/0007-deployment.md) |
-| 檢索 | 純向量                          | hybrid（向量＋BM25）：MRR 0.845 → 0.749，沒有變好 | [ADR 0004](docs/decisions/0004-retrieval.md) |
-| 引用 | 自訂 `[[條號]]` 標記，後端驗證          | Anthropic 原生 Citations（不能邊串流邊解析、不能套用自己的驗證規則） | [ADR 0005](docs/decisions/0005-generation.md) |
-| 拒答 | 兩層：相似度門檻 0.40 加模型判斷          | 只用單一門檻（貼近主題的範圍外問題，分數與可回答題重疊） | [ADR 0004](docs/decisions/0004-retrieval.md)、[0005](docs/decisions/0005-generation.md) |
-| 串流 | SSE，POST 帶問題                 | WebSocket（用不到雙向）、`EventSource`（不能 POST） | [ADR 0006](docs/decisions/0006-sse-api.md) |
-| 部署 | Fly.io 單機，沒人用時自動停機           | 多機、常駐（速率限制存在記憶體；常駐要多付錢） | [ADR 0007](docs/decisions/0007-deployment.md) |
+| Topic | Chosen | Rejected | Details |
+|---|---|---|---|
+| Data source | The data.gov.tw open-data bundle | Scraping the law database website (robots.txt forbids it, HTML changes often) | [ADR 0002](docs/decisions/0002-data-source.md) |
+| Chunking | One chunk per article; split at paragraph and item boundaries only above 800 characters | Fixed-size sliding windows (a split chunk cannot be traced back to its article number) | [ADR 0003](docs/decisions/0003-chunking.md) |
+| Vector store | Chroma, with the index shipped in the image | pgvector (only a few hundred chunks, no database service needed) | [ADR 0001](docs/decisions/0001-tech-stack.md), [0007](docs/decisions/0007-deployment.md) |
+| Retrieval | Vector search only | Hybrid (vector + BM25): MRR 0.845 → 0.749, no improvement | [ADR 0004](docs/decisions/0004-retrieval.md) |
+| Citations | Custom `[[article-id]]` markers, verified by the backend | Anthropic's native Citations (cannot be parsed while streaming, cannot apply our own validation rules) | [ADR 0005](docs/decisions/0005-generation.md) |
+| Refusal | Two layers: similarity threshold 0.40 plus a model judgment | A single threshold alone (near-topic out-of-scope questions score like answerable ones) | [ADR 0004](docs/decisions/0004-retrieval.md), [0005](docs/decisions/0005-generation.md) |
+| Streaming | SSE, with the question sent by POST | WebSocket (two-way is not needed), `EventSource` (cannot POST) | [ADR 0006](docs/decisions/0006-sse-api.md) |
+| Deployment | One Fly.io machine that stops when idle | Several machines or always-on (rate limits live in memory; always-on costs more) | [ADR 0007](docs/decisions/0007-deployment.md) |
 
-## 遇到的困難與解法
-- **單一相似度門檻分不開貼近主題的範圍外問題。** 補了 8 題貼近邊界的題目後，範圍外題的第一名相似度（最高 0.618）與可回答題（最低 0.416）重疊，任何門檻都會誤拒或漏放。所以門檻只負責擋明顯無關的問題（0.40），貼近主題的交給模型看過條文後判斷。
-- **原本標記「範圍外」答案被模型推翻。** q40「汽車多久要保養一次？」我當初只搜了「汽車保養」，漏搜「保養」；模型引用道安規則 39-3 條作答，是對的。我改標成可回答，並記下教訓：確認「法規沒有」時，要搜主題詞，不只搜完整詞組。
-- **只給模型檢索到的那一塊，會漏掉同一條的其他項。** 改成給整條條文後，重點金額涵蓋率 0.894 → 0.985，範圍外拒答 12/13 → 12/12（修正前後的評估集有一題標籤差異，見 ADR 0005）。
-- **冷啟動太慢。** 機器停機後第一個請求約 9.7 秒。大部分時間花在啟動 Python 時編譯程式碼，所以在建映像時就預編譯 `.pyc`（`UV_COMPILE_BYTECODE=1`），降到約 6.5 秒（各只量 1 次）。
+## Challenges and Solutions
 
-## 限制與後續方向
+- **A single similarity threshold cannot separate near-topic out-of-scope questions.** After adding 8 questions close to the boundary, the top similarity of out-of-scope questions (up to 0.618) overlapped with that of answerable ones (down to 0.416), so any threshold either wrongly refuses or wrongly lets through. The threshold (0.40) now only blocks clearly unrelated questions, and the model decides the near-topic ones after reading the articles.
+- **A question I had labeled "out of scope" was overturned by the model.** For q40 ("How often should a car be serviced?") I had searched only for "汽車保養" and missed "保養"; the model answered from Article 39-3 of the Road Traffic Safety Regulations, and it was right. I relabeled the question as answerable and noted the lesson: when checking that the laws contain nothing, search for the topic word, not only the full phrase.
+- **Giving the model only the retrieved chunk misses the other paragraphs of the same article.** After switching to whole articles, key-amount coverage went from 0.894 to 0.985 and out-of-scope refusals from 12/13 to 12/12 (the evaluation set differed by one label before and after; see ADR 0005).
+- **Cold start was too slow.** The first request after the machine stopped took about 9.7 seconds. Most of that was Python compiling code at startup, so I precompile `.pyc` files when building the image (`UV_COMPILE_BYTECODE=1`), which brought it down to about 6.5 seconds (each measured once).
 
-- **資料不即時**：每月手動更新一次，法規剛修正時最多落後一個月；畫面標示資料日期（`data_version`）。
-- **不含附表**：統一裁罰基準的罰款附表沒有內容，涉及該表的金額問題會拒答或只能引用母法。
-- **評估集小且由我們自己擬題**：見上方「怎麼看這些數字」。
-- **單一模型、單次執行的指標**：取樣參數無法設成確定性，同一題重跑可能略有不同。
-- **只有純向量**：沒做 reranker、停用詞處理的 hybrid。
-- **防濫用靠額度**：每 IP 每分鐘 10 次、全站每日 300 次（重啟歸零）、兩家服務商各設 US$10 花費上限；尚未做通關碼或 Turnstile。
-- **後續**：reranker、補上裁罰基準附表（需人工下載，不寫爬蟲）、改用節點圖呈現檢索過程（設計稿目前採用步驟列）、評估集擴充到真實使用者問法。
+## Limitations and Next Steps
 
-## 免責聲明與資料來源
+- **Data is not real-time**: it is refreshed by hand once a month, so a freshly amended law can lag by up to a month. The UI shows the data date (`data_version`).
+- **No fine tables**: the tables attached to the Standards for Fines have no content, so questions that depend on them are refused or can only cite the parent act.
+- **The evaluation set is small and written by us**: see "How to read these numbers" above.
+- **Metrics come from one model and one run**: the sampling parameters cannot be made deterministic, so rerunning a question may give slightly different results.
+- **Vector search only**: no reranker, and no stop-word handling for hybrid search.
+- **Abuse protection relies on quotas**: 10 requests per minute per IP, 300 per day for the whole site (resets on restart), and a US$10 spend cap at each of the two providers. There is no passcode or Turnstile yet.
+- **Next**: a reranker, adding the fine tables (they must be downloaded by hand; no scraper), showing the retrieval process as a node graph (the approved design uses a step list), and extending the evaluation set to real users' phrasing.
 
-- 本系統**不是法律意見**。答案由模型根據檢索到的條文產生，可能有誤；實際罰則與程序請以[全國法規資料庫](https://law.moj.gov.tw/)公告的現行條文與主管機關說明為準。
-- 法規條文來自[政府資料開放平臺](https://data.gov.tw/)的「全國法規資料庫」開放資料（法律 18289、命令 18290），授權為[政府資料開放授權條款－第 1 版](https://data.gov.tw/license)。本專案不抓取 law.moj.gov.tw 的網頁。
+## Disclaimer and Data Source
+
+- This system is **not legal advice**. Answers are generated by a model from the retrieved articles and may be wrong. For actual penalties and procedures, rely on the current text published in the [Laws & Regulations Database of the Republic of China](https://law.moj.gov.tw/) and on the competent authority's guidance.
+- The statute text comes from the "Laws & Regulations Database" open data on [Taiwan's Open Government Data platform](https://data.gov.tw/) (laws: 18289, orders: 18290), licensed under the [Open Government Data License, version 1.0](https://data.gov.tw/license). This project does not scrape any page of law.moj.gov.tw.
 
 ---
 
-## 快速開始
+## Quick Start
 
 ```bash
-cp .env.example .env            # 填入 ANTHROPIC_API_KEY、VOYAGE_API_KEY
-docker compose up --build       # 前端 http://localhost:5173、後端 http://localhost:8010
+cp .env.example .env            # fill in ANTHROPIC_API_KEY and VOYAGE_API_KEY
+docker compose up --build       # frontend http://localhost:5173, backend http://localhost:8010
 ```
 
-第一次需要先建索引（見下方「每月更新資料」）；`data/index/` 不進版控。
+On the first run you need to build the index first (see "Monthly Data Refresh" below). `data/index/` is not in version control.
 
-## 測試
+## Testing
 
 ```bash
-# 後端（在 backend/）
+# Backend (in backend/)
 uv run pytest
 
-# 前端單元測試（在 frontend/）
+# Frontend unit tests (in frontend/)
 pnpm test
 
-# 前端 E2E（在 frontend/）：Playwright 驅動真實瀏覽器
-pnpm exec playwright install chromium   # 首次才需要
-pnpm e2e                                # 跑全部；加 --ui 開互動模式
+# Frontend E2E (in frontend/): Playwright drives a real browser
+pnpm exec playwright install chromium   # first time only
+pnpm e2e                                # run all; add --ui for interactive mode
 ```
 
-E2E 會自己啟動前端與一個假後端（`backend/tests/e2e_server.py`，模型、檢索、條文都是假資料），不需要 API 金鑰或索引。CI 只在 push 到 main 時跑 E2E。
+E2E starts the frontend and a fake backend by itself (`backend/tests/e2e_server.py`; the model, retrieval and article texts are all fake data), so it needs no API keys or index. CI runs E2E only on pushes to main.
 
-## 部署（Fly.io）
+## Deployment (Fly.io)
 
-單一映像，後端一併提供前端（見 [ADR 0007](docs/decisions/0007-deployment.md)）。
+One image, with the backend also serving the frontend (see [ADR 0007](docs/decisions/0007-deployment.md)).
 
 ```bash
-# 首次
+# First time
 fly launch --no-deploy --copy-config
 fly secrets set ANTHROPIC_API_KEY=... VOYAGE_API_KEY=...
-# 之後每次（需要本機有 data/index/）
-fly deploy --ha=false      # 一定要單機：速率限制與每日額度存在記憶體，兩台會各算各的
+# Every time after (needs data/index/ locally)
+fly deploy --ha=false      # must be a single machine: the rate limit and daily quota live in memory, so two machines would count separately
 ```
 
-### 每月更新資料
+### Monthly Data Refresh
 
-法規資料來自 data.gov.tw，手動每月更新一次（在 `backend/`）：
+The law data comes from data.gov.tw and is refreshed by hand once a month (in `backend/`):
 
 ```bash
-uv run python -m app.ingestion.fetch          # 下載
-uv run python -m app.ingestion.parse          # 解析
-uv run python -m app.ingestion.build_index    # 重建索引（需要 VOYAGE_API_KEY）
-uv run python -m eval.run_generation_eval --name <檔名> --publish   # 選用：更新評估頁
-# 回到 repo 根目錄
+uv run python -m app.ingestion.fetch          # download
+uv run python -m app.ingestion.parse          # parse
+uv run python -m app.ingestion.build_index    # rebuild the index (needs VOYAGE_API_KEY)
+uv run python -m eval.run_generation_eval --name <name> --publish   # optional: update the evaluation page
+# back in the repo root
 fly deploy --ha=false
 ```
 
-### 冷啟動與成本
+### Cold Start and Cost
 
-| 項目 | 數字 | 來源 |
+| Item | Number | Source |
 |---|---|---|
-| 容器啟動到 `/api/health` 可用 | 約 2.5 秒 | 本機 Docker 實測 |
-| 容器剛啟動後第一次提問 | 約 4.5 秒（含載入索引） | 本機 Docker 實測 |
-| Fly 機器從停機喚醒 | 第一個請求約 6.5 秒才回應（機器端「可連線」約 2.3 秒），之後第一次提問約 4 秒；停機約在 6 分鐘沒流量後發生。映像預編譯 `.pyc` 之前是約 9.7 秒（機器端約 8.1 秒）。各只量 1 次 | Fly.io 實測，來源：台灣 |
-| 執行時記憶體 | 約 200 MB（設定 512 MB） | 本機 Docker 實測 |
-| 主機費用 | 常駐約 US$3.69／月（`shared-cpu-1x` 512 MB，按秒計費）；`auto_stop` 沒流量時機器不計運算費，只剩儲存費（US$0.15／GB／月，映像約 0.66 GB，約 US$0.10／月） | [Fly.io pricing](https://docs.fly.io/about/pricing) |
-| 模型單價 | Sonnet 5.5：輸入 US$2／百萬 token、輸出 US$10／百萬 token | Anthropic 價目頁 |
-| Embedding 單價 | Voyage：US$0.06／百萬 token；每次提問只嵌入一句短問題，可忽略 | [Voyage pricing](https://docs.voyageai.com/docs/pricing) |
-| 每次提問的模型費用 | 約 US$0.006–0.019，三題平均約 US$0.012（輸入 2.3k–6.2k、輸出 134–653 token，依單價換算）；只量了 3 題，是粗估 | 本機實測（後端會在 log 記 `usage` 一行） |
+| Container start until `/api/health` responds | about 2.5 s | Measured with local Docker |
+| First question right after the container starts | about 4.5 s (includes loading the index) | Measured with local Docker |
+| Fly machine waking from stop | The first request is answered after about 6.5 s (the machine is reachable after about 2.3 s), and the first question after that takes about 4 s. The machine stops after about 6 minutes without traffic. Before precompiling `.pyc` it was about 9.7 s (about 8.1 s on the machine side). Each measured once | Measured on Fly.io, from Taiwan |
+| Runtime memory | about 200 MB (512 MB configured) | Measured with local Docker |
+| Hosting cost | About US$3.69/month always-on (`shared-cpu-1x`, 512 MB, billed per second). With `auto_stop`, a stopped machine incurs no compute charge, only storage (US$0.15/GB/month; the image is about 0.66 GB, so about US$0.10/month) | [Fly.io pricing](https://docs.fly.io/about/pricing) |
+| Model price | Sonnet 5.5: US$2 per million input tokens, US$10 per million output tokens | Anthropic pricing page |
+| Embedding price | Voyage: US$0.06 per million tokens; each question embeds one short sentence, so it is negligible | [Voyage pricing](https://docs.voyageai.com/docs/pricing) |
+| Model cost per question | About US$0.006–0.019, average about US$0.012 over three questions (2.3k–6.2k input and 134–653 output tokens, converted at the prices above); only 3 questions measured, so a rough estimate | Measured locally (the backend logs one `usage` line per question) |
 
-## 更多文件
+## More Docs
 
-- 開發與測試指令：[CLAUDE.md](CLAUDE.md)
-- 實作規格：[docs/02-implementation-spec.md](docs/02-implementation-spec.md)
-- 技術決策：[docs/decisions/](docs/decisions/)
-- 維運手冊（部署、log、防濫用）：[docs/operations.md](docs/operations.md)
-- 重錄 demo GIF：在 `frontend/` 執行 `pnpm demo:record`（需要 ffmpeg 與 gifski）
+- Development and test commands: [CLAUDE.md](CLAUDE.md)
+- Implementation spec: [docs/02-implementation-spec.md](docs/02-implementation-spec.md)
+- Technical decisions: [docs/decisions/](docs/decisions/)
+- Operations manual (deploy, logs, abuse protection): [docs/operations.md](docs/operations.md)
+- Re-record the demo GIF: run `pnpm demo:record` in `frontend/` (needs ffmpeg and gifski)
+
+The spec, ADRs and operations manual are in Traditional Chinese.
