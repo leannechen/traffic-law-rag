@@ -10,6 +10,7 @@ from app.core.static import mount_frontend
 def create_app() -> FastAPI:
     configure_logging()
     app = FastAPI(title="Traffic Law RAG")
+    # 同源部署（前端建置檔由同一個映像提供），CORS 只在本機開發時才有用
     app.add_middleware(
         CORSMiddleware,
         allow_origins=get_settings().cors_origins,
