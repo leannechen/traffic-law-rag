@@ -10,7 +10,15 @@
 // 輸出：docs/media/demo-answer.gif、docs/media/demo-refusal.gif（中間檔放在系統暫存資料夾）
 
 import { execFileSync } from 'node:child_process'
-import { mkdirSync, mkdtempSync, readdirSync, rmSync, statSync } from 'node:fs'
+import {
+  copyFileSync,
+  mkdirSync,
+  mkdtempSync,
+  readdirSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -20,10 +28,14 @@ const args = process.argv.slice(2)
 const urlFlag = args.indexOf('--url')
 const BASE_URL = urlFlag >= 0 ? args[urlFlag + 1] : 'https://traffic-law-rag.fly.dev/'
 
+// --keep-video <資料夾>：另存原始 webm 與開頭要裁掉的秒數，方便試不同的 GIF 參數而不必重錄
+const keepFlag = args.indexOf('--keep-video')
+const KEEP_VIDEO = keepFlag >= 0 ? resolve(args[keepFlag + 1]) : null
+
 const VIEWPORT = { width: 1280, height: 720 }
-const GIF_WIDTH = 720
-const GIF_FPS = 10
-const GIF_QUALITY = 45
+const GIF_WIDTH = 880
+const GIF_FPS = 12
+const GIF_QUALITY = 52
 const OUT_DIR = resolve(fileURLToPath(import.meta.url), '../../../docs/media')
 
 const pause = (ms) => new Promise((r) => setTimeout(r, ms))
@@ -82,6 +94,11 @@ async function record(browser, { name, run }) {
   const video = page.video()
   await context.close()
   const webm = await video.path()
+  if (KEEP_VIDEO) {
+    mkdirSync(KEEP_VIDEO, { recursive: true })
+    copyFileSync(webm, join(KEEP_VIDEO, `${name}.webm`))
+    writeFileSync(join(KEEP_VIDEO, `${name}.start`), String(page.startAt))
+  }
 
   const frames = join(work, 'frames')
   mkdirSync(frames)
