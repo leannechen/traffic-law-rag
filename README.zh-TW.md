@@ -119,6 +119,15 @@ uv run python -m eval.run_generation_eval --name my-run                      # �
 - **防濫用靠額度**：每 IP 每分鐘 10 次、全站每日 300 次（重啟歸零）、兩家服務商各設 US$10 花費上限；尚未做通關碼或 Turnstile。
 - **後續**：reranker、補上裁罰基準附表（需人工下載，不寫爬蟲）、改用節點圖呈現檢索過程（設計稿目前採用步驟列）、評估集擴充到真實使用者問法。
 
+## 開發方式
+
+這個專案是用 Claude Code 協作完成的（大多數 commit 有 `Co-Authored-By` 標註）。流程是照一份寫好的分步規格（[docs/archive/implementation-spec.md](docs/archive/implementation-spec.md)）進行：13 個步驟，每步有驗收條件、各自一個 commit。分工如下：
+
+- **AI**：寫大部分的程式與測試、擬評估題目、起草文件。另有一個唯讀的 reviewer agent（[.claude/agents/code-reviewer.md](.claude/agents/code-reviewer.md)）在每步完成後，對照規格檢查。
+- **我**：決定範圍與資料來源、把評估集的每一題標準答案逐題對照法規原文確認、做 ADR 裡的取捨決定、每一步驗收通過才進下一步、改寫 README，並用自己的帳號完成部署。
+- **後端怎麼把關**：我沒有逐行看後端程式碼，靠自動化測試（後端 311 個、前端單元 117 個、端對端 14 個）、評估指標與 CI。改動 chunking、檢索參數、門檻或 prompt 之後，一定重跑評估並比較前後數字。
+- **已知的弱點**：題目是讀過條文的 AI 擬的，措辭可能比真實使用者更接近條文，Recall@5 可能因此偏高（見 [ADR 0004](docs/decisions/0004-retrieval.md)）。
+
 ## 免責聲明與資料來源
 
 - 本系統**不是法律意見**。答案由模型根據檢索到的條文產生，可能有誤；實際罰則與程序請以[全國法規資料庫](https://law.moj.gov.tw/)公告的現行條文與主管機關說明為準。
@@ -196,7 +205,7 @@ uv run python -m eval.run_generation_eval --name <檔名> --publish   # 選用�
 ## 更多文件
 
 - 開發與測試指令：[CLAUDE.md](CLAUDE.md)
-- 實作規格：[docs/02-implementation-spec.md](docs/02-implementation-spec.md)
+- 實作規格（封存，開工前寫的）：[docs/archive/implementation-spec.md](docs/archive/implementation-spec.md)
 - 技術決策：[docs/decisions/](docs/decisions/)
 - 維運手冊（部署、log、防濫用）：[docs/operations.md](docs/operations.md)
 - 重錄 demo GIF：在 `frontend/` 執行 `pnpm demo:record`（需要 ffmpeg 與 gifski）
