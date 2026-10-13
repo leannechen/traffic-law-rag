@@ -45,3 +45,5 @@ npm-debug.log*
 # 向量索引（可由 data/processed 重建）
 data/index/
 data/cache/
+
+docs/learning/

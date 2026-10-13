@@ -2,7 +2,7 @@
 
     uv run python -m eval.make_review
 
-標準答案是我（Claude Code）讀條文擬的，沒有參考檢索結果；審核單把每題的條文原文攤開，
+標準答案是 AI 讀條文擬的草稿，沒有參考檢索結果；審核單把每題的條文原文攤開，
 由 human 判斷是否正確，確認後把 dataset.jsonl 該題的 verified 改成 true。
 """
 
@@ -17,7 +17,7 @@ REVIEW_PATH = DATASET_PATH.with_name("review.md")
 
 HEADER = """# 評估集審核單
 
-資料版本：{data_version}。題目與標準答案是 Claude Code 讀條文草擬的，**沒有參考檢索結果**
+資料版本：{data_version}。題目與標準答案是 AI 讀條文草擬的，**沒有參考檢索結果**
 （否則評估會變成系統自己打自己）。請逐題確認後，把 `eval/dataset.jsonl` 該題的
 `"verified": false` 改成 `true`。
 

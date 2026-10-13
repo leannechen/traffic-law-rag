@@ -1,9 +1,8 @@
 # 設計稿（核准版）
 
 這個資料夾是「交通法規問答」UI 設計稿的原始檔，供實作前端時對照。
-互動規則寫在 `docs/02-implementation-spec.md` 的 5.5 節，這裡不重複，只放：畫板對照表、設計 token、畫板之間不一致時以誰為準。
+互動規則寫在 `docs/archive/implementation-spec.md` 的 5.5 節，這裡不重複，只放：畫板對照表、設計 token、畫板之間不一致時以誰為準。
 
-- 設計稿線上版（Claude Design，僅擁有者可開啟）：https://claude.ai/artifact/E8EnDiuSosjntJMzeaYRjB
 - 匯出日期：2026-10-05
 - 截圖：請把從設計稿匯出的畫面圖檔放在 `screenshots/`，檔名與畫板相同（例如 `Answer.png`），做並排比對時使用。
 
@@ -139,10 +138,10 @@
 | 範例題目 | 桌面主流程用「酒駕」（§35、§114、§35-1），手機與元件頁用「紅燈右轉」（§53、§206、§102） | 都是示意資料，沒有先後之分 |
 | PipelineSteps 的兩種密度 | `Streaming.dc.html`、`Answer.dc.html` 每步有摘要文字與耗時；`Refusal.dc.html`、`Components.dc.html` 只有符號與步驟名稱 | 問答結果頁的檢索過程用完整版；拒答頁的「為什麼不回答」用精簡版。各狀態的符號與線條樣式看 `Components.dc.html` |
 | ExampleQuestions 的樣式 | `Main.dc.html` 是三欄卡片（分類小標＋問題），`Components.dc.html` 是外框 chip | 首頁照 `Main.dc.html`；chip 樣式用在拒答頁的改問建議 |
-| 首頁標題文字 | `Main.dc.html` 是「交通法規白話文搜尋」，`MobileHome.dc.html` 是「用白話問交通法規，每個答案都附上條文依據。」 | **桌面為準，手機也用「交通法規白話文搜尋」**（Leanne 決定，2026-10-08） |
+| 首頁標題文字 | `Main.dc.html` 是「交通法規白話文搜尋」，`MobileHome.dc.html` 是「用白話問交通法規，每個答案都附上條文依據。」 | **桌面為準，手機也用「交通法規白話文搜尋」**（設計決定，2026-10-08） |
 | 首頁刊頭 | `Main.dc.html` 新版沒有「交通法規資料庫」那一列，主選單右端是 GitHub 圖示；`MobileHome.dc.html` 仍有產品名稱與選單鈕 | 桌面照新版（另外保留外觀切換按鈕）；GitHub 圖示先不顯示，因為 repo 還沒公開（`Header.tsx` 的 `SHOW_GITHUB_LINK`，公開後改成 true）；手機保留產品名稱那一列，因為選單鈕在裡面。其他頁面與狀態的精簡頁首不變 |
 | 收錄範圍 | `Main.dc.html` 新版是五欄表格（類別、法規名稱、簡稱、條文數、最新異動）；沒有手機畫板 | 桌面照表格；手機每部法規一塊（類別與名稱在上，簡稱、條文數、日期並排在下） |
-| 全文面板的操作提示 | 畫板沒有 | 面板列加「按 Esc 可關閉面板」（Leanne 要求，2026-10-08） |
+| 全文面板的操作提示 | 畫板沒有 | 面板列加「按 Esc 可關閉面板」（設計 review 要求，2026-10-08） |
 
 這張表沒有列到的不一致，先問，不自行決定。
 
