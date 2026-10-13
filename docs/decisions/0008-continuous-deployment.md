@@ -36,6 +36,16 @@
 - **自動回滾與備援機器**：只有一台機器，部署是原地替換；新版 health check 沒過時，Fly 不一定能留著舊版（我沒有實測過單機失敗的行為）。所以失敗時要手動回復：`fly releases` 找上一版、`fly deploy --image <上一版映像> --ha=false`。health check 沒覆蓋的問題（例如回答品質）也不會被擋下，要靠人看。第一次用 CD 時，我會在你有空盯著時驗證，不在離開時才部署。
 - **預覽環境**：只有一個 app、一個環境。
 
+## 驗證結果（2026-10-12）
+
+| 路徑 | 結果 |
+|---|---|
+| 只改文件的 push | 跳過部署，CI 成功 |
+| 手動觸發（`workflow_dispatch`） | 部署成功（Fly v3 → v4） |
+| 改到程式碼的 push | 自動部署成功（v5）；smoke test 的 `data_version`、`embedding_model`、`chunk_count` 與索引一致；仍是單機、health check 通過 |
+
+**未實測**：部署失敗時單機的行為、找不到 `data-*` Release 時的失敗路徑、force push 與新分支（程式裡寫成一律部署）。
+
 ## 後果
 
 - 手動 `fly deploy --ha=false` 仍可用，作為備援與每月更新資料時使用；兩者共用同一個 Fly app，`concurrency` 只管 CI 這一側。
