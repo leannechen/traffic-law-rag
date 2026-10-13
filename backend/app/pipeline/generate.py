@@ -23,7 +23,9 @@ def build_user_prompt(question: str, articles_in_context: list[ArticleText]) -> 
         f"\n{a.text}\n</條文>"
         for a in articles_in_context
     )
-    return f"<條文列表>\n{articles}\n</條文列表>\n\n<問題>\n{question}\n</問題>"
+    # 問題來源是 user input：跳脫角括號，避免偽造 </問題> 或 <條文> 標籤跳出資料區塊
+    safe_question = question.replace("<", "&lt;").replace(">", "&gt;")
+    return f"<條文列表>\n{articles}\n</條文列表>\n\n<問題>\n{safe_question}\n</問題>"
 
 
 @dataclass(frozen=True)
