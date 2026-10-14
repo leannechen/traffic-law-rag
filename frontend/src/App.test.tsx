@@ -3,6 +3,7 @@ import { fireEvent, render, screen, waitFor, within } from '@testing-library/rea
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import App from './App'
+import { GITHUB_URL } from './lib/config'
 import { ev, item, META, normalRun, sseResponse } from './test-utils'
 import type { AskEvent } from './types/events'
 
@@ -84,10 +85,12 @@ describe('home', () => {
     expect(screen.queryByText('用白話問交通法規，每個答案都附上條文依據。')).not.toBeInTheDocument()
   })
 
-  it('does not show the GitHub link while the repository is not public', () => {
+  it('shows the GitHub link in the header, opening in a new window', () => {
     stubFetch(() => json({}))
     renderApp()
-    expect(screen.queryByRole('link', { name: /GitHub/ })).not.toBeInTheDocument()
+    const link = screen.getByRole('link', { name: /GitHub/ })
+    expect(link).toHaveAttribute('href', GITHUB_URL)
+    expect(link).toHaveAttribute('target', '_blank')
   })
 
   it('disables submit and shows an error beyond 200 characters', async () => {
