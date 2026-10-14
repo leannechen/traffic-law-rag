@@ -65,5 +65,5 @@ test('首頁：頁首沒有產品名稱那一列，收錄範圍是五欄表格',
   await expect(table.getByRole('row')).toHaveCount(2) // 表頭 + 假後端的 1 部法規
   await expect(table.getByRole('columnheader')).toHaveCount(5)
   await expect(page.getByRole('link', { name: '交通法規資料庫' })).toBeHidden()
-  await expect(page.getByRole('link', { name: /GitHub/ })).toHaveCount(0) // repo 公開前不顯示
+  await expect(page.getByRole('link', { name: /GitHub/ })).toHaveCount(1)
 })
