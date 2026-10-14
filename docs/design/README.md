@@ -139,7 +139,7 @@
 | PipelineSteps 的兩種密度 | `Streaming.dc.html`、`Answer.dc.html` 每步有摘要文字與耗時；`Refusal.dc.html`、`Components.dc.html` 只有符號與步驟名稱 | 問答結果頁的檢索過程用完整版；拒答頁的「為什麼不回答」用精簡版。各狀態的符號與線條樣式看 `Components.dc.html` |
 | ExampleQuestions 的樣式 | `Main.dc.html` 是三欄卡片（分類小標＋問題），`Components.dc.html` 是外框 chip | 首頁照 `Main.dc.html`；chip 樣式用在拒答頁的改問建議 |
 | 首頁標題文字 | `Main.dc.html` 是「交通法規白話文搜尋」，`MobileHome.dc.html` 是「用白話問交通法規，每個答案都附上條文依據。」 | **桌面為準，手機也用「交通法規白話文搜尋」**（設計決定，2026-10-08） |
-| 首頁刊頭 | `Main.dc.html` 新版沒有「交通法規資料庫」那一列，主選單右端是 GitHub 圖示；`MobileHome.dc.html` 仍有產品名稱與選單鈕 | 桌面照新版（另外保留外觀切換按鈕）；GitHub 圖示先不顯示，因為 repo 還沒公開（`Header.tsx` 的 `SHOW_GITHUB_LINK`，公開後改成 true）；手機保留產品名稱那一列，因為選單鈕在裡面。其他頁面與狀態的精簡頁首不變 |
+| 首頁刊頭 | `Main.dc.html` 新版沒有「交通法規資料庫」那一列，主選單右端是 GitHub 圖示；`MobileHome.dc.html` 仍有產品名稱與選單鈕 | 桌面照新版（另外保留外觀切換按鈕）；手機保留產品名稱那一列，因為選單鈕在裡面。其他頁面與狀態的精簡頁首不變 |
 | 收錄範圍 | `Main.dc.html` 新版是五欄表格（類別、法規名稱、簡稱、條文數、最新異動）；沒有手機畫板 | 桌面照表格；手機每部法規一塊（類別與名稱在上，簡稱、條文數、日期並排在下） |
 | 全文面板的操作提示 | 畫板沒有 | 面板列加「按 Esc 可關閉面板」（設計 review 要求，2026-10-08） |
 

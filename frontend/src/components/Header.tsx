@@ -7,7 +7,7 @@ import { CloseIcon, GitHubIcon, MenuIcon } from './icons'
 import { ThemeToggle } from './ThemeToggle'
 
 // repo 公開之前先不在畫面上顯示 GitHub 連結；公開後改成 true
-const SHOW_GITHUB_LINK = false
+const SHOW_GITHUB_LINK = true
 
 type Props = {
   /** 首頁（尚未提問）用置中的大刊頭；其他頁面與狀態用精簡頁首 */
