@@ -2,8 +2,6 @@
 
 [English](README.md) | **繁體中文**
 
-[![CI](https://github.com/leannechen/traffic-law-rag/actions/workflows/ci.yml/badge.svg)](https://github.com/leannechen/traffic-law-rag/actions/workflows/ci.yml)
-
 用白話問台灣交通法規，系統只根據條文回答，並標註每一句話的出處；找不到依據時，它會拒答，不會自己猜測。
 
 ![Demo：回答「紅燈右轉會被罰多少錢？」，附引用與檢索過程](docs/media/demo-answer.gif)

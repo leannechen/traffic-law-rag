@@ -2,8 +2,6 @@
 
 **English** | [繁體中文](README.zh-TW.md)
 
-[![CI](https://github.com/leannechen/traffic-law-rag/actions/workflows/ci.yml/badge.svg)](https://github.com/leannechen/traffic-law-rag/actions/workflows/ci.yml)
-
 Ask Taiwan's traffic laws in plain language. The system answers only from the statute text and cites the source of every claim. When it finds no basis, it refuses instead of guessing.
 
 ![Demo: answering 「紅燈右轉會被罰多少錢？」 (How much is the fine for turning right on red?) with citations and the retrieval process](docs/media/demo-answer.gif)
