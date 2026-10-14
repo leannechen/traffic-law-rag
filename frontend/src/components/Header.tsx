@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { GITHUB_URL } from '../lib/config'
 import { useMeta } from '../lib/useMeta'
 import styles from './Header.module.css'
 import { CloseIcon, GitHubIcon, MenuIcon } from './icons'
 import { ThemeToggle } from './ThemeToggle'
 
-const GITHUB_URL = 'https://github.com/leannechen/traffic-law-rag'
 // repo 公開之前先不在畫面上顯示 GitHub 連結；公開後改成 true
 const SHOW_GITHUB_LINK = false
 

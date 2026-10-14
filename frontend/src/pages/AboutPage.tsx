@@ -2,10 +2,9 @@ import type { ReactNode } from 'react'
 import { Disclaimer } from '../components/Disclaimer'
 import { Icon } from '../components/icons'
 import { PageShell } from '../components/PageShell'
+import { GITHUB_URL } from '../lib/config'
 import { useMeta } from '../lib/useMeta'
 import styles from './AboutPage.module.css'
-
-const GITHUB_URL = 'https://github.com/leannechen/traffic-law-rag'
 
 const DOES = [
   '找出和問題相關的條文，並列出相似度',
