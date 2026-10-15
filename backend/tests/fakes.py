@@ -44,7 +44,12 @@ class FakeLLM:
         )
         text = self._respond if isinstance(self._respond, str) else self._respond(system, user)
         return LLMResponse(
-            text=text, model=self.model, refused=self._refused, input_tokens=10, output_tokens=5
+            text=text,
+            model=self.model,
+            refused=self._refused,
+            stop_reason=self._stop_reason,
+            input_tokens=10,
+            output_tokens=5,
         )
 
     def stream(
