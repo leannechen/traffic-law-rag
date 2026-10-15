@@ -38,7 +38,7 @@ claude mcp add traffic-law -- uv --directory <repo>/backend run python -m app.mc
 ## 放棄了什麼
 
 - **「與網站逐字相同的答案」**：模型取樣參數無法固定，同一題重跑文字會略有不同；相同的是流程、門檻、prompt 與驗證。
-- **對 Claude Code 轉述後的保證**：驗證只保證 tool 回傳的那份答案。Claude Code 之後可能改寫並寫錯金額或引用，只能靠 `notice` 約束，無法強制。
+- **對 Claude Code 轉述後的保證**：驗證只保證 tool 回傳的那份答案。Claude Code 之後可能改寫並寫錯金額或引用，只能靠 `notice` 約束，無法強制。實測見「驗證」：金額與條號有保留，但拒答後會自己補上不在回傳裡的說明。
 - **網站的速率限制與每日額度**：本機呼叫不經過，花的是自己的 key。
 - **遠端版本與驗證**：見選項 D。tool 本身可以原樣重用，之後要做只需換傳輸與加驗證。
 
@@ -56,4 +56,9 @@ claude mcp add traffic-law -- uv --directory <repo>/backend run python -m app.mc
   - 「紅燈右轉會被罰多少錢？」：回答含道交處罰條例第 53、53-1 條，引用皆有效、數字全部對得上。
   - 「考照報名費多少？」（第一名相似度 0.49，通過 gate）：由模型拒答（`refusal_layer = model`）。
   - 「超速罰款是照裁罰基準表的哪一級？」：由模型拒答。
-- 尚未做：在 Claude Code 裡的手動場景驗證，以及 Claude Code 轉述答案時是否保留引用與金額。
+- 在 Claude Code 裡的實測（2026-10-15，`data_version` 2026-10-05；步驟與逐題紀錄見 [mcp-verification.md](../mcp-verification.md)）：
+  - 五個場景都通過：紅燈右轉、範圍外問題與裁罰基準附表問題都由 `ask_traffic_law` 拒答，`get_article` 取回第 53 條原文，與 MCP 無關的問題沒有呼叫任何 tool。
+  - **轉述**：保留條號與金額數值，但把中文數字改成阿拉伯數字（例如 600、1,800），數值一致。
+  - **拒答後 host 會自己補話**：範圍外問題拒答後，Claude Code 補了一句「應該是由監理機關另外公告」並建議去監理服務網；裁罰基準的問題則提到第 43 條「超速 60 公里以上加重處罰」，來自模型記憶，沒有查證。兩次都沒有編出金額或級距，但這些補充不在 tool 回傳裡，也不受驗證約束。`notice` 擋得住「補金額」，擋不住「補說明」。
+  - `get_article` 第一次呼叫因參數猜錯（帶了 `law`、`article_no`）驗證失敗，第二次用 `article_id` 成功；原因是當時 tool schema 還沒載入，不是 server 的問題。
+- 尚未做：「所以最多罰多少？」的追問（host 會不會自己加總或換算）、對照 tool 原始回傳與 host 最終回答、缺 `ANTHROPIC_API_KEY` 時的行為（只有單元測試）、超過 200 字的輸入、API 用量與費用實際對帳，以及與全國法規資料庫原文的另行對照。
