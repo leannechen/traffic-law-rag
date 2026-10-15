@@ -49,6 +49,8 @@
 
 API（在 `backend/`，需 `ANTHROPIC_API_KEY`、`VOYAGE_API_KEY` 與已建好的索引）：`uv run uvicorn app.main:app --port 8021`；`curl -N -X POST localhost:8021/api/ask -H 'Content-Type: application/json' -d '{"question":"紅燈右轉會被罰多少錢？"}'`（本機 8000 常被其他專案佔用，compose 用 8010）
 
+MCP server（在 `backend/`，需 `VOYAGE_API_KEY` 與已建好的索引；`ask_traffic_law` 另需 `ANTHROPIC_API_KEY`，ADR 0009）：`uv run python -m app.mcp_server`（stdio；stdout 是協議通道，不可 print）；註冊到 Claude Code：`claude mcp add traffic-law -- uv --directory <repo>/backend run python -m app.mcp_server`
+
 問答與生成評估（在 `backend/`，需 `ANTHROPIC_API_KEY`）：`uv run python -m app.pipeline.answer "問題" [--rewrite]`；`uv run python -m eval.run_generation_eval --name <檔名> [--rewrite] [--refresh] [--publish]`（`--publish` 同時寫成 `eval/results/latest.json`，評估頁 `/api/eval/latest` 顯示的就是這份）（LLM 回應快取在 `data/cache/`）
 
 資料（在 `backend/`）：`uv run python -m app.ingestion.fetch` 下載、`uv run python -m app.ingestion.parse` 解析（說明見 `docs/data-format.md`）
