@@ -44,6 +44,16 @@ export function renderBold(text: string): ReactNode[] {
   )
 }
 
+/** 段落換行（一個以上的 \n）換成固定高度的間隔，不讓空白行吃掉整行高。 */
+function renderParagraphs(text: string): ReactNode[] {
+  return text.split(/\n+/).flatMap((part, i) => [
+    // biome-ignore lint/suspicious/noArrayIndexKey: 片段順序固定
+    i > 0 ? <span key={`gap${i}`} className={styles.gap} aria-hidden="true" /> : null,
+    // biome-ignore lint/suspicious/noArrayIndexKey: 片段順序固定
+    <span key={`p${i}`}>{renderBold(part)}</span>,
+  ])
+}
+
 function InvalidBadge({ label }: { label: string }) {
   const tipId = useId()
   const [open, setOpen] = useState(false)
@@ -80,7 +90,7 @@ export function AnswerStream({ segments, evidence, streaming, stopped, selection
       {segments.map((segment, i) => {
         if (segment.kind === 'text') {
           // biome-ignore lint/suspicious/noArrayIndexKey: 片段只會往後附加，位置就是身分
-          return <span key={i}>{renderBold(segment.text)}</span>
+          return <span key={i}>{renderParagraphs(segment.text)}</span>
         }
         const id = segment.articleId
         const label = badgeLabel(id, evidence)

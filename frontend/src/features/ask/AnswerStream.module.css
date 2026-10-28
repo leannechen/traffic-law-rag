@@ -6,6 +6,12 @@
   overflow-wrap: anywhere;
 }
 
+/* 段落之間：原本 pre-wrap 的空白行是一整行高（約 35px），改成固定小間距 */
+.gap {
+  display: block;
+  height: 10px;
+}
+
 .stopped {
   color: var(--ink2);
 }
