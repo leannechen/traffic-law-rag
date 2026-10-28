@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { ChevronIcon } from '../../components/icons'
-import { MOBILE_QUERY, useMediaQuery } from '../../lib/useMediaQuery'
 import type { ArticleEvidence } from '../ask/articles'
 import type { AskState } from '../ask/askReducer'
 import { PipelineSteps } from './PipelineSteps'
@@ -16,19 +15,13 @@ type Props = {
 
 /**
  * 檢索過程：PipelineSteps ＋ RetrievalPanel。
- * 桌面：串流中展開；回答完成時自動收合成一行摘要，可手動展開／收合。
- * 手機：預設展開，直式列表，不自動收合。
+ * 預設展開，回答完成後也不自動收合（避免畫面跳動），可手動展開／收合成一行摘要。
+ * 手機：直式列表。
  */
 export function ProcessSection({ state, articles }: Props) {
   const { phase, totalMs, cited, queries, results, question } = state
-  const isMobile = useMediaQuery(MOBILE_QUERY)
   const [open, setOpen] = useState(true)
   const steps = useMemo(() => pipelineSteps(state), [state])
-
-  // 桌面：回答完成時自動收合一次；之後使用者自己決定
-  useEffect(() => {
-    if (phase === 'done' && !isMobile) setOpen(false)
-  }, [phase, isMobile])
 
   // 沒有啟用改寫時，後端送出的查詢就是原問題：不當成「改寫查詢」顯示
   const rewritten = queries.length === 1 && queries[0] === question ? [] : queries
@@ -42,8 +35,6 @@ export function ProcessSection({ state, articles }: Props) {
       <span className={styles.desktopOnly}> · 檢索到 {articles.length} 條</span>
       {seconds}
     </>
-  ) : phase === 'streaming' ? (
-    '完成後自動收合'
   ) : null
 
   return (

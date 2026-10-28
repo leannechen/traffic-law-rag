@@ -42,17 +42,13 @@ async function ask() {
 const processToggle = () => screen.getByRole('button', { name: /檢索過程/ })
 
 describe('檢索過程 (desktop)', () => {
-  it('collapses to a one-line summary when the answer completes, and can be expanded and collapsed', async () => {
+  it('stays expanded when the answer completes, and can be collapsed and expanded', async () => {
     setup(normalRun())
     const user = await ask()
     await screen.findByRole('button', { name: '重新提問' })
 
-    expect(processToggle()).toHaveAttribute('aria-expanded', 'false')
-    expect(processToggle()).toHaveTextContent('✓ 5 個步驟完成 · 檢索到 2 條 · 1.3 秒')
-    expect(screen.queryByRole('list', { name: '處理步驟' })).not.toBeInTheDocument()
-
-    await user.click(processToggle())
     expect(processToggle()).toHaveAttribute('aria-expanded', 'true')
+    expect(processToggle()).toHaveTextContent('✓ 5 個步驟完成 · 檢索到 2 條 · 1.3 秒')
     const steps = screen.getByRole('list', { name: '處理步驟' })
     expect(within(steps).getAllByRole('listitem')).toHaveLength(5)
     expect(steps).toHaveTextContent('改寫問題')
@@ -61,13 +57,16 @@ describe('檢索過程 (desktop)', () => {
 
     await user.click(processToggle())
     expect(processToggle()).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.queryByRole('list', { name: '處理步驟' })).not.toBeInTheDocument()
+
+    await user.click(processToggle())
+    expect(processToggle()).toHaveAttribute('aria-expanded', 'true')
   })
 
   it('shows the retrieval results with citation tags only after completion', async () => {
     setup(normalRun())
-    const user = await ask()
+    await ask()
     await screen.findByRole('button', { name: '重新提問' })
-    await user.click(processToggle())
     const panel = screen.getByRole('heading', { name: '檢索結果' }).parentElement?.parentElement
     expect(panel).toHaveTextContent('道交處罰條例 §53')
     expect(panel).toHaveTextContent('已引用')
@@ -110,7 +109,6 @@ describe('檢索過程 (desktop)', () => {
     await ask()
     const steps = await screen.findByRole('list', { name: '處理步驟' })
     expect(processToggle()).toHaveAttribute('aria-expanded', 'true')
-    expect(processToggle()).toHaveTextContent('完成後自動收合')
     expect(within(steps).getAllByRole('listitem')[1]).toHaveTextContent('進行中')
     expect(within(steps).getAllByRole('listitem')[4]).toHaveTextContent('等待中')
   })
@@ -124,9 +122,8 @@ describe('檢索過程 (desktop)', () => {
       ev('validate.result', { valid: ['K0040012:53'], invalid: [] }),
       ev('run.completed', { total_ms: 1000 }),
     ])
-    const user = await ask()
+    await ask()
     await screen.findByRole('button', { name: '重新提問' })
-    await user.click(processToggle())
     expect(screen.queryByText(/改寫查詢/)).not.toBeInTheDocument()
   })
 
@@ -139,9 +136,8 @@ describe('檢索過程 (desktop)', () => {
       ev('validate.result', { valid: ['K0040012:53'], invalid: [] }),
       ev('run.completed', { total_ms: 1000 }),
     ])
-    const user = await ask()
+    await ask()
     await screen.findByRole('button', { name: '重新提問' })
-    await user.click(processToggle())
     expect(screen.getByText('改寫查詢：「闖紅燈 處罰」「紅燈 右轉」')).toBeInTheDocument()
   })
 })
