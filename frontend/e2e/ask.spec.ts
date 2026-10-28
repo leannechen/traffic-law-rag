@@ -70,15 +70,20 @@ test.describe('問答', () => {
     await expect(page.getByRole('button', { name: '重新產生' })).toBeVisible()
   })
 
-  test('檢索過程：完成後收合成一行摘要，可以展開', async ({ page }) => {
+  test('檢索過程：完成後維持展開，可以收合再展開', async ({ page }) => {
     await page.goto('/')
     await page.getByRole('button', { name: new RegExp(RED) }).click()
     await expect(page.getByRole('button', { name: '重新提問' })).toBeVisible()
     const toggle = page.getByRole('button', { name: /檢索過程/ })
-    await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    const steps = page.getByRole('list', { name: '處理步驟' })
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true')
     await expect(toggle).toContainText('5 個步驟完成')
+    await expect(steps.getByRole('listitem')).toHaveCount(5)
     await toggle.click()
-    await expect(page.getByRole('list', { name: '處理步驟' }).getByRole('listitem')).toHaveCount(5)
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    await expect(steps).toHaveCount(0)
+    await toggle.click()
+    await expect(steps.getByRole('listitem')).toHaveCount(5)
   })
 })
 
